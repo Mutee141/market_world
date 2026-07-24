@@ -1170,7 +1170,7 @@
             <div class="sh-drawer-header">
                 <a href="{% url 'storefront:home' %}" class="sh-logo">
                     {% if store.logo %}
-                    <img src="{{ store.logo.url }}" alt="{{ store.name }}" style="height:36px;object-fit:contain;">
+                    <img src="{{ store.logo.url }}" alt="{{ store.name }}" style="height:46px;max-height:48px;object-fit:contain;">
                     {% else %}
                     <div class="sh-logo-icon" style="width:32px;height:32px;font-size:14px;"><i class="fas fa-bolt"></i>
                     </div>

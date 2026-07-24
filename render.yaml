@@ -1,0 +1,39 @@
+services:
+  # ─── Web Service ───────────────────────────────────────────────────
+  - type: web
+    name: market-world
+    runtime: python
+    region: singapore          # choose closest to your users
+    plan: free                 # upgrade to starter ($7/mo) for better perf
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --timeout 120"
+    
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true     # Render auto-generates a secure key
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: "market-world.onrender.com"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: market-world-db
+          property: connectionString
+      - key: PYTHON_VERSION
+        value: "3.12.0"
+      - key: WEB_CONCURRENCY
+        value: "2"
+      - key: GOOGLE_CLIENT_ID
+        sync: false             # You'll fill this in Render dashboard
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false             # You'll fill this in Render dashboard
+
+    healthCheckPath: /
+
+  # ─── PostgreSQL Database ────────────────────────────────────────────
+databases:
+  - name: market-world-db
+    region: singapore
+    plan: free                 # 1GB storage, free tier
+    databaseName: retailplatform
+    user: retailplatform

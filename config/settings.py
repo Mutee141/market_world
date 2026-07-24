@@ -1,13 +1,15 @@
+import os
 import socket
 from pathlib import Path
 from decouple import config
 from datetime import timedelta
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
-ALLOWED_HOSTS = ['testserver'] + config('ALLOWED_HOSTS', default='localhost').split(',')
+ALLOWED_HOSTS = ['testserver', 'localhost', '127.0.0.1'] + config('ALLOWED_HOSTS', default='').split(',')
 
 SITE_ID = 1
 
@@ -48,6 +50,7 @@ AUTH_USER_MODEL = 'accounts.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -85,26 +88,41 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
-def _postgres_available():
-    host = config('DB_HOST', default='localhost')
-    port = config('DB_PORT', default='5432', cast=int)
-    try:
-        with socket.create_connection((host, port), timeout=1):
-            return True
-    except OSError:
-        return False
+# ──────────────────────────────────────────────────────────────
+# DATABASE — uses DATABASE_URL (Render/Heroku style) if set,
+# otherwise falls back to local postgres, then sqlite3.
+# ──────────────────────────────────────────────────────────────
+_DATABASE_URL = config('DATABASE_URL', default='')
 
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql' if _postgres_available() else 'django.db.backends.sqlite3',
-        'NAME': config('DB_NAME') if _postgres_available() else str(BASE_DIR / 'db.sqlite3'),
-        'USER': config('DB_USER', default=''),
-        'PASSWORD': config('DB_PASSWORD', default=''),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', default='5432'),
+if _DATABASE_URL:
+    # Render / any cloud environment
+    DATABASES = {
+        'default': dj_database_url.parse(
+            _DATABASE_URL,
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
     }
-}
+else:
+    def _postgres_available():
+        host = config('DB_HOST', default='localhost')
+        port = config('DB_PORT', default='5432', cast=int)
+        try:
+            with socket.create_connection((host, port), timeout=1):
+                return True
+        except OSError:
+            return False
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql' if _postgres_available() else 'django.db.backends.sqlite3',
+            'NAME': config('DB_NAME', default='retailplatform') if _postgres_available() else str(BASE_DIR / 'db.sqlite3'),
+            'USER': config('DB_USER', default=''),
+            'PASSWORD': config('DB_PASSWORD', default=''),
+            'HOST': config('DB_HOST', default='localhost'),
+            'PORT': config('DB_PORT', default='5432'),
+        }
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
@@ -119,8 +137,18 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICSFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# ── Production Security (only when DEBUG=False) ──────────────
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

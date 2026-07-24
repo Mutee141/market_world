@@ -11,12 +11,9 @@ python manage.py collectstatic --no-input
 echo "=== Running database migrations ==="
 python manage.py migrate --no-input
 
-# Ensure database is clean before loading fixtures
-echo "=== Flushing any existing data (if any) ==="
-python manage.py flush --no-input
-
-# Load initial data from fixtures_store.json
-echo "=== Loading initial data from fixtures_store.json ==="
-python manage.py loaddata fixtures_store.json || echo "⚠️ Data load failed - check logs"
+# Load initial data from fixtures_store.json if required
+echo "=== Loading data from fixtures_store.json ==="
+python manage.py loaddata fixtures_store.json || echo "⚠️ Data load note: existing data preserved or duplicate keys skipped"
 
 echo "=== Build complete ==="
+

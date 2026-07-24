@@ -1,0 +1,2238 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Admin Dashboard — {{ store.name|default:"Retail Platform" }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --sidebar-bg: #0f172a;
+            --sidebar-hover: #1e293b;
+            --sidebar-active: #3b82f6;
+            --sidebar-width: 260px;
+            --topbar-h: 64px;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59,130,246,0.15);
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #06b6d4;
+            --purple: #8b5cf6;
+            --card-bg: #ffffff;
+            --body-bg: #f1f5f9;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--body-bg);
+            color: var(--text-dark);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* ===== SIDEBAR ===== */
+        #sidebar {
+            position: fixed;
+            top: 0; left: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: var(--sidebar-bg);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        #sidebar .sidebar-logo {
+            padding: 18px 20px;
+            border-bottom: 1px solid #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+        #sidebar .sidebar-logo .logo-icon {
+            width: 38px; height: 38px;
+            background: linear-gradient(135deg, var(--accent), #6366f1);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 18px; font-weight: 700;
+        }
+        #sidebar .sidebar-logo .logo-text { color: white; font-weight: 700; font-size: 16px; line-height: 1.2; }
+        #sidebar .sidebar-logo .logo-text small { color: #64748b; font-size: 11px; font-weight: 400; }
+        #sidebar .sidebar-nav {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px 0;
+            scrollbar-width: thin;
+            scrollbar-color: #1e293b transparent;
+        }
+        #sidebar .sidebar-nav::-webkit-scrollbar { width: 4px; }
+        #sidebar .sidebar-nav::-webkit-scrollbar-track { background: transparent; }
+        #sidebar .sidebar-nav::-webkit-scrollbar-thumb { background: #334155; border-radius: 2px; }
+        .nav-section-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #475569;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 12px 20px 4px;
+        }
+        .nav-item { margin: 1px 8px; }
+        .nav-link-custom {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 12px;
+            border-radius: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 13.5px;
+            font-weight: 500;
+            transition: all 0.15s;
+        }
+        .nav-link-custom:hover { background: var(--sidebar-hover); color: #e2e8f0; }
+        .nav-link-custom.active { background: var(--accent-glow); color: var(--accent); font-weight: 600; }
+        .nav-link-custom .nav-icon {
+            width: 20px; height: 20px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; flex-shrink: 0;
+        }
+        .nav-link-custom .nav-badge {
+            margin-left: auto;
+            background: var(--danger);
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+        .nav-group-toggle {
+            display: flex; align-items: center; gap: 10px;
+            padding: 9px 12px;
+            border-radius: 8px;
+            color: #94a3b8;
+            font-size: 13.5px; font-weight: 500;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.15s;
+        }
+        .nav-group-toggle:hover { background: var(--sidebar-hover); color: #e2e8f0; }
+        .nav-group-toggle .nav-icon { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+        .nav-group-toggle .chevron { margin-left: auto; font-size: 10px; transition: transform 0.2s; }
+        .nav-group-toggle.expanded .chevron { transform: rotate(90deg); }
+        .nav-sub { padding-left: 32px; display: none; }
+        .nav-sub.open { display: block; }
+        .nav-sub .nav-link-custom { font-size: 13px; color: #64748b; }
+        .nav-sub .nav-link-custom:hover { color: #e2e8f0; }
+        .nav-sub .nav-link-custom.active { color: var(--accent); }
+        #sidebar .sidebar-footer {
+            padding: 12px 8px;
+            border-top: 1px solid #1e293b;
+            flex-shrink: 0;
+        }
+
+        /* ===== TOPBAR ===== */
+        #topbar {
+            position: fixed;
+            top: 0; left: var(--sidebar-width);
+            right: 0; height: var(--topbar-h);
+            background: white;
+            border-bottom: 1px solid var(--border);
+            display: flex; align-items: center;
+            padding: 0 24px;
+            z-index: 999;
+            gap: 16px;
+        }
+        #topbar .topbar-title { font-weight: 700; font-size: 18px; flex: 1; }
+        .search-box { position: relative; }
+        .search-box input {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 12px 8px 36px;
+            font-size: 13px;
+            width: 220px;
+            background: var(--body-bg);
+            outline: none;
+            transition: border 0.2s;
+        }
+        .search-box input:focus { border-color: var(--accent); }
+        .search-box .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 13px; }
+        .topbar-action {
+            width: 38px; height: 38px;
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.15s;
+            position: relative;
+            border: 1px solid var(--border);
+            background: var(--body-bg);
+        }
+        .topbar-action:hover { background: var(--accent); color: white; border-color: var(--accent); }
+        .notif-dot {
+            position: absolute; top: 6px; right: 6px;
+            width: 8px; height: 8px;
+            background: var(--danger); border-radius: 50%;
+            border: 2px solid white;
+        }
+        .topbar-profile {
+            display: flex; align-items: center; gap: 10px;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--body-bg);
+            transition: all 0.15s;
+        }
+        .topbar-profile:hover { border-color: var(--accent); }
+        .topbar-profile .avatar {
+            width: 32px; height: 32px;
+            background: linear-gradient(135deg, var(--accent), #6366f1);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-weight: 700; font-size: 13px;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        #main-content {
+            margin-left: var(--sidebar-width);
+            margin-top: var(--topbar-h);
+            padding: 28px;
+            min-height: calc(100vh - var(--topbar-h));
+        }
+
+        /* ===== STAT CARDS ===== */
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            padding: 20px;
+            transition: all 0.2s;
+            height: 100%;
+        }
+        .stat-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.07); }
+        .stat-card .stat-icon {
+            width: 44px; height: 44px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; margin-bottom: 12px;
+        }
+        .stat-card .stat-value { font-size: 26px; font-weight: 800; line-height: 1; }
+        .stat-card .stat-label { font-size: 12.5px; color: var(--text-muted); margin-top: 4px; font-weight: 500; }
+        .stat-card .stat-change { font-size: 12px; margin-top: 8px; font-weight: 600; }
+        .icon-blue { background: rgba(59,130,246,0.1); color: var(--accent); }
+        .icon-green { background: rgba(34,197,94,0.1); color: var(--success); }
+        .icon-orange { background: rgba(245,158,11,0.1); color: var(--warning); }
+        .icon-red { background: rgba(239,68,68,0.1); color: var(--danger); }
+        .icon-purple { background: rgba(139,92,246,0.1); color: var(--purple); }
+        .icon-cyan { background: rgba(6,182,212,0.1); color: var(--info); }
+
+        /* ===== QUICK ACTIONS ===== */
+        .quick-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+        .quick-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 9px 16px;
+            border-radius: 8px;
+            font-size: 13px; font-weight: 600;
+            border: none; cursor: pointer;
+            text-decoration: none;
+            transition: all 0.15s;
+        }
+        .quick-btn-primary { background: var(--accent); color: white; }
+        .quick-btn-primary:hover { background: #2563eb; color: white; transform: translateY(-1px); }
+        .quick-btn-outline { background: white; color: var(--text-dark); border: 1px solid var(--border); }
+        .quick-btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* ===== SECTION HEADER ===== */
+        .section-header { margin-bottom: 24px; }
+        .section-header h2 { font-size: 22px; font-weight: 800; margin: 0; }
+        .section-header p { color: var(--text-muted); margin: 4px 0 0; font-size: 14px; }
+
+        /* ===== TABLES ===== */
+        .data-table-card {
+            background: white;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+        .data-table-card .table-header {
+            padding: 18px 22px;
+            border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; gap: 12px;
+        }
+        .data-table-card .table-header h5 { margin: 0; font-size: 15px; font-weight: 700; }
+        .table { margin: 0; }
+        .table thead th {
+            background: #f8fafc;
+            font-size: 11.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 16px;
+        }
+        .table tbody td { padding: 14px 16px; vertical-align: middle; font-size: 13.5px; border-color: var(--border); }
+        .table tbody tr:hover { background: #f8fafc; }
+        .status-pill {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 11.5px;
+            font-weight: 600;
+        }
+        .pill-pending { background: rgba(245,158,11,0.12); color: var(--warning); }
+        .pill-confirmed { background: rgba(59,130,246,0.12); color: var(--accent); }
+        .pill-delivered { background: rgba(34,197,94,0.12); color: var(--success); }
+        .pill-cancelled { background: rgba(239,68,68,0.12); color: var(--danger); }
+        .pill-active { background: rgba(34,197,94,0.12); color: var(--success); }
+        .pill-inactive { background: rgba(100,116,139,0.12); color: var(--text-muted); }
+        .pill-in-stock { background: rgba(34,197,94,0.12); color: var(--success); }
+        .pill-low { background: rgba(245,158,11,0.12); color: var(--warning); }
+        .pill-out { background: rgba(239,68,68,0.12); color: var(--danger); }
+
+        /* ===== CHARTS ===== */
+        .chart-card {
+            background: white;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            padding: 24px;
+        }
+        .chart-card h5 { font-size: 15px; font-weight: 700; margin-bottom: 16px; }
+
+        /* ===== FORMS ===== */
+        .form-card {
+            background: white;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            padding: 24px;
+        }
+        .form-label { font-size: 13px; font-weight: 600; color: var(--text-dark); margin-bottom: 6px; }
+        .form-control, .form-select {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 13.5px;
+            padding: 9px 12px;
+        }
+        .form-control:focus, .form-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+        .btn-save {
+            background: var(--accent); color: white; border: none;
+            border-radius: 8px; padding: 10px 24px;
+            font-size: 13.5px; font-weight: 600;
+            cursor: pointer; transition: all 0.15s;
+        }
+        .btn-save:hover { background: #2563eb; transform: translateY(-1px); }
+        .btn-danger-sm {
+            background: rgba(239,68,68,0.1); color: var(--danger); border: none;
+            border-radius: 6px; padding: 5px 10px; font-size: 12px; cursor: pointer;
+            transition: all 0.15s;
+        }
+        .btn-danger-sm:hover { background: var(--danger); color: white; }
+        .btn-success-sm {
+            background: rgba(34,197,94,0.1); color: var(--success); border: none;
+            border-radius: 6px; padding: 5px 10px; font-size: 12px; cursor: pointer;
+            transition: all 0.15s;
+        }
+        .btn-success-sm:hover { background: var(--success); color: white; }
+        .btn-warning-sm {
+            background: rgba(245,158,11,0.1); color: var(--warning); border: none;
+            border-radius: 6px; padding: 5px 10px; font-size: 12px; cursor: pointer;
+            transition: all 0.15s;
+        }
+        .btn-warning-sm:hover { background: var(--warning); color: white; }
+
+        /* ===== ALERTS ===== */
+        .dash-alert {
+            border-radius: 10px; border: none; font-size: 13.5px;
+            display: flex; align-items: center; gap: 10px;
+            padding: 12px 18px;
+        }
+        .dash-alert-success { background: rgba(34,197,94,0.1); color: #15803d; }
+        .dash-alert-error { background: rgba(239,68,68,0.1); color: #b91c1c; }
+        .dash-alert-info { background: rgba(59,130,246,0.1); color: #1e40af; }
+
+        /* ===== ACTIVITY FEED ===== */
+        .activity-item {
+            display: flex; gap: 14px; align-items: flex-start;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .activity-item:last-child { border-bottom: none; }
+        .activity-dot {
+            width: 34px; height: 34px; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; flex-shrink: 0;
+        }
+        .activity-info .activity-title { font-size: 13.5px; font-weight: 600; }
+        .activity-info .activity-sub { font-size: 12px; color: var(--text-muted); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            #sidebar { transform: translateX(-100%); }
+            #sidebar.open { transform: translateX(0); }
+            #topbar { left: 0; }
+            #main-content { margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============= SIDEBAR ============= -->
+<nav id="sidebar">
+    <div class="sidebar-logo">
+        <div class="logo-icon">{{ store.name|slice:":1"|upper }}</div>
+        <div class="logo-text">
+            {{ store.name|truncatechars:18 }}
+            <br><small>Super Admin Dashboard</small>
+        </div>
+    </div>
+
+    <div class="sidebar-nav">
+        <!-- Dashboard -->
+        <div class="nav-item">
+            <a href="?section=overview" class="nav-link-custom {% if section == 'overview' %}active{% endif %}">
+                <span class="nav-icon"><i class="fas fa-chart-pie"></i></span> Dashboard
+            </a>
+        </div>
+
+        <!-- Website Management -->
+        <div class="nav-section-label">Website</div>
+        <div class="nav-item">
+            <div class="nav-group-toggle {% if section in 'slides,banners,pages,menus,settings,homepage_sections,media_library' %}expanded{% endif %}" onclick="toggleGroup(this, 'grp-website')">
+                <span class="nav-icon"><i class="fas fa-globe"></i></span>
+                Website Management
+                <i class="fas fa-chevron-right chevron"></i>
+            </div>
+            <div class="nav-sub {% if section in 'slides,banners,pages,menus,settings,homepage_sections,media_library' %}open{% endif %}" id="grp-website">
+                <div class="nav-item">
+                    <a href="?section=slides" class="nav-link-custom {% if section == 'slides' %}active{% endif %}">
+                        <span class="nav-icon"><i class="fas fa-images"></i></span> Hero Sliders
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="?section=banners" class="nav-link-custom {% if section == 'banners' %}active{% endif %}">
+                        <span class="nav-icon"><i class="fas fa-rectangle-ad"></i></span> Promo Banners
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="?section=homepage_sections" class="nav-link-custom {% if section == 'homepage_sections' %}active{% endif %}">
+                        <span class="nav-icon"><i class="fas fa-layer-group"></i></span> Homepage Sections
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="?section=menus" class="nav-link-custom {% if section == 'menus' %}active{% endif %}">
+                        <span class="nav-icon"><i class="fas fa-list-ul"></i></span> Navigation Menus
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="?section=pages" class="nav-link-custom {% if section == 'pages' %}active{% endif %}">
+                        <span class="nav-icon"><i class="fas fa-file-lines"></i></span> Static Pages
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="?section=media_library" class="nav-link-custom {% if section == 'media_library' %}active{% endif %}">
+                        <span class="nav-icon"><i class="fas fa-photo-film"></i></span> Media Library
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="?section=settings" class="nav-link-custom {% if section == 'settings' %}active{% endif %}">
+                        <span class="nav-icon"><i class="fas fa-sliders"></i></span> Site Settings
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="?section=contact_messages" class="nav-link-custom {% if section == 'contact_messages' %}active{% endif %}">
+                        <span class="nav-icon"><i class="fas fa-envelope-open-text"></i></span> Contact Messages
+                        {% if unread_messages_count %}<span class="nav-badge" style="background: #ef4444;">{{ unread_messages_count }}</span>{% endif %}
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Catalog -->
+        <div class="nav-section-label">Catalog</div>
+        <div class="nav-item">
+            <a href="?section=products" class="nav-link-custom {% if section == 'products' %}active{% endif %}">
+                <span class="nav-icon"><i class="fas fa-box"></i></span> Products
+                <span class="nav-badge">{{ products_count }}</span>
+            </a>
+        </div>
+        <div class="nav-item">
+            <a href="?section=categories" class="nav-link-custom {% if section == 'categories' %}active{% endif %}">
+                <span class="nav-icon"><i class="fas fa-tags"></i></span> Categories
+            </a>
+        </div>
+        <div class="nav-item">
+            <a href="?section=brands" class="nav-link-custom {% if section == 'brands' %}active{% endif %}">
+                <span class="nav-icon"><i class="fas fa-copyright"></i></span> Brands
+            </a>
+        </div>
+        <div class="nav-item">
+            <a href="?section=reviews" class="nav-link-custom {% if section == 'reviews' %}active{% endif %}">
+                <span class="nav-icon"><i class="fas fa-star"></i></span> Reviews
+            </a>
+        </div>
+
+        <!-- Inventory -->
+        <div class="nav-section-label">Inventory</div>
+        <div class="nav-item">
+            <a href="?section=stock" class="nav-link-custom {% if section == 'stock' %}active{% endif %}">
+                <span class="nav-icon"><i class="fas fa-warehouse"></i></span> Stock Levels
+                {% if low_stock_count %}<span class="nav-badge">{{ low_stock_count }}</span>{% endif %}
+            </a>
+        </div>
+        <div class="nav-item">
+            <a href="?section=stock_history" class="nav-link-custom {% if section == 'stock_history' %}active{% endif %}">
+                <span class="nav-icon"><i class="fas fa-clock-rotate-left"></i></span> Stock History
+            </a>
+        </div>
+        <div class="nav-item">
+            <a href="?section=branches" class="nav-link-custom {% if section == 'branches' %}active{% endif %}">
+                <span class="nav-icon"><i class="fas fa-store"></i></span> Branches
+            </a>
+        </div>
+
+        <!-- Sales -->
+        <div class="nav-section-label">Sales</div>
+        <div class="nav-item">
+            <a href="?section=orders" class="nav-link-custom {% if section == 'orders' %}active{% endif %}">
+                <span class="nav-icon"><i class="fas fa-receipt"></i></span> Orders
+                {% if pending_orders_count %}<span class="nav-badge">{{ pending_orders_count }}</span>{% endif %}
+            </a>
+        </div>
+        <div class="nav-item">
+            <a href="?section=customers" class="nav-link-custom {% if section == 'customers' %}active{% endif %}">
+                <span class="nav-icon"><i class="fas fa-users"></i></span> Customers
+            </a>
+        </div>
+        <div class="nav-item">
+            <a href="?section=coupons" class="nav-link-custom {% if section == 'coupons' %}active{% endif %}">
+                <span class="nav-icon"><i class="fas fa-ticket"></i></span> Coupons
+            </a>
+        </div>
+
+        <!-- Analytics -->
+        <div class="nav-section-label">Insights</div>
+        <div class="nav-item">
+            <a href="?section=analytics" class="nav-link-custom {% if section == 'analytics' %}active{% endif %}">
+                <span class="nav-icon"><i class="fas fa-chart-line"></i></span> Analytics
+            </a>
+        </div>
+    </div>
+
+    <div class="sidebar-footer">
+        <a href="/" target="_blank" class="nav-link-custom" style="margin-bottom:4px;">
+            <span class="nav-icon"><i class="fas fa-arrow-up-right-from-square"></i></span> View Storefront
+        </a>
+        <a href="{% url 'storefront:logout' %}?next={% url 'storefront:dashboard_login' %}" class="nav-link-custom" style="color: #ef4444;">
+            <span class="nav-icon"><i class="fas fa-right-from-bracket"></i></span> Logout
+        </a>
+    </div>
+</nav>
+
+<!-- ============= TOPBAR ============= -->
+<header id="topbar">
+    <div class="topbar-title">
+        {% if section == 'overview' %}Dashboard Overview
+        {% elif section == 'slides' %}Hero Sliders
+        {% elif section == 'banners' %}Promotional Banners
+        {% elif section == 'homepage_sections' %}Homepage Sections
+        {% elif section == 'menus' %}Navigation Menus
+        {% elif section == 'pages' %}Static Pages
+        {% elif section == 'media_library' %}Media Library
+        {% elif section == 'settings' %}Site Settings
+        {% elif section == 'products' %}Products Catalog
+        {% elif section == 'categories' %}Categories
+        {% elif section == 'brands' %}Brands
+        {% elif section == 'reviews' %}Customer Reviews
+        {% elif section == 'stock' %}Inventory Stock
+        {% elif section == 'stock_history' %}Stock History
+        {% elif section == 'branches' %}Store Branches
+        {% elif section == 'orders' %}Customer Orders
+        {% elif section == 'customers' %}Customers
+        {% elif section == 'coupons' %}Discount Coupons
+        {% elif section == 'analytics' %}Analytics & Reports
+        {% elif section == 'contact_messages' %}Contact Messages
+        {% else %}Admin Dashboard
+        {% endif %}
+    </div>
+    <div class="search-box">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" placeholder="Search dashboard...">
+    </div>
+    <div class="topbar-action" title="Notifications">
+        <i class="fas fa-bell"></i>
+        {% if pending_orders_count %}<span class="notif-dot"></span>{% endif %}
+    </div>
+    <a href="/" target="_blank" class="topbar-action" title="View Store" style="text-decoration:none;">
+        <i class="fas fa-external-link-alt"></i>
+    </a>
+    <div class="topbar-profile">
+        <div class="avatar">{{ request.user.username|slice:":1"|upper }}</div>
+        <div style="line-height:1.2;">
+            <div style="font-size:13px;font-weight:600;">{{ request.user.username }}</div>
+            <div style="font-size:11px;color:var(--text-muted);">Super Admin</div>
+        </div>
+    </div>
+</header>
+
+<!-- ============= MAIN CONTENT ============= -->
+<main id="main-content">
+
+    <!-- Flash Messages -->
+    {% for message in messages %}
+    <div class="dash-alert {% if message.tags == 'error' %}dash-alert-error{% elif message.tags == 'success' %}dash-alert-success{% else %}dash-alert-info{% endif %} mb-4" role="alert">
+        <i class="fas {% if message.tags == 'error' %}fa-circle-exclamation{% elif message.tags == 'success' %}fa-circle-check{% else %}fa-circle-info{% endif %}"></i>
+        {{ message }}
+    </div>
+    {% endfor %}
+
+    <!-- Manage Products Modals -->
+    {% for sec in homepage_sections_list %}
+    {% if sec.section_key not in 'slider,categories,middle_banners,reviews,brands' %}
+    <div class="modal fade" id="manageProductsModal{{ sec.id }}" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header border-0 bg-light">
+                    <h5 class="modal-title fw-bold"><i class="fas fa-box-open text-primary me-2"></i>Assign Products to {{ sec.title }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST">{% csrf_token %}
+                    <input type="hidden" name="action" value="assign_section_products">
+                    <input type="hidden" name="section_id" value="{{ sec.id }}">
+                    <div class="modal-body">
+                        <p class="text-muted small mb-3">Select the products you want to display in this section. If none are selected, it will use the fallback logic (e.g. by tags).</p>
+                        <div style="max-height: 400px; overflow-y: auto; border: 1px solid var(--border); border-radius: 8px; padding: 10px;">
+                            {% for product in products_list %}
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" name="products" value="{{ product.id }}" id="sec{{ sec.id }}prod{{ product.id }}" {% if product in sec.products.all %}checked{% endif %}>
+                                <label class="form-check-label" for="sec{{ sec.id }}prod{{ product.id }}">
+                                    {{ product.name }} (SKU: {{ product.variants.first.sku }})
+                                </label>
+                            </div>
+                            {% empty %}
+                            <p class="text-muted">No products available. Add some products first!</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i>Save Assignments</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+    <!-- ============================== -->
+    <!-- SECTION: OVERVIEW             -->
+    <!-- ============================== -->
+    {% if section == 'overview' %}
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+        <a href="?section=products" class="quick-btn quick-btn-primary"><i class="fas fa-plus"></i> Add Product</a>
+        <a href="?section=categories" class="quick-btn quick-btn-outline"><i class="fas fa-tag"></i> Add Category</a>
+        <a href="?section=brands" class="quick-btn quick-btn-outline"><i class="fas fa-copyright"></i> Add Brand</a>
+        <a href="?section=coupons" class="quick-btn quick-btn-outline"><i class="fas fa-ticket"></i> Create Coupon</a>
+        <a href="?section=slides" class="quick-btn quick-btn-outline"><i class="fas fa-images"></i> Add Slider</a>
+        <a href="?section=orders" class="quick-btn quick-btn-outline"><i class="fas fa-receipt"></i> View Orders</a>
+    </div>
+
+    <!-- Stats Row 1: Revenue -->
+    <div class="row g-3 mb-3">
+        <div class="col-xl-3 col-md-6">
+            <div class="stat-card">
+                <div class="stat-icon icon-green"><i class="fas fa-dollar-sign"></i></div>
+                <div class="stat-value text-success">{{ store.currency }} {{ total_sales|floatformat:0 }}</div>
+                <div class="stat-label">Total Revenue (Delivered)</div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="stat-card">
+                <div class="stat-icon icon-blue"><i class="fas fa-calendar-day"></i></div>
+                <div class="stat-value text-primary">{{ store.currency }} {{ today_revenue|floatformat:0 }}</div>
+                <div class="stat-label">Today's Revenue</div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="stat-card">
+                <div class="stat-icon icon-purple"><i class="fas fa-calendar-alt"></i></div>
+                <div class="stat-value" style="color:var(--purple);">{{ store.currency }} {{ month_revenue|floatformat:0 }}</div>
+                <div class="stat-label">This Month Revenue</div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="stat-card">
+                <div class="stat-icon icon-cyan"><i class="fas fa-chart-bar"></i></div>
+                <div class="stat-value" style="color:var(--info);">{{ store.currency }} {{ avg_order_value }}</div>
+                <div class="stat-label">Avg. Order Value</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Row 2: Orders -->
+    <div class="row g-3 mb-3">
+        <div class="col-xl-2 col-md-4 col-6">
+            <div class="stat-card">
+                <div class="stat-icon icon-blue"><i class="fas fa-receipt"></i></div>
+                <div class="stat-value">{{ orders_count }}</div>
+                <div class="stat-label">Total Orders</div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-4 col-6">
+            <div class="stat-card">
+                <div class="stat-icon icon-cyan"><i class="fas fa-sun"></i></div>
+                <div class="stat-value" style="color:var(--info);">{{ today_orders }}</div>
+                <div class="stat-label">Today's Orders</div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-4 col-6">
+            <div class="stat-card">
+                <div class="stat-icon icon-orange"><i class="fas fa-clock"></i></div>
+                <div class="stat-value text-warning">{{ pending_orders_count }}</div>
+                <div class="stat-label">Pending Orders</div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-4 col-6">
+            <div class="stat-card">
+                <div class="stat-icon icon-green"><i class="fas fa-check-circle"></i></div>
+                <div class="stat-value text-success">{{ delivered_orders_count }}</div>
+                <div class="stat-label">Completed Orders</div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-4 col-6">
+            <div class="stat-card">
+                <div class="stat-icon icon-red"><i class="fas fa-times-circle"></i></div>
+                <div class="stat-value text-danger">{{ cancelled_orders_count }}</div>
+                <div class="stat-label">Cancelled Orders</div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-4 col-6">
+            <div class="stat-card">
+                <div class="stat-icon icon-purple"><i class="fas fa-shopping-bag"></i></div>
+                <div class="stat-value" style="color:var(--purple);">{{ products_sold_count }}</div>
+                <div class="stat-label">Products Sold</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Row 3: Catalog & Inventory -->
+    <div class="row g-3 mb-4">
+        <div class="col-xl-2 col-md-4 col-6">
+            <div class="stat-card">
+                <div class="stat-icon icon-blue"><i class="fas fa-users"></i></div>
+                <div class="stat-value">{{ customers_count }}</div>
+                <div class="stat-label">Total Customers</div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-4 col-6">
+            <div class="stat-card">
+                <div class="stat-icon icon-cyan"><i class="fas fa-box"></i></div>
+                <div class="stat-value" style="color:var(--info);">{{ products_count }}</div>
+                <div class="stat-label">Total Products</div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-4 col-6">
+            <div class="stat-card">
+                <div class="stat-icon icon-purple"><i class="fas fa-tags"></i></div>
+                <div class="stat-value" style="color:var(--purple);">{{ categories_count }}</div>
+                <div class="stat-label">Categories</div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-4 col-6">
+            <div class="stat-card">
+                <div class="stat-icon icon-green"><i class="fas fa-copyright"></i></div>
+                <div class="stat-value text-success">{{ brands_count }}</div>
+                <div class="stat-label">Brands</div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-4 col-6">
+            <div class="stat-card">
+                <div class="stat-icon icon-orange"><i class="fas fa-exclamation-triangle"></i></div>
+                <div class="stat-value text-warning">{{ low_stock_count }}</div>
+                <div class="stat-label">Low Stock Products</div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-4 col-6">
+            <div class="stat-card">
+                <div class="stat-icon icon-red"><i class="fas fa-ban"></i></div>
+                <div class="stat-value text-danger">{{ out_of_stock_count }}</div>
+                <div class="stat-label">Out of Stock</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts + Activity -->
+    <div class="row g-4 mb-4">
+        <div class="col-lg-8">
+            <div class="chart-card">
+                <h5><i class="fas fa-chart-area me-2 text-primary"></i>Sales & Orders — Last 7 Days</h5>
+                <canvas id="salesChart" height="280"></canvas>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="chart-card h-100">
+                <h5><i class="fas fa-trophy me-2 text-warning"></i>Top Selling Products</h5>
+                {% if top_products %}
+                    {% for p in top_products %}
+                    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);">
+                        <span style="font-size:13px;font-weight:500;">{{ forloop.counter }}. {{ p.product_name|truncatechars:28 }}</span>
+                        <span class="status-pill pill-delivered">{{ p.total_qty }} sold</span>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="text-center py-5 text-muted"><i class="fas fa-chart-bar fa-3x mb-3 d-block" style="opacity:0.3;"></i>No sales data yet.</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Orders -->
+    <div class="data-table-card">
+        <div class="table-header">
+            <i class="fas fa-receipt text-primary"></i>
+            <h5>Recent Orders</h5>
+            <a href="?section=orders" class="ms-auto quick-btn quick-btn-outline" style="padding:6px 14px;font-size:12px;">View All</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead><tr>
+                    <th>Order #</th><th>Customer</th><th>Total</th><th>Status</th><th>Date</th>
+                </tr></thead>
+                <tbody>
+                {% for o in recent_orders|slice:":8" %}
+                <tr>
+                    <td class="fw-bold text-primary">#{{ o.order_number }}</td>
+                    <td>{% if o.customer.full_name %}{{ o.customer.full_name }}{% elif o.customer.user %}{{ o.customer.user.username }}{% else %}Guest{% endif %}</td>
+                    <td class="fw-bold">{{ store.currency }} {{ o.grand_total|floatformat:2 }}</td>
+                    <td><span class="status-pill pill-{{ o.status }}">{{ o.get_status_display }}</span></td>
+                    <td class="text-muted" style="font-size:12px;">{{ o.created_at|date:"M d, Y" }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="5" class="text-center py-4 text-muted">No orders yet.</td></tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- SECTION: HERO SLIDES          -->
+    <!-- ============================== -->
+    {% elif section == 'slides' %}
+    <div class="row g-4">
+        <div class="col-lg-7">
+            <div class="data-table-card">
+                <div class="table-header">
+                    <i class="fas fa-images text-primary"></i><h5>Hero Sliders</h5>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead><tr><th>Title</th><th>Order</th><th>Status</th><th>Actions</th></tr></thead>
+                        <tbody>
+                        {% for slide in slides_list %}
+                        <tr>
+                            <td>
+                                <strong>{{ slide.title }}</strong>
+                                <div style="font-size:11.5px;color:var(--text-muted);">{{ slide.subtitle|truncatechars:40 }}</div>
+                            </td>
+                            <td>{{ slide.display_order }}</td>
+                            <td>
+                                <span class="status-pill {% if slide.is_active %}pill-active{% else %}pill-inactive{% endif %}">
+                                    {% if slide.is_active %}Active{% else %}Hidden{% endif %}
+                                </span>
+                            </td>
+                            <td>
+                                <form method="POST" class="d-inline">{% csrf_token %}
+                                    <input type="hidden" name="action" value="toggle_slide">
+                                    <input type="hidden" name="slide_id" value="{{ slide.id }}">
+                                    <button type="submit" class="btn-warning-sm">Toggle</button>
+                                </form>
+                                <form method="POST" class="d-inline" onsubmit="return confirm('Delete slide?')">{% csrf_token %}
+                                    <input type="hidden" name="action" value="delete_slide">
+                                    <input type="hidden" name="slide_id" value="{{ slide.id }}">
+                                    <button type="submit" class="btn-danger-sm"><i class="fas fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="4" class="text-center py-5 text-muted">No slides added yet. Add your first hero slide →</td></tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="form-card">
+                <h5 class="fw-bold mb-4"><i class="fas fa-plus-circle text-primary me-2"></i>Add New Slide</h5>
+                <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <input type="hidden" name="action" value="add_slide">
+                    <div class="mb-3"><label class="form-label">Title *</label><input type="text" name="title" class="form-control" required></div>
+                    <div class="mb-3"><label class="form-label">Sub Title</label><input type="text" name="subtitle" class="form-control"></div>
+                    <div class="mb-3"><label class="form-label">Badge</label><input type="text" name="badge" class="form-control" placeholder="HOT DEAL"></div>
+                    <div class="mb-3"><label class="form-label">Button Text</label><input type="text" name="button_text" class="form-control" placeholder="Shop Now"></div>
+                    <div class="mb-3"><label class="form-label">Button Link</label><input type="text" name="button_link" class="form-control" placeholder="/shop/"></div>
+                    <div class="mb-3"><label class="form-label">Display Order</label><input type="number" name="display_order" class="form-control" value="0"></div>
+                    <div class="mb-3"><label class="form-label">Desktop Slide Image *</label><input type="file" name="image" class="form-control" accept="image/*" required></div>
+                    <div class="mb-3"><label class="form-label">Mobile Slide Image (Optional)</label><input type="file" name="mobile_image" class="form-control" accept="image/*"></div>
+                    <div class="mb-3"><label class="form-label">Text Color</label><input type="color" name="text_color" class="form-control" value="#000000" style="height:44px;"></div>
+                    <div class="mb-3">
+                        <label class="form-label">Text Alignment</label>
+                        <select name="text_alignment" class="form-select">
+                            <option value="left">Left</option>
+                            <option value="center">Center</option>
+                            <option value="right">Right</option>
+                        </select>
+                    </div>
+                    <div class="mb-3"><label class="form-label">Animation Type</label><input type="text" name="animation_type" class="form-control" value="fade" placeholder="fade"></div>
+                    <div class="mb-3"><label class="form-label">Alt Text</label><input type="text" name="alt_text" class="form-control"></div>
+                    <div class="mb-3"><label class="form-label">Countdown End Date (Optional)</label><input type="datetime-local" name="countdown_end" class="form-control"></div>
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" name="overlay_enabled" id="overlayEnabled" checked>
+                        <label class="form-check-label" for="overlayEnabled">Enable Dark Overlay</label>
+                    </div>
+                    <button type="submit" class="btn-save w-100">Add Slide</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- SECTION: BANNERS              -->
+    <!-- ============================== -->
+    {% elif section == 'banners' %}
+    <div class="row g-4">
+        <div class="col-lg-7">
+            <div class="data-table-card">
+                <div class="table-header"><i class="fas fa-rectangle-ad text-primary"></i><h5>Promotional Banners</h5></div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead><tr><th>Title</th><th>Position</th><th>Status</th><th>Actions</th></tr></thead>
+                        <tbody>
+                        {% for banner in banners_list %}
+                        <tr>
+                            <td><strong>{{ banner.title }}</strong><div style="font-size:11.5px;color:var(--text-muted);">{{ banner.subtitle|truncatechars:40 }}</div></td>
+                            <td><span class="status-pill pill-confirmed" style="font-size:11px;">{{ banner.get_position_display }}</span></td>
+                            <td><span class="status-pill {% if banner.is_active %}pill-active{% else %}pill-inactive{% endif %}">{% if banner.is_active %}Active{% else %}Hidden{% endif %}</span></td>
+                            <td>
+                                <form method="POST" class="d-inline">{% csrf_token %}
+                                    <input type="hidden" name="action" value="toggle_banner"><input type="hidden" name="banner_id" value="{{ banner.id }}">
+                                    <button type="submit" class="btn-warning-sm">Toggle</button>
+                                </form>
+                                <form method="POST" class="d-inline" onsubmit="return confirm('Delete banner?')">{% csrf_token %}
+                                    <input type="hidden" name="action" value="delete_banner"><input type="hidden" name="banner_id" value="{{ banner.id }}">
+                                    <button type="submit" class="btn-danger-sm"><i class="fas fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="4" class="text-center py-5 text-muted">No banners added.</td></tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="form-card">
+                <h5 class="fw-bold mb-4"><i class="fas fa-plus-circle text-primary me-2"></i>Add New Banner</h5>
+                <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <input type="hidden" name="action" value="add_banner">
+                    <div class="mb-3"><label class="form-label">Title *</label><input type="text" name="title" class="form-control" required></div>
+                    <div class="mb-3"><label class="form-label">Sub Title</label><input type="text" name="subtitle" class="form-control"></div>
+                    <div class="mb-3"><label class="form-label">Button Text</label><input type="text" name="button_text" class="form-control"></div>
+                    <div class="mb-3"><label class="form-label">Button Link</label><input type="text" name="button_link" class="form-control"></div>
+                    <div class="mb-3">
+                        <label class="form-label">Position</label>
+                        <select name="position" class="form-select">
+                            <option value="home_top">Home — Top (Hero Right Side Banners)</option>
+                            <option value="home_middle">Home — Middle (Special Offer Banners)</option>
+                            <option value="home_bottom">Home — Bottom (Bottom Grid Banners)</option>
+                            <option value="category_page">Category Page</option>
+                            <option value="product_page">Product Page</option>
+                            <option value="sidebar">Sidebar</option>
+                            <option value="footer">Footer</option>
+                        </select>
+                    </div>
+                    <div class="mb-3"><label class="form-label">Desktop Banner Image *</label><input type="file" name="image" class="form-control" accept="image/*" required></div>
+                    <div class="mb-3"><label class="form-label">Mobile Banner Image (Optional)</label><input type="file" name="mobile_image" class="form-control" accept="image/*"></div>
+                    <div class="mb-3"><label class="form-label">Alt Text</label><input type="text" name="alt_text" class="form-control" placeholder="Banner description for accessibility"></div>
+                    <div class="row mb-3">
+                        <div class="col-6"><label class="form-label">Background Color</label><input type="color" name="background_color" class="form-control" value="#ffffff" style="height:44px;"></div>
+                        <div class="col-6"><label class="form-label">Text Color</label><input type="color" name="text_color" class="form-control" value="#000000" style="height:44px;"></div>
+                    </div>
+                    <button type="submit" class="btn-save w-100">Add Banner</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- SECTION: MENUS                -->
+    <!-- ============================== -->
+    {% elif section == 'menus' %}
+    <div class="row g-4">
+        <div class="col-lg-7">
+            <div class="data-table-card">
+                <div class="table-header"><i class="fas fa-list-ul text-primary"></i><h5>Navigation Menu Items</h5></div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead><tr><th>Label</th><th>Location</th><th>Link / Category</th><th>Action</th></tr></thead>
+                        <tbody>
+                        {% for item in menu_items_list %}
+                        <tr>
+                            <td class="fw-bold">{{ item.label }}</td>
+                            <td><span class="status-pill pill-confirmed" style="font-size:11px;">{{ item.get_location_display }}</span></td>
+                            <td style="font-size:12.5px;">
+                                {% if item.category %}📂 {{ item.category.name }}{% else %}🔗 {{ item.url|truncatechars:30 }}{% endif %}
+                            </td>
+                            <td>
+                                <form method="POST" class="d-inline" onsubmit="return confirm('Remove menu item?')">{% csrf_token %}
+                                    <input type="hidden" name="action" value="delete_menu_item"><input type="hidden" name="item_id" value="{{ item.id }}">
+                                    <button type="submit" class="btn-danger-sm"><i class="fas fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="4" class="text-center py-5 text-muted">No menu items. Add your first one.</td></tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="form-card">
+                <h5 class="fw-bold mb-4"><i class="fas fa-plus-circle text-primary me-2"></i>Add Menu Item</h5>
+                <form method="POST">{% csrf_token %}
+                    <input type="hidden" name="action" value="add_menu_item">
+                    <div class="mb-3"><label class="form-label">Label *</label><input type="text" name="label" class="form-control" required></div>
+                    <div class="mb-3">
+                        <label class="form-label">Location</label>
+                        <select name="location" class="form-select">
+                            <option value="header">Header Navigation</option>
+                            <option value="footer">Footer Navigation</option>
+                            <option value="mega_menu">Mega Menu</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Parent Item (for dropdown nesting)</label>
+                        <select name="parent_id" class="form-select">
+                            <option value="">— Top Level (no parent) —</option>
+                            {% for item in menu_items_list %}<option value="{{ item.id }}">{{ item.label }}</option>{% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Link to Category</label>
+                        <select name="category_id" class="form-select">
+                            <option value="">— None (use custom URL) —</option>
+                            {% for cat in categories_list %}<option value="{{ cat.id }}">{{ cat.name }}</option>{% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3"><label class="form-label">Custom URL (if no category)</label><input type="text" name="url" class="form-control" placeholder="/shop/"></div>
+                    <div class="mb-3"><label class="form-label">Icon Class</label><input type="text" name="icon" class="form-control" placeholder="fa-laptop, fa-mobile-alt…"></div>
+                    <div class="mb-4"><label class="form-label">Display Order</label><input type="number" name="display_order" class="form-control" value="0"></div>
+                    <button type="submit" class="btn-save w-100">Add Menu Item</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- SECTION: PAGES                -->
+    <!-- ============================== -->
+    {% elif section == 'pages' %}
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="data-table-card">
+                <div class="table-header"><i class="fas fa-file-lines text-primary"></i><h5>Static Pages</h5></div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead><tr><th>Title</th><th>Slug</th><th>Footer</th><th>Actions</th></tr></thead>
+                        <tbody>
+                        {% for page in pages_list %}
+                        <tr>
+                            <td class="fw-bold">{{ page.title }}</td>
+                            <td style="font-size:12px;" class="text-muted">{{ page.slug }}</td>
+                            <td><span class="status-pill {% if page.show_in_footer %}pill-active{% else %}pill-inactive{% endif %}">{% if page.show_in_footer %}Yes{% else %}No{% endif %}</span></td>
+                            <td>
+                                <form method="POST" class="d-inline" onsubmit="return confirm('Delete page?')">{% csrf_token %}
+                                    <input type="hidden" name="action" value="delete_page"><input type="hidden" name="page_id" value="{{ page.id }}">
+                                    <button type="submit" class="btn-danger-sm"><i class="fas fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="4" class="text-center py-5 text-muted">No pages created.</td></tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-card">
+                <h5 class="fw-bold mb-4"><i class="fas fa-plus-circle text-primary me-2"></i>Create Page</h5>
+                <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <input type="hidden" name="action" value="add_page">
+                    <div class="mb-3"><label class="form-label">Page Title *</label><input type="text" name="title" class="form-control" placeholder="About Us" required></div>
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <select name="status" class="form-select">
+                            <option value="published">Published</option>
+                            <option value="draft">Draft</option>
+                            <option value="scheduled">Scheduled</option>
+                        </select>
+                    </div>
+                    <div class="mb-3"><label class="form-label">Content</label><textarea name="content" class="form-control" rows="6" placeholder="Write your page content here..."></textarea></div>
+                    <div class="mb-3"><label class="form-label">SEO Title</label><input type="text" name="seo_title" class="form-control" placeholder="Search engine title (max 160 chars)"></div>
+                    <div class="mb-3"><label class="form-label">SEO Description</label><textarea name="seo_description" class="form-control" rows="2" placeholder="Short meta description for search engines"></textarea></div>
+                    <div class="mb-3"><label class="form-label">Hero Image</label><input type="file" name="hero_image" class="form-control" accept="image/*"></div>
+                    <div class="mb-3"><label class="form-label">Featured Thumbnail</label><input type="file" name="featured_image" class="form-control" accept="image/*"></div>
+                    <div class="mb-3"><label class="form-label">Display Order</label><input type="number" name="display_order" class="form-control" value="0"></div>
+                    <div class="mb-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="show_in_footer" id="showFooter" checked>
+                            <label class="form-check-label" for="showFooter" style="font-size:13px;font-weight:500;">Show in Footer Links</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-save w-100">Create Page</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- SECTION: SETTINGS             -->
+    <!-- ============================== -->
+    {% elif section == 'settings' %}
+    <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+    <input type="hidden" name="action" value="save_settings">
+    <div class="row g-4">
+        <!-- Store Branding -->
+        <div class="col-lg-6">
+            <div class="form-card">
+                <h5 class="fw-bold mb-4"><i class="fas fa-store text-primary me-2"></i>Store Branding</h5>
+                <div class="mb-3"><label class="form-label">Store Name</label><input type="text" name="store_name" class="form-control" value="{{ store.name }}"></div>
+                <div class="mb-3"><label class="form-label">Store Logo</label><input type="file" name="store_logo" class="form-control" accept="image/*"></div>
+                <div class="mb-3"><label class="form-label">Favicon</label><input type="file" name="favicon" class="form-control" accept="image/*"></div>
+                <div class="mb-3"><label class="form-label">Primary Color</label><input type="color" name="primary_color" class="form-control" value="{{ store.primary_color }}" style="height:44px;"></div>
+            </div>
+        </div>
+        <!-- Store Info -->
+        <div class="col-lg-6">
+            <div class="form-card">
+                <h5 class="fw-bold mb-4"><i class="fas fa-info-circle text-primary me-2"></i>Store Information</h5>
+                <div class="mb-3"><label class="form-label">Phone</label><input type="text" name="store_phone" class="form-control" value="{{ store.phone }}"></div>
+                <div class="mb-3"><label class="form-label">Email</label><input type="email" name="store_email" class="form-control" value="{{ store.email }}"></div>
+                <div class="mb-3"><label class="form-label">Address</label><input type="text" name="store_address" class="form-control" value="{{ store.address }}"></div>
+                <div class="mb-3"><label class="form-label">City</label><input type="text" name="store_city" class="form-control" value="{{ store.city }}"></div>
+                <div class="row">
+                    <div class="col-6"><label class="form-label">Currency</label><input type="text" name="currency" class="form-control" value="{{ store.currency }}" maxlength="3"></div>
+                    <div class="col-6"><label class="form-label">Tax %</label><input type="number" name="tax_percentage" class="form-control" value="{{ store.tax_percentage }}" step="0.01"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Announcement Bar -->
+        <div class="col-lg-6">
+            <div class="form-card">
+                <h5 class="fw-bold mb-4"><i class="fas fa-bullhorn text-primary me-2"></i>Announcement Bar</h5>
+                <div class="mb-3">
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" name="announcement_bar_enabled" id="annEnabled" {% if site_settings.announcement_bar_enabled %}checked{% endif %}>
+                        <label class="form-check-label" for="annEnabled" style="font-size:13px;font-weight:500;">Enable Announcement Bar</label>
+                    </div>
+                </div>
+                <div class="mb-3"><label class="form-label">Announcement Text</label><input type="text" name="announcement_bar_text" class="form-control" value="{{ site_settings.announcement_bar_text|default:'' }}" placeholder="Free Delivery on orders over Rs. 5000"></div>
+                <div class="mb-3"><label class="form-label">Bar Background Color</label><input type="color" name="announcement_bar_color" class="form-control" value="{{ site_settings.announcement_bar_color|default:'#0f172a' }}" style="height:44px;"></div>
+            </div>
+        </div>
+        <!-- Social Media -->
+        <div class="col-lg-6">
+            <div class="form-card">
+                <h5 class="fw-bold mb-4"><i class="fas fa-share-nodes text-primary me-2"></i>Social Media Links</h5>
+                <div class="mb-3"><label class="form-label"><i class="fab fa-facebook text-primary me-1"></i> Facebook</label><input type="url" name="facebook_url" class="form-control" value="{{ site_settings.facebook_url|default:'' }}"></div>
+                <div class="mb-3"><label class="form-label"><i class="fab fa-instagram text-danger me-1"></i> Instagram</label><input type="url" name="instagram_url" class="form-control" value="{{ site_settings.instagram_url|default:'' }}"></div>
+                <div class="mb-3"><label class="form-label"><i class="fab fa-twitter text-info me-1"></i> Twitter / X</label><input type="url" name="twitter_url" class="form-control" value="{{ site_settings.twitter_url|default:'' }}"></div>
+                <div class="mb-3"><label class="form-label"><i class="fab fa-youtube text-danger me-1"></i> YouTube</label><input type="url" name="youtube_url" class="form-control" value="{{ site_settings.youtube_url|default:'' }}"></div>
+                <div class="mb-3"><label class="form-label"><i class="fab fa-whatsapp text-success me-1"></i> WhatsApp Number</label><input type="text" name="whatsapp_number" class="form-control" value="{{ site_settings.whatsapp_number|default:'' }}"></div>
+            </div>
+        </div>
+        <!-- Shipping -->
+        <div class="col-lg-6">
+            <div class="form-card">
+                <h5 class="fw-bold mb-4"><i class="fas fa-truck text-primary me-2"></i>Shipping Settings</h5>
+                <div class="mb-3"><label class="form-label">Free Shipping Threshold</label><input type="number" name="free_shipping_threshold" class="form-control" value="{{ site_settings.free_shipping_threshold|default:'0' }}" step="0.01"></div>
+                <div class="mb-3"><label class="form-label">Default Shipping Charge</label><input type="number" name="default_shipping_charge" class="form-control" value="{{ site_settings.default_shipping_charge|default:'0' }}" step="0.01"></div>
+            </div>
+        </div>
+        <!-- SEO & Footer -->
+        <div class="col-lg-6">
+            <div class="form-card">
+                <h5 class="fw-bold mb-4"><i class="fas fa-magnifying-glass text-primary me-2"></i>SEO & Footer</h5>
+                <div class="mb-3"><label class="form-label">SEO Title</label><input type="text" name="seo_title" class="form-control" value="{{ site_settings.seo_title|default:'' }}"></div>
+                <div class="mb-3"><label class="form-label">SEO Description</label><textarea name="seo_description" class="form-control" rows="3">{{ site_settings.seo_description|default:'' }}</textarea></div>
+                <div class="mb-3"><label class="form-label">Footer Description</label><textarea name="footer_description" class="form-control" rows="3">{{ site_settings.footer_description|default:'' }}</textarea></div>
+                <div class="mb-3"><label class="form-label">Copyright Text</label><input type="text" name="copyright_text" class="form-control" value="{{ site_settings.copyright_text|default:'' }}"></div>
+            </div>
+        </div>
+        <!-- Header Management -->
+        <div class="col-lg-6">
+            <div class="form-card">
+                <h5 class="fw-bold mb-4"><i class="fas fa-window-maximize text-primary me-2"></i>Header Management</h5>
+                <p class="text-muted mb-3" style="font-size:13px;">Control which features appear in your site header.</p>
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" name="sticky_header" id="stickyHeader" {% if site_settings.sticky_header %}checked{% endif %}>
+                    <label class="form-check-label" for="stickyHeader">Sticky Header (follows user on scroll)</label>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" name="search_enabled" id="searchEnabled" {% if site_settings.search_enabled %}checked{% endif %}>
+                    <label class="form-check-label" for="searchEnabled">Show Search Bar</label>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" name="wishlist_enabled" id="wishlistEnabled" {% if site_settings.wishlist_enabled %}checked{% endif %}>
+                    <label class="form-check-label" for="wishlistEnabled">Show Wishlist Button</label>
+                </div>
+                <div class="form-check mb-0">
+                    <input class="form-check-input" type="checkbox" name="cart_enabled" id="cartEnabled" {% if site_settings.cart_enabled %}checked{% endif %}>
+                    <label class="form-check-label" for="cartEnabled">Show Cart Button</label>
+                </div>
+            </div>
+        </div>
+        <!-- Payment Settings -->
+        <div class="col-lg-6">
+            <div class="form-card">
+                <h5 class="fw-bold mb-4"><i class="fas fa-credit-card text-primary me-2"></i>Payment Methods</h5>
+                <p class="text-muted mb-3" style="font-size:13px;">Toggle which payment options are available at checkout.</p>
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" name="cod_enabled" id="codEnabled" {% if site_settings.cod_enabled %}checked{% endif %}>
+                    <label class="form-check-label" for="codEnabled">Cash on Delivery (COD)</label>
+                </div>
+                <div class="form-check mb-0">
+                    <input class="form-check-input" type="checkbox" name="bank_transfer_enabled" id="bankEnabled" {% if site_settings.bank_transfer_enabled %}checked{% endif %}>
+                    <label class="form-check-label" for="bankEnabled">Bank Transfer</label>
+                </div>
+            </div>
+        </div>
+        <!-- SMTP Email Configuration -->
+        <div class="col-12">
+            <div class="form-card">
+                <h5 class="fw-bold mb-4"><i class="fas fa-envelope text-primary me-2"></i>Email / SMTP Configuration</h5>
+                <p class="text-muted mb-3" style="font-size:13px;">Configure your outgoing mail server for order confirmations and notifications.</p>
+                <div class="row g-3">
+                    <div class="col-lg-6"><label class="form-label">SMTP Host</label><input type="text" name="smtp_host" class="form-control" value="{{ site_settings.smtp_host|default:'' }}" placeholder="smtp.gmail.com"></div>
+                    <div class="col-lg-6"><label class="form-label">SMTP Port</label><input type="number" name="smtp_port" class="form-control" value="{{ site_settings.smtp_port|default:'587' }}"></div>
+                    <div class="col-lg-6"><label class="form-label">SMTP Username</label><input type="text" name="smtp_username" class="form-control" value="{{ site_settings.smtp_username|default:'' }}" placeholder="your@email.com"></div>
+                    <div class="col-lg-6"><label class="form-label">SMTP Password</label><input type="password" name="smtp_password" class="form-control" value="{{ site_settings.smtp_password|default:'' }}"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Maintenance -->
+        <div class="col-12">
+            <div class="form-card" style="border-left:4px solid var(--danger);">
+                <h5 class="fw-bold mb-3 text-danger"><i class="fas fa-triangle-exclamation me-2"></i>Maintenance Mode</h5>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" name="maintenance_mode" id="maintMode" {% if site_settings.maintenance_mode %}checked{% endif %}>
+                    <label class="form-check-label" for="maintMode" style="font-size:13.5px;font-weight:500;">Enable Maintenance Mode (takes site offline for visitors)</label>
+                </div>
+                <div class="mb-0"><label class="form-label">Maintenance Message</label><textarea name="maintenance_message" class="form-control" rows="2">{{ site_settings.maintenance_message|default:'We are currently under maintenance. Please check back later.' }}</textarea></div>
+            </div>
+        </div>
+        <!-- Feature Strip Settings -->
+        <div class="col-12">
+            <div class="form-card">
+                <h5 class="fw-bold mb-1"><i class="fas fa-star text-warning me-2"></i>Footer Feature Strip</h5>
+                <p class="text-muted mb-4" style="font-size:13px;">Customize the 4 trust badges shown above the footer.</p>
+                <div class="row g-3">
+                    <div class="col-lg-3 col-md-6">
+                        <label class="form-label fw-semibold">Feature 1 — Title</label>
+                        <input type="text" name="feature_1_title" class="form-control" value="{{ site_settings.feature_1_title|default:'Free Shipping' }}">
+                        <input type="text" name="feature_1_text" class="form-control mt-2" value="{{ site_settings.feature_1_text|default:'On qualifying orders' }}" placeholder="Sub text">
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <label class="form-label fw-semibold">Feature 2 — Title</label>
+                        <input type="text" name="feature_2_title" class="form-control" value="{{ site_settings.feature_2_title|default:'24/7 Support' }}">
+                        <input type="text" name="feature_2_text" class="form-control mt-2" value="{{ site_settings.feature_2_text|default:'Always here to help' }}" placeholder="Sub text">
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <label class="form-label fw-semibold">Feature 3 — Title</label>
+                        <input type="text" name="feature_3_title" class="form-control" value="{{ site_settings.feature_3_title|default:'Secure Payments' }}">
+                        <input type="text" name="feature_3_text" class="form-control mt-2" value="{{ site_settings.feature_3_text|default:'100% protected' }}" placeholder="Sub text">
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <label class="form-label fw-semibold">Feature 4 — Title</label>
+                        <input type="text" name="feature_4_title" class="form-control" value="{{ site_settings.feature_4_title|default:'Easy Returns' }}">
+                        <input type="text" name="feature_4_text" class="form-control mt-2" value="{{ site_settings.feature_4_text|default:'30-day policy' }}" placeholder="Sub text">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 text-end">
+            <button type="submit" class="btn-save" style="padding:12px 32px;font-size:15px;"><i class="fas fa-save me-2"></i>Save All Settings</button>
+        </div>
+
+    </div>
+    </form>
+
+    <!-- ============================== -->
+    <!-- SECTION: HOMEPAGE SECTIONS    -->
+    <!-- ============================== -->
+    {% elif section == 'homepage_sections' %}
+    <form method="POST">{% csrf_token %}
+        <input type="hidden" name="action" value="edit_homepage_sections">
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="data-table-card">
+                    <div class="table-header d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="fas fa-layer-group text-primary"></i><h5 class="d-inline ms-2">Homepage Sections — Drag & Customize</h5>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addHomepageSectionModal">
+                            <i class="fas fa-plus me-1"></i> Add Section
+                        </button>
+                    </div>
+                    <div class="p-4" style="background:#f8fafc;border-bottom:1px solid var(--border);">
+                        <p class="text-muted mb-0" style="font-size:13.5px;">Enable or disable each homepage section, set custom titles, subtitles, and display order. Lower order = appears first.</p>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead><tr><th>Enable</th><th>Section</th><th>Title</th><th>Subtitle</th><th>Order</th><th>Actions</th></tr></thead>
+                            <tbody>
+                            {% for sec in homepage_sections_list %}
+                            <tr>
+                                <td style="width:70px;">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="active_{{ sec.id }}" {% if sec.is_active %}checked{% endif %}>
+                                    </div>
+                                </td>
+                                <td><span class="status-pill pill-confirmed" style="font-size:11px;">{{ sec.get_section_key_display }}</span></td>
+                                <td><input type="text" name="title_{{ sec.id }}" class="form-control form-control-sm" value="{{ sec.title }}"></td>
+                                <td><input type="text" name="subtitle_{{ sec.id }}" class="form-control form-control-sm" value="{{ sec.subtitle }}"></td>
+                                <td style="width:100px;"><input type="number" name="order_{{ sec.id }}" class="form-control form-control-sm" value="{{ sec.display_order }}"></td>
+                                <td>
+                                    {% if sec.section_key not in 'slider,categories,middle_banners,reviews,brands' %}
+                                    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#manageProductsModal{{ sec.id }}">
+                                        Manage Products
+                                    </button>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr><td colspan="5" class="text-center py-5 text-muted">No sections yet — refresh the page to auto-seed them.</td></tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="p-3 text-end">
+                        <button type="submit" class="btn-save"><i class="fas fa-save me-2"></i>Save Homepage Sections</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Add Homepage Section Modal -->
+    <div class="modal fade" id="addHomepageSectionModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form method="POST">{% csrf_token %}
+                    <input type="hidden" name="action" value="add_homepage_section">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Homepage Section</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Section Type</label>
+                            <select name="section_key" class="form-select" required>
+                                <option value="slider">Hero Banner Slider</option>
+                                <option value="categories">Featured Categories</option>
+                                <option value="featured_products">Featured Products Grid</option>
+                                <option value="new_arrivals">New Arrivals Grid</option>
+                                <option value="top_selling">Top Selling Grid</option>
+                                <option value="sale_products">Discounted Items Grid</option>
+                                <option value="middle_banners">Promotional Banners Row</option>
+                                <option value="reviews">Customer Testimonials</option>
+                                <option value="special_offers">Special Offers</option>
+                                <option value="recently_added">Recently Added</option>
+                                <option value="flash_sale">Flash Sale</option>
+                                <option value="trending_products">Trending Products</option>
+                                <option value="deal_of_the_day">Deal of the Day</option>
+                                <option value="why_choose_us">Why Choose Us</option>
+                                <option value="brands">Brands</option>
+                                <option value="newsletter">Newsletter</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Title</label>
+                            <input type="text" name="title" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Subtitle (Optional)</label>
+                            <input type="text" name="subtitle" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Display Order</label>
+                            <input type="number" name="display_order" class="form-control" value="0">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Add Section</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- SECTION: MEDIA LIBRARY        -->
+    <!-- ============================== -->
+    {% elif section == 'media_library' %}
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="data-table-card">
+                <div class="table-header"><i class="fas fa-photo-film text-primary"></i><h5>Media Library ({{ media_files_list|length }} files)</h5></div>
+                {% if media_files_list %}
+                <div class="p-4">
+                    <div class="row g-3">
+                    {% for mf in media_files_list %}
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#fff;">
+                                <div style="height:120px;background:#f0f4f8;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                                    <img src="{{ mf.file.url }}" alt="{{ mf.alt_text }}" style="max-width:100%;max-height:120px;object-fit:cover;">
+                                </div>
+                                <div style="padding:8px;">
+                                    <div style="font-size:11px;font-weight:600;color:var(--text-main);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{{ mf.title|truncatechars:20 }}</div>
+                                    <div style="font-size:10.5px;color:var(--text-muted);">{{ mf.created_at|date:'M d, Y' }}</div>
+                                    <form method="POST" class="mt-1" onsubmit="return confirm('Delete media file?')">{% csrf_token %}
+                                        <input type="hidden" name="action" value="delete_media_file">
+                                        <input type="hidden" name="file_id" value="{{ mf.id }}">
+                                        <button type="submit" class="btn-danger-sm" style="width:100%;font-size:10px;"><i class="fas fa-trash me-1"></i>Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+                {% else %}
+                <div class="text-center py-5 text-muted">
+                    <i class="fas fa-photo-film" style="font-size:3rem;opacity:.3;"></i>
+                    <p class="mt-3">No media files yet. Upload your first image →</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-card">
+                <h5 class="fw-bold mb-4"><i class="fas fa-cloud-upload-alt text-primary me-2"></i>Upload to Library</h5>
+                <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <input type="hidden" name="action" value="add_media_file">
+                    <div class="mb-3"><label class="form-label">Select Image *</label><input type="file" name="file" class="form-control" accept="image/*" required></div>
+                    <div class="mb-3"><label class="form-label">Title / Label</label><input type="text" name="title" class="form-control" placeholder="e.g. Hero Banner July"></div>
+                    <div class="mb-4"><label class="form-label">Alt Text</label><input type="text" name="alt_text" class="form-control" placeholder="Describe this image"></div>
+                    <button type="submit" class="btn-save w-100"><i class="fas fa-upload me-2"></i>Upload File</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- SECTION: PRODUCTS             -->
+    <!-- ============================== -->
+    {% elif section == 'products' %}
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="data-table-card">
+                <div class="table-header">
+                    <i class="fas fa-box text-primary"></i><h5>Products ({{ products_list|length }})</h5>
+                    <button class="ms-auto quick-btn quick-btn-primary" data-bs-toggle="collapse" data-bs-target="#addProductForm">
+                        <i class="fas fa-plus"></i> Add Product
+                    </button>
+                </div>
+                <div class="collapse p-4" id="addProductForm" style="border-bottom:1px solid var(--border); background:#f8fafc;">
+                    <form method="POST" enctype="multipart/form-data" class="row g-3">{% csrf_token %}
+                        <input type="hidden" name="action" value="add_product">
+                        <div class="col-md-4"><label class="form-label">Product Name *</label><input type="text" name="name" class="form-control" required></div>
+                        <div class="col-md-3">
+                            <label class="form-label">Main Category</label>
+                            <select class="form-select dash-main-cat-filter" data-target="#add_product_cat_id">
+                                <option value="">— All Main Categories —</option>
+                                {% for mc in main_categories %}
+                                <option value="{{ mc.id }}">🛒 {{ mc.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Category *</label>
+                            <select name="category_id" id="add_product_cat_id" class="form-select" required>
+                                <option value="">— Select Category —</option>
+                                {% for mc in main_categories %}
+                                <optgroup label="🛒 {{ mc.name }}" data-parent-id="{{ mc.id }}">
+                                    <option value="{{ mc.id }}" data-parent-id="{{ mc.id }}">All {{ mc.name }}</option>
+                                    {% for sub in mc.children.all %}
+                                    {% if sub.is_active %}
+                                    <option value="{{ sub.id }}" data-parent-id="{{ mc.id }}">↳ {{ sub.name }}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </optgroup>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-2"><label class="form-label">Brand</label><select name="brand_id" class="form-select"><option value="">— None —</option>{% for b in brands_list %}<option value="{{ b.id }}">{{ b.name }}</option>{% endfor %}</select></div>
+                        <div class="col-md-12"><label class="form-label">Description</label><textarea name="description" class="form-control" rows="3"></textarea></div>
+                        <div class="col-md-3"><label class="form-label">SKU *</label><input type="text" name="sku" class="form-control" required></div>
+                        <div class="col-md-3"><label class="form-label">Cost Price</label><input type="number" name="cost_price" class="form-control" step="0.01" value="0"></div>
+                        <div class="col-md-3"><label class="form-label">Selling Price *</label><input type="number" name="selling_price" class="form-control" step="0.01" value="0" required></div>
+                        <div class="col-md-3"><label class="form-label">Discount Price</label><input type="number" name="discount_price" class="form-control" step="0.01"></div>
+                        <div class="col-md-6">
+                            <label class="form-label">Featured In</label>
+                            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;">
+                                <label style="font-size:13px;"><input type="checkbox" name="sections" value="featured"> Featured</label>
+                                <label style="font-size:13px;"><input type="checkbox" name="sections" value="new_arrival"> New Arrival</label>
+                                <label style="font-size:13px;"><input type="checkbox" name="sections" value="best_seller"> Best Seller</label>
+                                <label style="font-size:13px;"><input type="checkbox" name="sections" value="trending"> Trending</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6"><label class="form-label">Product Image</label><input type="file" name="image" class="form-control" accept="image/*"></div>
+                        <div class="col-12"><button type="submit" class="btn-save"><i class="fas fa-plus me-1"></i>Add Product</button></div>
+                    </form>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead><tr><th>Product</th><th>Category</th><th>Brand</th><th>Price</th><th>SKU</th><th>Actions</th></tr></thead>
+                        <tbody>
+                        {% for product in products_list %}
+                        {% with v=product.variants.first %}
+                        <tr>
+                            <td>
+                                <div style="display:flex;align-items:center;gap:10px;">
+                                    {% with img=product.images.first %}
+                                    {% if img %}<img src="{% static 'storefront/img/' %}{{ img.image }}" width="40" height="40" style="border-radius:8px;object-fit:cover;" onerror="this.style.display='none'">{% endif %}
+                                    <!-- Edit Product Modal -->
+                        <div class="modal fade" id="editProductModal{{ product.id }}" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-lg text-start">
+                                <div class="modal-content">
+                                    <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+                                        <input type="hidden" name="action" value="edit_product">
+                                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title fw-bold"><i class="fas fa-edit text-primary me-2"></i>Edit Product: {{ product.name }}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body row g-3">
+                                            <div class="col-md-4"><label class="form-label">Product Name *</label><input type="text" name="name" class="form-control" value="{{ product.name }}" required></div>
+                                            <div class="col-md-3">
+                                                <label class="form-label">Main Category</label>
+                                                <select class="form-select dash-main-cat-filter" data-target="#edit_product_cat_{{ product.id }}">
+                                                    <option value="">— All Main Categories —</option>
+                                                    {% for mc in main_categories %}
+                                                    <option value="{{ mc.id }}" {% if product.category and product.category.parent_id == mc.id or product.category_id == mc.id %}selected{% endif %}>🛒 {{ mc.name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="form-label">Category *</label>
+                                                <select name="category_id" id="edit_product_cat_{{ product.id }}" class="form-select" required>
+                                                    {% for mc in main_categories %}
+                                                    <optgroup label="🛒 {{ mc.name }}" data-parent-id="{{ mc.id }}">
+                                                        <option value="{{ mc.id }}" {% if product.category_id == mc.id %}selected{% endif %} data-parent-id="{{ mc.id }}">All {{ mc.name }}</option>
+                                                        {% for sub in mc.children.all %}
+                                                        {% if sub.is_active %}
+                                                        <option value="{{ sub.id }}" {% if product.category_id == sub.id %}selected{% endif %} data-parent-id="{{ mc.id }}">↳ {{ sub.name }}</option>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </optgroup>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2"><label class="form-label">Brand</label><select name="brand_id" class="form-select"><option value="">— None —</option>{% for b in brands_list %}<option value="{{ b.id }}" {% if product.brand_id == b.id %}selected{% endif %}>{{ b.name }}</option>{% endfor %}</select></div>
+                                            <div class="col-md-12"><label class="form-label">Description</label><textarea name="description" class="form-control" rows="3">{{ product.description }}</textarea></div>
+                                            <div class="col-md-3"><label class="form-label">SKU *</label><input type="text" name="sku" class="form-control" value="{{ v.sku }}" required></div>
+                                            <div class="col-md-3"><label class="form-label">Cost Price</label><input type="number" name="cost_price" class="form-control" step="0.01" value="{{ v.cost_price|default_if_none:'0' }}"></div>
+                                            <div class="col-md-3"><label class="form-label">Selling Price *</label><input type="number" name="selling_price" class="form-control" step="0.01" value="{{ v.selling_price }}" required></div>
+                                            <div class="col-md-3"><label class="form-label">Discount Price</label><input type="number" name="discount_price" class="form-control" step="0.01" value="{{ v.discount_price|default_if_none:'' }}"></div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Featured In</label>
+                                                <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;">
+                                                    <label style="font-size:13px;"><input type="checkbox" name="sections" value="featured" {% if 'featured' in product.tags %}checked{% endif %}> Featured</label>
+                                                    <label style="font-size:13px;"><input type="checkbox" name="sections" value="new_arrival" {% if 'new_arrival' in product.tags %}checked{% endif %}> New Arrival</label>
+                                                    <label style="font-size:13px;"><input type="checkbox" name="sections" value="best_seller" {% if 'best_seller' in product.tags %}checked{% endif %}> Best Seller</label>
+                                                    <label style="font-size:13px;"><input type="checkbox" name="sections" value="trending" {% if 'trending' in product.tags %}checked{% endif %}> Trending</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6"><label class="form-label">Product Image (leave blank to keep current)</label><input type="file" name="image" class="form-control" accept="image/*"></div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn-save"><i class="fas fa-save me-1"></i>Save Changes</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {% endwith %}
+                                    <div><strong style="font-size:13.5px;">{{ product.name|truncatechars:35 }}</strong></div>
+                                </div>
+                            </td>
+                            <td style="font-size:13px;">{{ product.category.name }}</td>
+                            <td style="font-size:13px;">{{ product.brand.name|default:"—" }}</td>
+                            <td class="fw-bold" style="font-size:13px;">{{ store.currency }} {{ v.selling_price|floatformat:2 }}</td>
+                            <td style="font-size:12px;color:var(--text-muted);">{{ v.sku }}</td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-primary me-1" data-bs-toggle="modal" data-bs-target="#editProductModal{{ product.id }}">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <form method="POST" class="d-inline" onsubmit="return confirm('Delete product?')">{% csrf_token %}
+                                    <input type="hidden" name="action" value="delete_product"><input type="hidden" name="product_id" value="{{ product.id }}">
+                                    <button type="submit" class="btn-danger-sm"><i class="fas fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endwith %}
+                        {% empty %}
+                        <tr><td colspan="6" class="text-center py-5 text-muted">No products added yet.</td></tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- SECTION: CATEGORIES           -->
+    <!-- ============================== -->
+    {% elif section == 'categories' %}
+    <div class="row g-4">
+        <div class="col-lg-7">
+            <div class="data-table-card">
+                <div class="table-header"><i class="fas fa-tags text-primary"></i><h5>Categories ({{ categories_list|length }})</h5></div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead><tr><th>Name</th><th>Slug</th><th>Status</th><th>Actions</th></tr></thead>
+                        <tbody>
+                        {% for cat in categories_list %}
+                        <tr>
+                            <td class="fw-bold">{{ cat.name }}</td>
+                            <td style="font-size:12px;color:var(--text-muted);">{{ cat.slug }}</td>
+                            <td><span class="status-pill {% if cat.is_active %}pill-active{% else %}pill-inactive{% endif %}">{% if cat.is_active %}Active{% else %}Inactive{% endif %}</span></td>
+                            <td>
+                                <form method="POST" class="d-inline" onsubmit="return confirm('Delete category?')">{% csrf_token %}
+                                    <input type="hidden" name="action" value="delete_category"><input type="hidden" name="category_id" value="{{ cat.id }}">
+                                    <button type="submit" class="btn-danger-sm"><i class="fas fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="4" class="text-center py-5 text-muted">No categories.</td></tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="form-card">
+                <h5 class="fw-bold mb-4"><i class="fas fa-plus-circle text-primary me-2"></i>Add Category</h5>
+                <form method="POST">{% csrf_token %}
+                    <input type="hidden" name="action" value="add_category">
+                    <div class="mb-3"><label class="form-label">Category Name *</label><input type="text" name="name" class="form-control" placeholder="e.g. Fresh Fruits" required></div>
+                    <div class="mb-4">
+                        <label class="form-label">Parent Category (optional for subcategories)</label>
+                        <select name="parent_id" class="form-select">
+                            <option value="">— Top Level Main Category —</option>
+                            {% for mc in main_categories %}
+                            <option value="{{ mc.id }}">{{ mc.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-save w-100"><i class="fas fa-plus-circle me-1"></i>Add Category</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- SECTION: BRANDS               -->
+    <!-- ============================== -->
+    {% elif section == 'brands' %}
+    <div class="row g-4">
+        <div class="col-lg-7">
+            <div class="data-table-card">
+                <div class="table-header"><i class="fas fa-copyright text-primary"></i><h5>Brands ({{ brands_list|length }})</h5></div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead><tr><th>Name</th><th>Slug</th><th>Status</th><th>Actions</th></tr></thead>
+                        <tbody>
+                        {% for brand in brands_list %}
+                        <tr>
+                            <td class="fw-bold">{{ brand.name }}</td>
+                            <td style="font-size:12px;color:var(--text-muted);">{{ brand.slug }}</td>
+                            <td><span class="status-pill {% if brand.is_active %}pill-active{% else %}pill-inactive{% endif %}">{% if brand.is_active %}Active{% else %}Inactive{% endif %}</span></td>
+                            <td>
+                                <form method="POST" class="d-inline" onsubmit="return confirm('Delete brand?')">{% csrf_token %}
+                                    <input type="hidden" name="action" value="delete_brand"><input type="hidden" name="brand_id" value="{{ brand.id }}">
+                                    <button type="submit" class="btn-danger-sm"><i class="fas fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="4" class="text-center py-5 text-muted">No brands added.</td></tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="form-card">
+                <h5 class="fw-bold mb-4"><i class="fas fa-plus-circle text-primary me-2"></i>Add Brand</h5>
+                <form method="POST">{% csrf_token %}
+                    <input type="hidden" name="action" value="add_brand">
+                    <div class="mb-4"><label class="form-label">Brand Name *</label><input type="text" name="name" class="form-control" required></div>
+                    <button type="submit" class="btn-save w-100">Add Brand</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- SECTION: STOCK                -->
+    <!-- ============================== -->
+    {% elif section == 'stock' %}
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="data-table-card">
+                <div class="table-header"><i class="fas fa-warehouse text-primary"></i><h5>Stock Levels</h5></div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead><tr><th>Product / SKU</th><th>Branch</th><th class="text-center">Qty</th><th>Status</th></tr></thead>
+                        <tbody>
+                        {% for s in all_stocks %}
+                        <tr>
+                            <td>
+                                <strong>{{ s.variant.product.name }}</strong>
+                                <div style="font-size:11.5px;color:var(--text-muted);">SKU: {{ s.variant.sku }}</div>
+                            </td>
+                            <td style="font-size:13px;">{{ s.branch.name }}</td>
+                            <td class="text-center fw-bold fs-6">{{ s.quantity }}</td>
+                            <td>
+                                {% if s.quantity == 0 %}<span class="status-pill pill-out">Out of Stock</span>
+                                {% elif s.quantity <= 5 %}<span class="status-pill pill-low">Low Stock</span>
+                                {% else %}<span class="status-pill pill-in-stock">In Stock</span>{% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="4" class="text-center py-5 text-muted">No stock records.</td></tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-card">
+                <h5 class="fw-bold mb-4"><i class="fas fa-sliders text-primary me-2"></i>Adjust Stock</h5>
+                <form method="POST" action="{% url 'storefront:adjust_stock' %}">{% csrf_token %}
+                    <div class="mb-3"><label class="form-label">Select Product Variant *</label>
+                        <select name="variant_id" class="form-select" required>
+                            <option value="">— Select —</option>
+                            {% for v in variants %}<option value="{{ v.id }}">{{ v.product.name }} ({{ v.sku }})</option>{% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3"><label class="form-label">Select Branch *</label>
+                        <select name="branch_id" class="form-select" required>
+                            <option value="">— Select —</option>
+                            {% for b in branches %}<option value="{{ b.id }}">{{ b.name }}</option>{% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3"><label class="form-label">Qty Change (+ or -) *</label><input type="number" name="quantity_change" class="form-control" placeholder="+10 or -3" required></div>
+                    <div class="mb-3"><label class="form-label">Reason</label>
+                        <select name="reason" class="form-select">
+                            <option value="adjustment">Manual Adjustment</option>
+                            <option value="purchase">Purchase / Restock</option>
+                            <option value="damaged">Damaged / Expired</option>
+                            <option value="return">Customer Return</option>
+                        </select>
+                    </div>
+                    <div class="mb-4"><label class="form-label">Note</label><input type="text" name="note" class="form-control" placeholder="Optional log note"></div>
+                    <button type="submit" class="btn-save w-100">Adjust Quantity</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- SECTION: STOCK HISTORY        -->
+    <!-- ============================== -->
+    {% elif section == 'stock_history' %}
+    <div class="data-table-card">
+        <div class="table-header"><i class="fas fa-clock-rotate-left text-primary"></i><h5>Stock Movement History (Recent 50)</h5></div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead><tr><th>Product</th><th>Branch</th><th>Change</th><th>Reason</th><th>Note</th><th>By</th><th>Date</th></tr></thead>
+                <tbody>
+                {% for mv in stock_movements %}
+                <tr>
+                    <td><strong style="font-size:13px;">{{ mv.variant.product.name }}</strong><div style="font-size:11px;color:var(--text-muted);">{{ mv.variant.sku }}</div></td>
+                    <td style="font-size:13px;">{{ mv.branch.name }}</td>
+                    <td class="fw-bold {% if mv.quantity_change > 0 %}text-success{% else %}text-danger{% endif %}">
+                        {% if mv.quantity_change > 0 %}+{% endif %}{{ mv.quantity_change }}
+                    </td>
+                    <td style="font-size:12.5px;">{{ mv.reason|title }}</td>
+                    <td style="font-size:12px;color:var(--text-muted);">{{ mv.note|truncatechars:40 }}</td>
+                    <td style="font-size:12px;">{% if mv.performed_by %}{{ mv.performed_by.username }}{% else %}System{% endif %}</td>
+                    <td style="font-size:11.5px;color:var(--text-muted);">{{ mv.created_at|date:"M d, Y H:i" }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="7" class="text-center py-5 text-muted">No stock movements recorded.</td></tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- SECTION: BRANCHES             -->
+    <!-- ============================== -->
+    {% elif section == 'branches' %}
+    <div class="data-table-card">
+        <div class="table-header"><i class="fas fa-store text-primary"></i><h5>Store Branches</h5></div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead><tr><th>Branch Name</th><th>City</th><th>Address</th><th>Phone</th><th>Status</th></tr></thead>
+                <tbody>
+                {% for branch in branches %}
+                <tr>
+                    <td class="fw-bold">{{ branch.name }}</td>
+                    <td>{{ branch.city }}</td>
+                    <td style="font-size:13px;">{{ branch.address }}</td>
+                    <td>{{ branch.phone }}</td>
+                    <td><span class="status-pill {% if branch.is_active %}pill-active{% else %}pill-inactive{% endif %}">{% if branch.is_active %}Active{% else %}Inactive{% endif %}</span></td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="5" class="text-center py-5 text-muted">No branches configured.</td></tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- SECTION: ORDERS               -->
+    <!-- ============================== -->
+    {% elif section == 'orders' %}
+    <div class="row g-3 mb-4">
+        <div class="col-md-3 col-6"><div class="stat-card"><div class="stat-icon icon-blue"><i class="fas fa-receipt"></i></div><div class="stat-value">{{ orders_count }}</div><div class="stat-label">Total Orders</div></div></div>
+        <div class="col-md-3 col-6"><div class="stat-card"><div class="stat-icon icon-green"><i class="fas fa-dollar-sign"></i></div><div class="stat-value text-success" style="font-size:20px;">{{ store.currency }} {{ total_sales|floatformat:0 }}</div><div class="stat-label">Total Revenue</div></div></div>
+        <div class="col-md-3 col-6"><div class="stat-card"><div class="stat-icon icon-orange"><i class="fas fa-clock"></i></div><div class="stat-value text-warning">{{ pending_orders_count }}</div><div class="stat-label">Pending</div></div></div>
+        <div class="col-md-3 col-6"><div class="stat-card"><div class="stat-icon icon-green"><i class="fas fa-check-circle"></i></div><div class="stat-value text-success">{{ delivered_orders_count }}</div><div class="stat-label">Delivered</div></div></div>
+    </div>
+    <div class="data-table-card">
+        <div class="table-header"><i class="fas fa-receipt text-primary"></i><h5>All Orders</h5></div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead><tr><th>Order #</th><th>Customer</th><th>Contact</th><th>Total</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+                <tbody>
+                {% for o in recent_orders %}
+                <tr>
+                    <td class="fw-bold text-primary">#{{ o.order_number }}</td>
+                    <td><strong>{% if o.customer.full_name %}{{ o.customer.full_name }}{% elif o.customer.user %}{{ o.customer.user.username }}{% else %}Guest{% endif %}</strong><div style="font-size:11.5px;color:var(--text-muted);">{{ o.shipping_city }}</div></td>
+                    <td style="font-size:12.5px;">{{ o.shipping_phone }}</td>
+                    <td class="fw-bold">{{ store.currency }} {{ o.grand_total|floatformat:2 }}</td>
+                    <td>
+                        <form method="POST" style="display:inline;">{% csrf_token %}
+                            <input type="hidden" name="action" value="update_order_status"><input type="hidden" name="order_id" value="{{ o.id }}">
+                            <select name="status" class="form-select form-select-sm" onchange="this.form.submit()" style="width:120px;font-size:12px;">
+                                {% for st, label in o.STATUS_CHOICES %}<option value="{{ st }}" {% if o.status == st %}selected{% endif %}>{{ label }}</option>{% endfor %}
+                            </select>
+                        </form>
+                    </td>
+                    <td style="font-size:12px;color:var(--text-muted);">{{ o.created_at|date:"M d, Y" }}</td>
+                    <td>
+                        <form method="POST" class="d-inline" onsubmit="return confirm('Delete order permanently?')">{% csrf_token %}
+                            <input type="hidden" name="action" value="delete_order"><input type="hidden" name="order_id" value="{{ o.id }}">
+                            <button type="submit" class="btn-danger-sm"><i class="fas fa-trash"></i></button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="7" class="text-center py-5 text-muted">No orders placed yet.</td></tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- SECTION: CUSTOMERS            -->
+    <!-- ============================== -->
+    {% elif section == 'customers' %}
+    <div class="data-table-card">
+        <div class="table-header"><i class="fas fa-users text-primary"></i><h5>Customers Directory ({{ customers_list|length }})</h5></div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead><tr><th>Name</th><th>Username</th><th>Email</th><th>Phone</th><th class="text-center">Orders</th><th>Registered</th></tr></thead>
+                <tbody>
+                {% for customer in customers_list %}
+                <tr>
+                    <td class="fw-bold">{{ customer.full_name|default:"—" }}</td>
+                    <td style="font-size:13px;">{% if customer.user %}{{ customer.user.username }}{% else %}Guest{% endif %}</td>
+                    <td style="font-size:13px;">{{ customer.user.email|default:"—" }}</td>
+                    <td style="font-size:13px;">{{ customer.phone|default:"—" }}</td>
+                    <td class="text-center fw-bold text-primary">{{ customer.orders.count }}</td>
+                    <td style="font-size:12px;color:var(--text-muted);">{{ customer.created_at|date:"M d, Y" }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="6" class="text-center py-5 text-muted">No customers registered.</td></tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- SECTION: COUPONS              -->
+    <!-- ============================== -->
+    {% elif section == 'coupons' %}
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="data-table-card">
+                <div class="table-header"><i class="fas fa-ticket text-primary"></i><h5>Discount Coupons</h5></div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead><tr><th>Code</th><th>Discount</th><th>Min Order</th><th>Valid Until</th><th>Uses</th><th>Status</th><th>Actions</th></tr></thead>
+                        <tbody>
+                        {% for coupon in coupons_list %}
+                        <tr>
+                            <td><code class="fw-bold text-primary" style="font-size:13.5px;background:#eff6ff;padding:3px 8px;border-radius:5px;">{{ coupon.code }}</code></td>
+                            <td class="fw-bold">{% if coupon.discount_type == 'percentage' %}{{ coupon.discount_value }}%{% else %}{{ store.currency }} {{ coupon.discount_value|floatformat:2 }}{% endif %}</td>
+                            <td>{{ store.currency }} {{ coupon.min_order_amount|floatformat:0 }}</td>
+                            <td style="font-size:12px;">{{ coupon.valid_until|date:"M d, Y" }}</td>
+                            <td>{{ coupon.times_used }}{% if coupon.usage_limit %} / {{ coupon.usage_limit }}{% endif %}</td>
+                            <td><span class="status-pill {% if coupon.is_active %}pill-active{% else %}pill-inactive{% endif %}">{% if coupon.is_active %}Active{% else %}Inactive{% endif %}</span></td>
+                            <td>
+                                <form method="POST" class="d-inline">{% csrf_token %}
+                                    <input type="hidden" name="action" value="toggle_coupon"><input type="hidden" name="coupon_id" value="{{ coupon.id }}">
+                                    <button type="submit" class="btn-warning-sm">Toggle</button>
+                                </form>
+                                <form method="POST" class="d-inline" onsubmit="return confirm('Delete coupon?')">{% csrf_token %}
+                                    <input type="hidden" name="action" value="delete_coupon"><input type="hidden" name="coupon_id" value="{{ coupon.id }}">
+                                    <button type="submit" class="btn-danger-sm"><i class="fas fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="7" class="text-center py-5 text-muted">No coupons created.</td></tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-card">
+                <h5 class="fw-bold mb-4"><i class="fas fa-plus-circle text-primary me-2"></i>Create Coupon</h5>
+                <form method="POST">{% csrf_token %}
+                    <input type="hidden" name="action" value="add_coupon">
+                    <div class="mb-3"><label class="form-label">Coupon Code *</label><input type="text" name="code" class="form-control" required placeholder="SAVE20"></div>
+                    <div class="mb-3"><label class="form-label">Discount Type</label>
+                        <select name="discount_type" class="form-select">
+                            <option value="percentage">Percentage (%)</option>
+                            <option value="flat">Flat Amount</option>
+                        </select>
+                    </div>
+                    <div class="mb-3"><label class="form-label">Discount Value *</label><input type="number" name="discount_value" class="form-control" required step="0.01" placeholder="20 for 20%"></div>
+                    <div class="mb-3"><label class="form-label">Min Order Amount</label><input type="number" name="min_order_amount" class="form-control" step="0.01" value="0"></div>
+                    <div class="mb-3"><label class="form-label">Usage Limit</label><input type="number" name="usage_limit" class="form-control" placeholder="Leave empty for unlimited"></div>
+                    <div class="mb-3"><label class="form-label">Valid From *</label><input type="datetime-local" name="valid_from" class="form-control" required></div>
+                    <div class="mb-4"><label class="form-label">Valid Until *</label><input type="datetime-local" name="valid_until" class="form-control" required></div>
+                    <button type="submit" class="btn-save w-100">Create Coupon</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- SECTION: REVIEWS              -->
+    <!-- ============================== -->
+    {% elif section == 'reviews' %}
+    <div class="data-table-card">
+        <div class="table-header"><i class="fas fa-star text-warning"></i><h5>Customer Reviews</h5></div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead><tr><th>Customer</th><th>Product</th><th>Rating</th><th>Comment</th><th>Status</th><th>Actions</th></tr></thead>
+                <tbody>
+                {% for review in reviews_list %}
+                <tr>
+                    <td class="fw-bold">{% if review.customer.full_name %}{{ review.customer.full_name }}{% elif review.customer.user %}{{ review.customer.user.username }}{% else %}Guest{% endif %}</td>
+                    <td style="font-size:13px;">{{ review.product.name|truncatechars:30 }}</td>
+                    <td>
+                        {% for i in "12345" %}{% if forloop.counter <= review.rating %}<i class="fas fa-star text-warning" style="font-size:12px;"></i>{% else %}<i class="far fa-star text-muted" style="font-size:12px;"></i>{% endif %}{% endfor %}
+                    </td>
+                    <td style="font-size:13px;max-width:250px;">{{ review.comment|truncatechars:80 }}</td>
+                    <td><span class="status-pill {% if review.is_approved %}pill-active{% else %}pill-pending{% endif %}">{% if review.is_approved %}Approved{% else %}Pending{% endif %}</span></td>
+                    <td>
+                        {% if not review.is_approved %}
+                        <form method="POST" class="d-inline">{% csrf_token %}
+                            <input type="hidden" name="action" value="approve_review"><input type="hidden" name="review_id" value="{{ review.id }}">
+                            <button type="submit" class="btn-success-sm"><i class="fas fa-check"></i> Approve</button>
+                        </form>
+                        {% else %}
+                        <form method="POST" class="d-inline">{% csrf_token %}
+                            <input type="hidden" name="action" value="reject_review"><input type="hidden" name="review_id" value="{{ review.id }}">
+                            <button type="submit" class="btn-warning-sm"><i class="fas fa-eye-slash"></i> Reject</button>
+                        </form>
+                        {% endif %}
+                        <form method="POST" class="d-inline" onsubmit="return confirm('Delete review?')">{% csrf_token %}
+                            <input type="hidden" name="action" value="delete_review"><input type="hidden" name="review_id" value="{{ review.id }}">
+                            <button type="submit" class="btn-danger-sm"><i class="fas fa-trash"></i></button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="6" class="text-center py-5 text-muted">No reviews submitted.</td></tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- SECTION: ANALYTICS            -->
+    <!-- ============================== -->
+    {% elif section == 'analytics' %}
+    <div class="row g-4 mb-4">
+        <div class="col-md-4"><div class="stat-card"><div class="stat-icon icon-green"><i class="fas fa-dollar-sign"></i></div><div class="stat-value text-success">{{ store.currency }} {{ total_sales|floatformat:0 }}</div><div class="stat-label">Total Revenue</div></div></div>
+        <div class="col-md-4"><div class="stat-card"><div class="stat-icon icon-blue"><i class="fas fa-receipt"></i></div><div class="stat-value">{{ orders_count }}</div><div class="stat-label">Total Orders</div></div></div>
+        <div class="col-md-4"><div class="stat-card"><div class="stat-icon icon-purple"><i class="fas fa-chart-bar"></i></div><div class="stat-value" style="color:var(--purple);">{{ store.currency }} {{ avg_order_value }}</div><div class="stat-label">Avg. Order Value</div></div></div>
+    </div>
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="chart-card">
+                <h5><i class="fas fa-chart-area me-2 text-primary"></i>Daily Revenue — Last 7 Days</h5>
+                <canvas id="analyticsChart" height="300"></canvas>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="chart-card h-100">
+                <h5><i class="fas fa-boxes-stacked me-2 text-warning"></i>Inventory Summary</h5>
+                <canvas id="inventoryChart"></canvas>
+                <div class="mt-3">
+                    <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border);"><span>Total Stock Items</span><strong>{{ total_inventory_value }}</strong></div>
+                    <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border);"><span class="text-warning">Low Stock</span><strong>{{ low_stock_count }}</strong></div>
+                    <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;"><span class="text-danger">Out of Stock</span><strong>{{ out_of_stock_count }}</strong></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="chart-card">
+                <h5><i class="fas fa-trophy me-2 text-warning"></i>Top Selling Products</h5>
+                {% if top_products %}
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead><tr><th>#</th><th>Product Name</th><th>Units Sold</th></tr></thead>
+                        <tbody>
+                        {% for p in top_products %}
+                        <tr><td>{{ forloop.counter }}</td><td>{{ p.product_name }}</td><td class="fw-bold text-success">{{ p.total_qty }}</td></tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="text-center py-4 text-muted">No sales data available yet.</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- ============================== -->
+    <!-- SECTION: CONTACT MESSAGES     -->
+    <!-- ============================== -->
+    {% if section == 'contact_messages' %}
+    <div class="data-table-card">
+        <div class="table-header">
+            <i class="fas fa-envelope-open-text text-primary"></i>
+            <h5>Contact Messages ({{ contact_messages_list|length }})</h5>
+            {% if unread_messages_count %}
+            <span class="nav-badge" style="background: #ef4444; margin-left: 8px;">{{ unread_messages_count }} Unread</span>
+            {% endif %}
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Subject</th>
+                        <th>Message</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for msg in contact_messages_list %}
+                <tr style="{% if not msg.is_read %}background: #fffbeb;{% endif %}">
+                    <td class="fw-bold">{{ msg.name }}</td>
+                    <td style="font-size:13px;"><a href="mailto:{{ msg.email }}">{{ msg.email }}</a></td>
+                    <td style="font-size:13px;">{{ msg.phone|default:"—" }}</td>
+                    <td style="font-size:13px;">{{ msg.subject|default:"—"|truncatechars:30 }}</td>
+                    <td style="font-size:13px; max-width:260px;">{{ msg.message|truncatechars:80 }}</td>
+                    <td>
+                        {% if msg.is_read %}
+                        <span class="status-pill pill-active">Read</span>
+                        {% else %}
+                        <span class="status-pill pill-inactive" style="background:#fef3c7;color:#92400e;">Unread</span>
+                        {% endif %}
+                    </td>
+                    <td style="font-size:12px;color:var(--text-muted);">{{ msg.created_at|date:"M d, Y H:i" }}</td>
+                    <td>
+                        {% if not msg.is_read %}
+                        <form method="POST" class="d-inline">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="mark_message_read">
+                            <input type="hidden" name="message_id" value="{{ msg.id }}">
+                            <button type="submit" class="btn-success-sm"><i class="fas fa-check"></i> Mark Read</button>
+                        </form>
+                        {% endif %}
+                        <form method="POST" class="d-inline" onsubmit="return confirm('Delete this message?')">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="delete_message">
+                            <input type="hidden" name="message_id" value="{{ msg.id }}">
+                            <button type="submit" class="btn-danger-sm"><i class="fas fa-trash"></i></button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="8" class="text-center py-5">
+                        <div style="color: var(--text-muted); font-size: 14px;">
+                            <i class="fas fa-inbox fa-2x mb-3 d-block" style="opacity: 0.3;"></i>
+                            No contact messages yet.
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Sidebar group toggle
+    function toggleGroup(el, id) {
+        el.classList.toggle('expanded');
+        const sub = document.getElementById(id);
+        if (sub) sub.classList.toggle('open');
+    }
+
+    // Sales chart (overview and analytics pages)
+    const salesCtx = document.getElementById('salesChart');
+    const analyticsCtx = document.getElementById('analyticsChart');
+    const chartData = {
+        labels: {{ daily_labels|safe }},
+        datasets: [
+            {
+                label: 'Revenue',
+                data: {{ daily_revenue_data|safe }},
+                backgroundColor: 'rgba(59,130,246,0.12)',
+                borderColor: '#3b82f6',
+                borderWidth: 2,
+                fill: true,
+                tension: 0.4,
+                yAxisID: 'y',
+            },
+            {
+                label: 'Orders',
+                data: {{ daily_orders_data|safe }},
+                backgroundColor: 'rgba(34,197,94,0.12)',
+                borderColor: '#22c55e',
+                borderWidth: 2,
+                fill: true,
+                tension: 0.4,
+                yAxisID: 'y1',
+            }
+        ]
+    };
+    const chartOptions = {
+        responsive: true,
+        interaction: { mode: 'index', intersect: false },
+        plugins: { legend: { position: 'top', labels: { font: { size: 12 } } } },
+        scales: {
+            y: { type: 'linear', display: true, position: 'left', grid: { color: '#f1f5f9' }, ticks: { font: { size: 11 } } },
+            y1: { type: 'linear', display: true, position: 'right', grid: { drawOnChartArea: false }, ticks: { font: { size: 11 } } },
+            x: { grid: { color: '#f1f5f9' }, ticks: { font: { size: 11 } } }
+        }
+    };
+    if (salesCtx) new Chart(salesCtx, { type: 'line', data: chartData, options: chartOptions });
+    if (analyticsCtx) new Chart(analyticsCtx, { type: 'bar', data: { labels: {{ daily_labels|safe }}, datasets: [{ label: 'Revenue', data: {{ daily_revenue_data|safe }}, backgroundColor: '#3b82f6', borderRadius: 6 }] }, options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { grid: { color: '#f1f5f9' } }, x: { grid: { display: false } } } } });
+
+    // Inventory pie chart
+    const invCtx = document.getElementById('inventoryChart');
+    if (invCtx) new Chart(invCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['In Stock', 'Low Stock', 'Out of Stock'],
+            datasets: [{ data: [{{ total_inventory_value }}, {{ low_stock_count }}, {{ out_of_stock_count }}], backgroundColor: ['#22c55e', '#f59e0b', '#ef4444'], borderWidth: 0 }]
+        },
+        options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 12 } } }, cutout: '70%' }
+    });
+
+    // Dynamic Main Category -> Subcategory Filtering for Add/Edit Product
+    document.addEventListener('change', function(e) {
+        if (e.target && e.target.classList.contains('dash-main-cat-filter')) {
+            var parentId = e.target.value;
+            var targetId = e.target.getAttribute('data-target');
+            var targetSelect = document.querySelector(targetId);
+            if (!targetSelect) return;
+
+            var optgroups = targetSelect.querySelectorAll('optgroup');
+            optgroups.forEach(function(group) {
+                if (!parentId || group.getAttribute('data-parent-id') === parentId) {
+                    group.style.display = '';
+                    Array.from(group.options).forEach(function(opt) { opt.disabled = false; });
+                } else {
+                    group.style.display = 'none';
+                    Array.from(group.options).forEach(function(opt) { opt.disabled = true; });
+                }
+            });
+
+            if (parentId) {
+                var firstActiveGroup = targetSelect.querySelector('optgroup[data-parent-id="' + parentId + '"]');
+                if (firstActiveGroup && firstActiveGroup.options.length > 0) {
+                    targetSelect.value = firstActiveGroup.options[0].value;
+                }
+            }
+        }
+    });
+
+    // Trigger initial filtering for pre-selected edit modals
+    document.querySelectorAll('.dash-main-cat-filter').forEach(function(filterSelect) {
+        if (filterSelect.value) {
+            filterSelect.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+    });
+</script>
+</body>
+</html>

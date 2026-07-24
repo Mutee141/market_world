@@ -1,0 +1,89 @@
+{% load static %}
+<!-- ========== 1. HERO SLIDER & SIDE BANNERS SECTION (100% Crisp Background Image Style) ========== -->
+{% if not sections_dict.slider or sections_dict.slider.is_active %}
+{% if hero_slides %}
+<section class="hero-slider-section">
+  <div class="container">
+    <div class="hero-layout-grid">
+      <!-- Left Main Column: Hero Carousel (100% Crisp Cover Background Image) -->
+      <div class="hero-main-col">
+        <div class="hero-carousel-wrapper">
+          <div class="hero-carousel" id="heroCarousel">
+            {% for slide in hero_slides %}{% if slide.is_live %}
+            <div class="hero-slide"
+              style="{% if slide.image %}background-image: url('{{ slide.image.url }}'); background-size: cover; background-position: center;{% else %}background: linear-gradient(135deg, #eef2f6 0%, #e2e8f0 100%);{% endif %}">
+              <div class="hero-slide-inner">
+                <div class="hero-text-col hero-text-glass">
+                  <span class="hero-badge"><i class="fas fa-bolt text-warning"></i> {{ slide.badge|default:"Mega Flash Deals" }}</span>
+                  <h1 class="hero-title">{{ slide.title }}</h1>
+                  {% if slide.subtitle %}<p class="hero-subtitle">{{ slide.subtitle }}</p>{% endif %}
+                  <div class="hero-actions">
+                    {% if slide.button_text %}<a href="{{ slide.button_link|default:'#' }}" class="btn-hero-primary">{{ slide.button_text }} <i class="fas fa-arrow-right"></i></a>{% endif %}
+                    <a href="{% url 'storefront:shop' %}" class="btn-hero-ghost"><i class="fas fa-th-large me-1"></i> Explore All</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endif %}{% endfor %}
+          </div>
+          <div class="hero-dots" id="heroDots"></div>
+          <button class="hero-arrow hero-prev" id="heroPrev"><i class="fas fa-chevron-left"></i></button>
+          <button class="hero-arrow hero-next" id="heroNext"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+
+      <!-- Right Side Column: 2 Stacked Side Banners -->
+      <div class="hero-side-col">
+        {% if home_banners_top %}
+          {% for banner in home_banners_top|slice:":2" %}
+          <div class="hero-side-card" style="{% if banner.image %}background-image: url('{{ banner.image.url }}'); background-size: cover; background-position: center;{% else %}background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);{% endif %}">
+            <div class="side-card-glass-panel">
+              {% if banner.subtitle %}<span class="side-card-eyebrow">{{ banner.subtitle }}</span>{% endif %}
+              <h3 class="side-card-title">{{ banner.title }}</h3>
+              <a href="{{ banner.button_link|default:'/shop/' }}" class="side-card-btn">
+                {{ banner.button_text|default:"Shop Now" }} <i class="fas fa-arrow-right ms-1"></i>
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+          {% if home_banners_top|length == 1 %}
+          <!-- 2nd Banner slot if only 1 banner is added in dashboard -->
+          <div class="hero-side-card" style="background-image: url('https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=700&auto=format&fit=crop&q=80'); background-size: cover; background-position: center;">
+            <div class="side-card-glass-panel">
+              <span class="side-card-eyebrow">Next-Gen Gear</span>
+              <h3 class="side-card-title">Pro Accessories & Audio</h3>
+              <a href="{% url 'storefront:shop' %}" class="side-card-btn">
+                Buy Now <i class="fas fa-arrow-right ms-1"></i>
+              </a>
+            </div>
+          </div>
+          {% endif %}
+        {% else %}
+          <!-- Default Fallback Banners with Full Background Images + Glass Card -->
+          <div class="hero-side-card" style="background-image: url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=700&auto=format&fit=crop&q=80'); background-size: cover; background-position: center;">
+            <div class="side-card-glass-panel">
+              <span class="side-card-eyebrow">Tested. Trusted.</span>
+              <h3 class="side-card-title">Used Laptops</h3>
+              <p class="side-card-desc">Ready to Work at Unbeatable Prices</p>
+              <a href="{% url 'storefront:shop' %}" class="side-card-btn">
+                See Offers <i class="fas fa-arrow-right ms-1"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-side-card" style="background-image: url('https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=700&auto=format&fit=crop&q=80'); background-size: cover; background-position: center;">
+            <div class="side-card-glass-panel">
+              <span class="side-card-eyebrow">Next-Gen Gear</span>
+              <h3 class="side-card-title">Pro Accessories & Audio</h3>
+              <a href="{% url 'storefront:shop' %}" class="side-card-btn">
+                Buy Now <i class="fas fa-arrow-right ms-1"></i>
+              </a>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endif %}

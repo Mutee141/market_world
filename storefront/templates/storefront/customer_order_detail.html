@@ -1,0 +1,149 @@
+{% extends 'storefront/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="bg-light py-5">
+  <div class="container">
+
+    <!-- Top Navigation Breadcrumb -->
+    <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
+      <div>
+        <a href="{% url 'storefront:account' %}" class="btn btn-outline-dark btn-sm rounded-3 fw-bold">
+          <i class="fas fa-arrow-left me-1"></i> Back to Orders
+        </a>
+      </div>
+      <div>
+        <button type="button" onclick="window.print()" class="btn btn-dark btn-sm rounded-3 fw-bold">
+          <i class="fas fa-print me-1"></i> Print Invoice
+        </button>
+      </div>
+    </div>
+
+    <!-- Order Header Card -->
+    <div class="bg-white border rounded-3 p-4 shadow-sm mb-4">
+      <div class="row align-items-center g-3">
+        <div class="col-md-6">
+          <span class="badge bg-primary text-white mb-2 font-monospace">ORDER DETAILS</span>
+          <h2 class="fw-bold text-dark mb-1"><i class="fas fa-hashtag me-1 text-primary"></i>{{ order.order_number }}</h2>
+          <p class="text-muted small mb-0"><i class="far fa-calendar-alt me-1"></i>Placed on {{ order.created_at|date:"F d, Y • h:i A" }}</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <span class="order-status-badge {{ order.status }} fs-6 px-3 py-2">
+            <i class="fas {% if order.status == 'delivered' %}fa-check-circle{% elif order.status == 'shipped' %}fa-truck{% elif order.status == 'packed' %}fa-box-open{% elif order.status == 'confirmed' %}fa-user-check{% elif order.status == 'cancelled' %}fa-times-circle{% else %}fa-clock{% endif %}"></i>
+            {{ order.get_status_display }}
+          </span>
+          <div class="mt-2 text-dark font-monospace fw-bold fs-5">
+            Total: {{ store.currency|default:"PKR" }} {{ order.grand_total|floatformat:2 }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+
+      <!-- Left Column: Items Breakdown -->
+      <div class="col-lg-8">
+        <div class="bg-white border rounded-3 p-4 shadow-sm mb-4">
+          <h5 class="fw-bold text-dark border-bottom pb-3 mb-3"><i class="fas fa-shopping-basket me-2 text-primary"></i>Items Ordered ({{ items|length }})</h5>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light small text-uppercase">
+                <tr>
+                  <th>Product</th>
+                  <th>Price</th>
+                  <th class="text-center">Qty</th>
+                  <th class="text-end">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in items %}
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center gap-3">
+                      {% with item.variant.product.images.first as p_img %}
+                      <img src="{% if p_img %}{% if p_img.image.name and '/' in p_img.image.name %}{{ p_img.image.url }}{% else %}{% static 'storefront/img/' %}{{ p_img.image }}{% endif %}{% else %}{% static 'storefront/img/product-1.png' %}{% endif %}" style="width:48px;height:48px;object-fit:contain;border-radius:8px;border:1px solid #e2e8f0;padding:2px;background:#f8fafc;" alt="{{ item.product_name }}">
+                      {% endwith %}
+                      <div>
+                        <h6 class="fw-bold mb-0 text-dark" style="font-size:14px;">{{ item.product_name }}</h6>
+                        <small class="text-muted font-monospace" style="font-size:11px;">SKU: {{ item.variant.sku }}</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="fw-bold">{{ store.currency|default:"PKR" }} {{ item.unit_price|floatformat:2 }}</td>
+                  <td class="text-center"><span class="badge bg-light text-dark border px-3 py-1">{{ item.quantity }}</span></td>
+                  <td class="text-end fw-black text-dark">{{ store.currency|default:"PKR" }} {{ item.line_total|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Audit Trail Status History Timeline -->
+        {% if status_history %}
+        <div class="bg-white border rounded-3 p-4 shadow-sm">
+          <h5 class="fw-bold text-dark border-bottom pb-3 mb-3"><i class="fas fa-history me-2 text-info"></i>Tracking & Activity Timeline</h5>
+          <div class="timeline position-relative ps-3" style="border-left: 2px solid #e2e8f0;">
+            {% for h in status_history %}
+            <div class="mb-3 position-relative ps-3">
+              <div class="position-absolute bg-primary rounded-circle" style="width:10px;height:10px;left:-21px;top:6px;"></div>
+              <div class="d-flex align-items-center justify-content-between">
+                <strong class="text-dark">{{ h.get_status_display }}</strong>
+                <small class="text-muted">{{ h.created_at|date:"M d, Y • h:i A" }}</small>
+              </div>
+              {% if h.note %}<p class="text-muted small mb-0 mt-1">{{ h.note }}</p>{% endif %}
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Right Column: Shipping & Summary -->
+      <div class="col-lg-4">
+        <!-- Summary Card -->
+        <div class="bg-white border rounded-3 p-4 shadow-sm mb-4">
+          <h5 class="fw-bold text-dark border-bottom pb-3 mb-3"><i class="fas fa-receipt me-2 text-success"></i>Order Summary</h5>
+          <div class="d-flex justify-content-between mb-2">
+            <span class="text-muted small">Subtotal:</span>
+            <span class="fw-bold">{{ store.currency|default:"PKR" }} {{ order.subtotal|floatformat:2 }}</span>
+          </div>
+          {% if order.discount_amount %}
+          <div class="d-flex justify-content-between mb-2 text-success">
+            <span class="small">Discount:</span>
+            <span class="fw-bold">- {{ store.currency|default:"PKR" }} {{ order.discount_amount|floatformat:2 }}</span>
+          </div>
+          {% endif %}
+          <div class="d-flex justify-content-between mb-2">
+            <span class="text-muted small">Shipping Fee:</span>
+            <span class="fw-bold">{{ store.currency|default:"PKR" }} {{ order.shipping_fee|floatformat:2 }}</span>
+          </div>
+          <div class="d-flex justify-content-between mb-3">
+            <span class="text-muted small">Tax:</span>
+            <span class="fw-bold">{{ store.currency|default:"PKR" }} {{ order.tax_amount|floatformat:2 }}</span>
+          </div>
+          <div class="border-top pt-3 d-flex justify-content-between align-items-center">
+            <strong class="text-dark fs-5">Grand Total:</strong>
+            <strong class="text-primary fs-4">{{ store.currency|default:"PKR" }} {{ order.grand_total|floatformat:2 }}</strong>
+          </div>
+        </div>
+
+        <!-- Shipping Info Card -->
+        <div class="bg-white border rounded-3 p-4 shadow-sm">
+          <h5 class="fw-bold text-dark border-bottom pb-3 mb-3"><i class="fas fa-truck me-2 text-danger"></i>Delivery Details</h5>
+          <p class="mb-1 text-muted small fw-bold">CUSTOMER</p>
+          <p class="fw-bold text-dark mb-3">{{ order.customer.full_name }}</p>
+
+          <p class="mb-1 text-muted small fw-bold">SHIPPING ADDRESS</p>
+          <p class="text-dark mb-3">{{ order.shipping_address|default:"Address on file" }}, {{ order.shipping_city|default:"" }}</p>
+
+          <p class="mb-1 text-muted small fw-bold">CONTACT PHONE</p>
+          <p class="text-dark mb-0">{{ order.shipping_phone|default:"N/A" }}</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+{% endblock %}

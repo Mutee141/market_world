@@ -1,0 +1,44 @@
+
+<section class="products-section" style="border-top: 1px solid var(--tm-border); padding: 48px 0; {% if section.section_key == 'flash_sale' %}background: #fff0f0; border-top: 1px solid #fecaca;{% elif section.section_key == 'deal_of_the_day' %}background: #fdfae8;{% else %}background: #ffffff;{% endif %}">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <span class="section-eyebrow" {% if section.section_key == 'flash_sale' %}style="color: #ef4444;"{% endif %}>{{ section.subtitle }}</span>
+        <h2 class="section-title" {% if section.section_key == 'flash_sale' %}style="color: #dc3545;"{% endif %}>
+            {% if section.section_key == 'flash_sale' %}<i class="fas fa-bolt me-2"></i>{% endif %}
+            {% if section.section_key == 'deal_of_the_day' %}<i class="fas fa-gift me-2 text-warning"></i>{% endif %}
+            {{ section.title }}
+        </h2>
+      </div>
+      <a href="{% url 'storefront:shop' %}" class="section-view-all">View All <i class="fas fa-arrow-right ms-1"></i></a>
+    </div>
+    <div class="products-grid">
+      {% if section.products.all %}
+        {% for prod in section.products.all %}
+          {% include "storefront/includes/product_card.html" with prod=prod %}
+        {% endfor %}
+      {% else %}
+        {% if section.section_key == 'new_arrivals' %}
+          {% for prod in new_arrivals %}{% include "storefront/includes/product_card.html" with prod=prod %}{% endfor %}
+        {% elif section.section_key == 'top_selling' %}
+          {% for prod in top_selling_products %}{% include "storefront/includes/product_card.html" with prod=prod %}{% endfor %}
+        {% elif section.section_key == 'sale_products' %}
+          {% for prod in sale_products %}{% include "storefront/includes/product_card.html" with prod=prod %}{% endfor %}
+        {% elif section.section_key == 'special_offers' %}
+          {% for prod in special_offers %}{% include "storefront/includes/product_card.html" with prod=prod %}{% endfor %}
+        {% elif section.section_key == 'recently_added' %}
+          {% for prod in recently_added %}{% include "storefront/includes/product_card.html" with prod=prod %}{% endfor %}
+        {% elif section.section_key == 'flash_sale' %}
+          {% for prod in flash_sale %}{% include "storefront/includes/product_card.html" with prod=prod %}{% endfor %}
+        {% elif section.section_key == 'trending_products' %}
+          {% for prod in trending_products %}{% include "storefront/includes/product_card.html" with prod=prod %}{% endfor %}
+        {% else %}
+          <div class="empty-state text-center py-5 w-100">
+              <i class="fas fa-box-open fa-3x mb-3 text-muted"></i>
+              <p class="text-muted">No products assigned to {{ section.title }}.</p>
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+</section>

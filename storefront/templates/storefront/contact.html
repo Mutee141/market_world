@@ -1,0 +1,269 @@
+{% extends 'storefront/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Page Header -->
+    <div class="container-fluid page-header py-5 text-center position-relative overflow-hidden" style="background: linear-gradient(135deg, #0d0f14 0%, #1a1d24 100%);">
+        <div class="position-absolute top-0 start-0 w-100 h-100" style="background: radial-gradient(ellipse at 50% 0%, rgba(214, 255, 62, 0.06) 0%, transparent 65%); pointer-events: none;"></div>
+        <div style="position: relative; z-index: 1;">
+            <h1 class="text-white display-5 fw-bold mb-3">Contact Us</h1>
+            <ol class="breadcrumb justify-content-center mb-0">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'storefront:home' %}" style="color: #94a3b8; text-decoration: none; transition: color 0.2s;"
+                       onmouseover="this.style.color='#fff';" onmouseout="this.style.color='#94a3b8';">Home</a>
+                </li>
+                <li class="breadcrumb-item active" style="color: #d6ff3e;">Contact</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section style="background: #f8f9fa; padding: 80px 0;">
+        <div class="container">
+
+            {% if form_submitted %}
+            <!-- Success State -->
+            <div class="row justify-content-center">
+                <div class="col-lg-6 text-center py-5">
+                    <div class="mb-4" style="width: 80px; height: 80px; background: linear-gradient(135deg, #0d0f14, #1a1d24); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                        <i class="fas fa-check" style="color: #d6ff3e; font-size: 32px;"></i>
+                    </div>
+                    <h2 class="fw-bold mb-3" style="color: #0d0f14;">Message Sent!</h2>
+                    <p class="text-muted mb-4">Thank you for reaching out. Our team has received your message and will respond within 24 hours.</p>
+                    <a href="{% url 'storefront:home' %}" class="btn fw-bold px-5 py-3"
+                       style="background: #0d0f14; color: #d6ff3e; border-radius: 12px; text-decoration: none; transition: all 0.3s;"
+                       onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(13,15,20,0.2)';"
+                       onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
+                        <i class="fas fa-home me-2"></i>Back to Home
+                    </a>
+                </div>
+            </div>
+            {% else %}
+
+            <!-- Contact Info Cards (top row) -->
+            <div class="row g-4 mb-5">
+                <div class="col-md-4">
+                    <div class="h-100 p-4 rounded-3 text-center"
+                         style="background: #fff; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 4px 20px rgba(0,0,0,0.05); transition: all 0.3s;"
+                         onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 12px 30px rgba(0,0,0,0.1)';"
+                         onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.05)';">
+                        <div class="mb-3 mx-auto d-flex align-items-center justify-content-center"
+                             style="width: 56px; height: 56px; background: #0d0f14; border-radius: 14px;">
+                            <i class="fas fa-map-marker-alt" style="color: #d6ff3e; font-size: 20px;"></i>
+                        </div>
+                        <h6 class="fw-bold mb-1" style="color: #0d0f14;">Our Location</h6>
+                        <p class="text-muted mb-0" style="font-size: 14px;">{{ store.address|default:"123 Street, New York, USA" }}</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="h-100 p-4 rounded-3 text-center"
+                         style="background: #fff; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 4px 20px rgba(0,0,0,0.05); transition: all 0.3s;"
+                         onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 12px 30px rgba(0,0,0,0.1)';"
+                         onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.05)';">
+                        <div class="mb-3 mx-auto d-flex align-items-center justify-content-center"
+                             style="width: 56px; height: 56px; background: #0d0f14; border-radius: 14px;">
+                            <i class="fas fa-envelope" style="color: #d6ff3e; font-size: 20px;"></i>
+                        </div>
+                        <h6 class="fw-bold mb-1" style="color: #0d0f14;">Email Address</h6>
+                        <p class="text-muted mb-0" style="font-size: 14px;">
+                            <a href="mailto:{{ store.email|default:'info@electroworld.com' }}"
+                               style="color: #64748b; text-decoration: none;">
+                                {{ store.email|default:"info@electroworld.com" }}
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="h-100 p-4 rounded-3 text-center"
+                         style="background: #fff; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 4px 20px rgba(0,0,0,0.05); transition: all 0.3s;"
+                         onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 12px 30px rgba(0,0,0,0.1)';"
+                         onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.05)';">
+                        <div class="mb-3 mx-auto d-flex align-items-center justify-content-center"
+                             style="width: 56px; height: 56px; background: #0d0f14; border-radius: 14px;">
+                            <i class="fas fa-phone-alt" style="color: #d6ff3e; font-size: 20px;"></i>
+                        </div>
+                        <h6 class="fw-bold mb-1" style="color: #0d0f14;">Phone Number</h6>
+                        <p class="text-muted mb-0" style="font-size: 14px;">
+                            <a href="tel:{{ store.phone|default:'+12345678900' }}"
+                               style="color: #64748b; text-decoration: none;">
+                                {{ store.phone|default:"+1 234 567 890" }}
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form + Dark Info Panel -->
+            <div class="row g-0 rounded-4 overflow-hidden" style="box-shadow: 0 10px 40px rgba(0,0,0,0.08);">
+
+                <!-- Form Column -->
+                <div class="col-lg-7" style="background: #fff; padding: 48px;">
+                    <h2 class="fw-bold mb-2" style="color: #0d0f14; font-size: 28px;">Send a Message</h2>
+                    <p class="text-muted mb-4" style="font-size: 14px;">We'll get back to you within 24 hours.</p>
+
+                    <form method="POST" action="{% url 'storefront:contact' %}">
+                        {% csrf_token %}
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold" style="font-size: 13px; color: #374151;">Full Name <span style="color: #ef4444;">*</span></label>
+                                <input type="text" name="name" class="form-control py-3 px-4"
+                                       style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 12px; color: #0d0f14; font-size: 14px; transition: all 0.3s;"
+                                       placeholder="Your full name"
+                                       onfocus="this.style.borderColor='#d6ff3e'; this.style.background='#fff'; this.style.boxShadow='0 0 0 4px rgba(214,255,62,0.1)';"
+                                       onblur="this.style.borderColor='#e2e8f0'; this.style.background='#f8fafc'; this.style.boxShadow='none';"
+                                       required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold" style="font-size: 13px; color: #374151;">Email Address <span style="color: #ef4444;">*</span></label>
+                                <input type="email" name="email" class="form-control py-3 px-4"
+                                       style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 12px; color: #0d0f14; font-size: 14px; transition: all 0.3s;"
+                                       placeholder="your@email.com"
+                                       onfocus="this.style.borderColor='#d6ff3e'; this.style.background='#fff'; this.style.boxShadow='0 0 0 4px rgba(214,255,62,0.1)';"
+                                       onblur="this.style.borderColor='#e2e8f0'; this.style.background='#f8fafc'; this.style.boxShadow='none';"
+                                       required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold" style="font-size: 13px; color: #374151;">Phone Number</label>
+                                <input type="tel" name="phone" class="form-control py-3 px-4"
+                                       style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 12px; color: #0d0f14; font-size: 14px; transition: all 0.3s;"
+                                       placeholder="+1 234 567 890"
+                                       onfocus="this.style.borderColor='#d6ff3e'; this.style.background='#fff'; this.style.boxShadow='0 0 0 4px rgba(214,255,62,0.1)';"
+                                       onblur="this.style.borderColor='#e2e8f0'; this.style.background='#f8fafc'; this.style.boxShadow='none';">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold" style="font-size: 13px; color: #374151;">Subject</label>
+                                <input type="text" name="subject" class="form-control py-3 px-4"
+                                       style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 12px; color: #0d0f14; font-size: 14px; transition: all 0.3s;"
+                                       placeholder="How can we help?"
+                                       onfocus="this.style.borderColor='#d6ff3e'; this.style.background='#fff'; this.style.boxShadow='0 0 0 4px rgba(214,255,62,0.1)';"
+                                       onblur="this.style.borderColor='#e2e8f0'; this.style.background='#f8fafc'; this.style.boxShadow='none';">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold" style="font-size: 13px; color: #374151;">Message <span style="color: #ef4444;">*</span></label>
+                                <textarea name="message" rows="6" class="form-control py-3 px-4"
+                                          style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 12px; color: #0d0f14; font-size: 14px; resize: none; transition: all 0.3s;"
+                                          placeholder="Write your message here..."
+                                          onfocus="this.style.borderColor='#d6ff3e'; this.style.background='#fff'; this.style.boxShadow='0 0 0 4px rgba(214,255,62,0.1)';"
+                                          onblur="this.style.borderColor='#e2e8f0'; this.style.background='#f8fafc'; this.style.boxShadow='none';"
+                                          required></textarea>
+                            </div>
+                            <div class="col-12 mt-2">
+                                <button type="submit" class="btn w-100 py-3 fw-bold"
+                                        style="background: #0d0f14; color: #d6ff3e; border-radius: 12px; font-size: 15px; letter-spacing: 0.3px; transition: all 0.3s; border: none;"
+                                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 25px rgba(13,15,20,0.25)';"
+                                        onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
+                                    <i class="fas fa-paper-plane me-2"></i>Send Message
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Dark Info Panel -->
+                <div class="col-lg-5 position-relative overflow-hidden d-flex flex-column justify-content-between"
+                     style="background: linear-gradient(145deg, #0d0f14 0%, #1a1d24 100%); padding: 48px;">
+                    <!-- Decorative blobs -->
+                    <div class="position-absolute" style="width: 220px; height: 220px; background: radial-gradient(circle, rgba(214,255,62,0.12) 0%, transparent 70%); border-radius: 50%; top: -60px; right: -60px; pointer-events: none;"></div>
+                    <div class="position-absolute" style="width: 160px; height: 160px; background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%); border-radius: 50%; bottom: -40px; left: -40px; pointer-events: none;"></div>
+
+                    <div style="position: relative; z-index: 1;">
+                        <h3 class="text-white fw-bold mb-2" style="font-size: 22px;">Contact Information</h3>
+                        <p style="color: #64748b; font-size: 14px; margin-bottom: 36px;">Fill out the form and we'll be in touch soon.</p>
+
+                        <div class="d-flex align-items-start mb-4 contact-info-row"
+                             style="transition: transform 0.3s;"
+                             onmouseover="this.style.transform='translateX(5px)';"
+                             onmouseout="this.style.transform='none';">
+                            <div class="d-flex align-items-center justify-content-center flex-shrink-0"
+                                 style="width: 44px; height: 44px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 11px; color: #d6ff3e;">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="ms-3">
+                                <p style="color: #94a3b8; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 3px;">Location</p>
+                                <p class="text-white mb-0" style="font-size: 14px;">{{ store.address|default:"123 Street, New York, USA" }}</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-start mb-4"
+                             style="transition: transform 0.3s;"
+                             onmouseover="this.style.transform='translateX(5px)';"
+                             onmouseout="this.style.transform='none';">
+                            <div class="d-flex align-items-center justify-content-center flex-shrink-0"
+                                 style="width: 44px; height: 44px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 11px; color: #d6ff3e;">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="ms-3">
+                                <p style="color: #94a3b8; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 3px;">Email</p>
+                                <a href="mailto:{{ store.email|default:'info@electroworld.com' }}"
+                                   class="text-white mb-0" style="font-size: 14px; text-decoration: none;">
+                                    {{ store.email|default:"info@electroworld.com" }}
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-start mb-5"
+                             style="transition: transform 0.3s;"
+                             onmouseover="this.style.transform='translateX(5px)';"
+                             onmouseout="this.style.transform='none';">
+                            <div class="d-flex align-items-center justify-content-center flex-shrink-0"
+                                 style="width: 44px; height: 44px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 11px; color: #d6ff3e;">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="ms-3">
+                                <p style="color: #94a3b8; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 3px;">Phone</p>
+                                <a href="tel:{{ store.phone|default:'+12345678900' }}"
+                                   class="text-white mb-0" style="font-size: 14px; text-decoration: none;">
+                                    {{ store.phone|default:"+1 234 567 890" }}
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Social links -->
+                        <div>
+                            <p style="color: #64748b; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px;">Connect With Us</p>
+                            <div class="d-flex gap-2">
+                                {% if site_settings.facebook_url %}
+                                <a href="{{ site_settings.facebook_url }}" target="_blank"
+                                   class="d-flex align-items-center justify-content-center social-btn-dark"
+                                   style="width: 38px; height: 38px; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #94a3b8; text-decoration: none; transition: all 0.3s;"
+                                   onmouseover="this.style.background='#d6ff3e'; this.style.color='#0d0f14'; this.style.borderColor='#d6ff3e';"
+                                   onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.color='#94a3b8'; this.style.borderColor='rgba(255,255,255,0.1)';">
+                                    <i class="fab fa-facebook-f" style="font-size: 14px;"></i>
+                                </a>
+                                {% endif %}
+                                {% if site_settings.instagram_url %}
+                                <a href="{{ site_settings.instagram_url }}" target="_blank"
+                                   class="d-flex align-items-center justify-content-center"
+                                   style="width: 38px; height: 38px; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #94a3b8; text-decoration: none; transition: all 0.3s;"
+                                   onmouseover="this.style.background='#d6ff3e'; this.style.color='#0d0f14'; this.style.borderColor='#d6ff3e';"
+                                   onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.color='#94a3b8'; this.style.borderColor='rgba(255,255,255,0.1)';">
+                                    <i class="fab fa-instagram" style="font-size: 14px;"></i>
+                                </a>
+                                {% endif %}
+                                {% if site_settings.twitter_url %}
+                                <a href="{{ site_settings.twitter_url }}" target="_blank"
+                                   class="d-flex align-items-center justify-content-center"
+                                   style="width: 38px; height: 38px; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #94a3b8; text-decoration: none; transition: all 0.3s;"
+                                   onmouseover="this.style.background='#d6ff3e'; this.style.color='#0d0f14'; this.style.borderColor='#d6ff3e';"
+                                   onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.color='#94a3b8'; this.style.borderColor='rgba(255,255,255,0.1)';">
+                                    <i class="fab fa-twitter" style="font-size: 14px;"></i>
+                                </a>
+                                {% endif %}
+                                {% if site_settings.whatsapp_number %}
+                                <a href="https://wa.me/{{ site_settings.whatsapp_number|cut:' ' }}" target="_blank"
+                                   class="d-flex align-items-center justify-content-center"
+                                   style="width: 38px; height: 38px; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #94a3b8; text-decoration: none; transition: all 0.3s;"
+                                   onmouseover="this.style.background='#25d366'; this.style.color='#fff'; this.style.borderColor='#25d366';"
+                                   onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.color='#94a3b8'; this.style.borderColor='rgba(255,255,255,0.1)';">
+                                    <i class="fab fa-whatsapp" style="font-size: 14px;"></i>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

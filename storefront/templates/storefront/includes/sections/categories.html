@@ -1,0 +1,31 @@
+<!-- ========== 2. CATEGORIES SECTION (Dashboard Managed) ========== -->
+{% if not sections_dict.categories or sections_dict.categories.is_active %}
+{% if categories %}
+<section class="category-section">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <span class="section-eyebrow">{{ sections_dict.categories.subtitle|default:"Explore Everyday Essentials" }}</span>
+        <h2 class="section-title">{{ sections_dict.categories.title|default:"Shop by Main Categories" }}</h2>
+      </div>
+      <a href="{% url 'storefront:shop' %}" class="section-view-all">View All Catalog <i class="fas fa-arrow-right ms-1"></i></a>
+    </div>
+    <div class="category-grid-v2">
+      {% for cat in categories|slice:":16" %}
+      {% cycle 'cat-tone-1' 'cat-tone-2' 'cat-tone-3' 'cat-tone-4' as cat_tone silent %}
+      <a href="{% url 'storefront:shop' %}?category={{ cat.slug }}" class="cat-card-v2 {{ cat_tone }}">
+        <div class="cat-v2-icon">
+          <i class="fas {% if 'grocery' in cat.slug or 'food' in cat.slug %}fa-shopping-basket{% elif 'electronics' in cat.slug %}fa-laptop{% elif 'mobile' in cat.slug %}fa-mobile-alt{% elif 'computer' in cat.slug %}fa-desktop{% elif 'fashion' in cat.slug %}fa-tshirt{% elif 'footwear' in cat.slug %}fa-shoe-prints{% elif 'beauty' in cat.slug %}fa-pump-soap{% elif 'home' in cat.slug %}fa-couch{% elif 'kitchen' in cat.slug %}fa-utensils{% elif 'cleaning' in cat.slug %}fa-broom{% elif 'baby' in cat.slug %}fa-baby{% elif 'pet' in cat.slug %}fa-dog{% elif 'sports' in cat.slug %}fa-dumbbell{% elif 'gaming' in cat.slug %}fa-gamepad{% elif 'book' in cat.slug %}fa-book{% elif 'auto' in cat.slug %}fa-car{% elif 'health' in cat.slug %}fa-heartbeat{% elif 'hardware' in cat.slug or 'tool' in cat.slug %}fa-tools{% elif 'gift' in cat.slug or 'toy' in cat.slug %}fa-gift{% elif 'garden' in cat.slug %}fa-seedling{% elif 'office' in cat.slug %}fa-briefcase{% else %}fa-shapes{% endif %}"></i>
+        </div>
+        <div class="cat-v2-info">
+          <span class="cat-v2-name">{{ cat.name }}</span>
+          <span class="cat-v2-count">{{ cat.children.count|default:cat.products.count }} Subcategories</span>
+        </div>
+        <div class="cat-v2-arrow"><i class="fas fa-chevron-right"></i></div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endif %}

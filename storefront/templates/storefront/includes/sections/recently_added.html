@@ -1,0 +1,21 @@
+<!-- ========== NEW SECTION: RECENTLY ADDED ========== -->
+{% if sections_dict.recently_added and sections_dict.recently_added.is_active %}
+<section class="products-section" style="background: #ffffff; border-top: 1px solid var(--tm-border); padding: 48px 0;">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <span class="section-eyebrow">{{ sections_dict.recently_added.subtitle|default:"Fresh In Stock" }}</span>
+        <h2 class="section-title"><i class="fas fa-box-open me-2 text-primary"></i>{{ sections_dict.recently_added.title|default:"Recently Added" }}</h2>
+      </div>
+      <a href="{% url 'storefront:shop' %}" class="section-view-all">View New <i class="fas fa-arrow-right ms-1"></i></a>
+    </div>
+    <div class="products-grid">
+      {% for prod in recently_added %}
+        {% include "storefront/includes/product_card.html" with prod=prod %}
+      {% empty %}
+        <div class="empty-state text-center py-5 w-100"><i class="fas fa-box-open fa-3x mb-3 text-muted"></i><p class="text-muted">No new arrivals recently.</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}

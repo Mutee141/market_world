@@ -1,0 +1,164 @@
+{% extends 'storefront/base.html' %}
+{% load static socialaccount %}
+
+{% block content %}
+<div class="auth2-page">
+  <div class="auth2-card">
+
+    <!-- LEFT: Brand & Visual Showcase Panel -->
+    <div class="auth2-image-panel">
+      <div class="auth2-visual-overlay"></div>
+      <div class="auth2-brand-panel">
+        <div class="auth2-brand-badge">
+          <i class="fas fa-sparkles text-warning me-1"></i> {{ store.name|default:"Market World Store" }}
+        </div>
+        <h2 class="auth2-brand-heading">Shop The World's Best Products</h2>
+        <p class="auth2-brand-tagline">Access 10,000+ top-rated items, exclusive daily deals, and instant order tracking.</p>
+
+        
+        <!-- Stats Grid -->
+        <div class="auth2-brand-stats">
+          <div class="auth2-stat">
+            <span class="auth2-stat-num">10K+</span>
+            <span class="auth2-stat-lbl">Products</span>
+          </div>
+          <div class="auth2-stat">
+            <span class="auth2-stat-num">4.9★</span>
+            <span class="auth2-stat-lbl">Rating</span>
+          </div>
+          <div class="auth2-stat">
+            <span class="auth2-stat-num">24/7</span>
+            <span class="auth2-stat-lbl">Support</span>
+          </div>
+        </div>
+
+        <!-- Features List -->
+        <div class="auth2-features">
+          <div class="auth2-feature">
+            <div class="auth2-feature-icon"><i class="fas fa-shield-alt"></i></div>
+            <div class="auth2-feature-text">
+              <strong>100% Secure Checkout</strong>
+              <span>SSL-encrypted bank-grade security</span>
+            </div>
+          </div>
+          <div class="auth2-feature">
+            <div class="auth2-feature-icon"><i class="fas fa-shipping-fast"></i></div>
+            <div class="auth2-feature-text">
+              <strong>Express Delivery</strong>
+              <span>Fast door-to-door shipping worldwide</span>
+            </div>
+          </div>
+          <div class="auth2-feature">
+            <div class="auth2-feature-icon"><i class="fas fa-undo"></i></div>
+            <div class="auth2-feature-text">
+              <strong>Hassle-Free Returns</strong>
+              <span>30-day money back guarantee</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Form Panel -->
+    <div class="auth2-form-panel">
+      <div class="auth2-form-inner">
+
+        <!-- Logo -->
+        <div class="auth2-logo">
+          {% if store.logo %}
+            <img src="{{ store.logo.url }}" alt="{{ store.name }}" style="height:40px;object-fit:contain;">
+          {% else %}
+            <div class="auth2-logo-icon"><i class="fas fa-bolt"></i></div>
+            <span class="auth2-logo-text">{{ store.name|default:"Market World" }}</span>
+          {% endif %}
+        </div>
+
+        <!-- Heading -->
+        <div class="auth2-heading">
+          <h1 class="auth2-title">Sign In to Your Account</h1>
+          <p class="auth2-sub">Welcome back! Enter your credentials to manage your orders.</p>
+        </div>
+
+        <!-- Google OAuth Button -->
+        <a href="{% provider_login_url 'google' %}" class="btn-google-auth" id="btnGoogleLogin">
+          <svg width="20" height="20" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.64 9.2c0-.74-.06-1.28-.19-1.84H9v3.34h4.96c-.1.83-.64 2.08-1.84 2.92l2.84 2.2c1.7-1.57 2.68-3.88 2.68-6.62z" fill="#4285F4"/>
+            <path d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.84-2.2c-.76.53-1.78.9-3.12.9-2.38 0-4.41-1.57-5.13-3.72H.97l-2.82 2.2C2.16 15.8 5.3 18 9 18z" fill="#34A853"/>
+            <path d="M3.87 10.8c-.18-.53-.28-1.1-.28-1.8s.1-1.27.28-1.8V4.99H.97C.35 6.2 0 7.56 0 9s.35 2.8 1.07 4.01l2.8-2.21z" fill="#FBBC05"/>
+            <path d="M9 3.58c1.32 0 2.5.46 3.44 1.34l2.58-2.58C13.46.89 11.43 0 9 0 5.3 0 2.16 2.2.97 5.01l2.9 2.21C4.59 5.07 6.62 3.58 9 3.58z" fill="#EA4335"/>
+          </svg>
+          <span>Continue with Google</span>
+        </a>
+
+        <div class="auth2-divider"><span>or sign in with email</span></div>
+
+        <!-- Messages -->
+        {% if messages %}
+        <div class="auth2-alerts">
+          {% for message in messages %}
+          <div class="auth2-alert {% if message.tags == 'error' or message.tags == 'danger' %}auth2-alert-error{% else %}auth2-alert-success{% endif %}">
+            <i class="fas {% if message.tags == 'error' or message.tags == 'danger' %}fa-exclamation-circle{% else %}fa-check-circle{% endif %} me-1"></i>
+            {{ message }}
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Form -->
+        <form method="POST" action="" id="loginForm" novalidate>
+          {% csrf_token %}
+
+          <div class="auth2-field">
+            <label class="auth2-label" for="loginUsername">Username or Email</label>
+            <div class="auth2-input-icon-wrap">
+              <i class="fas fa-user auth2-input-icon"></i>
+              <input type="text" class="auth2-input ps-5" name="username" id="loginUsername" placeholder="Enter your username or email" required autocomplete="username">
+            </div>
+          </div>
+
+          <div class="auth2-field">
+            <div class="auth2-label-row">
+              <label class="auth2-label" for="loginPassword">Password</label>
+              <a href="#" class="auth2-forgot">Forgot password?</a>
+            </div>
+            <div class="auth2-input-pw-wrap">
+              <i class="fas fa-lock auth2-input-icon"></i>
+              <input type="password" class="auth2-input ps-5" name="password" id="loginPassword" placeholder="• • • • • • • •" required autocomplete="current-password">
+              <button type="button" class="auth2-eye" id="toggleLoginPwd" tabindex="-1">
+                <i class="fas fa-eye-slash" id="loginEyeIcon"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="auth2-remember-row">
+            <label class="auth2-check-label">
+              <input type="checkbox" id="rememberMe" class="auth2-checkbox">
+              <span class="auth2-checkmark"></span>
+              Keep me signed in for 30 days
+            </label>
+          </div>
+
+          <button type="submit" class="auth2-submit">
+            <span>Sign In to Account</span> <i class="fas fa-arrow-right ms-2"></i>
+          </button>
+        </form>
+
+        <p class="auth2-switch">Don't have an account? <a href="{% url 'storefront:register' %}" class="auth2-link">Create free account</a></p>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('toggleLoginPwd').addEventListener('click', function(){
+  var inp = document.getElementById('loginPassword');
+  var icon = document.getElementById('loginEyeIcon');
+  if(inp.type === 'password'){ inp.type = 'text'; icon.className = 'fas fa-eye'; }
+  else { inp.type = 'password'; icon.className = 'fas fa-eye-slash'; }
+});
+</script>
+{% endblock %}

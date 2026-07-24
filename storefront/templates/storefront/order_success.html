@@ -1,0 +1,188 @@
+{% extends 'storefront/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="os-page">
+
+  <!-- Animated background orbs -->
+  <div class="os-bg-orb os-orb-1"></div>
+  <div class="os-bg-orb os-orb-2"></div>
+
+  <div class="os-wrapper">
+
+    <!-- ── SUCCESS HEADER ── -->
+    <div class="os-hero">
+      <div class="os-check-ring" id="osCheckRing">
+        <div class="os-check-icon">
+          <i class="fas fa-check"></i>
+        </div>
+      </div>
+      <h1 class="os-title">Order Confirmed!</h1>
+      <p class="os-subtitle">Thank you for your purchase. Your order has been received and is now being processed.</p>
+      <div class="os-order-badge">
+        <span class="os-order-badge-label">Order Number</span>
+        <span class="os-order-badge-num">{{ order.order_number }}</span>
+      </div>
+    </div>
+
+    <!-- ── MAIN CARD ── -->
+    <div class="os-card">
+      <div class="os-accent-bar"></div>
+
+      <!-- Meta row: Date + Status -->
+      <div class="os-meta-row">
+        <div class="os-meta-item">
+          <div class="os-meta-icon"><i class="fas fa-calendar-alt"></i></div>
+          <div>
+            <span class="os-meta-label">Placed On</span>
+            <span class="os-meta-value">{{ order.created_at|date:"F d, Y" }}</span>
+            <span class="os-meta-sub">{{ order.created_at|date:"h:i A" }}</span>
+          </div>
+        </div>
+        <div class="os-meta-item">
+          <div class="os-meta-icon os-meta-icon--green"><i class="fas fa-check-circle"></i></div>
+          <div>
+            <span class="os-meta-label">Status</span>
+            <span class="os-meta-value">Processing</span>
+            <span class="os-meta-sub">We'll notify you shortly</span>
+          </div>
+        </div>
+        <div class="os-meta-item">
+          <div class="os-meta-icon os-meta-icon--blue"><i class="fas fa-credit-card"></i></div>
+          <div>
+            <span class="os-meta-label">Payment</span>
+            <span class="os-meta-value">{{ order.payment_method|default:"Cash on Delivery" }}</span>
+            <span class="os-meta-sub">{{ order.payment_status|default:"Pending" }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SHIPPING DETAILS ── -->
+      <div class="os-section">
+        <div class="os-section-header">
+          <div class="os-section-icon"><i class="fas fa-truck"></i></div>
+          <h3 class="os-section-title">Shipping Details</h3>
+        </div>
+        <div class="os-shipping-grid">
+          <div class="os-shipping-field">
+            <span class="os-field-label">Recipient</span>
+            <span class="os-field-value">{{ order.customer.full_name }}</span>
+          </div>
+          <div class="os-shipping-field">
+            <span class="os-field-label">Phone</span>
+            <span class="os-field-value">{{ order.shipping_phone }}</span>
+          </div>
+          <div class="os-shipping-field os-shipping-field--full">
+            <span class="os-field-label">Delivery Address</span>
+            <span class="os-field-value">{{ order.shipping_address }}, {{ order.shipping_city }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ITEMS SUMMARY ── -->
+      <div class="os-section">
+        <div class="os-section-header">
+          <div class="os-section-icon"><i class="fas fa-box-open"></i></div>
+          <h3 class="os-section-title">Items Summary</h3>
+        </div>
+
+        <div class="os-items-table">
+          <div class="os-items-head">
+            <span>Product</span>
+            <span class="os-col-center">Qty</span>
+            <span class="os-col-right">Price</span>
+          </div>
+
+          {% for item in order.items.all %}
+          <div class="os-item-row">
+            <div class="os-item-name">
+              <div class="os-item-dot"></div>
+              {{ item.product_name }}
+            </div>
+            <div class="os-col-center os-item-qty">
+              <span class="os-qty-badge">{{ item.quantity }}</span>
+            </div>
+            <div class="os-col-right os-item-price">{{ store.currency }} {{ item.line_total|floatformat:2 }}</div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- Totals -->
+        <div class="os-totals">
+          <div class="os-total-row">
+            <span class="os-total-label">Subtotal</span>
+            <span class="os-total-val">{{ store.currency }} {{ order.subtotal|floatformat:2 }}</span>
+          </div>
+          {% if order.discount_amount > 0 %}
+          <div class="os-total-row os-total-discount">
+            <span class="os-total-label"><i class="fas fa-tag" style="margin-right:6px;"></i>Discount</span>
+            <span class="os-total-val">-{{ store.currency }} {{ order.discount_amount|floatformat:2 }}</span>
+          </div>
+          {% endif %}
+          <div class="os-total-row">
+            <span class="os-total-label">Shipping Fee</span>
+            <span class="os-total-val">{{ store.currency }} {{ order.shipping_fee|floatformat:2 }}</span>
+          </div>
+          <div class="os-total-row">
+            <span class="os-total-label">Taxes</span>
+            <span class="os-total-val">{{ store.currency }} {{ order.tax_amount|floatformat:2 }}</span>
+          </div>
+          <div class="os-total-row os-total-grand">
+            <span class="os-total-label">Total Paid</span>
+            <span class="os-total-val os-grand-amount">{{ store.currency }} {{ order.grand_total|floatformat:2 }}</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── CTA BUTTONS ── -->
+    <div class="os-actions">
+      <a href="{% url 'storefront:shop' %}" class="os-btn-primary">
+        <i class="fas fa-shopping-bag"></i>
+        Continue Shopping
+      </a>
+      <a href="{% url 'storefront:home' %}" class="os-btn-ghost">
+        <i class="fas fa-home"></i>
+        Go to Home
+      </a>
+    </div>
+
+    <!-- ── TRACK STEPS ── -->
+    <div class="os-track">
+      <div class="os-track-step os-track-done">
+        <div class="os-track-dot"><i class="fas fa-check"></i></div>
+        <span class="os-track-lbl">Order Placed</span>
+      </div>
+      <div class="os-track-line os-track-line--done"></div>
+      <div class="os-track-step os-track-active">
+        <div class="os-track-dot"><i class="fas fa-cog"></i></div>
+        <span class="os-track-lbl">Processing</span>
+      </div>
+      <div class="os-track-line"></div>
+      <div class="os-track-step">
+        <div class="os-track-dot"><i class="fas fa-truck"></i></div>
+        <span class="os-track-lbl">Shipped</span>
+      </div>
+      <div class="os-track-line"></div>
+      <div class="os-track-step">
+        <div class="os-track-dot"><i class="fas fa-home"></i></div>
+        <span class="os-track-lbl">Delivered</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Animate check ring on page load
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    var ring = document.getElementById('osCheckRing');
+    if (ring) ring.classList.add('os-check-ring--animated');
+  }, 100);
+});
+</script>
+{% endblock %}

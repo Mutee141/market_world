@@ -1,0 +1,131 @@
+{% extends 'storefront/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Dynamic SEO -->
+    {% if cms_page.seo_title %}
+    <title>{{ cms_page.seo_title }}</title>
+    {% endif %}
+
+    <!-- Page Header -->
+    <div class="position-relative overflow-hidden text-center py-5"
+         style="background: {% if cms_page.hero_image %}url('{{ cms_page.hero_image.url }}') center/cover no-repeat{% else %}linear-gradient(135deg, #0d0f14 0%, #1a1d24 100%){% endif %};">
+        {% if cms_page.hero_image %}
+        <div class="position-absolute top-0 start-0 w-100 h-100"
+             style="background: rgba(13,15,20,0.65); pointer-events: none;"></div>
+        {% else %}
+        <div class="position-absolute top-0 start-0 w-100 h-100"
+             style="background: radial-gradient(ellipse at 50% 0%, rgba(214, 255, 62, 0.06) 0%, transparent 65%); pointer-events: none;"></div>
+        {% endif %}
+        <div style="position: relative; z-index: 1; padding: 20px 0 10px;">
+            <h1 class="text-white display-5 fw-bold mb-3">{{ cms_page.title }}</h1>
+            <ol class="breadcrumb justify-content-center mb-0">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'storefront:home' %}"
+                       style="color: #94a3b8; text-decoration: none; transition: color 0.2s;"
+                       onmouseover="this.style.color='#fff';" onmouseout="this.style.color='#94a3b8';">Home</a>
+                </li>
+                <li class="breadcrumb-item active" style="color: #d6ff3e;">{{ cms_page.title }}</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <section style="background: #f8f9fa; padding: 72px 0;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+                    <div class="p-5 rounded-4" style="background: #ffffff; box-shadow: 0 8px 32px rgba(0,0,0,0.06);">
+
+                        {% if cms_page.featured_image %}
+                        <div class="mb-4 rounded-3 overflow-hidden">
+                            <img src="{{ cms_page.featured_image.url }}" alt="{{ cms_page.title }}"
+                                 class="img-fluid w-100" style="max-height: 420px; object-fit: cover;">
+                        </div>
+                        {% endif %}
+
+                        <!-- CMS page content rendered as HTML (admin-trusted) -->
+                        <div class="cms-content" style="color: #374151; font-size: 16px; line-height: 1.85;">
+                            {{ cms_page.content|safe }}
+                        </div>
+
+                        <!-- Updated Date -->
+                        <div class="mt-5 pt-4" style="border-top: 1px solid #f1f5f9;">
+                            <p style="color: #94a3b8; font-size: 12px;">
+                                <i class="fas fa-clock me-1"></i>
+                                Last updated: {{ cms_page.updated_at|date:"F j, Y" }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Other Pages Navigation -->
+                    {% if footer_pages %}
+                    <div class="mt-5">
+                        <h6 class="fw-bold mb-3" style="color: #64748b; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Other Pages</h6>
+                        <div class="d-flex flex-wrap gap-2">
+                            {% for pg in footer_pages %}
+                            {% if pg.slug != cms_page.slug %}
+                            <a href="{% url 'storefront:cms_page' pg.slug %}"
+                               class="px-4 py-2 rounded-pill text-decoration-none fw-semibold"
+                               style="background: #fff; border: 1.5px solid #e2e8f0; color: #374151; font-size: 13px; transition: all 0.3s;"
+                               onmouseover="this.style.background='#0d0f14'; this.style.color='#d6ff3e'; this.style.borderColor='#0d0f14';"
+                               onmouseout="this.style.background='#fff'; this.style.color='#374151'; this.style.borderColor='#e2e8f0';">
+                                {{ pg.title }}
+                            </a>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+<style>
+.cms-content h1, .cms-content h2, .cms-content h3, .cms-content h4, .cms-content h5, .cms-content h6 {
+    color: #0d0f14;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+.cms-content h2 { font-size: 1.6rem; }
+.cms-content h3 { font-size: 1.3rem; }
+.cms-content p { margin-bottom: 1.2rem; }
+.cms-content a { color: #0d0f14; font-weight: 600; }
+.cms-content a:hover { color: #d6ff3e; }
+.cms-content ul, .cms-content ol { padding-left: 1.5rem; margin-bottom: 1.2rem; }
+.cms-content li { margin-bottom: 0.5rem; }
+.cms-content blockquote {
+    border-left: 4px solid #d6ff3e;
+    padding: 1rem 1.5rem;
+    background: #f8fafc;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: #475569;
+}
+.cms-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+.cms-content table th {
+    background: #0d0f14;
+    color: #d6ff3e;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.cms-content table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 14px;
+}
+.cms-content table tr:hover td { background: #f8fafc; }
+.cms-content img { max-width: 100%; border-radius: 8px; margin: 1rem 0; }
+.cms-content hr { border-top: 1px solid #e2e8f0; margin: 2rem 0; }
+</style>
+{% endblock %}

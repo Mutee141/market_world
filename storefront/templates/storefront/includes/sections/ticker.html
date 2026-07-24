@@ -1,0 +1,16 @@
+<!-- ========== TICKER STRIP ========== -->
+<div class="mw-ticker">
+  <div class="mw-ticker-inner" id="tickerInner">
+    <span class="mw-ticker-item"><i class="fas fa-bolt"></i> {% if site_settings.free_shipping_threshold > 0 %}FREE EXPRESS DELIVERY on orders above {{ store.currency|default:"PKR" }} {{ site_settings.free_shipping_threshold|floatformat:0 }}{% else %}FREE EXPRESS DELIVERY AVAILABLE{% endif %}</span><span class="mw-ticker-dot"></span>
+    <span class="mw-ticker-item"><i class="fas fa-fire"></i> FLASH SALE: UP TO 70% OFF Top Electronics</span><span class="mw-ticker-dot"></span>
+    <span class="mw-ticker-item"><i class="fas fa-undo-alt"></i> 7-Day Easy Returns — No Questions Asked</span><span class="mw-ticker-dot"></span>
+    <span class="mw-ticker-item"><i class="fas fa-shield-alt"></i> 100% Guaranteed Authentic Products</span><span class="mw-ticker-dot"></span>
+    <span class="mw-ticker-item"><i class="fas fa-headset"></i> 24/7 Support Always Available</span><span class="mw-ticker-dot"></span>
+    <!-- Duplicate for seamless loop -->
+    <span class="mw-ticker-item"><i class="fas fa-bolt"></i> {% if site_settings.free_shipping_threshold > 0 %}FREE EXPRESS DELIVERY on orders above {{ store.currency|default:"PKR" }} {{ site_settings.free_shipping_threshold|floatformat:0 }}{% else %}FREE EXPRESS DELIVERY AVAILABLE{% endif %}</span><span class="mw-ticker-dot"></span>
+    <span class="mw-ticker-item"><i class="fas fa-fire"></i> FLASH SALE: UP TO 70% OFF Top Electronics</span><span class="mw-ticker-dot"></span>
+    <span class="mw-ticker-item"><i class="fas fa-undo-alt"></i> 7-Day Easy Returns — No Questions Asked</span><span class="mw-ticker-dot"></span>
+    <span class="mw-ticker-item"><i class="fas fa-shield-alt"></i> 100% Guaranteed Authentic Products</span><span class="mw-ticker-dot"></span>
+    <span class="mw-ticker-item"><i class="fas fa-headset"></i> 24/7 Support Always Available</span><span class="mw-ticker-dot"></span>
+  </div>
+</div>

@@ -1,0 +1,1667 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>{% if site_settings.seo_title %}{{ site_settings.seo_title }}{% else %}{{ store.name|default:"Retail
+        Platform" }} - Electro Storefront{% endif %}</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ecommerce, multi-tenant retail, electro store" name="keywords">
+    <meta
+        content="{% if site_settings.seo_description %}{{ site_settings.seo_description }}{% else %}Dynamic multi-tenant online storefront powered by Electro Bootstrap{% endif %}"
+        name="description">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'storefront/lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'storefront/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'storefront/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'storefront/css/style.css' %}?v=7" rel="stylesheet">
+    <link href="{% static 'storefront/css/theme.css' %}?v=7" rel="stylesheet">
+
+    <style>
+        /* Custom store primary color override if defined */
+            {
+            % if store.primary_color %
+        }
+
+        :root {
+            --bs-primary: {
+                    {
+                    store.primary_color
+                }
+            }
+
+            ;
+
+            --bs-primary-rgb: {
+                    {
+                    store.primary_color
+                }
+            }
+
+            ;
+        }
+
+        .text-primary {
+            color: {
+                    {
+                    store.primary_color
+                }
+            }
+
+            !important;
+        }
+
+        .bg-primary {
+            background-color: {
+                    {
+                    store.primary_color
+                }
+            }
+
+            !important;
+        }
+
+        .btn-primary {
+            background-color: {
+                    {
+                    store.primary_color
+                }
+            }
+
+            !important;
+
+            border-color: {
+                    {
+                    store.primary_color
+                }
+            }
+
+            !important;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+            {
+            % endif %
+        }
+
+            {
+            % if site_settings.sticky_header %
+        }
+
+        /* Sticky header — attach to top on scroll */
+        .container-fluid.nav-bar {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+            {
+            % endif %
+        }
+
+        .alert-messages {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1050;
+            max-width: 400px;
+        }
+
+        /* ===== MODERN NAV BAR & FOOTER STYLES (Dark Black Scheme) ===== */
+        .bg-navbar-dark {
+            background-color: #0d0f14 !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        /* ---------------------------------------------------------
+           TOP UTILITY BAR — bar #1 of the new two-tier header
+           --------------------------------------------------------- */
+        .tbar-utility {
+            background: #08090d;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tbar-utility::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 15% 0%, rgba(214, 255, 62, 0.05) 0%, transparent 55%);
+            pointer-events: none;
+        }
+
+        .tbar-utility-inner {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            padding: 9px 32px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .tbar-left {
+            display: flex;
+            align-items: center;
+            gap: 26px;
+            flex-wrap: wrap;
+        }
+
+        .tbar-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 12.5px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .tbar-item i {
+            color: #d6ff3e;
+            font-size: 11px;
+            width: 12px;
+            text-align: center;
+        }
+
+        a.tbar-item:hover {
+            color: #ffffff;
+        }
+
+        .tbar-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .tbar-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .tbar-link i {
+            font-size: 11px;
+        }
+
+        .tbar-link:hover {
+            color: #d6ff3e;
+        }
+
+        .tbar-divider {
+            width: 1px;
+            height: 14px;
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .tbar-select-wrap {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #64748b;
+            font-size: 11px;
+        }
+
+        .tbar-select {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 12px;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+            padding: 2px 4px;
+        }
+
+        .tbar-select option {
+            background: #0d0f14;
+            color: #ffffff;
+        }
+
+        .tbar-socials {
+            display: flex;
+            gap: 7px;
+        }
+
+        .tbar-social-btn {
+            width: 25px;
+            height: 25px;
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #94a3b8;
+            font-size: 11px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .tbar-social-btn:hover {
+            background: #d6ff3e;
+            color: #0d0f14;
+            border-color: #d6ff3e;
+        }
+
+        @media (max-width: 991px) {
+            .tbar-utility {
+                display: none;
+            }
+        }
+
+        /* Quick-action icon buttons in the main navbar (wishlist, etc.) */
+        .qa-icon-btn {
+            position: relative;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .qa-icon-btn:hover {
+            background: #d6ff3e;
+            color: #0d0f14;
+            border-color: #d6ff3e;
+        }
+
+        .qa-icon-badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: #ff5c5c;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 800;
+            min-width: 16px;
+            height: 16px;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px;
+            line-height: 1;
+        }
+
+        .footer-modern {
+            background: linear-gradient(135deg, #08090d 0%, #12131a 50%, #08090d 100%);
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .footer-modern::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(214, 255, 62, 0.02) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(255, 92, 92, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .footer-modern::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #d6ff3e, #0d1321, #ff5c5c, #d6ff3e);
+            background-size: 200% 100%;
+            animation: footerGradientShift 4s linear infinite;
+        }
+
+        @keyframes footerGradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 200% 50%;
+            }
+        }
+
+        /* Feature badges */
+        .footer-feature-strip {
+            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 28px 0;
+        }
+
+        .footer-feature-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 20px;
+            border-radius: 12px;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .footer-feature-item:hover {
+            background: rgba(255, 255, 255, 0.04);
+            transform: translateY(-2px);
+        }
+
+        .footer-feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .footer-feature-icon.purple {
+            background: rgba(255, 255, 255, 0.08);
+            color: #d6ff3e;
+        }
+
+        .footer-feature-icon.cyan {
+            background: rgba(255, 255, 255, 0.08);
+            color: #d6ff3e;
+        }
+
+        .footer-feature-icon.green {
+            background: rgba(255, 255, 255, 0.08);
+            color: #d6ff3e;
+        }
+
+        .footer-feature-icon.amber {
+            background: rgba(255, 255, 255, 0.08);
+            color: #d6ff3e;
+        }
+
+        .footer-feature-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .footer-feature-sub {
+            font-size: 12px;
+            color: #94a3b8;
+            margin: 0;
+        }
+
+        /* Main footer body */
+        .footer-body {
+            padding: 64px 0 40px;
+        }
+
+        /* Brand column */
+        .footer-brand-logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: #ffffff;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand-logo img {
+            height: 52px;
+            object-fit: contain;
+        }
+
+        .footer-brand-desc {
+            font-size: 14px;
+            color: #94a3b8;
+            line-height: 1.75;
+            margin-bottom: 24px;
+        }
+
+        /* Social icons */
+        .footer-socials {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .footer-social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #94a3b8;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .footer-social-btn:hover {
+            transform: translateY(-4px) scale(1.1);
+            color: #08090d;
+            border-color: transparent;
+            background: #ffffff;
+        }
+
+        /* Column headings */
+        .footer-col-title {
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #ffffff;
+            margin-bottom: 22px;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .footer-col-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: #d6ff3e;
+            border-radius: 2px;
+        }
+
+        /* Footer links */
+        .footer-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 6px 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .footer-link .link-arrow {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #ffffff;
+            transform: translateX(4px);
+        }
+
+        .footer-link:hover .link-arrow {
+            background: #ffffff;
+            color: #08090d;
+        }
+
+        /* Contact items */
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .footer-contact-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .footer-contact-item:hover .footer-contact-icon {
+            background: #ffffff;
+            color: #08090d;
+        }
+
+        .footer-contact-text {
+            font-size: 13px;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        .footer-contact-label {
+            font-size: 11px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 2px;
+            font-weight: 600;
+        }
+
+        /* Newsletter */
+        .footer-newsletter-wrap {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 8px;
+        }
+
+        .footer-newsletter-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .footer-newsletter-sub {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 16px;
+        }
+
+        .footer-newsletter-form {
+            display: flex;
+            gap: 8px;
+        }
+
+        .footer-newsletter-input {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 10px 16px;
+            font-size: 13px;
+            color: #ffffff;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .footer-newsletter-input::placeholder {
+            color: #64748b;
+        }
+
+        .footer-newsletter-input:focus {
+            border-color: #ffffff;
+        }
+
+        .footer-newsletter-btn {
+            background: #ffffff;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 18px;
+            color: #08090d;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .footer-newsletter-btn:hover {
+            background: #e2e8f0;
+            transform: scale(1.03);
+            box-shadow: 0 6px 15px rgba(255, 255, 255, 0.08);
+        }
+
+        /* Divider */
+        .footer-divider {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            margin: 40px 0 30px;
+        }
+
+        /* Payment badges */
+        .footer-payment-badges {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .payment-badge {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #94a3b8;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+        }
+
+        .payment-badge:hover {
+            border-color: #ffffff;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-payment-label {
+            font-size: 12px;
+            color: #64748b;
+            margin-right: 6px;
+            font-weight: 600;
+        }
+
+        /* Copyright bar */
+        .footer-copyright {
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 20px 0;
+        }
+
+        .footer-copyright-text {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .footer-copyright-text a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-copyright-text a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-powered {
+            font-size: 12px;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .footer-powered .heart {
+            color: #ff5c5c;
+            animation: heartbeat 1.4s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            14% {
+                transform: scale(1.25);
+            }
+
+            28% {
+                transform: scale(1);
+            }
+
+            42% {
+                transform: scale(1.2);
+            }
+        }
+        /* ===== MODERN MEGA CATEGORIES DROPDOWN ===== */
+        .sh-mega-cat-menu {
+            width: 700px !important;
+            max-height: 520px !important;
+            overflow-y: auto !important;
+            padding: 24px !important;
+            background: #ffffff !important;
+            border: 1px solid #cbd5e1 !important;
+            border-radius: 18px !important;
+            box-shadow: 0 24px 60px -12px rgba(15, 23, 42, 0.18) !important;
+            right: 0 !important;
+            left: auto !important;
+        }
+
+        .sh-mega-cat-grid {
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 20px 24px !important;
+        }
+
+        .sh-mega-cat-col {
+            display: flex !important;
+            flex-direction: column !important;
+        }
+
+        .sh-mega-cat-header {
+            display: flex !important;
+            align-items: center !important;
+            gap: 10px !important;
+            padding: 8px 10px !important;
+            border-radius: 10px !important;
+            text-decoration: none !important;
+            color: #0f172a !important;
+            margin-bottom: 8px !important;
+            background: #f8fafc !important;
+            border: 1px solid #f1f5f9 !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .sh-mega-cat-header:hover {
+            background: #0f172a !important;
+            color: #ffffff !important;
+            border-color: #0f172a !important;
+        }
+
+        .sh-mega-cat-icon {
+            width: 30px !important;
+            height: 30px !important;
+            border-radius: 8px !important;
+            background: #ffffff !important;
+            border: 1px solid #e2e8f0 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-size: 13px !important;
+            color: #0f172a !important;
+            flex-shrink: 0 !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .sh-mega-cat-header:hover .sh-mega-cat-icon {
+            background: rgba(255, 255, 255, 0.2) !important;
+            color: #ffffff !important;
+            border-color: transparent !important;
+        }
+
+        .sh-mega-cat-title {
+            font-size: 13.5px !important;
+            font-weight: 800 !important;
+            font-family: 'Inter', system-ui, sans-serif !important;
+            line-height: 1.2 !important;
+        }
+
+        .sh-mega-subcat-list {
+            list-style: none !important;
+            padding: 0 0 0 10px !important;
+            margin: 0 !important;
+        }
+
+        .sh-mega-subcat-link {
+            display: flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+            padding: 4px 8px !important;
+            border-radius: 6px !important;
+            font-size: 12.5px !important;
+            color: #475569 !important;
+            text-decoration: none !important;
+            font-weight: 500 !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .sh-mega-subcat-link:hover {
+            color: #0284c7 !important;
+            background: #f1f5f9 !important;
+            padding-left: 12px !important;
+        }
+
+        .sh-mega-cat-footer {
+            margin-top: 20px !important;
+            padding-top: 16px !important;
+            border-top: 1px solid #e2e8f0 !important;
+            text-align: center !important;
+        }
+
+        .sh-mega-footer-link {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            padding: 10px 24px !important;
+            border-radius: 10px !important;
+            background: #f1f5f9 !important;
+            color: #0f172a !important;
+            font-size: 13px !important;
+            font-weight: 800 !important;
+            text-decoration: none !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .sh-mega-footer-link:hover {
+            background: #0f172a !important;
+            color: #ffffff !important;
+        }
+
+        @media (max-width: 992px) {
+            .sh-mega-cat-menu {
+                width: 340px !important;
+                padding: 16px !important;
+            }
+            .sh-mega-cat-grid {
+                grid-template-columns: 1fr !important;
+                gap: 14px !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Alert Messages -->
+    <div class="alert-messages">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show shadow"
+            role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+
+    <!-- Dynamic Announcement Bar (Dashboard Controlled) -->
+    {% if site_settings.announcement_bar_enabled and site_settings.announcement_bar_text %}
+    <div class="site-announcement-bar" style="background: {{ site_settings.announcement_bar_color|default:'#ff4d00' }}; color: #ffffff; text-align: center; padding: 8px 16px; font-size: 13px; font-weight: 700; position: relative; z-index: 1001;">
+        <span><i class="fas fa-bullhorn me-2"></i>{{ site_settings.announcement_bar_text }}</span>
+    </div>
+    {% endif %}
+
+    <!-- ===== BAR 1: TOP UTILITY BAR ===== -->
+    <div class="tbar-utility">
+        <div class="tbar-utility-inner">
+            <div class="tbar-left">
+                <a href="tel:{{ store.phone|default:'+1234567890' }}" class="tbar-item">
+                    <i class="fas fa-phone-alt"></i><span>{{ store.phone|default:"+1 234 567 890" }}</span>
+                </a>
+                <a href="mailto:{{ store.email|default:'info@electroworld.com' }}" class="tbar-item">
+                    <i class="fas fa-envelope"></i><span>{{ store.email|default:"info@electroworld.com" }}</span>
+                </a>
+                <span class="tbar-item d-none d-lg-flex">
+                    <i class="fas fa-map-marker-alt"></i><span>{{ store.address|default:"123 Street, New York, USA" }}</span>
+                </span>
+            </div>
+            <div class="tbar-right">
+                <a href="#" class="tbar-link"><i class="fas fa-truck"></i> Track Order</a>
+                <div class="tbar-divider d-none d-md-block"></div>
+                <a href="{% url 'storefront:contact' %}" class="tbar-link"><i class="fas fa-question-circle"></i>
+                    Help</a>
+                <div class="tbar-divider d-none d-md-block"></div>
+                <div class="tbar-select-wrap">
+                    <i class="fas fa-globe" style="color:#64748b;font-size:11px;"></i>
+                    <select class="tbar-select" aria-label="Language">
+                        <option>English</option>
+                    </select>
+                </div>
+                <div class="tbar-divider d-none d-md-block"></div>
+                <div class="tbar-select-wrap">
+                    <select class="tbar-select" aria-label="Currency">
+                        <option>{{ store.currency|default:"PKR" }}</option>
+                    </select>
+                </div>
+                <div class="tbar-divider d-none d-md-block"></div>
+                <div class="tbar-socials d-none d-md-flex">
+                    <a href="{{ site_settings.facebook_url|default:'#' }}" target="_blank" class="tbar-social-btn"
+                        aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="{{ site_settings.twitter_url|default:'#' }}" target="_blank" class="tbar-social-btn"
+                        aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="{{ site_settings.instagram_url|default:'#' }}" target="_blank" class="tbar-social-btn"
+                        aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ===== END BAR 1 ===== -->
+
+    <!-- ===== BAR 2: MAIN NAVBAR ===== -->
+    <header class="site-header" id="siteHeader">
+        <div class="site-header-inner">
+
+            <!-- LEFT: Logo -->
+            <div class="sh-logo-wrap">
+                <a href="{% url 'storefront:home' %}" class="sh-logo">
+                    {% if store.logo %}
+                    <img src="{{ store.logo.url }}" alt="{{ store.name }}" class="sh-logo-img">
+                    {% else %}
+                    <div class="sh-logo-icon"><i class="fas fa-bolt"></i></div>
+                    <span class="sh-logo-text">{{ store.name|default:"Electro" }}</span>
+                    {% endif %}
+                </a>
+            </div>
+
+            <!-- CENTER: Search Bar -->
+            {% if not site_settings or site_settings.search_enabled %}
+            <div class="sh-search-wrap">
+                <form action="{% url 'storefront:shop' %}" method="GET" class="sh-search-form">
+                    <div class="sh-search-bar" style="position: relative;">
+                        <i class="fas fa-search sh-search-icon"></i>
+                        <input type="text" name="q" value="{{ q|default:'' }}" placeholder="Search products, brands…"
+                            class="sh-search-input">
+                        <input type="hidden" name="category" id="searchCategoryInput" value="{{ current_category.slug|default:'' }}">
+                        
+                        <button type="button" id="searchCatDropdownBtn" class="sh-search-select bg-transparent border-0" style="height: 100%; max-width: 140px; padding: 0 10px; color: #475569; font-size: 12px; font-weight: 500; white-space: nowrap; outline: none; border-left: 1.5px solid #e2e8f0; border-radius: 0;">
+                            <span id="searchCatSelectedText" style="overflow: hidden; text-overflow: ellipsis; display: inline-block; max-width: 90px; vertical-align: middle;">
+                                {% if current_category %}{{ current_category.name }}{% else %}All Categories{% endif %}
+                            </span>
+                            <i class="fas fa-chevron-down ms-1" style="font-size:10px;"></i>
+                        </button>
+                        
+                        <div id="searchCatDropdownMenu" class="shadow-lg" style="display: none; position: absolute; top: calc(100% + 8px); left: 0; right: 0; width: 100%; z-index: 1000; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 20px; max-height: 420px; overflow-y: auto;">
+                            <!-- All Categories Option -->
+                            <div class="border-bottom pb-2 mb-3">
+                                <a href="#" class="search-cat-select-btn d-flex align-items-center gap-2 text-dark fw-bold text-decoration-none" data-slug="" data-name="All Categories" style="font-size: 13.5px;">
+                                    <span class="d-inline-flex align-items-center justify-content-center bg-light border rounded" style="width: 28px; height: 28px;"><i class="fas fa-th-large text-secondary" style="font-size: 12px;"></i></span>
+                                    <span>All Categories</span>
+                                </a>
+                            </div>
+                            
+                            <div class="row g-3">
+                                {% for cat in nav_categories %}
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <a href="#" class="search-cat-select-btn d-flex align-items-center gap-2 p-2 rounded text-decoration-none text-dark" data-slug="{{ cat.slug }}" data-name="{{ cat.name }}" style="background: #f8fafc; border: 1px solid #f1f5f9; transition: all 0.2s;">
+                                            <span class="sh-mega-cat-icon d-inline-flex align-items-center justify-content-center bg-white border rounded" style="width: 28px; height: 28px; font-size: 11px;">
+                                                <i class="fas {% if 'grocery' in cat.slug or 'food' in cat.slug %}fa-shopping-basket{% elif 'electronics' in cat.slug %}fa-laptop{% elif 'mobile' in cat.slug or 'phone' in cat.slug %}fa-mobile-alt{% elif 'computer' in cat.slug or 'casing' in cat.slug %}fa-desktop{% elif 'fashion' in cat.slug or 'clothing' in cat.slug %}fa-tshirt{% elif 'footwear' in cat.slug or 'shoe' in cat.slug %}fa-shoe-prints{% elif 'beauty' in cat.slug %}fa-pump-soap{% elif 'home' in cat.slug %}fa-couch{% elif 'kitchen' in cat.slug %}fa-utensils{% elif 'cleaning' in cat.slug %}fa-broom{% elif 'baby' in cat.slug %}fa-baby{% elif 'pet' in cat.slug %}fa-dog{% elif 'sports' in cat.slug %}fa-dumbbell{% elif 'gaming' in cat.slug or 'console' in cat.slug %}fa-gamepad{% else %}fa-tag{% endif %}"></i>
+                                            </span>
+                                            <span class="fw-bold" style="font-size: 13px;">{{ cat.name }}</span>
+                                        </a>
+                                        {% if cat.children.all %}
+                                        <ul class="list-unstyled ps-2 mt-1 mb-0" style="display: flex; flex-direction: column; gap: 4px;">
+                                            {% for sub in cat.children.all %}
+                                            {% if sub.is_active %}
+                                            <li>
+                                                <a href="#" class="search-cat-select-btn text-decoration-none text-muted" data-slug="{{ sub.slug }}" data-name="{{ sub.name }}" style="font-size: 12px; font-weight: 500; display: block; padding: 3px 6px; border-radius: 4px; transition: all 0.15s;" onmouseover="this.style.color='#0284c7'; this.style.background='#f1f5f9';" onmouseout="this.style.color='#64748b'; this.style.background='transparent';">
+                                                    {{ sub.name }}
+                                                </a>
+                                            </li>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </ul>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Mobile fallback select -->
+                        <select class="sh-search-select d-md-none" style="max-width:100px; border-radius:0; border-top:none; border-bottom:none; border-right:none;" onchange="document.getElementById('searchCategoryInput').value = this.value; document.getElementById('searchCatSelectedText').innerText = this.options[this.selectedIndex].text;">
+                            <option value="">All</option>
+                            {% for cat in nav_categories %}
+                            <option value="{{ cat.slug }}" {% if current_category.slug == cat.slug %}selected{% endif %}>{{ cat.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit" class="sh-search-btn"><i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </form>
+            </div>
+            {% endif %}
+
+            <!-- RIGHT: Nav links + Wishlist + Cart + Auth -->
+            <div class="sh-right-wrap">
+
+                <!-- Desktop Nav Links -->
+                <nav class="sh-nav d-none d-xl-flex">
+                    {% if header_menus %}
+                    {% for menu in header_menus %}
+                    <a href="{{ menu.resolved_url }}" class="sh-nav-link" {% if menu.open_in_new_tab %}target="_blank"
+                        {% endif %}>{{ menu.label }}</a>
+                    {% endfor %}
+                    {% else %}
+                    <a href="{% url 'storefront:home' %}" class="sh-nav-link">Home</a>
+                    <a href="{% url 'storefront:shop' %}" class="sh-nav-link">Shop</a>
+                    {% if user.is_authenticated and user.is_superuser or user.role == 'super_admin' %}
+                    <a href="{% url 'storefront:dashboard' %}" target="_blank" class="sh-nav-link">Dashboard</a>
+                    {% endif %}
+                    <a href="{% url 'storefront:contact' %}" class="sh-nav-link">Contact</a>
+                    {% endif %}
+                    {% if mega_menus %}
+                    <div class="sh-dropdown">
+                        <button class="sh-nav-link sh-dropdown-toggle">More <i class="fas fa-chevron-down ms-1"
+                                style="font-size:10px;"></i></button>
+                        <div class="sh-dropdown-menu">
+                            {% for menu in mega_menus %}
+                            <a href="{{ menu.resolved_url }}" class="sh-dropdown-item" {% if menu.open_in_new_tab                                 %}target="_blank" {% endif %}>{{ menu.label }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    <!-- Category Dropdown -->
+                    <div class="sh-dropdown">
+                        <button class="sh-nav-link sh-dropdown-toggle"><i class="fas fa-th me-1"></i>Categories</button>
+                        <div class="sh-dropdown-menu sh-mega-cat-menu">
+                            <div class="sh-mega-cat-grid">
+                                {% for cat in nav_categories %}
+                                <div class="sh-mega-cat-col">
+                                    <a href="{% url 'storefront:shop' %}?category={{ cat.slug }}" class="sh-mega-cat-header">
+                                        <span class="sh-mega-cat-icon">
+                                            <i class="fas {% if 'grocery' in cat.slug or 'food' in cat.slug %}fa-shopping-basket{% elif 'electronics' in cat.slug %}fa-laptop{% elif 'mobile' in cat.slug or 'phone' in cat.slug %}fa-mobile-alt{% elif 'computer' in cat.slug or 'casing' in cat.slug %}fa-desktop{% elif 'fashion' in cat.slug or 'clothing' in cat.slug %}fa-tshirt{% elif 'footwear' in cat.slug or 'shoe' in cat.slug %}fa-shoe-prints{% elif 'beauty' in cat.slug %}fa-pump-soap{% elif 'home' in cat.slug %}fa-couch{% elif 'kitchen' in cat.slug %}fa-utensils{% elif 'cleaning' in cat.slug %}fa-broom{% elif 'baby' in cat.slug %}fa-baby{% elif 'pet' in cat.slug %}fa-dog{% elif 'sports' in cat.slug %}fa-dumbbell{% elif 'gaming' in cat.slug or 'console' in cat.slug %}fa-gamepad{% else %}fa-tag{% endif %}"></i>
+                                        </span>
+                                        <span class="sh-mega-cat-title">{{ cat.name }}</span>
+                                    </a>
+                                    {% if cat.children.all %}
+                                    <ul class="sh-mega-subcat-list">
+                                        {% for sub in cat.children.all %}
+                                        {% if sub.is_active %}
+                                        <li>
+                                            <a href="{% url 'storefront:shop' %}?category={{ sub.slug }}" class="sh-mega-subcat-link">
+                                                {{ sub.name }}
+                                            </a>
+                                        </li>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                    {% endif %}
+                                </div>
+                                {% empty %}
+                                <div class="p-3 text-muted">No categories available</div>
+                                {% endfor %}
+                            </div>
+                            <div class="sh-mega-cat-footer">
+                                <a href="{% url 'storefront:shop' %}" class="sh-mega-footer-link">
+                                    View All Categories & Catalog <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Wishlist Quick Icon -->
+                <a href="#" class="qa-icon-btn d-none d-sm-flex" aria-label="Wishlist" title="Wishlist">
+                    <i class="far fa-heart"></i>
+                    <span class="qa-icon-badge">0</span>
+                </a>
+
+                <!-- Cart -->
+                {% if not site_settings or site_settings.cart_enabled %}
+                <a href="{% url 'storefront:cart' %}" class="sh-cart-btn">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="sh-cart-badge" id="header-cart-count">{{ cart_items_count|default:"0" }}</span>
+                    <span class="sh-cart-total d-none d-lg-inline" id="header-cart-total">{{ store.currency|default:"PKR" }} {{ cart_subtotal|default:"0.00"|floatformat:2 }}</span>
+                </a>
+                {% endif %}
+
+                <!-- Auth -->
+                <div class="sh-auth">
+                    {% if user.is_authenticated %}
+                    <div class="sh-dropdown">
+                        <button class="sh-user-btn">
+                            <div class="sh-user-avatar">{{ user.username|slice:":1"|upper }}</div>
+                            <span class="d-none d-lg-inline">{{ user.username }}</span>
+                            <i class="fas fa-chevron-down ms-1" style="font-size:10px;opacity:.6;"></i>
+                        </button>
+                        <div class="sh-dropdown-menu sh-dropdown-menu-right">
+                            <a href="{% url 'storefront:account' %}" class="sh-dropdown-item"><i class="fas fa-box-open me-2 text-primary"></i>My Orders & Account</a>
+                            {% if user.is_superuser or user.role == 'super_admin' %}
+                            <a href="{% url 'storefront:dashboard' %}" class="sh-dropdown-item"><i class="fas fa-tachometer-alt me-2 text-info"></i>Admin Dashboard</a>
+                            {% endif %}
+                            <div class="dropdown-divider my-1"></div>
+                            <a href="{% url 'storefront:logout' %}" class="sh-dropdown-item text-danger"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                        </div>
+                    </div>
+                    {% else %}
+                    <a href="{% url 'storefront:login' %}?next={{ request.path }}" class="sh-btn-login">Login</a>
+                    <a href="{% url 'storefront:register' %}" class="sh-btn-register">Sign Up</a>
+                    {% endif %}
+                </div>
+
+                <!-- Mobile Search Toggle -->
+                <button class="qa-icon-btn sh-mobile-search-toggle" id="shMobileSearchToggle" aria-label="Search" title="Search" style="display:none;">
+                    <i class="fas fa-search"></i>
+                </button>
+
+                <!-- Mobile Hamburger -->
+                <button class="sh-hamburger d-xl-none" id="shHamburger" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div class="sh-mobile-overlay" id="shOverlay"></div>
+        <div class="sh-mobile-drawer" id="shDrawer">
+            <div class="sh-drawer-header">
+                <a href="{% url 'storefront:home' %}" class="sh-logo">
+                    {% if store.logo %}
+                    <img src="{{ store.logo.url }}" alt="{{ store.name }}" style="height:36px;object-fit:contain;">
+                    {% else %}
+                    <div class="sh-logo-icon" style="width:32px;height:32px;font-size:14px;"><i class="fas fa-bolt"></i>
+                    </div>
+                    <span class="sh-logo-text">{{ store.name|default:"Electro" }}</span>
+                    {% endif %}
+                </a>
+                <button class="sh-drawer-close" id="shDrawerClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="sh-drawer-body">
+                {% if header_menus %}
+                {% for menu in header_menus %}
+                <a href="{{ menu.resolved_url }}" class="sh-drawer-link" {% if menu.open_in_new_tab %}target="_blank" {%                     endif %}>{{ menu.label }}</a>
+                {% endfor %}
+                {% else %}
+                <a href="{% url 'storefront:home' %}" class="sh-drawer-link">Home</a>
+                <a href="{% url 'storefront:shop' %}" class="sh-drawer-link">Shop</a>
+                <a href="{% url 'storefront:contact' %}" class="sh-drawer-link">Contact</a>
+                {% endif %}
+                <div class="sh-drawer-divider"></div>
+                <p class="sh-drawer-section-title">Categories</p>
+                <div class="sh-drawer-cat-accordion">
+                    {% for cat in nav_categories %}
+                    <div class="sh-drawer-cat-group">
+                        <div class="sh-drawer-cat-header">
+                            <a href="{% url 'storefront:shop' %}?category={{ cat.slug }}" class="sh-drawer-link sh-drawer-cat-title">
+                                <span class="d-flex align-items-center gap-2">
+                                    <i class="fas {% if 'grocery' in cat.slug or 'food' in cat.slug %}fa-shopping-basket{% elif 'electronics' in cat.slug %}fa-laptop{% elif 'mobile' in cat.slug or 'phone' in cat.slug %}fa-mobile-alt{% elif 'computer' in cat.slug or 'casing' in cat.slug %}fa-desktop{% elif 'fashion' in cat.slug or 'clothing' in cat.slug %}fa-tshirt{% elif 'footwear' in cat.slug or 'shoe' in cat.slug %}fa-shoe-prints{% elif 'beauty' in cat.slug %}fa-pump-soap{% elif 'home' in cat.slug %}fa-couch{% elif 'kitchen' in cat.slug %}fa-utensils{% elif 'cleaning' in cat.slug %}fa-broom{% elif 'baby' in cat.slug %}fa-baby{% elif 'pet' in cat.slug %}fa-dog{% elif 'sports' in cat.slug %}fa-dumbbell{% elif 'gaming' in cat.slug or 'console' in cat.slug %}fa-gamepad{% else %}fa-tag{% endif %} cat-drawer-icon"></i>
+                                    {{ cat.name }}
+                                </span>
+                            </a>
+                            {% if cat.children.all %}
+                            <button type="button" class="sh-drawer-toggle-btn collapsed" data-bs-toggle="collapse" data-bs-target="#drawer-subcat-{{ cat.id }}" aria-expanded="false" aria-controls="drawer-subcat-{{ cat.id }}">
+                                <i class="fas fa-chevron-down sh-drawer-chevron"></i>
+                            </button>
+                            {% endif %}
+                        </div>
+                        {% if cat.children.all %}
+                        <div class="collapse" id="drawer-subcat-{{ cat.id }}">
+                            <div class="sh-drawer-subcat-wrap">
+                                {% for sub in cat.children.all %}
+                                {% if sub.is_active %}
+                                <a href="{% url 'storefront:shop' %}?category={{ sub.slug }}" class="sh-drawer-subcat-link">
+                                    ↳ {{ sub.name }}
+                                </a>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% empty %}
+                    {% for cat in all_categories %}
+                    <a href="{% url 'storefront:shop' %}?category={{ cat.slug }}" class="sh-drawer-link sh-drawer-cat">{{ cat.name }}</a>
+                    {% endfor %}
+                    {% endfor %}
+                </div>
+                <div class="sh-drawer-divider"></div>
+                {% if user.is_authenticated %}
+                <a href="{% url 'storefront:logout' %}" class="sh-drawer-link"><i
+                        class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                {% else %}
+                <a href="{% url 'storefront:login' %}?next={{ request.path }}" class="sh-drawer-link"><i
+                        class="fas fa-sign-in-alt me-2"></i>Login</a>
+                <a href="{% url 'storefront:register' %}" class="sh-drawer-link"><i
+                        class="fas fa-user-plus me-2"></i>Sign Up</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+    <!-- ===== END BAR 2: MAIN NAVBAR ===== -->
+
+    <!-- Mobile Search Bar (expandable) -->
+    <div class="sh-mobile-search-bar" id="shMobileSearchBar">
+        <form action="{% url 'storefront:shop' %}" method="GET">
+            <div class="sh-search-bar">
+                <i class="fas fa-search sh-search-icon"></i>
+                <input type="text" name="q" value="{{ q|default:'' }}" placeholder="Search products, brands…" class="sh-search-input">
+                <button type="submit" class="sh-search-btn"><i class="fas fa-arrow-right"></i></button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Main Content -->
+    {% block content %}
+    {% endblock %}
+
+    <!-- Footer Start -->
+    <footer class="footer-modern mt-5">
+
+        <!-- Feature Strip — Dynamic from SiteSettings -->
+        <div class="footer-feature-strip">
+            <div class="container">
+                <div class="row g-3">
+                    <div class="col-6 col-md-3">
+                        <div class="footer-feature-item">
+                            <div class="footer-feature-icon purple">
+                                <i class="fas fa-shipping-fast"></i>
+                            </div>
+                            <div>
+                                <p class="footer-feature-title">{{ site_settings.feature_1_title|default:"Free Shipping" }}</p>
+                                <p class="footer-feature-sub">{{ site_settings.feature_1_text|default:"On qualifying orders" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="footer-feature-item">
+                            <div class="footer-feature-icon cyan">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <div>
+                                <p class="footer-feature-title">{{ site_settings.feature_2_title|default:"24/7 Support" }}</p>
+                                <p class="footer-feature-sub">{{ site_settings.feature_2_text|default:"Always here to help" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="footer-feature-item">
+                            <div class="footer-feature-icon green">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div>
+                                <p class="footer-feature-title">{{ site_settings.feature_3_title|default:"Secure Payments" }}</p>
+                                <p class="footer-feature-sub">{{ site_settings.feature_3_text|default:"100% protected" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="footer-feature-item">
+                            <div class="footer-feature-icon amber">
+                                <i class="fas fa-undo-alt"></i>
+                            </div>
+                            <div>
+                                <p class="footer-feature-title">{{ site_settings.feature_4_title|default:"Easy Returns" }}</p>
+                                <p class="footer-feature-sub">{{ site_settings.feature_4_text|default:"30-day policy" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Footer Body -->
+        <div class="footer-body">
+            <div class="container">
+                <div class="row g-5">
+
+                    <!-- Brand Column -->
+                    <div class="col-lg-4 col-md-6">
+                        <a href="{% url 'storefront:home' %}" class="footer-brand-logo">
+                            {% if store.logo %}
+                            <img src="{{ store.logo.url }}" alt="{{ store.name }}">
+                            {% else %}
+                            <i class="fas fa-shopping-bag me-2"></i>{{ store.name|default:"Electro" }}
+                            {% endif %}
+                        </a>
+                        <p class="footer-brand-desc">
+                            {{ site_settings.footer_description|default:"A premier destination for cutting-edge consumer
+                            electronics. Shop quality laptops, smartphones, televisions, and accessories with reliable
+                            support." }}
+                        </p>
+
+                        <!-- Social Links -->
+                        <div class="footer-socials">
+                            {% if site_settings.facebook_url %}
+                            <a href="{{ site_settings.facebook_url }}" target="_blank" class="footer-social-btn fb"
+                                aria-label="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            {% else %}
+                            <a href="#" class="footer-social-btn fb" aria-label="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            {% endif %}
+                            {% if site_settings.twitter_url %}
+                            <a href="{{ site_settings.twitter_url }}" target="_blank" class="footer-social-btn tw"
+                                aria-label="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            {% else %}
+                            <a href="#" class="footer-social-btn tw" aria-label="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            {% endif %}
+                            {% if site_settings.instagram_url %}
+                            <a href="{{ site_settings.instagram_url }}" target="_blank" class="footer-social-btn ig"
+                                aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            {% else %}
+                            <a href="#" class="footer-social-btn ig" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            {% endif %}
+                            {% if site_settings.youtube_url %}
+                            <a href="{{ site_settings.youtube_url }}" target="_blank" class="footer-social-btn yt"
+                                aria-label="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            {% else %}
+                            <a href="#" class="footer-social-btn yt" aria-label="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Quick Links Column -->
+                    <div class="col-lg-2 col-md-6 col-sm-6">
+                        <h6 class="footer-col-title">Quick Links</h6>
+                        <nav class="d-flex flex-column">
+                            {% if footer_menus %}
+                            {% for menu in footer_menus %}
+                            <a href="{{ menu.resolved_url }}" class="footer-link" {% if menu.open_in_new_tab %}target="_blank"{% endif %}>
+                                <span class="link-arrow"><i class="fas fa-angle-right"></i></span>
+                                {{ menu.label }}
+                            </a>
+                            {% endfor %}
+                            {% else %}
+                            <a href="{% url 'storefront:home' %}" class="footer-link">
+                                <span class="link-arrow"><i class="fas fa-angle-right"></i></span>Home
+                            </a>
+                            <a href="{% url 'storefront:shop' %}" class="footer-link">
+                                <span class="link-arrow"><i class="fas fa-angle-right"></i></span>Shop
+                            </a>
+                            <a href="{% url 'storefront:cart' %}" class="footer-link">
+                                <span class="link-arrow"><i class="fas fa-angle-right"></i></span>My Cart
+                            </a>
+                            <a href="{% url 'storefront:contact' %}" class="footer-link">
+                                <span class="link-arrow"><i class="fas fa-angle-right"></i></span>Contact
+                            </a>
+                            {% endif %}
+                        </nav>
+                    </div>
+
+                    <!-- CMS Pages Column (From Dashboard) -->
+                    {% if footer_pages %}
+                    <div class="col-lg-2 col-md-6 col-sm-6">
+                        <h6 class="footer-col-title">Information</h6>
+                        <nav class="d-flex flex-column">
+                            {% for pg in footer_pages %}
+                            <a href="{% url 'storefront:cms_page' pg.slug %}" class="footer-link">
+                                <span class="link-arrow"><i class="fas fa-angle-right"></i></span>
+                                {{ pg.title }}
+                            </a>
+                            {% endfor %}
+                        </nav>
+                    </div>
+                    {% endif %}
+
+                    <!-- Contact Info Column -->
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <h6 class="footer-col-title">Get In Touch</h6>
+                        <div class="footer-contact-item">
+                            <div class="footer-contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <p class="footer-contact-label">Address</p>
+                                <p class="footer-contact-text">{{ store.address|default:"123 Street, New York, USA" }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="footer-contact-item">
+                            <div class="footer-contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="footer-contact-label">Email</p>
+                                <p class="footer-contact-text">{{ store.email|default:"info@electroworld.com" }}</p>
+                            </div>
+                        </div>
+                        <div class="footer-contact-item">
+                            <div class="footer-contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <p class="footer-contact-label">Phone</p>
+                                <p class="footer-contact-text">{{ store.phone|default:"+1 234 567 890" }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Newsletter Column -->
+                    <div class="col-lg-3 col-md-6">
+                        <h6 class="footer-col-title">Newsletter</h6>
+                        <div class="footer-newsletter-wrap">
+                            <p class="footer-newsletter-title">Stay in the loop 📬</p>
+                            <p class="footer-newsletter-sub">Get deals, new arrivals &amp; exclusive offers.</p>
+                            <div class="footer-newsletter-form">
+                                <input type="email" class="footer-newsletter-input" placeholder="Your email...">
+                                <button class="footer-newsletter-btn"><i class="fas fa-paper-plane"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Divider -->
+                <hr class="footer-divider">
+
+                <!-- Bottom Row: Payment + copyright -->
+                <div class="row align-items-center g-3">
+                    <div class="col-md-8">
+                        <div class="footer-payment-badges">
+                            <span class="footer-payment-label">We accept:</span>
+                            <span class="payment-badge">VISA</span>
+                            <span class="payment-badge">Mastercard</span>
+                            <span class="payment-badge">PayPal</span>
+                            <span class="payment-badge">Stripe</span>
+                            <span class="payment-badge">COD</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-md-end">
+                        <p class="footer-powered">
+                            Made with <span class="heart">&#10084;</span> by RetailPlatform
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Copyright Bar -->
+        <div class="footer-copyright">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-start">
+                        <p class="footer-copyright-text mb-0">
+                            &copy; {{ site_settings.copyright_text|default:store.name|default:"Electro World" }} — All
+                            rights reserved.
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
+                        <p class="footer-copyright-text mb-0">
+                            {% if footer_menus %}
+                            {% for menu in footer_menus %}
+                            <a href="{{ menu.resolved_url }}">{{ menu.label }}</a>{% if not forloop.last %} &nbsp;&bull;&nbsp;{% endif %}
+                            {% endfor %}
+                            {% else %}
+                            <a href="{% url 'storefront:home' %}">Home</a> &nbsp;&bull;&nbsp;
+                            <a href="{% url 'storefront:shop' %}">Shop</a> &nbsp;&bull;&nbsp;
+                            <a href="{% url 'storefront:contact' %}">Contact</a>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <!-- Footer End -->
+
+    <!-- ===== MOBILE BOTTOM NAVIGATION BAR ===== -->
+    <nav class="mobile-bottom-nav" id="mobileBottomNav">
+        <a href="{% url 'storefront:home' %}" class="mobile-bottom-nav-link{% if request.resolver_match.url_name == 'home' %} active{% endif %}">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="{% if user.is_authenticated %}{% url 'storefront:account' %}{% else %}{% url 'storefront:login' %}?next={{ request.path }}{% endif %}" class="mobile-bottom-nav-link{% if request.resolver_match.url_name == 'account' %} active{% endif %}">
+            <i class="fas fa-user"></i>
+            <span>Account</span>
+        </a>
+        <a href="{% url 'storefront:shop' %}" class="mobile-bottom-nav-link{% if request.resolver_match.url_name == 'shop' %} active{% endif %}">
+            <i class="fas fa-store"></i>
+            <span>Shop</span>
+        </a>
+        <a href="{% url 'storefront:shop' %}" class="mobile-bottom-nav-link">
+            <i class="far fa-heart"></i>
+            <span>Wishlist</span>
+            <span class="mobile-bottom-nav-badge">0</span>
+        </a>
+        {% if not site_settings or site_settings.cart_enabled %}
+        <a href="{% url 'storefront:cart' %}" class="mobile-bottom-nav-link{% if request.resolver_match.url_name == 'cart' %} active{% endif %}">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Cart</span>
+            {% if cart_items_count %}<span class="mobile-bottom-nav-badge">{{ cart_items_count }}</span>{% endif %}
+        </a>
+        {% endif %}
+    </nav>
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+
+    <!-- Dynamic WhatsApp Float Button (Dashboard Controlled) -->
+    {% if site_settings.whatsapp_number %}
+    <a href="https://wa.me/{{ site_settings.whatsapp_number|cut:' ' }}" target="_blank" class="whatsapp-float-btn" style="position: fixed; bottom: 28px; right: 85px; width: 50px; height: 50px; border-radius: 50%; background: #25d366; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 26px; box-shadow: 0 8px 24px rgba(37,211,102,0.45); z-index: 9999; text-decoration: none; transition: transform 0.25s;" title="Chat with Us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    {% endif %}
+
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'storefront/lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'storefront/lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'storefront/lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'storefront/lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'storefront/js/main.js' %}"></script>
+
+    <script>
+        const STORE_CURRENCY = "{{ store.currency|default:'PKR' }}";
+        
+        // Handle Search Bar Mega Menu Category Selection
+        document.addEventListener('DOMContentLoaded', function() {
+            var searchCatDropdownBtn = document.getElementById('searchCatDropdownBtn');
+            var searchCatDropdownMenu = document.getElementById('searchCatDropdownMenu');
+            var searchCatSelectBtns = document.querySelectorAll('.search-cat-select-btn');
+            var searchCatInput = document.getElementById('searchCategoryInput');
+            var searchCatText = document.getElementById('searchCatSelectedText');
+            
+            if (searchCatDropdownBtn && searchCatDropdownMenu) {
+                // Toggle dropdown display
+                searchCatDropdownBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (searchCatDropdownMenu.style.display === 'none') {
+                        searchCatDropdownMenu.style.display = 'block';
+                    } else {
+                        searchCatDropdownMenu.style.display = 'none';
+                    }
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!searchCatDropdownBtn.contains(e.target) && !searchCatDropdownMenu.contains(e.target)) {
+                        searchCatDropdownMenu.style.display = 'none';
+                    }
+                });
+            }
+            
+            searchCatSelectBtns.forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var slug = this.getAttribute('data-slug');
+                    var name = this.getAttribute('data-name');
+                    
+                    if (searchCatInput) searchCatInput.value = slug;
+                    if (searchCatText) searchCatText.textContent = name;
+                    if (searchCatDropdownMenu) searchCatDropdownMenu.style.display = 'none';
+                });
+            });
+        });
+    </script>
+
+    <script>
+        // ===== MODERN NAVBAR — Mobile Drawer =====
+        (function () {
+            var hamburger = document.getElementById('shHamburger');
+            var drawer = document.getElementById('shDrawer');
+            var overlay = document.getElementById('shOverlay');
+            var closeBtn = document.getElementById('shDrawerClose');
+            function openDrawer() {
+                drawer.classList.add('open');
+                overlay.classList.add('active');
+                hamburger.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeDrawer() {
+                drawer.classList.remove('open');
+                overlay.classList.remove('active');
+                hamburger.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+            if (hamburger) hamburger.addEventListener('click', openDrawer);
+            if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+            if (overlay) overlay.addEventListener('click', closeDrawer);
+            // Close on ESC
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDrawer(); });
+        })();
+    </script>
+
+    <script>
+        // ===== MOBILE SEARCH BAR TOGGLE =====
+        (function () {
+            var searchToggle = document.getElementById('shMobileSearchToggle');
+            var searchBar = document.getElementById('shMobileSearchBar');
+            if (searchToggle && searchBar) {
+                searchToggle.addEventListener('click', function () {
+                    searchBar.classList.toggle('open');
+                    if (searchBar.classList.contains('open')) {
+                        var input = searchBar.querySelector('.sh-search-input');
+                        if (input) input.focus();
+                    }
+                });
+            }
+        })();
+    </script>
+
+    {% block scripts %}
+    {% endblock %}
+</body>
+
+</html>

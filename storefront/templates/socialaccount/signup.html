@@ -1,0 +1,55 @@
+{% extends 'storefront/base.html' %}
+{% load i18n allauth socialaccount %}
+
+{% block content %}
+<div class="auth2-page">
+  <div class="auth2-card" style="max-width:520px;min-height:auto;">
+    <div class="auth2-accent-bar"></div>
+    <div class="auth2-form-panel" style="flex:1;padding:48px 44px;">
+      <div class="auth2-form-inner" style="max-width:100%;">
+
+        <div class="auth2-logo" style="justify-content:center;margin-bottom:28px;">
+          <div class="auth2-logo-icon"><i class="fab fa-google"></i></div>
+          <span class="auth2-logo-text">Google Sign-In</span>
+        </div>
+
+        <div class="auth2-heading" style="text-align:center;">
+          <h1 class="auth2-title" style="font-size:1.5rem;">Almost there!</h1>
+          <p class="auth2-sub">Complete your profile to finish signing in with Google.</p>
+        </div>
+
+        {% url 'socialaccount_signup' as action_url %}
+        <form method="post" action="{{ action_url }}" id="socialSignupForm">
+          {% csrf_token %}
+          {{ redirect_field }}
+
+          {% for field in form %}
+          <div class="auth2-field">
+            <label class="auth2-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+            <input
+              type="{{ field.field.widget.input_type }}"
+              class="auth2-input"
+              name="{{ field.html_name }}"
+              id="{{ field.id_for_label }}"
+              value="{{ field.value|default:'' }}"
+              placeholder="{{ field.label }}"
+              {% if field.field.required %}required{% endif %}
+            >
+            {% if field.errors %}
+              {% for error in field.errors %}
+              <div class="auth2-alert auth2-alert-error" style="margin-top:6px;padding:8px 12px;font-size:12px;">
+                <i class="fas fa-exclamation-circle"></i> {{ error }}
+              </div>
+              {% endfor %}
+            {% endif %}
+          </div>
+          {% endfor %}
+
+          <button type="submit" class="auth2-submit">Complete Sign In</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

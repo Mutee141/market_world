@@ -1,0 +1,56 @@
+<!-- ========== 5. REVIEWS / TESTIMONIALS SECTION (Dashboard Managed) ========== -->
+{% if not sections_dict.reviews or sections_dict.reviews.is_active %}
+{% if recent_reviews %}
+<section class="reviews-section">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <span class="section-eyebrow">{{ sections_dict.reviews.subtitle|default:"Testimonials" }}</span>
+        <h2 class="section-title">{{ sections_dict.reviews.title|default:"Customer Reviews" }}</h2>
+      </div>
+    </div>
+    <div class="row g-4">
+      {% for rev in recent_reviews %}
+      <div class="col-md-6 col-lg-4">
+        <div class="review-card">
+          <div class="review-stars">
+            {% for i in "12345" %}
+              {% if forloop.counter <= rev.rating %}
+                <i class="fas fa-star"></i>
+              {% else %}
+                <i class="far fa-star"></i>
+              {% endif %}
+            {% endfor %}
+          </div>
+          <p class="review-comment">"{{ rev.comment }}"</p>
+          <div class="review-author">
+            <div class="review-avatar">
+              {% if rev.customer.full_name %}
+                {{ rev.customer.full_name|slice:":1"|upper }}
+              {% elif rev.customer.user and rev.customer.user.username %}
+                {{ rev.customer.user.username|slice:":1"|upper }}
+              {% else %}
+                C
+              {% endif %}
+            </div>
+            <div>
+              <div class="review-author-name">
+                {% if rev.customer.full_name %}
+                  {{ rev.customer.full_name }}
+                {% elif rev.customer.user and rev.customer.user.username %}
+                  {{ rev.customer.user.username }}
+                {% else %}
+                  Verified Customer
+                {% endif %}
+              </div>
+              <div class="review-product-name">{{ rev.product.name }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endif %}

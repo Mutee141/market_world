@@ -1,0 +1,21 @@
+<!-- ========== NEW SECTION: TRENDING PRODUCTS ========== -->
+{% if sections_dict.trending_products and sections_dict.trending_products.is_active %}
+<section class="products-section" style="background: #f8fafc; border-top: 1px solid var(--tm-border); padding: 48px 0;">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <span class="section-eyebrow">{{ sections_dict.trending_products.subtitle|default:"Popular Right Now" }}</span>
+        <h2 class="section-title"><i class="fas fa-fire-alt me-2 text-warning"></i>{{ sections_dict.trending_products.title|default:"Trending Products" }}</h2>
+      </div>
+      <a href="{% url 'storefront:shop' %}" class="section-view-all">View Trending <i class="fas fa-arrow-right ms-1"></i></a>
+    </div>
+    <div class="products-grid">
+      {% for prod in trending_products %}
+        {% include "storefront/includes/product_card.html" with prod=prod %}
+      {% empty %}
+        <div class="empty-state text-center py-5 w-100"><i class="fas fa-fire fa-3x mb-3 text-muted"></i><p class="text-muted">No trending items currently.</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}

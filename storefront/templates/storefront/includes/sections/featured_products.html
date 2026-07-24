@@ -1,0 +1,67 @@
+{% load static %}
+<!-- ========== 4. PRODUCTS SECTION (Dashboard Managed) ========== -->
+<section class="products-section">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <span class="section-eyebrow">{{ sections_dict.featured_products.subtitle|default:"Curated For You" }}</span>
+        <h2 class="section-title">{{ sections_dict.featured_products.title|default:"Hot Marketplace Products" }}</h2>
+      </div>
+      <div class="product-tabs-wrap">
+        <ul class="product-tabs d-flex list-unstyled mb-0 gap-1" id="productTab" role="tablist">
+          <li><button class="ptab active" data-bs-target="#all-pane" type="button" role="tab">All Products</button></li>
+          <li><button class="ptab" data-bs-target="#new-pane" type="button" role="tab">New Arrivals</button></li>
+          <li><button class="ptab" data-bs-target="#featured-pane" type="button" role="tab">Featured</button></li>
+          <li><button class="ptab" data-bs-target="#topselling-pane" type="button" role="tab">Top Selling</button></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-content" id="productTabContent">
+
+      <!-- All Products -->
+      <div class="tab-pane fade show active" id="all-pane" role="tabpanel">
+        <div class="products-grid">
+          {% for prod in all_products %}
+            {% include "storefront/includes/product_card.html" with prod=prod %}
+          {% empty %}<div class="empty-state text-center py-5"><i class="fas fa-box-open fa-3x mb-3 text-muted"></i><p class="text-muted">No products available right now.</p></div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- New Arrivals -->
+      <div class="tab-pane fade" id="new-pane" role="tabpanel">
+        <div class="products-grid">
+          {% for prod in new_arrivals %}
+            {% include "storefront/includes/product_card.html" with prod=prod %}
+          {% empty %}<div class="empty-state text-center py-5"><i class="fas fa-box-open fa-3x mb-3 text-muted"></i><p class="text-muted">No new arrivals yet.</p></div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Featured -->
+      <div class="tab-pane fade" id="featured-pane" role="tabpanel">
+        <div class="products-grid">
+          {% for prod in featured_products %}
+            {% include "storefront/includes/product_card.html" with prod=prod %}
+          {% empty %}<div class="empty-state text-center py-5"><i class="fas fa-star fa-3x mb-3 text-muted"></i><p class="text-muted">No featured products yet.</p></div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Top Selling -->
+      <div class="tab-pane fade" id="topselling-pane" role="tabpanel">
+        <div class="products-grid">
+          {% for prod in top_selling_products %}
+            {% include "storefront/includes/product_card.html" with prod=prod %}
+          {% empty %}<div class="empty-state text-center py-5"><i class="fas fa-fire fa-3x mb-3 text-muted"></i><p class="text-muted">No top selling products yet.</p></div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-5">
+      <a href="{% url 'storefront:shop' %}" class="btn-view-all-products">Explore All Deals <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>

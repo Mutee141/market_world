@@ -1,0 +1,28 @@
+<!-- ========== 6. TRUSTED BRANDS STRIP (Dashboard Managed Brands) ========== -->
+{% if sections_dict.brands and sections_dict.brands.is_active %}
+<section class="brands-section">
+  <div class="container">
+    <p class="brands-label">Trusted Top Global Brands</p>
+    <div class="brands-grid">
+      {% if active_brands %}
+        {% for brand in active_brands %}
+        <div class="brand-logo-item">
+          {% if brand.logo %}
+            <img src="{{ brand.logo.url }}" alt="{{ brand.name }}" style="max-height: 38px; object-fit: contain;">
+          {% else %}
+            <span class="brand-logo-text">{{ brand.name }}</span>
+          {% endif %}
+        </div>
+        {% endfor %}
+      {% else %}
+        <div class="brand-logo-item"><span class="brand-logo-text">Samsung</span></div>
+        <div class="brand-logo-item"><span class="brand-logo-text">Apple</span></div>
+        <div class="brand-logo-item"><span class="brand-logo-text">Sony</span></div>
+        <div class="brand-logo-item"><span class="brand-logo-text">LG</span></div>
+        <div class="brand-logo-item"><span class="brand-logo-text">Xiaomi</span></div>
+        <div class="brand-logo-item"><span class="brand-logo-text">Dell</span></div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endif %}

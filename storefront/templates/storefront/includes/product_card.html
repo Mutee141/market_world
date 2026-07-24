@@ -1,0 +1,26 @@
+{% load static %}
+<div class="pcard">
+  <div class="pcard-img-wrap">
+    {% with prod.images.first as prod_img %}
+    <a href="{% url 'storefront:product_detail' prod.slug %}" class="pcard-img-link">
+      <img src="{% if prod_img %}{% if prod_img.image.name and '/' in prod_img.image.name %}{{ prod_img.image.url }}{% else %}{% static 'storefront/img/' %}{{ prod_img.image }}{% endif %}{% else %}{% static 'storefront/img/product-1.png' %}{% endif %}" class="pcard-img" alt="{{ prod.name }}">
+    </a>
+    {% endwith %}
+    {% if prod.variants.first.discount_price %}<span class="pcard-badge sale">SALE</span>{% elif 'new_arrivals' in prod.tags %}<span class="pcard-badge new">NEW</span>{% endif %}
+    <button type="button" class="pcard-wishlist"><i class="far fa-heart"></i></button>
+  </div>
+  <div class="pcard-body">
+    <span class="pcard-category">{{ prod.category.name }}</span>
+    <a href="{% url 'storefront:product_detail' prod.slug %}" class="pcard-name">{{ prod.name }}</a>
+    <div class="pcard-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+    <div class="pcard-footer">
+      {% with prod.variants.first as v %}
+      <div class="pcard-price">
+        {% if v.discount_price %}<del class="pcard-old">{{ store.currency }} {{ v.selling_price|floatformat:2 }}</del><span class="pcard-current">{{ store.currency }} {{ v.discount_price|floatformat:2 }}</span>
+        {% else %}<span class="pcard-current">{{ store.currency }} {{ v.selling_price|floatformat:2 }}</span>{% endif %}
+      </div>
+      <button type="button" class="pcard-cart add-to-cart-btn" data-variant-id="{{ v.id }}"><i class="fas fa-cart-plus"></i></button>
+      {% endwith %}
+    </div>
+  </div>
+</div>

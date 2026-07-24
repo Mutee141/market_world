@@ -1,0 +1,5960 @@
+[
+{
+  "model": "tenants.store",
+  "pk": 6,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.274Z",
+    "updated_at": "2026-07-13T10:15:13.274Z",
+    "name": "Market World",
+    "slug": "electro",
+    "custom_domain": null,
+    "owner": null,
+    "status": "trial",
+    "is_active": true,
+    "logo": "store_logos/Gemini_Generated_Image_v1zofvv1zofvv1zo.png",
+    "banner": "",
+    "primary_color": "#8089bc",
+    "phone": "+1234567890",
+    "email": "info@electroworld.com",
+    "address": "123 Electronic Street",
+    "city": "Peshawar",
+    "currency": "PKR",
+    "tax_percentage": "5.00"
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 8,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$J9owbTfDVJcPAZ0fZpJ39R$Z6wETwbODzFxTYG4ZOei/OnLAzW0uakYq1FnXqOoXFE=",
+    "last_login": "2026-07-24T16:38:09.216Z",
+    "is_superuser": true,
+    "username": "electro",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-07-13T10:16:21Z",
+    "role": "super_admin",
+    "store": null,
+    "phone": "",
+    "branch_id": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 9,
+  "fields": {
+    "password": "!WXFOGKFOIUpllrbKDIZefNeM1kapNQnD7qagabsj",
+    "last_login": "2026-07-23T07:36:29.661Z",
+    "is_superuser": false,
+    "username": "mutee",
+    "first_name": "Mutee",
+    "last_name": "Rehman",
+    "email": "muteerehman2323@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-07-23T07:36:29.508Z",
+    "role": "customer",
+    "store": 6,
+    "phone": "",
+    "branch_id": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 10,
+  "fields": {
+    "password": "!z0FAGNMmRVgSiR1ew3SrszvvJOImT5nvzBlwDFQd",
+    "last_login": "2026-07-23T07:53:42.335Z",
+    "is_superuser": false,
+    "username": "malik",
+    "first_name": "Malik",
+    "last_name": "Chalenger",
+    "email": "malikchallenger2324@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-07-23T07:53:42.266Z",
+    "role": "customer",
+    "store": 6,
+    "phone": "",
+    "branch_id": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 11,
+  "fields": {
+    "password": "!ZkupiA65FlLaXfQiXiq5uddCDjDP4L9Y6IXxEp7D",
+    "last_login": "2026-07-24T08:40:30.460Z",
+    "is_superuser": false,
+    "username": "unknown",
+    "first_name": "Unknown",
+    "last_name": "",
+    "email": "emptyhome2324@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-07-24T07:31:33.367Z",
+    "role": "customer",
+    "store": 6,
+    "phone": "",
+    "branch_id": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 12,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$iTt8cZz63rowEP4YC6UNHC$hYGVs7ci+Jmue4AcS3l0K2s2aDgYXT6fBG6y4InKcyY=",
+    "last_login": "2026-07-24T16:49:23.275Z",
+    "is_superuser": true,
+    "username": "market",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-07-24T16:48:57.684Z",
+    "role": "customer",
+    "store": null,
+    "phone": "",
+    "branch_id": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 13,
+  "fields": {
+    "password": "!ht1FriVDuJ8h3Ref88NagUL7YRuFkCqsD2zakf7T",
+    "last_login": "2026-07-24T18:17:29.836Z",
+    "is_superuser": false,
+    "username": "kamran",
+    "first_name": "Kamran",
+    "last_name": "Rashid",
+    "email": "kamranrashid578@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-07-24T18:17:29.697Z",
+    "role": "customer",
+    "store": 6,
+    "phone": "",
+    "branch_id": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 9,
+  "fields": {
+    "store": 6,
+    "name": "Electronics",
+    "slug": "electronics",
+    "parent": null,
+    "image": "categories/electronics.jpg",
+    "is_active": true,
+    "order": 20,
+    "created_at": "2026-07-13T10:15:13.316Z",
+    "updated_at": "2026-07-13T10:15:13.316Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 10,
+  "fields": {
+    "store": 6,
+    "name": "Laptops",
+    "slug": "laptops",
+    "parent": 9,
+    "image": "",
+    "is_active": true,
+    "order": 2,
+    "created_at": "2026-07-13T10:15:13.325Z",
+    "updated_at": "2026-07-13T10:15:13.325Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 11,
+  "fields": {
+    "store": 6,
+    "name": "Smartphones",
+    "slug": "smartphones",
+    "parent": 9,
+    "image": "",
+    "is_active": true,
+    "order": 3,
+    "created_at": "2026-07-13T10:15:13.331Z",
+    "updated_at": "2026-07-13T10:15:13.331Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 12,
+  "fields": {
+    "store": 6,
+    "name": "Televisions",
+    "slug": "televisions",
+    "parent": 9,
+    "image": "",
+    "is_active": true,
+    "order": 4,
+    "created_at": "2026-07-13T10:15:13.339Z",
+    "updated_at": "2026-07-13T10:15:13.339Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 13,
+  "fields": {
+    "store": 6,
+    "name": "Accessories",
+    "slug": "accessories",
+    "parent": 9,
+    "image": "",
+    "is_active": true,
+    "order": 5,
+    "created_at": "2026-07-13T10:15:13.347Z",
+    "updated_at": "2026-07-13T10:15:13.347Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 14,
+  "fields": {
+    "store": 6,
+    "name": "Grocery & Food",
+    "slug": "grocery-food",
+    "parent": null,
+    "image": "categories/grocery-food.jpg",
+    "is_active": true,
+    "order": 10,
+    "created_at": "2026-07-24T11:34:37.047Z",
+    "updated_at": "2026-07-24T11:34:37.047Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 15,
+  "fields": {
+    "store": 6,
+    "name": "Fresh Fruits",
+    "slug": "fresh-fruits",
+    "parent": 14,
+    "image": "",
+    "is_active": true,
+    "order": 1,
+    "created_at": "2026-07-24T11:34:37.056Z",
+    "updated_at": "2026-07-24T11:34:37.056Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 16,
+  "fields": {
+    "store": 6,
+    "name": "Fresh Vegetables",
+    "slug": "fresh-vegetables",
+    "parent": 14,
+    "image": "",
+    "is_active": true,
+    "order": 2,
+    "created_at": "2026-07-24T11:34:37.064Z",
+    "updated_at": "2026-07-24T11:34:37.064Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 17,
+  "fields": {
+    "store": 6,
+    "name": "Rice & Flour",
+    "slug": "rice-flour",
+    "parent": 14,
+    "image": "",
+    "is_active": true,
+    "order": 3,
+    "created_at": "2026-07-24T11:34:37.070Z",
+    "updated_at": "2026-07-24T11:34:37.070Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 18,
+  "fields": {
+    "store": 6,
+    "name": "Cooking Oil & Ghee",
+    "slug": "cooking-oil-ghee",
+    "parent": 14,
+    "image": "",
+    "is_active": true,
+    "order": 4,
+    "created_at": "2026-07-24T11:34:37.078Z",
+    "updated_at": "2026-07-24T11:34:37.078Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 19,
+  "fields": {
+    "store": 6,
+    "name": "Pulses & Grains",
+    "slug": "pulses-grains",
+    "parent": 14,
+    "image": "",
+    "is_active": true,
+    "order": 5,
+    "created_at": "2026-07-24T11:34:37.083Z",
+    "updated_at": "2026-07-24T11:34:37.083Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 20,
+  "fields": {
+    "store": 6,
+    "name": "Sugar & Salt",
+    "slug": "sugar-salt",
+    "parent": 14,
+    "image": "",
+    "is_active": true,
+    "order": 6,
+    "created_at": "2026-07-24T11:34:37.090Z",
+    "updated_at": "2026-07-24T11:34:37.090Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 21,
+  "fields": {
+    "store": 6,
+    "name": "Spices & Masala",
+    "slug": "spices-masala",
+    "parent": 14,
+    "image": "",
+    "is_active": true,
+    "order": 7,
+    "created_at": "2026-07-24T11:34:37.097Z",
+    "updated_at": "2026-07-24T11:34:37.097Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 22,
+  "fields": {
+    "store": 6,
+    "name": "Tea & Coffee",
+    "slug": "tea-coffee",
+    "parent": 14,
+    "image": "",
+    "is_active": true,
+    "order": 8,
+    "created_at": "2026-07-24T11:34:37.103Z",
+    "updated_at": "2026-07-24T11:34:37.103Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 23,
+  "fields": {
+    "store": 6,
+    "name": "Biscuits & Snacks",
+    "slug": "biscuits-snacks",
+    "parent": 14,
+    "image": "",
+    "is_active": true,
+    "order": 9,
+    "created_at": "2026-07-24T11:34:37.111Z",
+    "updated_at": "2026-07-24T11:34:37.111Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 24,
+  "fields": {
+    "store": 6,
+    "name": "Chocolates & Candies",
+    "slug": "chocolates-candies",
+    "parent": 14,
+    "image": "",
+    "is_active": true,
+    "order": 10,
+    "created_at": "2026-07-24T11:34:37.116Z",
+    "updated_at": "2026-07-24T11:34:37.116Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 25,
+  "fields": {
+    "store": 6,
+    "name": "Frozen Foods",
+    "slug": "frozen-foods",
+    "parent": 14,
+    "image": "",
+    "is_active": true,
+    "order": 11,
+    "created_at": "2026-07-24T11:34:37.124Z",
+    "updated_at": "2026-07-24T11:34:37.124Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 26,
+  "fields": {
+    "store": 6,
+    "name": "Bakery",
+    "slug": "bakery",
+    "parent": 14,
+    "image": "",
+    "is_active": true,
+    "order": 12,
+    "created_at": "2026-07-24T11:34:37.131Z",
+    "updated_at": "2026-07-24T11:34:37.131Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 27,
+  "fields": {
+    "store": 6,
+    "name": "Dairy Products",
+    "slug": "dairy-products",
+    "parent": 14,
+    "image": "",
+    "is_active": true,
+    "order": 13,
+    "created_at": "2026-07-24T11:34:37.134Z",
+    "updated_at": "2026-07-24T11:34:37.134Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 28,
+  "fields": {
+    "store": 6,
+    "name": "Eggs",
+    "slug": "eggs",
+    "parent": 14,
+    "image": "",
+    "is_active": true,
+    "order": 14,
+    "created_at": "2026-07-24T11:34:37.146Z",
+    "updated_at": "2026-07-24T11:34:37.146Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 29,
+  "fields": {
+    "store": 6,
+    "name": "Meat & Poultry",
+    "slug": "meat-poultry",
+    "parent": 14,
+    "image": "",
+    "is_active": true,
+    "order": 15,
+    "created_at": "2026-07-24T11:34:37.153Z",
+    "updated_at": "2026-07-24T11:34:37.153Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 30,
+  "fields": {
+    "store": 6,
+    "name": "Seafood",
+    "slug": "seafood",
+    "parent": 14,
+    "image": "",
+    "is_active": true,
+    "order": 16,
+    "created_at": "2026-07-24T11:34:37.161Z",
+    "updated_at": "2026-07-24T11:34:37.161Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 31,
+  "fields": {
+    "store": 6,
+    "name": "Soft Drinks",
+    "slug": "soft-drinks",
+    "parent": 14,
+    "image": "",
+    "is_active": true,
+    "order": 17,
+    "created_at": "2026-07-24T11:34:37.168Z",
+    "updated_at": "2026-07-24T11:34:37.168Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 32,
+  "fields": {
+    "store": 6,
+    "name": "Juices",
+    "slug": "juices",
+    "parent": 14,
+    "image": "",
+    "is_active": true,
+    "order": 18,
+    "created_at": "2026-07-24T11:34:37.176Z",
+    "updated_at": "2026-07-24T11:34:37.176Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 33,
+  "fields": {
+    "store": 6,
+    "name": "Water",
+    "slug": "water",
+    "parent": 14,
+    "image": "",
+    "is_active": true,
+    "order": 19,
+    "created_at": "2026-07-24T11:34:37.182Z",
+    "updated_at": "2026-07-24T11:34:37.182Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 34,
+  "fields": {
+    "store": 6,
+    "name": "Ready-to-Eat Meals",
+    "slug": "ready-to-eat-meals",
+    "parent": 14,
+    "image": "",
+    "is_active": true,
+    "order": 20,
+    "created_at": "2026-07-24T11:34:37.189Z",
+    "updated_at": "2026-07-24T11:34:37.189Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 35,
+  "fields": {
+    "store": 6,
+    "name": "Desktop PCs",
+    "slug": "desktop-pcs",
+    "parent": 9,
+    "image": "",
+    "is_active": true,
+    "order": 3,
+    "created_at": "2026-07-24T11:34:37.218Z",
+    "updated_at": "2026-07-24T11:34:37.218Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 36,
+  "fields": {
+    "store": 6,
+    "name": "Tablets",
+    "slug": "tablets",
+    "parent": 9,
+    "image": "",
+    "is_active": true,
+    "order": 4,
+    "created_at": "2026-07-24T11:34:37.224Z",
+    "updated_at": "2026-07-24T11:34:37.224Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 37,
+  "fields": {
+    "store": 6,
+    "name": "Smart Watches",
+    "slug": "smart-watches",
+    "parent": 9,
+    "image": "",
+    "is_active": true,
+    "order": 5,
+    "created_at": "2026-07-24T11:34:37.230Z",
+    "updated_at": "2026-07-24T11:34:37.230Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 38,
+  "fields": {
+    "store": 6,
+    "name": "Headphones",
+    "slug": "headphones",
+    "parent": 9,
+    "image": "",
+    "is_active": true,
+    "order": 6,
+    "created_at": "2026-07-24T11:34:37.239Z",
+    "updated_at": "2026-07-24T11:34:37.239Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 39,
+  "fields": {
+    "store": 6,
+    "name": "Speakers",
+    "slug": "speakers",
+    "parent": 9,
+    "image": "",
+    "is_active": true,
+    "order": 7,
+    "created_at": "2026-07-24T11:34:37.248Z",
+    "updated_at": "2026-07-24T11:34:37.248Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 40,
+  "fields": {
+    "store": 6,
+    "name": "Cameras",
+    "slug": "cameras",
+    "parent": 9,
+    "image": "",
+    "is_active": true,
+    "order": 8,
+    "created_at": "2026-07-24T11:34:37.255Z",
+    "updated_at": "2026-07-24T11:34:37.255Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 41,
+  "fields": {
+    "store": 6,
+    "name": "Gaming Consoles",
+    "slug": "gaming-consoles",
+    "parent": 9,
+    "image": "",
+    "is_active": true,
+    "order": 10,
+    "created_at": "2026-07-24T11:34:37.269Z",
+    "updated_at": "2026-07-24T11:34:37.269Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 42,
+  "fields": {
+    "store": 6,
+    "name": "Computer Accessories",
+    "slug": "computer-accessories",
+    "parent": 9,
+    "image": "",
+    "is_active": true,
+    "order": 40,
+    "created_at": "2026-07-24T11:34:37.276Z",
+    "updated_at": "2026-07-24T11:34:37.276Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 43,
+  "fields": {
+    "store": 6,
+    "name": "Networking Devices",
+    "slug": "networking-devices",
+    "parent": 9,
+    "image": "",
+    "is_active": true,
+    "order": 12,
+    "created_at": "2026-07-24T11:34:37.281Z",
+    "updated_at": "2026-07-24T11:34:37.281Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 44,
+  "fields": {
+    "store": 6,
+    "name": "Mobile Accessories",
+    "slug": "mobile-accessories",
+    "parent": null,
+    "image": "categories/mobile-accessories.jpg",
+    "is_active": true,
+    "order": 30,
+    "created_at": "2026-07-24T11:34:37.287Z",
+    "updated_at": "2026-07-24T11:34:37.287Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 45,
+  "fields": {
+    "store": 6,
+    "name": "Phone Cases",
+    "slug": "phone-cases",
+    "parent": 44,
+    "image": "",
+    "is_active": true,
+    "order": 1,
+    "created_at": "2026-07-24T11:34:37.297Z",
+    "updated_at": "2026-07-24T11:34:37.297Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 46,
+  "fields": {
+    "store": 6,
+    "name": "Screen Protectors",
+    "slug": "screen-protectors",
+    "parent": 44,
+    "image": "",
+    "is_active": true,
+    "order": 2,
+    "created_at": "2026-07-24T11:34:37.304Z",
+    "updated_at": "2026-07-24T11:34:37.304Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 47,
+  "fields": {
+    "store": 6,
+    "name": "Chargers",
+    "slug": "chargers",
+    "parent": 44,
+    "image": "",
+    "is_active": true,
+    "order": 3,
+    "created_at": "2026-07-24T11:34:37.316Z",
+    "updated_at": "2026-07-24T11:34:37.316Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 48,
+  "fields": {
+    "store": 6,
+    "name": "Power Banks",
+    "slug": "power-banks",
+    "parent": 44,
+    "image": "",
+    "is_active": true,
+    "order": 4,
+    "created_at": "2026-07-24T11:34:37.324Z",
+    "updated_at": "2026-07-24T11:34:37.324Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 49,
+  "fields": {
+    "store": 6,
+    "name": "Earbuds",
+    "slug": "earbuds",
+    "parent": 44,
+    "image": "",
+    "is_active": true,
+    "order": 5,
+    "created_at": "2026-07-24T11:34:37.333Z",
+    "updated_at": "2026-07-24T11:34:37.333Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 50,
+  "fields": {
+    "store": 6,
+    "name": "USB Cables",
+    "slug": "usb-cables",
+    "parent": 44,
+    "image": "",
+    "is_active": true,
+    "order": 6,
+    "created_at": "2026-07-24T11:34:37.340Z",
+    "updated_at": "2026-07-24T11:34:37.340Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 51,
+  "fields": {
+    "store": 6,
+    "name": "Selfie Sticks",
+    "slug": "selfie-sticks",
+    "parent": 44,
+    "image": "",
+    "is_active": true,
+    "order": 7,
+    "created_at": "2026-07-24T11:34:37.349Z",
+    "updated_at": "2026-07-24T11:34:37.349Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 52,
+  "fields": {
+    "store": 6,
+    "name": "Car Holders",
+    "slug": "car-holders",
+    "parent": 44,
+    "image": "",
+    "is_active": true,
+    "order": 8,
+    "created_at": "2026-07-24T11:34:37.356Z",
+    "updated_at": "2026-07-24T11:34:37.356Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 53,
+  "fields": {
+    "store": 6,
+    "name": "Keyboard",
+    "slug": "keyboard",
+    "parent": 42,
+    "image": "",
+    "is_active": true,
+    "order": 1,
+    "created_at": "2026-07-24T11:34:37.370Z",
+    "updated_at": "2026-07-24T11:34:37.370Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 54,
+  "fields": {
+    "store": 6,
+    "name": "Mouse",
+    "slug": "mouse",
+    "parent": 42,
+    "image": "",
+    "is_active": true,
+    "order": 2,
+    "created_at": "2026-07-24T11:34:37.378Z",
+    "updated_at": "2026-07-24T11:34:37.378Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 55,
+  "fields": {
+    "store": 6,
+    "name": "Monitors",
+    "slug": "monitors",
+    "parent": 42,
+    "image": "",
+    "is_active": true,
+    "order": 3,
+    "created_at": "2026-07-24T11:34:37.385Z",
+    "updated_at": "2026-07-24T11:34:37.385Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 56,
+  "fields": {
+    "store": 6,
+    "name": "SSD",
+    "slug": "ssd",
+    "parent": 42,
+    "image": "",
+    "is_active": true,
+    "order": 4,
+    "created_at": "2026-07-24T11:34:37.393Z",
+    "updated_at": "2026-07-24T11:34:37.393Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 57,
+  "fields": {
+    "store": 6,
+    "name": "HDD",
+    "slug": "hdd",
+    "parent": 42,
+    "image": "",
+    "is_active": true,
+    "order": 5,
+    "created_at": "2026-07-24T11:34:37.398Z",
+    "updated_at": "2026-07-24T11:34:37.398Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 58,
+  "fields": {
+    "store": 6,
+    "name": "RAM",
+    "slug": "ram",
+    "parent": 42,
+    "image": "",
+    "is_active": true,
+    "order": 6,
+    "created_at": "2026-07-24T11:34:37.405Z",
+    "updated_at": "2026-07-24T11:34:37.405Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 59,
+  "fields": {
+    "store": 6,
+    "name": "Graphic Cards",
+    "slug": "graphic-cards",
+    "parent": 42,
+    "image": "",
+    "is_active": true,
+    "order": 7,
+    "created_at": "2026-07-24T11:34:37.415Z",
+    "updated_at": "2026-07-24T11:34:37.415Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 60,
+  "fields": {
+    "store": 6,
+    "name": "Routers",
+    "slug": "routers",
+    "parent": 42,
+    "image": "",
+    "is_active": true,
+    "order": 8,
+    "created_at": "2026-07-24T11:34:37.422Z",
+    "updated_at": "2026-07-24T11:34:37.422Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 61,
+  "fields": {
+    "store": 6,
+    "name": "Printers",
+    "slug": "printers",
+    "parent": 42,
+    "image": "",
+    "is_active": true,
+    "order": 9,
+    "created_at": "2026-07-24T11:34:37.430Z",
+    "updated_at": "2026-07-24T11:34:37.430Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 62,
+  "fields": {
+    "store": 6,
+    "name": "UPS",
+    "slug": "ups",
+    "parent": 42,
+    "image": "",
+    "is_active": true,
+    "order": 10,
+    "created_at": "2026-07-24T11:34:37.434Z",
+    "updated_at": "2026-07-24T11:34:37.434Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 63,
+  "fields": {
+    "store": 6,
+    "name": "Fashion",
+    "slug": "fashion",
+    "parent": null,
+    "image": "categories/fashion.jpg",
+    "is_active": true,
+    "order": 50,
+    "created_at": "2026-07-24T11:34:37.444Z",
+    "updated_at": "2026-07-24T11:34:37.444Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 64,
+  "fields": {
+    "store": 6,
+    "name": "Men's Clothing",
+    "slug": "mens-clothing",
+    "parent": 63,
+    "image": "",
+    "is_active": true,
+    "order": 1,
+    "created_at": "2026-07-24T11:34:37.453Z",
+    "updated_at": "2026-07-24T11:34:37.453Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 65,
+  "fields": {
+    "store": 6,
+    "name": "Women's Clothing",
+    "slug": "womens-clothing",
+    "parent": 63,
+    "image": "",
+    "is_active": true,
+    "order": 2,
+    "created_at": "2026-07-24T11:34:37.461Z",
+    "updated_at": "2026-07-24T11:34:37.461Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 66,
+  "fields": {
+    "store": 6,
+    "name": "Kids' Clothing",
+    "slug": "kids-clothing",
+    "parent": 63,
+    "image": "",
+    "is_active": true,
+    "order": 3,
+    "created_at": "2026-07-24T11:34:37.469Z",
+    "updated_at": "2026-07-24T11:34:37.469Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 67,
+  "fields": {
+    "store": 6,
+    "name": "Men's Shirts",
+    "slug": "mens-shirts",
+    "parent": 63,
+    "image": "",
+    "is_active": true,
+    "order": 4,
+    "created_at": "2026-07-24T11:34:37.477Z",
+    "updated_at": "2026-07-24T11:34:37.477Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 68,
+  "fields": {
+    "store": 6,
+    "name": "Men's T-Shirts",
+    "slug": "mens-t-shirts",
+    "parent": 63,
+    "image": "",
+    "is_active": true,
+    "order": 5,
+    "created_at": "2026-07-24T11:34:37.484Z",
+    "updated_at": "2026-07-24T11:34:37.484Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 69,
+  "fields": {
+    "store": 6,
+    "name": "Men's Jeans",
+    "slug": "mens-jeans",
+    "parent": 63,
+    "image": "",
+    "is_active": true,
+    "order": 6,
+    "created_at": "2026-07-24T11:34:37.500Z",
+    "updated_at": "2026-07-24T11:34:37.500Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 70,
+  "fields": {
+    "store": 6,
+    "name": "Men's Pants",
+    "slug": "mens-pants",
+    "parent": 63,
+    "image": "",
+    "is_active": true,
+    "order": 7,
+    "created_at": "2026-07-24T11:34:37.509Z",
+    "updated_at": "2026-07-24T11:34:37.509Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 71,
+  "fields": {
+    "store": 6,
+    "name": "Men's Jackets",
+    "slug": "mens-jackets",
+    "parent": 63,
+    "image": "",
+    "is_active": true,
+    "order": 8,
+    "created_at": "2026-07-24T11:34:37.517Z",
+    "updated_at": "2026-07-24T11:34:37.517Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 72,
+  "fields": {
+    "store": 6,
+    "name": "Men's Shoes",
+    "slug": "mens-shoes",
+    "parent": 82,
+    "image": "",
+    "is_active": true,
+    "order": 9,
+    "created_at": "2026-07-24T11:34:37.519Z",
+    "updated_at": "2026-07-24T11:34:37.519Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 73,
+  "fields": {
+    "store": 6,
+    "name": "Men's Watches",
+    "slug": "mens-watches",
+    "parent": 63,
+    "image": "",
+    "is_active": true,
+    "order": 10,
+    "created_at": "2026-07-24T11:34:37.533Z",
+    "updated_at": "2026-07-24T11:34:37.533Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 74,
+  "fields": {
+    "store": 6,
+    "name": "Women's Dresses",
+    "slug": "womens-dresses",
+    "parent": 63,
+    "image": "",
+    "is_active": true,
+    "order": 11,
+    "created_at": "2026-07-24T11:34:37.542Z",
+    "updated_at": "2026-07-24T11:34:37.542Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 75,
+  "fields": {
+    "store": 6,
+    "name": "Women's Abayas",
+    "slug": "womens-abayas",
+    "parent": 63,
+    "image": "",
+    "is_active": true,
+    "order": 12,
+    "created_at": "2026-07-24T11:34:37.552Z",
+    "updated_at": "2026-07-24T11:34:37.552Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 76,
+  "fields": {
+    "store": 6,
+    "name": "Women's Handbags",
+    "slug": "womens-handbags",
+    "parent": 63,
+    "image": "",
+    "is_active": true,
+    "order": 13,
+    "created_at": "2026-07-24T11:34:37.560Z",
+    "updated_at": "2026-07-24T11:34:37.560Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 77,
+  "fields": {
+    "store": 6,
+    "name": "Women's Heels",
+    "slug": "womens-heels",
+    "parent": 63,
+    "image": "",
+    "is_active": true,
+    "order": 14,
+    "created_at": "2026-07-24T11:34:37.569Z",
+    "updated_at": "2026-07-24T11:34:37.569Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 78,
+  "fields": {
+    "store": 6,
+    "name": "Women's Jewelry",
+    "slug": "womens-jewelry",
+    "parent": 63,
+    "image": "",
+    "is_active": true,
+    "order": 15,
+    "created_at": "2026-07-24T11:34:37.578Z",
+    "updated_at": "2026-07-24T11:34:37.578Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 79,
+  "fields": {
+    "store": 6,
+    "name": "Boys Clothing",
+    "slug": "boys-clothing",
+    "parent": 63,
+    "image": "",
+    "is_active": true,
+    "order": 16,
+    "created_at": "2026-07-24T11:34:37.588Z",
+    "updated_at": "2026-07-24T11:34:37.588Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 80,
+  "fields": {
+    "store": 6,
+    "name": "Girls Clothing",
+    "slug": "girls-clothing",
+    "parent": 63,
+    "image": "",
+    "is_active": true,
+    "order": 17,
+    "created_at": "2026-07-24T11:34:37.596Z",
+    "updated_at": "2026-07-24T11:34:37.596Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 81,
+  "fields": {
+    "store": 6,
+    "name": "School Uniforms",
+    "slug": "school-uniforms",
+    "parent": 63,
+    "image": "",
+    "is_active": true,
+    "order": 18,
+    "created_at": "2026-07-24T11:34:37.605Z",
+    "updated_at": "2026-07-24T11:34:37.605Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 82,
+  "fields": {
+    "store": 6,
+    "name": "Footwear",
+    "slug": "footwear",
+    "parent": null,
+    "image": "categories/footwear.jpg",
+    "is_active": true,
+    "order": 60,
+    "created_at": "2026-07-24T11:34:37.615Z",
+    "updated_at": "2026-07-24T11:34:37.615Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 83,
+  "fields": {
+    "store": 6,
+    "name": "Women's Shoes",
+    "slug": "womens-shoes",
+    "parent": 82,
+    "image": "",
+    "is_active": true,
+    "order": 2,
+    "created_at": "2026-07-24T11:34:37.634Z",
+    "updated_at": "2026-07-24T11:34:37.634Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 84,
+  "fields": {
+    "store": 6,
+    "name": "Sports Shoes",
+    "slug": "sports-shoes",
+    "parent": 82,
+    "image": "",
+    "is_active": true,
+    "order": 3,
+    "created_at": "2026-07-24T11:34:37.643Z",
+    "updated_at": "2026-07-24T11:34:37.643Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 85,
+  "fields": {
+    "store": 6,
+    "name": "Sandals",
+    "slug": "sandals",
+    "parent": 82,
+    "image": "",
+    "is_active": true,
+    "order": 4,
+    "created_at": "2026-07-24T11:34:37.652Z",
+    "updated_at": "2026-07-24T11:34:37.652Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 86,
+  "fields": {
+    "store": 6,
+    "name": "Slippers",
+    "slug": "slippers",
+    "parent": 82,
+    "image": "",
+    "is_active": true,
+    "order": 5,
+    "created_at": "2026-07-24T11:34:37.661Z",
+    "updated_at": "2026-07-24T11:34:37.661Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 87,
+  "fields": {
+    "store": 6,
+    "name": "Formal Shoes",
+    "slug": "formal-shoes",
+    "parent": 82,
+    "image": "",
+    "is_active": true,
+    "order": 6,
+    "created_at": "2026-07-24T11:34:37.672Z",
+    "updated_at": "2026-07-24T11:34:37.672Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 88,
+  "fields": {
+    "store": 6,
+    "name": "Beauty & Personal Care",
+    "slug": "beauty-personal-care",
+    "parent": null,
+    "image": "categories/beauty-personal-care.jpg",
+    "is_active": true,
+    "order": 70,
+    "created_at": "2026-07-24T11:34:37.683Z",
+    "updated_at": "2026-07-24T11:34:37.683Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 89,
+  "fields": {
+    "store": 6,
+    "name": "Makeup",
+    "slug": "makeup",
+    "parent": 88,
+    "image": "",
+    "is_active": true,
+    "order": 1,
+    "created_at": "2026-07-24T11:34:37.693Z",
+    "updated_at": "2026-07-24T11:34:37.693Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 90,
+  "fields": {
+    "store": 6,
+    "name": "Skincare",
+    "slug": "skincare",
+    "parent": 88,
+    "image": "",
+    "is_active": true,
+    "order": 2,
+    "created_at": "2026-07-24T11:34:37.705Z",
+    "updated_at": "2026-07-24T11:34:37.705Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 91,
+  "fields": {
+    "store": 6,
+    "name": "Hair Care",
+    "slug": "hair-care",
+    "parent": 88,
+    "image": "",
+    "is_active": true,
+    "order": 3,
+    "created_at": "2026-07-24T11:34:37.714Z",
+    "updated_at": "2026-07-24T11:34:37.714Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 92,
+  "fields": {
+    "store": 6,
+    "name": "Perfumes",
+    "slug": "perfumes",
+    "parent": 88,
+    "image": "",
+    "is_active": true,
+    "order": 4,
+    "created_at": "2026-07-24T11:34:37.723Z",
+    "updated_at": "2026-07-24T11:34:37.723Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 93,
+  "fields": {
+    "store": 6,
+    "name": "Men's Grooming",
+    "slug": "mens-grooming",
+    "parent": 88,
+    "image": "",
+    "is_active": true,
+    "order": 5,
+    "created_at": "2026-07-24T11:34:37.733Z",
+    "updated_at": "2026-07-24T11:34:37.733Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 94,
+  "fields": {
+    "store": 6,
+    "name": "Bath Products",
+    "slug": "bath-products",
+    "parent": 88,
+    "image": "",
+    "is_active": true,
+    "order": 6,
+    "created_at": "2026-07-24T11:34:37.743Z",
+    "updated_at": "2026-07-24T11:34:37.743Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 95,
+  "fields": {
+    "store": 6,
+    "name": "Oral Care",
+    "slug": "oral-care",
+    "parent": 88,
+    "image": "",
+    "is_active": true,
+    "order": 7,
+    "created_at": "2026-07-24T11:34:37.752Z",
+    "updated_at": "2026-07-24T11:34:37.752Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 96,
+  "fields": {
+    "store": 6,
+    "name": "Home & Living",
+    "slug": "home-living",
+    "parent": null,
+    "image": "categories/home-living.jpg",
+    "is_active": true,
+    "order": 80,
+    "created_at": "2026-07-24T11:34:37.762Z",
+    "updated_at": "2026-07-24T11:34:37.762Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 97,
+  "fields": {
+    "store": 6,
+    "name": "Furniture",
+    "slug": "furniture",
+    "parent": 96,
+    "image": "",
+    "is_active": true,
+    "order": 1,
+    "created_at": "2026-07-24T11:34:37.773Z",
+    "updated_at": "2026-07-24T11:34:37.773Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 98,
+  "fields": {
+    "store": 6,
+    "name": "Curtains",
+    "slug": "curtains",
+    "parent": 96,
+    "image": "",
+    "is_active": true,
+    "order": 2,
+    "created_at": "2026-07-24T11:34:37.782Z",
+    "updated_at": "2026-07-24T11:34:37.782Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 99,
+  "fields": {
+    "store": 6,
+    "name": "Carpets",
+    "slug": "carpets",
+    "parent": 96,
+    "image": "",
+    "is_active": true,
+    "order": 3,
+    "created_at": "2026-07-24T11:34:37.792Z",
+    "updated_at": "2026-07-24T11:34:37.792Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 100,
+  "fields": {
+    "store": 6,
+    "name": "Bedsheets",
+    "slug": "bedsheets",
+    "parent": 96,
+    "image": "",
+    "is_active": true,
+    "order": 4,
+    "created_at": "2026-07-24T11:34:37.801Z",
+    "updated_at": "2026-07-24T11:34:37.801Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 101,
+  "fields": {
+    "store": 6,
+    "name": "Cushions",
+    "slug": "cushions",
+    "parent": 96,
+    "image": "",
+    "is_active": true,
+    "order": 5,
+    "created_at": "2026-07-24T11:34:37.808Z",
+    "updated_at": "2026-07-24T11:34:37.808Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 102,
+  "fields": {
+    "store": 6,
+    "name": "Storage",
+    "slug": "storage",
+    "parent": 96,
+    "image": "",
+    "is_active": true,
+    "order": 6,
+    "created_at": "2026-07-24T11:34:37.816Z",
+    "updated_at": "2026-07-24T11:34:37.816Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 103,
+  "fields": {
+    "store": 6,
+    "name": "Wall Decor",
+    "slug": "wall-decor",
+    "parent": 96,
+    "image": "",
+    "is_active": true,
+    "order": 7,
+    "created_at": "2026-07-24T11:34:37.825Z",
+    "updated_at": "2026-07-24T11:34:37.825Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 104,
+  "fields": {
+    "store": 6,
+    "name": "Kitchen & Dining",
+    "slug": "kitchen-dining",
+    "parent": null,
+    "image": "categories/kitchen-dining.jpg",
+    "is_active": true,
+    "order": 90,
+    "created_at": "2026-07-24T11:34:37.833Z",
+    "updated_at": "2026-07-24T11:34:37.833Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 105,
+  "fields": {
+    "store": 6,
+    "name": "Cookware",
+    "slug": "cookware",
+    "parent": 104,
+    "image": "",
+    "is_active": true,
+    "order": 1,
+    "created_at": "2026-07-24T11:34:37.840Z",
+    "updated_at": "2026-07-24T11:34:37.840Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 106,
+  "fields": {
+    "store": 6,
+    "name": "Dinner Sets",
+    "slug": "dinner-sets",
+    "parent": 104,
+    "image": "",
+    "is_active": true,
+    "order": 2,
+    "created_at": "2026-07-24T11:34:37.848Z",
+    "updated_at": "2026-07-24T11:34:37.848Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 107,
+  "fields": {
+    "store": 6,
+    "name": "Glasses",
+    "slug": "glasses",
+    "parent": 104,
+    "image": "",
+    "is_active": true,
+    "order": 3,
+    "created_at": "2026-07-24T11:34:37.856Z",
+    "updated_at": "2026-07-24T11:34:37.856Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 108,
+  "fields": {
+    "store": 6,
+    "name": "Kitchen Tools",
+    "slug": "kitchen-tools",
+    "parent": 104,
+    "image": "",
+    "is_active": true,
+    "order": 4,
+    "created_at": "2026-07-24T11:34:37.867Z",
+    "updated_at": "2026-07-24T11:34:37.867Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 109,
+  "fields": {
+    "store": 6,
+    "name": "Storage Containers",
+    "slug": "storage-containers",
+    "parent": 104,
+    "image": "",
+    "is_active": true,
+    "order": 5,
+    "created_at": "2026-07-24T11:34:37.877Z",
+    "updated_at": "2026-07-24T11:34:37.877Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 110,
+  "fields": {
+    "store": 6,
+    "name": "Small Kitchen Appliances",
+    "slug": "small-kitchen-appliances",
+    "parent": 104,
+    "image": "",
+    "is_active": true,
+    "order": 6,
+    "created_at": "2026-07-24T11:34:37.886Z",
+    "updated_at": "2026-07-24T11:34:37.886Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 111,
+  "fields": {
+    "store": 6,
+    "name": "Cleaning Supplies",
+    "slug": "cleaning-supplies",
+    "parent": null,
+    "image": "categories/cleaning-supplies.jpg",
+    "is_active": true,
+    "order": 100,
+    "created_at": "2026-07-24T11:34:37.896Z",
+    "updated_at": "2026-07-24T11:34:37.896Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 112,
+  "fields": {
+    "store": 6,
+    "name": "Detergents",
+    "slug": "detergents",
+    "parent": 111,
+    "image": "",
+    "is_active": true,
+    "order": 1,
+    "created_at": "2026-07-24T11:34:37.905Z",
+    "updated_at": "2026-07-24T11:34:37.905Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 113,
+  "fields": {
+    "store": 6,
+    "name": "Floor Cleaners",
+    "slug": "floor-cleaners",
+    "parent": 111,
+    "image": "",
+    "is_active": true,
+    "order": 2,
+    "created_at": "2026-07-24T11:34:37.914Z",
+    "updated_at": "2026-07-24T11:34:37.914Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 114,
+  "fields": {
+    "store": 6,
+    "name": "Dishwashing",
+    "slug": "dishwashing",
+    "parent": 111,
+    "image": "",
+    "is_active": true,
+    "order": 3,
+    "created_at": "2026-07-24T11:34:37.924Z",
+    "updated_at": "2026-07-24T11:34:37.924Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 115,
+  "fields": {
+    "store": 6,
+    "name": "Air Fresheners",
+    "slug": "air-fresheners",
+    "parent": 111,
+    "image": "",
+    "is_active": true,
+    "order": 4,
+    "created_at": "2026-07-24T11:34:37.932Z",
+    "updated_at": "2026-07-24T11:34:37.932Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 116,
+  "fields": {
+    "store": 6,
+    "name": "Cleaning Tools",
+    "slug": "cleaning-tools",
+    "parent": 111,
+    "image": "",
+    "is_active": true,
+    "order": 5,
+    "created_at": "2026-07-24T11:34:37.938Z",
+    "updated_at": "2026-07-24T11:34:37.938Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 117,
+  "fields": {
+    "store": 6,
+    "name": "Baby Care",
+    "slug": "baby-care",
+    "parent": null,
+    "image": "categories/baby-care.jpg",
+    "is_active": true,
+    "order": 110,
+    "created_at": "2026-07-24T11:34:37.947Z",
+    "updated_at": "2026-07-24T11:34:37.947Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 118,
+  "fields": {
+    "store": 6,
+    "name": "Baby Food",
+    "slug": "baby-food",
+    "parent": 117,
+    "image": "",
+    "is_active": true,
+    "order": 1,
+    "created_at": "2026-07-24T11:34:37.956Z",
+    "updated_at": "2026-07-24T11:34:37.956Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 119,
+  "fields": {
+    "store": 6,
+    "name": "Diapers",
+    "slug": "diapers",
+    "parent": 117,
+    "image": "",
+    "is_active": true,
+    "order": 2,
+    "created_at": "2026-07-24T11:34:37.964Z",
+    "updated_at": "2026-07-24T11:34:37.964Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 120,
+  "fields": {
+    "store": 6,
+    "name": "Baby Wipes",
+    "slug": "baby-wipes",
+    "parent": 117,
+    "image": "",
+    "is_active": true,
+    "order": 3,
+    "created_at": "2026-07-24T11:34:37.968Z",
+    "updated_at": "2026-07-24T11:34:37.968Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 121,
+  "fields": {
+    "store": 6,
+    "name": "Baby Toys",
+    "slug": "baby-toys",
+    "parent": 117,
+    "image": "",
+    "is_active": true,
+    "order": 4,
+    "created_at": "2026-07-24T11:34:37.980Z",
+    "updated_at": "2026-07-24T11:34:37.980Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 122,
+  "fields": {
+    "store": 6,
+    "name": "Baby Clothes",
+    "slug": "baby-clothes",
+    "parent": 117,
+    "image": "",
+    "is_active": true,
+    "order": 5,
+    "created_at": "2026-07-24T11:34:37.983Z",
+    "updated_at": "2026-07-24T11:34:37.983Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 123,
+  "fields": {
+    "store": 6,
+    "name": "Baby Accessories",
+    "slug": "baby-accessories",
+    "parent": 117,
+    "image": "",
+    "is_active": true,
+    "order": 6,
+    "created_at": "2026-07-24T11:34:37.996Z",
+    "updated_at": "2026-07-24T11:34:37.996Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 124,
+  "fields": {
+    "store": 6,
+    "name": "Pet Supplies",
+    "slug": "pet-supplies",
+    "parent": null,
+    "image": "categories/pet-supplies.jpg",
+    "is_active": true,
+    "order": 120,
+    "created_at": "2026-07-24T11:34:38.002Z",
+    "updated_at": "2026-07-24T11:34:38.002Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 125,
+  "fields": {
+    "store": 6,
+    "name": "Dog Food",
+    "slug": "dog-food",
+    "parent": 124,
+    "image": "",
+    "is_active": true,
+    "order": 1,
+    "created_at": "2026-07-24T11:34:38.010Z",
+    "updated_at": "2026-07-24T11:34:38.010Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 126,
+  "fields": {
+    "store": 6,
+    "name": "Cat Food",
+    "slug": "cat-food",
+    "parent": 124,
+    "image": "",
+    "is_active": true,
+    "order": 2,
+    "created_at": "2026-07-24T11:34:38.018Z",
+    "updated_at": "2026-07-24T11:34:38.018Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 127,
+  "fields": {
+    "store": 6,
+    "name": "Pet Toys",
+    "slug": "pet-toys",
+    "parent": 124,
+    "image": "",
+    "is_active": true,
+    "order": 3,
+    "created_at": "2026-07-24T11:34:38.026Z",
+    "updated_at": "2026-07-24T11:34:38.026Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 128,
+  "fields": {
+    "store": 6,
+    "name": "Pet Grooming",
+    "slug": "pet-grooming",
+    "parent": 124,
+    "image": "",
+    "is_active": true,
+    "order": 4,
+    "created_at": "2026-07-24T11:34:38.031Z",
+    "updated_at": "2026-07-24T11:34:38.031Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 129,
+  "fields": {
+    "store": 6,
+    "name": "Pet Accessories",
+    "slug": "pet-accessories",
+    "parent": 124,
+    "image": "",
+    "is_active": true,
+    "order": 5,
+    "created_at": "2026-07-24T11:34:38.038Z",
+    "updated_at": "2026-07-24T11:34:38.038Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 130,
+  "fields": {
+    "store": 6,
+    "name": "Sports & Fitness",
+    "slug": "sports-fitness",
+    "parent": null,
+    "image": "categories/sports-fitness.jpg",
+    "is_active": true,
+    "order": 130,
+    "created_at": "2026-07-24T11:34:38.048Z",
+    "updated_at": "2026-07-24T11:34:38.048Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 131,
+  "fields": {
+    "store": 6,
+    "name": "Gym Equipment",
+    "slug": "gym-equipment",
+    "parent": 130,
+    "image": "",
+    "is_active": true,
+    "order": 1,
+    "created_at": "2026-07-24T11:34:38.056Z",
+    "updated_at": "2026-07-24T11:34:38.056Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 132,
+  "fields": {
+    "store": 6,
+    "name": "Football",
+    "slug": "football",
+    "parent": 130,
+    "image": "",
+    "is_active": true,
+    "order": 2,
+    "created_at": "2026-07-24T11:34:38.063Z",
+    "updated_at": "2026-07-24T11:34:38.063Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 133,
+  "fields": {
+    "store": 6,
+    "name": "Cricket",
+    "slug": "cricket",
+    "parent": 130,
+    "image": "",
+    "is_active": true,
+    "order": 3,
+    "created_at": "2026-07-24T11:34:38.074Z",
+    "updated_at": "2026-07-24T11:34:38.074Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 134,
+  "fields": {
+    "store": 6,
+    "name": "Badminton",
+    "slug": "badminton",
+    "parent": 130,
+    "image": "",
+    "is_active": true,
+    "order": 4,
+    "created_at": "2026-07-24T11:34:38.082Z",
+    "updated_at": "2026-07-24T11:34:38.082Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 135,
+  "fields": {
+    "store": 6,
+    "name": "Yoga",
+    "slug": "yoga",
+    "parent": 130,
+    "image": "",
+    "is_active": true,
+    "order": 5,
+    "created_at": "2026-07-24T11:34:38.090Z",
+    "updated_at": "2026-07-24T11:34:38.090Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 136,
+  "fields": {
+    "store": 6,
+    "name": "Cycling",
+    "slug": "cycling",
+    "parent": 130,
+    "image": "",
+    "is_active": true,
+    "order": 6,
+    "created_at": "2026-07-24T11:34:38.097Z",
+    "updated_at": "2026-07-24T11:34:38.097Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 137,
+  "fields": {
+    "store": 6,
+    "name": "Outdoor Sports",
+    "slug": "outdoor-sports",
+    "parent": 130,
+    "image": "",
+    "is_active": true,
+    "order": 7,
+    "created_at": "2026-07-24T11:34:38.108Z",
+    "updated_at": "2026-07-24T11:34:38.108Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 138,
+  "fields": {
+    "store": 6,
+    "name": "Gaming",
+    "slug": "gaming",
+    "parent": null,
+    "image": "categories/gaming.jpg",
+    "is_active": true,
+    "order": 140,
+    "created_at": "2026-07-24T11:34:38.115Z",
+    "updated_at": "2026-07-24T11:34:38.115Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 139,
+  "fields": {
+    "store": 6,
+    "name": "PlayStation",
+    "slug": "playstation",
+    "parent": 138,
+    "image": "",
+    "is_active": true,
+    "order": 1,
+    "created_at": "2026-07-24T11:34:38.123Z",
+    "updated_at": "2026-07-24T11:34:38.123Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 140,
+  "fields": {
+    "store": 6,
+    "name": "Xbox",
+    "slug": "xbox",
+    "parent": 138,
+    "image": "",
+    "is_active": true,
+    "order": 2,
+    "created_at": "2026-07-24T11:34:38.131Z",
+    "updated_at": "2026-07-24T11:34:38.131Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 141,
+  "fields": {
+    "store": 6,
+    "name": "Nintendo",
+    "slug": "nintendo",
+    "parent": 138,
+    "image": "",
+    "is_active": true,
+    "order": 3,
+    "created_at": "2026-07-24T11:34:38.139Z",
+    "updated_at": "2026-07-24T11:34:38.139Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 142,
+  "fields": {
+    "store": 6,
+    "name": "PC Games",
+    "slug": "pc-games",
+    "parent": 138,
+    "image": "",
+    "is_active": true,
+    "order": 4,
+    "created_at": "2026-07-24T11:34:38.146Z",
+    "updated_at": "2026-07-24T11:34:38.146Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 143,
+  "fields": {
+    "store": 6,
+    "name": "Gaming Chairs",
+    "slug": "gaming-chairs",
+    "parent": 138,
+    "image": "",
+    "is_active": true,
+    "order": 5,
+    "created_at": "2026-07-24T11:34:38.154Z",
+    "updated_at": "2026-07-24T11:34:38.154Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 144,
+  "fields": {
+    "store": 6,
+    "name": "Gaming Accessories",
+    "slug": "gaming-accessories",
+    "parent": 138,
+    "image": "",
+    "is_active": true,
+    "order": 6,
+    "created_at": "2026-07-24T11:34:38.162Z",
+    "updated_at": "2026-07-24T11:34:38.162Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 145,
+  "fields": {
+    "store": 6,
+    "name": "Books & Stationery",
+    "slug": "books-stationery",
+    "parent": null,
+    "image": "categories/books-stationery.jpg",
+    "is_active": true,
+    "order": 150,
+    "created_at": "2026-07-24T11:34:38.170Z",
+    "updated_at": "2026-07-24T11:34:38.170Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 146,
+  "fields": {
+    "store": 6,
+    "name": "Books",
+    "slug": "books",
+    "parent": 145,
+    "image": "",
+    "is_active": true,
+    "order": 1,
+    "created_at": "2026-07-24T11:34:38.177Z",
+    "updated_at": "2026-07-24T11:34:38.177Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 147,
+  "fields": {
+    "store": 6,
+    "name": "School Supplies",
+    "slug": "school-supplies",
+    "parent": 145,
+    "image": "",
+    "is_active": true,
+    "order": 2,
+    "created_at": "2026-07-24T11:34:38.186Z",
+    "updated_at": "2026-07-24T11:34:38.186Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 148,
+  "fields": {
+    "store": 6,
+    "name": "Office Supplies",
+    "slug": "office-supplies",
+    "parent": 145,
+    "image": "",
+    "is_active": true,
+    "order": 210,
+    "created_at": "2026-07-24T11:34:38.194Z",
+    "updated_at": "2026-07-24T11:34:38.194Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 149,
+  "fields": {
+    "store": 6,
+    "name": "Notebooks",
+    "slug": "notebooks",
+    "parent": 145,
+    "image": "",
+    "is_active": true,
+    "order": 4,
+    "created_at": "2026-07-24T11:34:38.201Z",
+    "updated_at": "2026-07-24T11:34:38.201Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 150,
+  "fields": {
+    "store": 6,
+    "name": "Pens",
+    "slug": "pens",
+    "parent": 145,
+    "image": "",
+    "is_active": true,
+    "order": 5,
+    "created_at": "2026-07-24T11:34:38.211Z",
+    "updated_at": "2026-07-24T11:34:38.211Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 151,
+  "fields": {
+    "store": 6,
+    "name": "Art Supplies",
+    "slug": "art-supplies",
+    "parent": 145,
+    "image": "",
+    "is_active": true,
+    "order": 6,
+    "created_at": "2026-07-24T11:34:38.220Z",
+    "updated_at": "2026-07-24T11:34:38.220Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 152,
+  "fields": {
+    "store": 6,
+    "name": "Automotive",
+    "slug": "automotive",
+    "parent": null,
+    "image": "categories/automotive.jpg",
+    "is_active": true,
+    "order": 160,
+    "created_at": "2026-07-24T11:34:38.226Z",
+    "updated_at": "2026-07-24T11:34:38.226Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 153,
+  "fields": {
+    "store": 6,
+    "name": "Car Accessories",
+    "slug": "car-accessories",
+    "parent": 152,
+    "image": "",
+    "is_active": true,
+    "order": 1,
+    "created_at": "2026-07-24T11:34:38.235Z",
+    "updated_at": "2026-07-24T11:34:38.235Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 154,
+  "fields": {
+    "store": 6,
+    "name": "Bike Accessories",
+    "slug": "bike-accessories",
+    "parent": 152,
+    "image": "",
+    "is_active": true,
+    "order": 2,
+    "created_at": "2026-07-24T11:34:38.244Z",
+    "updated_at": "2026-07-24T11:34:38.244Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 155,
+  "fields": {
+    "store": 6,
+    "name": "Engine Oil",
+    "slug": "engine-oil",
+    "parent": 152,
+    "image": "",
+    "is_active": true,
+    "order": 3,
+    "created_at": "2026-07-24T11:34:38.253Z",
+    "updated_at": "2026-07-24T11:34:38.253Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 156,
+  "fields": {
+    "store": 6,
+    "name": "Car Care",
+    "slug": "car-care",
+    "parent": 152,
+    "image": "",
+    "is_active": true,
+    "order": 4,
+    "created_at": "2026-07-24T11:34:38.263Z",
+    "updated_at": "2026-07-24T11:34:38.263Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 157,
+  "fields": {
+    "store": 6,
+    "name": "Tools",
+    "slug": "tools",
+    "parent": 152,
+    "image": "",
+    "is_active": true,
+    "order": 5,
+    "created_at": "2026-07-24T11:34:38.276Z",
+    "updated_at": "2026-07-24T11:34:38.276Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 158,
+  "fields": {
+    "store": 6,
+    "name": "Health Care",
+    "slug": "health-care",
+    "parent": null,
+    "image": "categories/health-care.jpg",
+    "is_active": true,
+    "order": 170,
+    "created_at": "2026-07-24T11:34:38.362Z",
+    "updated_at": "2026-07-24T11:34:38.362Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 159,
+  "fields": {
+    "store": 6,
+    "name": "Vitamins",
+    "slug": "vitamins",
+    "parent": 158,
+    "image": "",
+    "is_active": true,
+    "order": 1,
+    "created_at": "2026-07-24T11:34:38.371Z",
+    "updated_at": "2026-07-24T11:34:38.371Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 160,
+  "fields": {
+    "store": 6,
+    "name": "Medical Equipment",
+    "slug": "medical-equipment",
+    "parent": 158,
+    "image": "",
+    "is_active": true,
+    "order": 2,
+    "created_at": "2026-07-24T11:34:38.381Z",
+    "updated_at": "2026-07-24T11:34:38.381Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 161,
+  "fields": {
+    "store": 6,
+    "name": "First Aid",
+    "slug": "first-aid",
+    "parent": 158,
+    "image": "",
+    "is_active": true,
+    "order": 3,
+    "created_at": "2026-07-24T11:34:38.389Z",
+    "updated_at": "2026-07-24T11:34:38.389Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 162,
+  "fields": {
+    "store": 6,
+    "name": "Health Devices",
+    "slug": "health-devices",
+    "parent": 158,
+    "image": "",
+    "is_active": true,
+    "order": 4,
+    "created_at": "2026-07-24T11:34:38.398Z",
+    "updated_at": "2026-07-24T11:34:38.398Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 163,
+  "fields": {
+    "store": 6,
+    "name": "Hardware & Tools",
+    "slug": "hardware-tools",
+    "parent": null,
+    "image": "categories/hardware-tools.jpg",
+    "is_active": true,
+    "order": 180,
+    "created_at": "2026-07-24T11:34:38.406Z",
+    "updated_at": "2026-07-24T11:34:38.406Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 164,
+  "fields": {
+    "store": 6,
+    "name": "Power Tools",
+    "slug": "power-tools",
+    "parent": 163,
+    "image": "",
+    "is_active": true,
+    "order": 1,
+    "created_at": "2026-07-24T11:34:38.414Z",
+    "updated_at": "2026-07-24T11:34:38.414Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 165,
+  "fields": {
+    "store": 6,
+    "name": "Hand Tools",
+    "slug": "hand-tools",
+    "parent": 163,
+    "image": "",
+    "is_active": true,
+    "order": 2,
+    "created_at": "2026-07-24T11:34:38.424Z",
+    "updated_at": "2026-07-24T11:34:38.424Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 166,
+  "fields": {
+    "store": 6,
+    "name": "Electrical Items",
+    "slug": "electrical-items",
+    "parent": 163,
+    "image": "",
+    "is_active": true,
+    "order": 3,
+    "created_at": "2026-07-24T11:34:38.433Z",
+    "updated_at": "2026-07-24T11:34:38.433Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 167,
+  "fields": {
+    "store": 6,
+    "name": "Plumbing",
+    "slug": "plumbing",
+    "parent": 163,
+    "image": "",
+    "is_active": true,
+    "order": 4,
+    "created_at": "2026-07-24T11:34:38.440Z",
+    "updated_at": "2026-07-24T11:34:38.440Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 168,
+  "fields": {
+    "store": 6,
+    "name": "Gifts & Toys",
+    "slug": "gifts-toys",
+    "parent": null,
+    "image": "categories/gifts-toys.jpg",
+    "is_active": true,
+    "order": 190,
+    "created_at": "2026-07-24T11:34:38.450Z",
+    "updated_at": "2026-07-24T11:34:38.450Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 169,
+  "fields": {
+    "store": 6,
+    "name": "Toys",
+    "slug": "toys",
+    "parent": 168,
+    "image": "",
+    "is_active": true,
+    "order": 1,
+    "created_at": "2026-07-24T11:34:38.458Z",
+    "updated_at": "2026-07-24T11:34:38.458Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 170,
+  "fields": {
+    "store": 6,
+    "name": "Gift Sets",
+    "slug": "gift-sets",
+    "parent": 168,
+    "image": "",
+    "is_active": true,
+    "order": 2,
+    "created_at": "2026-07-24T11:34:38.466Z",
+    "updated_at": "2026-07-24T11:34:38.466Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 171,
+  "fields": {
+    "store": 6,
+    "name": "Educational Toys",
+    "slug": "educational-toys",
+    "parent": 168,
+    "image": "",
+    "is_active": true,
+    "order": 3,
+    "created_at": "2026-07-24T11:34:38.476Z",
+    "updated_at": "2026-07-24T11:34:38.476Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 172,
+  "fields": {
+    "store": 6,
+    "name": "Party Supplies",
+    "slug": "party-supplies",
+    "parent": 168,
+    "image": "",
+    "is_active": true,
+    "order": 4,
+    "created_at": "2026-07-24T11:34:38.484Z",
+    "updated_at": "2026-07-24T11:34:38.484Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 173,
+  "fields": {
+    "store": 6,
+    "name": "Garden & Outdoor",
+    "slug": "garden-outdoor",
+    "parent": null,
+    "image": "categories/garden-outdoor.jpg",
+    "is_active": true,
+    "order": 200,
+    "created_at": "2026-07-24T11:34:38.493Z",
+    "updated_at": "2026-07-24T11:34:38.493Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 174,
+  "fields": {
+    "store": 6,
+    "name": "Plants",
+    "slug": "plants",
+    "parent": 173,
+    "image": "",
+    "is_active": true,
+    "order": 1,
+    "created_at": "2026-07-24T11:34:38.502Z",
+    "updated_at": "2026-07-24T11:34:38.502Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 175,
+  "fields": {
+    "store": 6,
+    "name": "Gardening Tools",
+    "slug": "gardening-tools",
+    "parent": 173,
+    "image": "",
+    "is_active": true,
+    "order": 2,
+    "created_at": "2026-07-24T11:34:38.510Z",
+    "updated_at": "2026-07-24T11:34:38.510Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 176,
+  "fields": {
+    "store": 6,
+    "name": "Outdoor Furniture",
+    "slug": "outdoor-furniture",
+    "parent": 173,
+    "image": "",
+    "is_active": true,
+    "order": 3,
+    "created_at": "2026-07-24T11:34:38.520Z",
+    "updated_at": "2026-07-24T11:34:38.520Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 177,
+  "fields": {
+    "store": 6,
+    "name": "BBQ Equipment",
+    "slug": "bbq-equipment",
+    "parent": 173,
+    "image": "",
+    "is_active": true,
+    "order": 4,
+    "created_at": "2026-07-24T11:34:38.527Z",
+    "updated_at": "2026-07-24T11:34:38.527Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 178,
+  "fields": {
+    "store": 6,
+    "name": "Office Furniture",
+    "slug": "office-furniture",
+    "parent": 148,
+    "image": "",
+    "is_active": true,
+    "order": 1,
+    "created_at": "2026-07-24T11:34:38.555Z",
+    "updated_at": "2026-07-24T11:34:38.555Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 179,
+  "fields": {
+    "store": 6,
+    "name": "Office Electronics",
+    "slug": "office-electronics",
+    "parent": 148,
+    "image": "",
+    "is_active": true,
+    "order": 2,
+    "created_at": "2026-07-24T11:34:38.566Z",
+    "updated_at": "2026-07-24T11:34:38.566Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 180,
+  "fields": {
+    "store": 6,
+    "name": "Files & Folders",
+    "slug": "files-folders",
+    "parent": 148,
+    "image": "",
+    "is_active": true,
+    "order": 3,
+    "created_at": "2026-07-24T11:34:38.575Z",
+    "updated_at": "2026-07-24T11:34:38.575Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 181,
+  "fields": {
+    "store": 6,
+    "name": "Whiteboards",
+    "slug": "whiteboards",
+    "parent": 148,
+    "image": "",
+    "is_active": true,
+    "order": 4,
+    "created_at": "2026-07-24T11:34:38.585Z",
+    "updated_at": "2026-07-24T11:34:38.585Z"
+  }
+},
+{
+  "model": "catalog.brand",
+  "pk": 5,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.355Z",
+    "updated_at": "2026-07-13T10:15:13.355Z",
+    "store": 6,
+    "name": "Apple",
+    "slug": "apple",
+    "logo": "",
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.brand",
+  "pk": 6,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.365Z",
+    "updated_at": "2026-07-13T10:15:13.365Z",
+    "store": 6,
+    "name": "Samsung",
+    "slug": "samsung",
+    "logo": "",
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.brand",
+  "pk": 7,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.373Z",
+    "updated_at": "2026-07-13T10:15:13.373Z",
+    "store": 6,
+    "name": "Dell",
+    "slug": "dell",
+    "logo": "",
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.brand",
+  "pk": 8,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.380Z",
+    "updated_at": "2026-07-13T10:15:13.380Z",
+    "store": 6,
+    "name": "Sony",
+    "slug": "sony",
+    "logo": "",
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.brand",
+  "pk": 9,
+  "fields": {
+    "created_at": "2026-07-13T11:16:28.782Z",
+    "updated_at": "2026-07-13T11:16:28.782Z",
+    "store": 6,
+    "name": "Dawlence",
+    "slug": "dawlence",
+    "logo": "",
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.brand",
+  "pk": 10,
+  "fields": {
+    "created_at": "2026-07-24T15:18:51.146Z",
+    "updated_at": "2026-07-24T15:18:51.146Z",
+    "store": 6,
+    "name": "Iphone ",
+    "slug": "iphone",
+    "logo": "",
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.brand",
+  "pk": 11,
+  "fields": {
+    "created_at": "2026-07-24T15:19:00.206Z",
+    "updated_at": "2026-07-24T15:19:00.206Z",
+    "store": 6,
+    "name": "Huawei",
+    "slug": "huawei",
+    "logo": "",
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.brand",
+  "pk": 12,
+  "fields": {
+    "created_at": "2026-07-24T15:49:42.693Z",
+    "updated_at": "2026-07-24T15:49:42.693Z",
+    "store": 6,
+    "name": "Dalda",
+    "slug": "dalda",
+    "logo": "",
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 8,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.392Z",
+    "updated_at": "2026-07-13T10:15:13.392Z",
+    "store": 6,
+    "category": 10,
+    "brand": 7,
+    "name": "Dell XPS 15",
+    "slug": "dell-xps-15",
+    "description": "Premium 15-inch laptop with stunning InfinityEdge display, 13th Gen Intel Core processors, and sleek design.",
+    "status": "active",
+    "tax_class": "",
+    "tags": "featured,best_seller"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 9,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.463Z",
+    "updated_at": "2026-07-13T10:15:13.463Z",
+    "store": 6,
+    "category": 11,
+    "brand": 5,
+    "name": "iPhone 15 Pro",
+    "slug": "iphone-15-pro",
+    "description": "Featuring a strong and light titanium design, a new Action button, powerful camera system, and the A17 Pro chip.",
+    "status": "active",
+    "tax_class": "",
+    "tags": "featured"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 10,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.537Z",
+    "updated_at": "2026-07-13T10:15:13.537Z",
+    "store": 6,
+    "category": 11,
+    "brand": 6,
+    "name": "Samsung Galaxy S24 Ultra",
+    "slug": "samsung-galaxy-s24-ultra",
+    "description": "The ultimate smartphone experience. Built-in S Pen, advanced nightography camera system, and all-day power with Snapdragon 8 Gen 3.",
+    "status": "active",
+    "tax_class": "",
+    "tags": "featured"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 11,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.582Z",
+    "updated_at": "2026-07-13T10:15:13.582Z",
+    "store": 6,
+    "category": 12,
+    "brand": 8,
+    "name": "Sony Bravia 65-Inch 4K TV",
+    "slug": "sony-bravia-65-inch-4k-tv",
+    "description": "Smart Google TV with breathtaking 4K HDR processor, deep contrast, immersive audio, and seamless gaming integrations.",
+    "status": "active",
+    "tax_class": "",
+    "tags": "featured,best_seller"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 12,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.655Z",
+    "updated_at": "2026-07-13T10:15:13.655Z",
+    "store": 6,
+    "category": 13,
+    "brand": 5,
+    "name": "Apple AirPods Pro 2",
+    "slug": "apple-airpods-pro-2",
+    "description": "Active Noise Cancellation, adaptive transparency mode, personalized spatial audio, and sweat/water resistance.",
+    "status": "active",
+    "tax_class": "",
+    "tags": "new_arrivals"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 13,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.715Z",
+    "updated_at": "2026-07-13T10:15:13.715Z",
+    "store": 6,
+    "category": 13,
+    "brand": 6,
+    "name": "Samsung Galaxy Watch 6",
+    "slug": "samsung-galaxy-watch-6",
+    "description": "Track your fitness, health metrics, and sleep quality. Sleek design, custom watch faces, and LTE connectivity.",
+    "status": "active",
+    "tax_class": "",
+    "tags": "featured"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 14,
+  "fields": {
+    "created_at": "2026-07-13T11:18:34.501Z",
+    "updated_at": "2026-07-13T11:18:34.501Z",
+    "store": 6,
+    "category": 9,
+    "brand": 9,
+    "name": "Refrigerator",
+    "slug": "refrigerator",
+    "description": "",
+    "status": "active",
+    "tax_class": "",
+    "tags": ""
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 15,
+  "fields": {
+    "created_at": "2026-07-24T07:01:32.164Z",
+    "updated_at": "2026-07-24T07:01:32.164Z",
+    "store": 6,
+    "category": 85,
+    "brand": null,
+    "name": "Snikkers ",
+    "slug": "snikkers",
+    "description": "Comfortable",
+    "status": "active",
+    "tax_class": "",
+    "tags": "trending"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 16,
+  "fields": {
+    "created_at": "2026-07-24T08:39:37.681Z",
+    "updated_at": "2026-07-24T08:39:37.681Z",
+    "store": 6,
+    "category": 109,
+    "brand": null,
+    "name": "Kitchen Storage Shelf",
+    "slug": "kitchen-storage-shelf",
+    "description": "Microwave Stand, Kitchen Storage Rack, Large Capacity",
+    "status": "active",
+    "tax_class": "",
+    "tags": "featured,new_arrival"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 17,
+  "fields": {
+    "created_at": "2026-07-24T15:48:55.250Z",
+    "updated_at": "2026-07-24T15:48:55.250Z",
+    "store": 6,
+    "category": 33,
+    "brand": 12,
+    "name": "Cooking Oil",
+    "slug": "cooking-oil",
+    "description": "",
+    "status": "active",
+    "tax_class": "",
+    "tags": "featured,new_arrival"
+  }
+},
+{
+  "model": "catalog.productimage",
+  "pk": 13,
+  "fields": {
+    "created_at": "2026-07-13T11:26:59.194Z",
+    "updated_at": "2026-07-13T11:26:59.194Z",
+    "store": 6,
+    "product": 14,
+    "image": "images (1).png",
+    "is_primary": true,
+    "order": 1
+  }
+},
+{
+  "model": "catalog.productimage",
+  "pk": 14,
+  "fields": {
+    "created_at": "2026-07-14T05:54:45.092Z",
+    "updated_at": "2026-07-14T05:54:45.092Z",
+    "store": 6,
+    "product": 12,
+    "image": "images.jfif",
+    "is_primary": true,
+    "order": 1
+  }
+},
+{
+  "model": "catalog.productimage",
+  "pk": 15,
+  "fields": {
+    "created_at": "2026-07-24T07:01:32.168Z",
+    "updated_at": "2026-07-24T07:01:32.168Z",
+    "store": 6,
+    "product": 15,
+    "image": "products/download_1.jfif",
+    "is_primary": true,
+    "order": 1
+  }
+},
+{
+  "model": "catalog.productimage",
+  "pk": 16,
+  "fields": {
+    "created_at": "2026-07-24T08:33:36.589Z",
+    "updated_at": "2026-07-24T08:33:36.589Z",
+    "store": 6,
+    "product": 8,
+    "image": "products/images_3.jfif",
+    "is_primary": true,
+    "order": 1
+  }
+},
+{
+  "model": "catalog.productimage",
+  "pk": 17,
+  "fields": {
+    "created_at": "2026-07-24T08:35:18.922Z",
+    "updated_at": "2026-07-24T08:35:18.922Z",
+    "store": 6,
+    "product": 10,
+    "image": "products/images.jfif",
+    "is_primary": true,
+    "order": 1
+  }
+},
+{
+  "model": "catalog.productimage",
+  "pk": 18,
+  "fields": {
+    "created_at": "2026-07-24T08:36:12.930Z",
+    "updated_at": "2026-07-24T08:36:12.930Z",
+    "store": 6,
+    "product": 11,
+    "image": "products/images_1.jfif",
+    "is_primary": true,
+    "order": 1
+  }
+},
+{
+  "model": "catalog.productimage",
+  "pk": 19,
+  "fields": {
+    "created_at": "2026-07-24T08:37:05.285Z",
+    "updated_at": "2026-07-24T08:37:05.285Z",
+    "store": 6,
+    "product": 13,
+    "image": "products/images_2.jfif",
+    "is_primary": true,
+    "order": 1
+  }
+},
+{
+  "model": "catalog.productimage",
+  "pk": 20,
+  "fields": {
+    "created_at": "2026-07-24T08:39:37.686Z",
+    "updated_at": "2026-07-24T08:39:37.686Z",
+    "store": 6,
+    "product": 16,
+    "image": "products/images_4.jfif",
+    "is_primary": true,
+    "order": 1
+  }
+},
+{
+  "model": "catalog.productimage",
+  "pk": 22,
+  "fields": {
+    "created_at": "2026-07-24T09:21:17.262Z",
+    "updated_at": "2026-07-24T09:21:17.262Z",
+    "store": 6,
+    "product": 9,
+    "image": "products/images_5.jfif",
+    "is_primary": true,
+    "order": 1
+  }
+},
+{
+  "model": "catalog.productimage",
+  "pk": 23,
+  "fields": {
+    "created_at": "2026-07-24T15:48:55.258Z",
+    "updated_at": "2026-07-24T15:48:55.258Z",
+    "store": 6,
+    "product": 17,
+    "image": "products/images_9.jfif",
+    "is_primary": true,
+    "order": 1
+  }
+},
+{
+  "model": "catalog.productvariant",
+  "pk": 10,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.409Z",
+    "updated_at": "2026-07-13T10:15:13.409Z",
+    "store": 6,
+    "product": 8,
+    "sku": "DELL-XPS15-I7",
+    "barcode": null,
+    "attributes": {
+      "CPU": "Intel i7",
+      "RAM": "16GB",
+      "SSD": "512GB"
+    },
+    "cost_price": "1000.00",
+    "selling_price": "1499.99",
+    "discount_price": "1399.99",
+    "weight_kg": null,
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.productvariant",
+  "pk": 11,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.438Z",
+    "updated_at": "2026-07-13T10:15:13.438Z",
+    "store": 6,
+    "product": 8,
+    "sku": "DELL-XPS15-I9",
+    "barcode": null,
+    "attributes": {
+      "CPU": "Intel i9",
+      "RAM": "32GB",
+      "SSD": "1TB"
+    },
+    "cost_price": "1400.00",
+    "selling_price": "1999.99",
+    "discount_price": null,
+    "weight_kg": null,
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.productvariant",
+  "pk": 12,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.483Z",
+    "updated_at": "2026-07-13T10:15:13.483Z",
+    "store": 6,
+    "product": 9,
+    "sku": "IPHONE-15P-128GB",
+    "barcode": null,
+    "attributes": {
+      "Storage": "128GB",
+      "Color": "Titanium Gray"
+    },
+    "cost_price": "127000.00",
+    "selling_price": "154700.00",
+    "discount_price": "999.99",
+    "weight_kg": null,
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.productvariant",
+  "pk": 13,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.509Z",
+    "updated_at": "2026-07-13T10:15:13.509Z",
+    "store": 6,
+    "product": 9,
+    "sku": "IPHONE-15P-256GB",
+    "barcode": null,
+    "attributes": {
+      "Storage": "256GB",
+      "Color": "Space Black"
+    },
+    "cost_price": "800.00",
+    "selling_price": "1199.99",
+    "discount_price": null,
+    "weight_kg": null,
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.productvariant",
+  "pk": 14,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.553Z",
+    "updated_at": "2026-07-13T10:15:13.553Z",
+    "store": 6,
+    "product": 10,
+    "sku": "SAMSUNG-S24U",
+    "barcode": null,
+    "attributes": {
+      "Storage": "256GB",
+      "Color": "Titanium Yellow"
+    },
+    "cost_price": "240000.00",
+    "selling_price": "310000.00",
+    "discount_price": "1199.99",
+    "weight_kg": null,
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.productvariant",
+  "pk": 15,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.598Z",
+    "updated_at": "2026-07-13T10:15:13.598Z",
+    "store": 6,
+    "product": 11,
+    "sku": "SONY-BR65",
+    "barcode": null,
+    "attributes": {
+      "Size": "65-Inch",
+      "Resolution": "4K UHD"
+    },
+    "cost_price": "55500.00",
+    "selling_price": "90700.99",
+    "discount_price": "799.99",
+    "weight_kg": null,
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.productvariant",
+  "pk": 16,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.679Z",
+    "updated_at": "2026-07-13T10:15:13.679Z",
+    "store": 6,
+    "product": 12,
+    "sku": "APPLE-AP2",
+    "barcode": null,
+    "attributes": {
+      "Generation": "2nd Gen"
+    },
+    "cost_price": "130.00",
+    "selling_price": "249.99",
+    "discount_price": "219.99",
+    "weight_kg": null,
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.productvariant",
+  "pk": 17,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.735Z",
+    "updated_at": "2026-07-13T10:15:13.735Z",
+    "store": 6,
+    "product": 13,
+    "sku": "SAMSUNG-WATCH6",
+    "barcode": null,
+    "attributes": {
+      "Size": "44mm",
+      "Color": "Graphite"
+    },
+    "cost_price": "5550.00",
+    "selling_price": "7999.99",
+    "discount_price": null,
+    "weight_kg": null,
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.productvariant",
+  "pk": 18,
+  "fields": {
+    "created_at": "2026-07-13T11:18:34.501Z",
+    "updated_at": "2026-07-13T11:18:34.501Z",
+    "store": 6,
+    "product": 14,
+    "sku": "IPH1RRPM",
+    "barcode": null,
+    "attributes": {},
+    "cost_price": "54.70",
+    "selling_price": "78.70",
+    "discount_price": "3.02",
+    "weight_kg": null,
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.productvariant",
+  "pk": 19,
+  "fields": {
+    "created_at": "2026-07-24T07:01:32.166Z",
+    "updated_at": "2026-07-24T07:01:32.166Z",
+    "store": 6,
+    "product": 15,
+    "sku": "IPH1336PM",
+    "barcode": null,
+    "attributes": {},
+    "cost_price": "1800.00",
+    "selling_price": "2700.00",
+    "discount_price": "130.00",
+    "weight_kg": null,
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.productvariant",
+  "pk": 20,
+  "fields": {
+    "created_at": "2026-07-24T08:39:37.685Z",
+    "updated_at": "2026-07-24T08:39:37.685Z",
+    "store": 6,
+    "product": 16,
+    "sku": "SAG-S24U",
+    "barcode": null,
+    "attributes": {},
+    "cost_price": "9000.00",
+    "selling_price": "11700.00",
+    "discount_price": "560.00",
+    "weight_kg": null,
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.productvariant",
+  "pk": 21,
+  "fields": {
+    "created_at": "2026-07-24T15:48:55.256Z",
+    "updated_at": "2026-07-24T15:48:55.256Z",
+    "store": 6,
+    "product": 17,
+    "sku": "IPHONE-15P-12243",
+    "barcode": null,
+    "attributes": {},
+    "cost_price": "399.00",
+    "selling_price": "600.00",
+    "discount_price": "55.00",
+    "weight_kg": null,
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.review",
+  "pk": 3,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.777Z",
+    "updated_at": "2026-07-13T10:15:13.777Z",
+    "store": 6,
+    "product": 8,
+    "customer": 2,
+    "rating": 5,
+    "comment": "Absolutely love the screen and processing power! Highly recommend.",
+    "is_approved": true
+  }
+},
+{
+  "model": "catalog.review",
+  "pk": 4,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.790Z",
+    "updated_at": "2026-07-13T10:15:13.790Z",
+    "store": 6,
+    "product": 9,
+    "customer": 2,
+    "rating": 4,
+    "comment": "Solid titanium build feels great, battery life is good, not a massive upgrade from 14 but worth it.",
+    "is_approved": true
+  }
+},
+{
+  "model": "catalog.review",
+  "pk": 5,
+  "fields": {
+    "created_at": "2026-07-16T17:53:22.802Z",
+    "updated_at": "2026-07-16T17:53:22.802Z",
+    "store": 6,
+    "product": 12,
+    "customer": 4,
+    "rating": 4,
+    "comment": "good",
+    "is_approved": true
+  }
+},
+{
+  "model": "catalog.review",
+  "pk": 6,
+  "fields": {
+    "created_at": "2026-07-24T10:42:47.709Z",
+    "updated_at": "2026-07-24T10:42:47.709Z",
+    "store": 6,
+    "product": 16,
+    "customer": 4,
+    "rating": 4,
+    "comment": "Good ",
+    "is_approved": true
+  }
+},
+{
+  "model": "inventory.branch",
+  "pk": 4,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.302Z",
+    "updated_at": "2026-07-13T10:15:13.302Z",
+    "store": 6,
+    "name": "Main Warehouse",
+    "address": "456 Storage Blvd",
+    "city": "New York",
+    "phone": "+1999888777",
+    "is_active": true,
+    "is_default": true
+  }
+},
+{
+  "model": "inventory.branch",
+  "pk": 5,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.308Z",
+    "updated_at": "2026-07-13T10:15:13.308Z",
+    "store": 6,
+    "name": "Downtown Store",
+    "address": "789 Broadway",
+    "city": "New York",
+    "phone": "+1888777666",
+    "is_active": true,
+    "is_default": false
+  }
+},
+{
+  "model": "inventory.stock",
+  "pk": 18,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.418Z",
+    "updated_at": "2026-07-13T10:15:13.418Z",
+    "store": 6,
+    "variant": 10,
+    "branch": 4,
+    "quantity": 14,
+    "low_stock_threshold": 5
+  }
+},
+{
+  "model": "inventory.stock",
+  "pk": 19,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.426Z",
+    "updated_at": "2026-07-13T10:15:13.426Z",
+    "store": 6,
+    "variant": 10,
+    "branch": 5,
+    "quantity": 5,
+    "low_stock_threshold": 5
+  }
+},
+{
+  "model": "inventory.stock",
+  "pk": 20,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.447Z",
+    "updated_at": "2026-07-13T10:15:13.447Z",
+    "store": 6,
+    "variant": 11,
+    "branch": 4,
+    "quantity": 8,
+    "low_stock_threshold": 5
+  }
+},
+{
+  "model": "inventory.stock",
+  "pk": 21,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.456Z",
+    "updated_at": "2026-07-13T10:15:13.456Z",
+    "store": 6,
+    "variant": 11,
+    "branch": 5,
+    "quantity": 2,
+    "low_stock_threshold": 5
+  }
+},
+{
+  "model": "inventory.stock",
+  "pk": 22,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.493Z",
+    "updated_at": "2026-07-13T10:15:13.493Z",
+    "store": 6,
+    "variant": 12,
+    "branch": 4,
+    "quantity": 20,
+    "low_stock_threshold": 5
+  }
+},
+{
+  "model": "inventory.stock",
+  "pk": 23,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.502Z",
+    "updated_at": "2026-07-13T10:15:13.502Z",
+    "store": 6,
+    "variant": 12,
+    "branch": 5,
+    "quantity": 10,
+    "low_stock_threshold": 5
+  }
+},
+{
+  "model": "inventory.stock",
+  "pk": 24,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.519Z",
+    "updated_at": "2026-07-13T10:15:13.519Z",
+    "store": 6,
+    "variant": 13,
+    "branch": 4,
+    "quantity": 12,
+    "low_stock_threshold": 5
+  }
+},
+{
+  "model": "inventory.stock",
+  "pk": 25,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.529Z",
+    "updated_at": "2026-07-13T10:15:13.529Z",
+    "store": 6,
+    "variant": 13,
+    "branch": 5,
+    "quantity": 3,
+    "low_stock_threshold": 5
+  }
+},
+{
+  "model": "inventory.stock",
+  "pk": 26,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.564Z",
+    "updated_at": "2026-07-13T10:15:13.564Z",
+    "store": 6,
+    "variant": 14,
+    "branch": 4,
+    "quantity": 25,
+    "low_stock_threshold": 5
+  }
+},
+{
+  "model": "inventory.stock",
+  "pk": 27,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.569Z",
+    "updated_at": "2026-07-13T10:15:13.569Z",
+    "store": 6,
+    "variant": 14,
+    "branch": 5,
+    "quantity": 12,
+    "low_stock_threshold": 5
+  }
+},
+{
+  "model": "inventory.stock",
+  "pk": 28,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.639Z",
+    "updated_at": "2026-07-13T10:15:13.639Z",
+    "store": 6,
+    "variant": 15,
+    "branch": 4,
+    "quantity": 5,
+    "low_stock_threshold": 5
+  }
+},
+{
+  "model": "inventory.stock",
+  "pk": 29,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.650Z",
+    "updated_at": "2026-07-13T10:15:13.650Z",
+    "store": 6,
+    "variant": 15,
+    "branch": 5,
+    "quantity": 4,
+    "low_stock_threshold": 5
+  }
+},
+{
+  "model": "inventory.stock",
+  "pk": 30,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.690Z",
+    "updated_at": "2026-07-13T10:15:13.690Z",
+    "store": 6,
+    "variant": 16,
+    "branch": 4,
+    "quantity": 50,
+    "low_stock_threshold": 5
+  }
+},
+{
+  "model": "inventory.stock",
+  "pk": 31,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.702Z",
+    "updated_at": "2026-07-13T10:15:13.702Z",
+    "store": 6,
+    "variant": 16,
+    "branch": 5,
+    "quantity": 20,
+    "low_stock_threshold": 5
+  }
+},
+{
+  "model": "inventory.stock",
+  "pk": 32,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.747Z",
+    "updated_at": "2026-07-13T10:15:13.747Z",
+    "store": 6,
+    "variant": 17,
+    "branch": 4,
+    "quantity": 30,
+    "low_stock_threshold": 5
+  }
+},
+{
+  "model": "inventory.stock",
+  "pk": 33,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.755Z",
+    "updated_at": "2026-07-13T10:15:13.755Z",
+    "store": 6,
+    "variant": 17,
+    "branch": 5,
+    "quantity": 8,
+    "low_stock_threshold": 5
+  }
+},
+{
+  "model": "inventory.stock",
+  "pk": 34,
+  "fields": {
+    "created_at": "2026-07-13T11:18:34.512Z",
+    "updated_at": "2026-07-13T11:18:34.512Z",
+    "store": 6,
+    "variant": 18,
+    "branch": 4,
+    "quantity": 6,
+    "low_stock_threshold": 5
+  }
+},
+{
+  "model": "inventory.stock",
+  "pk": 35,
+  "fields": {
+    "created_at": "2026-07-24T07:01:32.175Z",
+    "updated_at": "2026-07-24T07:01:32.175Z",
+    "store": 6,
+    "variant": 19,
+    "branch": 4,
+    "quantity": 10,
+    "low_stock_threshold": 5
+  }
+},
+{
+  "model": "inventory.stock",
+  "pk": 36,
+  "fields": {
+    "created_at": "2026-07-24T08:39:37.691Z",
+    "updated_at": "2026-07-24T08:39:37.691Z",
+    "store": 6,
+    "variant": 20,
+    "branch": 4,
+    "quantity": 10,
+    "low_stock_threshold": 5
+  }
+},
+{
+  "model": "inventory.stock",
+  "pk": 37,
+  "fields": {
+    "created_at": "2026-07-24T15:48:55.273Z",
+    "updated_at": "2026-07-24T15:48:55.273Z",
+    "store": 6,
+    "variant": 21,
+    "branch": 4,
+    "quantity": 10,
+    "low_stock_threshold": 5
+  }
+},
+{
+  "model": "inventory.stockmovement",
+  "pk": 2,
+  "fields": {
+    "created_at": "2026-07-13T11:18:34.513Z",
+    "updated_at": "2026-07-13T11:18:34.513Z",
+    "store": 6,
+    "variant": 18,
+    "branch": 4,
+    "reason": "purchase",
+    "quantity_change": 10,
+    "note": "Initial stock setup on product creation",
+    "performed_by": 8,
+    "reference_id": ""
+  }
+},
+{
+  "model": "inventory.stockmovement",
+  "pk": 3,
+  "fields": {
+    "created_at": "2026-07-16T06:46:52.708Z",
+    "updated_at": "2026-07-16T06:46:52.708Z",
+    "store": 6,
+    "variant": 18,
+    "branch": 4,
+    "reason": "sale",
+    "quantity_change": -3,
+    "note": "Storefront checkout order: ORD-8AEF946220",
+    "performed_by": null,
+    "reference_id": "1"
+  }
+},
+{
+  "model": "inventory.stockmovement",
+  "pk": 4,
+  "fields": {
+    "created_at": "2026-07-23T07:54:48.289Z",
+    "updated_at": "2026-07-23T07:54:48.289Z",
+    "store": 6,
+    "variant": 15,
+    "branch": 4,
+    "reason": "sale",
+    "quantity_change": -2,
+    "note": "Storefront checkout order: ORD-1502108935",
+    "performed_by": 10,
+    "reference_id": "2"
+  }
+},
+{
+  "model": "inventory.stockmovement",
+  "pk": 5,
+  "fields": {
+    "created_at": "2026-07-24T05:17:42.473Z",
+    "updated_at": "2026-07-24T05:17:42.473Z",
+    "store": 6,
+    "variant": 15,
+    "branch": 4,
+    "reason": "sale",
+    "quantity_change": -3,
+    "note": "Storefront checkout order: ORD-A60E636960",
+    "performed_by": 8,
+    "reference_id": "3"
+  }
+},
+{
+  "model": "inventory.stockmovement",
+  "pk": 6,
+  "fields": {
+    "created_at": "2026-07-24T05:17:42.489Z",
+    "updated_at": "2026-07-24T05:17:42.489Z",
+    "store": 6,
+    "variant": 10,
+    "branch": 4,
+    "reason": "sale",
+    "quantity_change": -1,
+    "note": "Storefront checkout order: ORD-A60E636960",
+    "performed_by": 8,
+    "reference_id": "3"
+  }
+},
+{
+  "model": "inventory.stockmovement",
+  "pk": 7,
+  "fields": {
+    "created_at": "2026-07-24T07:01:32.176Z",
+    "updated_at": "2026-07-24T07:01:32.176Z",
+    "store": 6,
+    "variant": 19,
+    "branch": 4,
+    "reason": "purchase",
+    "quantity_change": 10,
+    "note": "Initial stock setup on product creation",
+    "performed_by": 8,
+    "reference_id": ""
+  }
+},
+{
+  "model": "inventory.stockmovement",
+  "pk": 8,
+  "fields": {
+    "created_at": "2026-07-24T07:30:38.020Z",
+    "updated_at": "2026-07-24T07:30:38.020Z",
+    "store": 6,
+    "variant": 18,
+    "branch": 4,
+    "reason": "sale",
+    "quantity_change": -1,
+    "note": "Storefront checkout order: ORD-A8A1E133D9",
+    "performed_by": 8,
+    "reference_id": "4"
+  }
+},
+{
+  "model": "inventory.stockmovement",
+  "pk": 9,
+  "fields": {
+    "created_at": "2026-07-24T08:39:37.691Z",
+    "updated_at": "2026-07-24T08:39:37.691Z",
+    "store": 6,
+    "variant": 20,
+    "branch": 4,
+    "reason": "purchase",
+    "quantity_change": 10,
+    "note": "Initial stock setup on product creation",
+    "performed_by": 8,
+    "reference_id": ""
+  }
+},
+{
+  "model": "inventory.stockmovement",
+  "pk": 10,
+  "fields": {
+    "created_at": "2026-07-24T15:48:55.278Z",
+    "updated_at": "2026-07-24T15:48:55.278Z",
+    "store": 6,
+    "variant": 21,
+    "branch": 4,
+    "reason": "purchase",
+    "quantity_change": 10,
+    "note": "Initial stock setup on product creation",
+    "performed_by": 8,
+    "reference_id": ""
+  }
+},
+{
+  "model": "customers.customer",
+  "pk": 2,
+  "fields": {
+    "created_at": "2026-07-13T10:15:13.765Z",
+    "updated_at": "2026-07-13T10:15:13.765Z",
+    "store": 6,
+    "user": null,
+    "full_name": "John Doe",
+    "phone": "+1231231234",
+    "email": "johndoe@test.com",
+    "loyalty_points": 120,
+    "store_credit": "0.00",
+    "is_guest": false
+  }
+},
+{
+  "model": "customers.customer",
+  "pk": 3,
+  "fields": {
+    "created_at": "2026-07-16T06:46:52.674Z",
+    "updated_at": "2026-07-16T06:46:52.674Z",
+    "store": 6,
+    "user": null,
+    "full_name": "Malik Chalenger",
+    "phone": "84564444949",
+    "email": "malikchallenger2324@gmail.com",
+    "loyalty_points": 0,
+    "store_credit": "0.00",
+    "is_guest": true
+  }
+},
+{
+  "model": "customers.customer",
+  "pk": 4,
+  "fields": {
+    "created_at": "2026-07-16T17:53:22.779Z",
+    "updated_at": "2026-07-16T17:53:22.779Z",
+    "store": 6,
+    "user": 8,
+    "full_name": "electro",
+    "phone": "",
+    "email": null,
+    "loyalty_points": 0,
+    "store_credit": "0.00",
+    "is_guest": false
+  }
+},
+{
+  "model": "customers.customer",
+  "pk": 5,
+  "fields": {
+    "created_at": "2026-07-23T07:36:29.618Z",
+    "updated_at": "2026-07-23T07:36:29.618Z",
+    "store": 6,
+    "user": 9,
+    "full_name": "Mutee Rehman",
+    "phone": "",
+    "email": "muteerehman2323@gmail.com",
+    "loyalty_points": 0,
+    "store_credit": "0.00",
+    "is_guest": false
+  }
+},
+{
+  "model": "customers.customer",
+  "pk": 6,
+  "fields": {
+    "created_at": "2026-07-23T07:53:42.302Z",
+    "updated_at": "2026-07-23T07:53:42.302Z",
+    "store": 6,
+    "user": 10,
+    "full_name": "Malik Chalenger",
+    "phone": "",
+    "email": "malikchallenger2324@gmail.com",
+    "loyalty_points": 0,
+    "store_credit": "0.00",
+    "is_guest": false
+  }
+},
+{
+  "model": "customers.customer",
+  "pk": 7,
+  "fields": {
+    "created_at": "2026-07-24T07:31:33.405Z",
+    "updated_at": "2026-07-24T07:31:33.405Z",
+    "store": 6,
+    "user": 11,
+    "full_name": "Unknown",
+    "phone": "",
+    "email": "emptyhome2324@gmail.com",
+    "loyalty_points": 0,
+    "store_credit": "0.00",
+    "is_guest": false
+  }
+},
+{
+  "model": "customers.customer",
+  "pk": 8,
+  "fields": {
+    "created_at": "2026-07-24T18:17:29.802Z",
+    "updated_at": "2026-07-24T18:17:29.802Z",
+    "store": 6,
+    "user": 13,
+    "full_name": "Kamran Rashid",
+    "phone": "",
+    "email": "kamranrashid578@gmail.com",
+    "loyalty_points": 0,
+    "store_credit": "0.00",
+    "is_guest": false
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 5,
+  "fields": {
+    "created_at": "2026-07-13T10:16:55.633Z",
+    "updated_at": "2026-07-13T10:16:55.633Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "oqq0ykr7pr8838x29089rsu5t80a0cmh",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 6,
+  "fields": {
+    "created_at": "2026-07-13T10:47:30.955Z",
+    "updated_at": "2026-07-13T10:47:30.955Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "p34h3bymnvwxh4ecvbms7b0m9xgdk51i",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 7,
+  "fields": {
+    "created_at": "2026-07-13T10:48:20.620Z",
+    "updated_at": "2026-07-13T10:48:20.620Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "e19re8vlcvdizewv6wh2lm4fj1lbkxa9",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 8,
+  "fields": {
+    "created_at": "2026-07-13T11:30:22.424Z",
+    "updated_at": "2026-07-13T11:30:22.424Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "avaep1f5zsx0tewj2ilznurwklmw9zb0",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 9,
+  "fields": {
+    "created_at": "2026-07-13T11:39:18.859Z",
+    "updated_at": "2026-07-13T11:39:18.859Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "vgeyekjxtokd5q4aymbbspj8pvjih71z",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 10,
+  "fields": {
+    "created_at": "2026-07-14T05:23:52.308Z",
+    "updated_at": "2026-07-14T05:23:52.308Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "7gg2ig4wxrigvqby45w4n3l8112vj3je",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 11,
+  "fields": {
+    "created_at": "2026-07-14T05:25:41.997Z",
+    "updated_at": "2026-07-14T05:25:41.997Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "uaf2n7g29sb9l9qgvr93h9km8juhh0ru",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 12,
+  "fields": {
+    "created_at": "2026-07-15T10:59:10.880Z",
+    "updated_at": "2026-07-15T10:59:10.880Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "mwi1xmhynb4edb0qea4jqe4f4c0iqk5h",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 13,
+  "fields": {
+    "created_at": "2026-07-16T05:53:44.522Z",
+    "updated_at": "2026-07-16T05:53:44.522Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "y1t9b6zt8hahe34w73knh2sqmg2hcx2e",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": "2026-07-16T06:46:52.718Z"
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 14,
+  "fields": {
+    "created_at": "2026-07-16T06:46:52.756Z",
+    "updated_at": "2026-07-16T06:46:52.756Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "y1t9b6zt8hahe34w73knh2sqmg2hcx2e",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 15,
+  "fields": {
+    "created_at": "2026-07-16T06:47:42.351Z",
+    "updated_at": "2026-07-16T06:47:42.351Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "wkl3m0e4vi9kssc1nz470awmoossxjnb",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 16,
+  "fields": {
+    "created_at": "2026-07-16T09:27:34.653Z",
+    "updated_at": "2026-07-16T09:27:34.653Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "vih46189t5luw8pcai40fkzqov67bty2",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 17,
+  "fields": {
+    "created_at": "2026-07-16T09:28:01.835Z",
+    "updated_at": "2026-07-16T09:28:01.835Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "ahjqlcej4ojvg0em2wl42kpkpm8i02l4",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 18,
+  "fields": {
+    "created_at": "2026-07-16T09:28:13.126Z",
+    "updated_at": "2026-07-16T09:28:13.126Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "kefw94s54a5syo79riy14ga96bs269ey",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 19,
+  "fields": {
+    "created_at": "2026-07-16T09:43:05.169Z",
+    "updated_at": "2026-07-16T09:43:05.169Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "jjaap13drr5sdq7bgbl5g76iqqub6kh9",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 20,
+  "fields": {
+    "created_at": "2026-07-16T09:44:50.462Z",
+    "updated_at": "2026-07-16T09:44:50.462Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "nlt6wgxs4o7c2o98dm82g0k8cbdvy5io",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 21,
+  "fields": {
+    "created_at": "2026-07-16T10:36:50.546Z",
+    "updated_at": "2026-07-16T10:36:50.546Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "qogrk783zfgt4j5nwyaeuw274eq1yyh2",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 22,
+  "fields": {
+    "created_at": "2026-07-16T10:57:33.462Z",
+    "updated_at": "2026-07-16T10:57:33.462Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "v7i4t8d9lhs92wdzmt6i8xk0vnevey5i",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 23,
+  "fields": {
+    "created_at": "2026-07-16T11:23:53.450Z",
+    "updated_at": "2026-07-16T11:23:53.450Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "f8whc9g5evcwh40upj0n4ryc56lyna4n",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 24,
+  "fields": {
+    "created_at": "2026-07-16T11:27:48.047Z",
+    "updated_at": "2026-07-16T11:27:48.047Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "yir321q00biqujrasci2zdl46wydyuia",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 25,
+  "fields": {
+    "created_at": "2026-07-16T17:53:22.880Z",
+    "updated_at": "2026-07-16T17:53:22.880Z",
+    "store": 6,
+    "customer": 4,
+    "session_key": null,
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": "2026-07-24T05:17:42.492Z"
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 26,
+  "fields": {
+    "created_at": "2026-07-20T09:03:04.859Z",
+    "updated_at": "2026-07-20T09:03:04.859Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "3zlahtzku3stw3hoeljulmls6jvgagj9",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 27,
+  "fields": {
+    "created_at": "2026-07-20T09:03:44.371Z",
+    "updated_at": "2026-07-20T09:03:44.371Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "ik7vvut6fil16s8ctx02d9nwlmwn1qj8",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 28,
+  "fields": {
+    "created_at": "2026-07-20T10:02:09.406Z",
+    "updated_at": "2026-07-20T10:02:09.406Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "b973eoj3z6c5hv5x3n7fpkh9yz0946rp",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 29,
+  "fields": {
+    "created_at": "2026-07-23T05:57:24.713Z",
+    "updated_at": "2026-07-23T05:57:24.713Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "ht83edxk19fdusg0pj97ug2327983dq5",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 30,
+  "fields": {
+    "created_at": "2026-07-23T07:20:55.254Z",
+    "updated_at": "2026-07-23T07:20:55.254Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "oerrzrh63fabpqxnh5stlhugaxojqe37",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 31,
+  "fields": {
+    "created_at": "2026-07-23T07:36:29.766Z",
+    "updated_at": "2026-07-23T07:36:29.766Z",
+    "store": 6,
+    "customer": 5,
+    "session_key": null,
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 32,
+  "fields": {
+    "created_at": "2026-07-23T07:36:58.882Z",
+    "updated_at": "2026-07-23T07:36:58.882Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "tyzz0cbv9juo6dyaitj87eh8369f1acr",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 33,
+  "fields": {
+    "created_at": "2026-07-23T07:42:31.907Z",
+    "updated_at": "2026-07-23T07:42:31.907Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "68oc3jzczynfoa2xpt4cpftpcp1gvf2n",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 34,
+  "fields": {
+    "created_at": "2026-07-23T07:53:42.374Z",
+    "updated_at": "2026-07-23T07:53:42.374Z",
+    "store": 6,
+    "customer": 6,
+    "session_key": null,
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": "2026-07-23T07:54:48.292Z"
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 35,
+  "fields": {
+    "created_at": "2026-07-23T07:54:48.332Z",
+    "updated_at": "2026-07-23T07:54:48.332Z",
+    "store": 6,
+    "customer": 6,
+    "session_key": null,
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 36,
+  "fields": {
+    "created_at": "2026-07-23T10:48:45.872Z",
+    "updated_at": "2026-07-23T10:48:45.872Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "j3k6a25hib8236fmwptlxwf0i2i3j1ym",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 37,
+  "fields": {
+    "created_at": "2026-07-24T05:17:42.555Z",
+    "updated_at": "2026-07-24T05:17:42.555Z",
+    "store": 6,
+    "customer": 4,
+    "session_key": null,
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": "2026-07-24T07:30:38.023Z"
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 38,
+  "fields": {
+    "created_at": "2026-07-24T06:10:42.939Z",
+    "updated_at": "2026-07-24T06:10:42.939Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "h519hfx6stk43e7kbolkss8knuri6fse",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 39,
+  "fields": {
+    "created_at": "2026-07-24T06:15:19.119Z",
+    "updated_at": "2026-07-24T06:15:19.119Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "g4a8nr3w6m6gdkuf8c4evg4k047qdy4t",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 40,
+  "fields": {
+    "created_at": "2026-07-24T06:24:34.826Z",
+    "updated_at": "2026-07-24T06:24:34.826Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "a5qbdepb7ewip7jxmkntc9l6hq1egcu4",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 41,
+  "fields": {
+    "created_at": "2026-07-24T07:30:38.068Z",
+    "updated_at": "2026-07-24T07:30:38.068Z",
+    "store": 6,
+    "customer": 4,
+    "session_key": null,
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 42,
+  "fields": {
+    "created_at": "2026-07-24T07:31:15.085Z",
+    "updated_at": "2026-07-24T07:31:15.085Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "hfqgy24ufjzz7215iyitvtw4e04h5yed",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 43,
+  "fields": {
+    "created_at": "2026-07-24T07:31:33.503Z",
+    "updated_at": "2026-07-24T07:31:33.503Z",
+    "store": 6,
+    "customer": 7,
+    "session_key": null,
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 44,
+  "fields": {
+    "created_at": "2026-07-24T07:32:25.780Z",
+    "updated_at": "2026-07-24T07:32:25.780Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "zqki3yz3zkt4j1wwuac34mrrjvxqm0xr",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 45,
+  "fields": {
+    "created_at": "2026-07-24T08:08:59.832Z",
+    "updated_at": "2026-07-24T08:08:59.832Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "0s9c5zr9w6ol9niimavymp9ty8ygytwp",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 46,
+  "fields": {
+    "created_at": "2026-07-24T08:40:09.359Z",
+    "updated_at": "2026-07-24T08:40:09.359Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "zpiibkmg8j0rka36pgill6hx2gx33wqd",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 47,
+  "fields": {
+    "created_at": "2026-07-24T08:40:45.766Z",
+    "updated_at": "2026-07-24T08:40:45.766Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "y1yhboyj2ofgkko1hazor2mwraha4uf2",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 48,
+  "fields": {
+    "created_at": "2026-07-24T09:18:40.964Z",
+    "updated_at": "2026-07-24T09:18:40.964Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "227ilmt0rowlea2h7o5pscv5c67kn1oj",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 49,
+  "fields": {
+    "created_at": "2026-07-24T09:31:49.656Z",
+    "updated_at": "2026-07-24T09:31:49.656Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "7yqboirgl6q1ti17agpta3doy66o66ck",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 50,
+  "fields": {
+    "created_at": "2026-07-24T10:58:02.565Z",
+    "updated_at": "2026-07-24T10:58:02.565Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "we06xh05fscpjuzuz3wrfdvpjgcdzukk",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 51,
+  "fields": {
+    "created_at": "2026-07-24T11:42:00.370Z",
+    "updated_at": "2026-07-24T11:42:00.370Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "5pkui31klqmicofkckaq86ji9sx6irek",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 52,
+  "fields": {
+    "created_at": "2026-07-24T15:07:57.193Z",
+    "updated_at": "2026-07-24T15:07:57.193Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "830fey33h8y5zm3iqtmxj39pdko6yqgj",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 53,
+  "fields": {
+    "created_at": "2026-07-24T15:08:20.117Z",
+    "updated_at": "2026-07-24T15:08:20.117Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "f0ycpjgdc9rmcdnpqeymndfqkmts3wpr",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 54,
+  "fields": {
+    "created_at": "2026-07-24T15:08:50.804Z",
+    "updated_at": "2026-07-24T15:08:50.804Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "alelxi2t416cfuzuj4n8uy4npn8fl0xv",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 55,
+  "fields": {
+    "created_at": "2026-07-24T15:08:59.286Z",
+    "updated_at": "2026-07-24T15:08:59.286Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "lfpc0bwxulit8evhof7rg3odlm3d3uvu",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 56,
+  "fields": {
+    "created_at": "2026-07-24T16:34:31.980Z",
+    "updated_at": "2026-07-24T16:34:31.980Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "pazxjhl4enbn8jpj3ohu2n2e4sjj2td2",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 57,
+  "fields": {
+    "created_at": "2026-07-24T16:48:04.673Z",
+    "updated_at": "2026-07-24T16:48:04.673Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "fuerml4xafgbe422r1dzij9j6z7mao48",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 58,
+  "fields": {
+    "created_at": "2026-07-24T16:49:23.466Z",
+    "updated_at": "2026-07-24T16:49:23.466Z",
+    "store": 6,
+    "customer": null,
+    "session_key": "h7wmk1gvjdnqoggpz0e7omvuad6v4j4l",
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cart",
+  "pk": 59,
+  "fields": {
+    "created_at": "2026-07-24T18:17:29.982Z",
+    "updated_at": "2026-07-24T18:17:29.982Z",
+    "store": 6,
+    "customer": 8,
+    "session_key": null,
+    "coupon": null,
+    "is_abandoned": false,
+    "checked_out_at": null
+  }
+},
+{
+  "model": "carts.cartitem",
+  "pk": 1,
+  "fields": {
+    "created_at": "2026-07-13T10:17:03.338Z",
+    "updated_at": "2026-07-13T10:17:03.338Z",
+    "store": 6,
+    "cart": 5,
+    "variant": 16,
+    "quantity": 1
+  }
+},
+{
+  "model": "carts.cartitem",
+  "pk": 2,
+  "fields": {
+    "created_at": "2026-07-13T11:28:50.538Z",
+    "updated_at": "2026-07-13T11:28:50.538Z",
+    "store": 6,
+    "cart": 7,
+    "variant": 18,
+    "quantity": 3
+  }
+},
+{
+  "model": "carts.cartitem",
+  "pk": 3,
+  "fields": {
+    "created_at": "2026-07-16T06:46:28.706Z",
+    "updated_at": "2026-07-16T06:46:28.706Z",
+    "store": 6,
+    "cart": 13,
+    "variant": 18,
+    "quantity": 3
+  }
+},
+{
+  "model": "carts.cartitem",
+  "pk": 4,
+  "fields": {
+    "created_at": "2026-07-16T10:00:05.184Z",
+    "updated_at": "2026-07-16T10:00:05.184Z",
+    "store": 6,
+    "cart": 18,
+    "variant": 18,
+    "quantity": 6
+  }
+},
+{
+  "model": "carts.cartitem",
+  "pk": 5,
+  "fields": {
+    "created_at": "2026-07-16T10:31:38.349Z",
+    "updated_at": "2026-07-16T10:31:38.349Z",
+    "store": 6,
+    "cart": 18,
+    "variant": 16,
+    "quantity": 1
+  }
+},
+{
+  "model": "carts.cartitem",
+  "pk": 6,
+  "fields": {
+    "created_at": "2026-07-16T11:29:56.442Z",
+    "updated_at": "2026-07-16T11:29:56.442Z",
+    "store": 6,
+    "cart": 24,
+    "variant": 15,
+    "quantity": 1
+  }
+},
+{
+  "model": "carts.cartitem",
+  "pk": 7,
+  "fields": {
+    "created_at": "2026-07-16T17:52:57.371Z",
+    "updated_at": "2026-07-16T17:52:57.371Z",
+    "store": 6,
+    "cart": 24,
+    "variant": 16,
+    "quantity": 1
+  }
+},
+{
+  "model": "carts.cartitem",
+  "pk": 8,
+  "fields": {
+    "created_at": "2026-07-16T19:48:28.451Z",
+    "updated_at": "2026-07-16T19:48:28.451Z",
+    "store": 6,
+    "cart": 25,
+    "variant": 15,
+    "quantity": 3
+  }
+},
+{
+  "model": "carts.cartitem",
+  "pk": 9,
+  "fields": {
+    "created_at": "2026-07-17T04:58:55.863Z",
+    "updated_at": "2026-07-17T04:58:55.863Z",
+    "store": 6,
+    "cart": 25,
+    "variant": 10,
+    "quantity": 1
+  }
+},
+{
+  "model": "carts.cartitem",
+  "pk": 10,
+  "fields": {
+    "created_at": "2026-07-23T07:54:10.383Z",
+    "updated_at": "2026-07-23T07:54:10.383Z",
+    "store": 6,
+    "cart": 34,
+    "variant": 15,
+    "quantity": 2
+  }
+},
+{
+  "model": "carts.cartitem",
+  "pk": 11,
+  "fields": {
+    "created_at": "2026-07-23T10:48:03.314Z",
+    "updated_at": "2026-07-23T10:48:03.314Z",
+    "store": 6,
+    "cart": 35,
+    "variant": 17,
+    "quantity": 1
+  }
+},
+{
+  "model": "carts.cartitem",
+  "pk": 12,
+  "fields": {
+    "created_at": "2026-07-24T07:29:59.883Z",
+    "updated_at": "2026-07-24T07:29:59.883Z",
+    "store": 6,
+    "cart": 37,
+    "variant": 18,
+    "quantity": 1
+  }
+},
+{
+  "model": "carts.cartitem",
+  "pk": 13,
+  "fields": {
+    "created_at": "2026-07-24T09:34:49.092Z",
+    "updated_at": "2026-07-24T09:34:49.092Z",
+    "store": 6,
+    "cart": 49,
+    "variant": 17,
+    "quantity": 1
+  }
+},
+{
+  "model": "carts.cartitem",
+  "pk": 14,
+  "fields": {
+    "created_at": "2026-07-24T10:41:23.960Z",
+    "updated_at": "2026-07-24T10:41:23.960Z",
+    "store": 6,
+    "cart": 41,
+    "variant": 19,
+    "quantity": 1
+  }
+},
+{
+  "model": "carts.cartitem",
+  "pk": 15,
+  "fields": {
+    "created_at": "2026-07-24T11:30:38.340Z",
+    "updated_at": "2026-07-24T11:30:38.340Z",
+    "store": 6,
+    "cart": 41,
+    "variant": 16,
+    "quantity": 1
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 1,
+  "fields": {
+    "created_at": "2026-07-16T06:46:52.694Z",
+    "updated_at": "2026-07-16T06:46:52.694Z",
+    "store": 6,
+    "order_number": "ORD-8AEF946220",
+    "customer": 3,
+    "branch": 4,
+    "status": "pending",
+    "source": "online",
+    "shipping_address": "Regi Model Town Peshawar",
+    "shipping_city": "Peshawar",
+    "shipping_phone": "84564444949",
+    "subtotal": "9.06",
+    "discount_amount": "0.00",
+    "tax_amount": "0.45",
+    "shipping_fee": "10.00",
+    "grand_total": "19.51",
+    "coupon_code": "",
+    "notes": "",
+    "placed_by": null
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 2,
+  "fields": {
+    "created_at": "2026-07-23T07:54:48.260Z",
+    "updated_at": "2026-07-23T07:54:48.260Z",
+    "store": 6,
+    "order_number": "ORD-1502108935",
+    "customer": 6,
+    "branch": 4,
+    "status": "pending",
+    "source": "online",
+    "shipping_address": "Regi Model Town Peshawar",
+    "shipping_city": "Peshawar",
+    "shipping_phone": "84564444949",
+    "subtotal": "1599.98",
+    "discount_amount": "0.00",
+    "tax_amount": "80.00",
+    "shipping_fee": "10.00",
+    "grand_total": "1689.98",
+    "coupon_code": "",
+    "notes": "juiygtdrsedftgyuhjiok",
+    "placed_by": 10
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 3,
+  "fields": {
+    "created_at": "2026-07-24T05:17:42.436Z",
+    "updated_at": "2026-07-24T05:17:42.436Z",
+    "store": 6,
+    "order_number": "ORD-A60E636960",
+    "customer": 4,
+    "branch": 4,
+    "status": "pending",
+    "source": "online",
+    "shipping_address": "Regi Model Town Peshawar",
+    "shipping_city": "Peshawar",
+    "shipping_phone": "84564444949",
+    "subtotal": "3799.96",
+    "discount_amount": "0.00",
+    "tax_amount": "190.00",
+    "shipping_fee": "10.00",
+    "grand_total": "3999.96",
+    "coupon_code": "",
+    "notes": "",
+    "placed_by": 8
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 4,
+  "fields": {
+    "created_at": "2026-07-24T07:30:37.998Z",
+    "updated_at": "2026-07-24T07:30:37.998Z",
+    "store": 6,
+    "order_number": "ORD-A8A1E133D9",
+    "customer": 4,
+    "branch": 4,
+    "status": "pending",
+    "source": "online",
+    "shipping_address": "Regi Model Town Peshawar",
+    "shipping_city": "Peshawar",
+    "shipping_phone": "987654e3",
+    "subtotal": "3.02",
+    "discount_amount": "0.00",
+    "tax_amount": "0.15",
+    "shipping_fee": "10.00",
+    "grand_total": "13.17",
+    "coupon_code": "",
+    "notes": "",
+    "placed_by": 8
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 1,
+  "fields": {
+    "created_at": "2026-07-16T06:46:52.702Z",
+    "updated_at": "2026-07-16T06:46:52.702Z",
+    "store": 6,
+    "order": 1,
+    "variant": 18,
+    "product_name": "Refrigerator",
+    "unit_price": "3.02",
+    "quantity": 3
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 2,
+  "fields": {
+    "created_at": "2026-07-23T07:54:48.280Z",
+    "updated_at": "2026-07-23T07:54:48.280Z",
+    "store": 6,
+    "order": 2,
+    "variant": 15,
+    "product_name": "Sony Bravia 65-Inch 4K TV",
+    "unit_price": "799.99",
+    "quantity": 2
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 3,
+  "fields": {
+    "created_at": "2026-07-24T05:17:42.451Z",
+    "updated_at": "2026-07-24T05:17:42.451Z",
+    "store": 6,
+    "order": 3,
+    "variant": 15,
+    "product_name": "Sony Bravia 65-Inch 4K TV",
+    "unit_price": "799.99",
+    "quantity": 3
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 4,
+  "fields": {
+    "created_at": "2026-07-24T05:17:42.485Z",
+    "updated_at": "2026-07-24T05:17:42.485Z",
+    "store": 6,
+    "order": 3,
+    "variant": 10,
+    "product_name": "Dell XPS 15",
+    "unit_price": "1399.99",
+    "quantity": 1
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 5,
+  "fields": {
+    "created_at": "2026-07-24T07:30:38.013Z",
+    "updated_at": "2026-07-24T07:30:38.013Z",
+    "store": 6,
+    "order": 4,
+    "variant": 18,
+    "product_name": "Refrigerator",
+    "unit_price": "3.02",
+    "quantity": 1
+  }
+},
+{
+  "model": "orders.orderstatushistory",
+  "pk": 1,
+  "fields": {
+    "created_at": "2026-07-16T06:46:52.714Z",
+    "updated_at": "2026-07-16T06:46:52.714Z",
+    "store": 6,
+    "order": 1,
+    "status": "pending",
+    "changed_by": null,
+    "note": "Order successfully placed online."
+  }
+},
+{
+  "model": "orders.orderstatushistory",
+  "pk": 2,
+  "fields": {
+    "created_at": "2026-07-16T06:50:53.651Z",
+    "updated_at": "2026-07-16T06:50:53.651Z",
+    "store": 6,
+    "order": 1,
+    "status": "packed",
+    "changed_by": 8,
+    "note": "Order status changed to packed by Super Admin."
+  }
+},
+{
+  "model": "orders.orderstatushistory",
+  "pk": 3,
+  "fields": {
+    "created_at": "2026-07-16T06:50:59.431Z",
+    "updated_at": "2026-07-16T06:50:59.431Z",
+    "store": 6,
+    "order": 1,
+    "status": "pending",
+    "changed_by": 8,
+    "note": "Order status changed to pending by Super Admin."
+  }
+},
+{
+  "model": "orders.orderstatushistory",
+  "pk": 4,
+  "fields": {
+    "created_at": "2026-07-16T06:51:19.852Z",
+    "updated_at": "2026-07-16T06:51:19.852Z",
+    "store": 6,
+    "order": 1,
+    "status": "delivered",
+    "changed_by": 8,
+    "note": "Order status changed to delivered by Super Admin."
+  }
+},
+{
+  "model": "orders.orderstatushistory",
+  "pk": 5,
+  "fields": {
+    "created_at": "2026-07-16T06:51:24.119Z",
+    "updated_at": "2026-07-16T06:51:24.119Z",
+    "store": 6,
+    "order": 1,
+    "status": "pending",
+    "changed_by": 8,
+    "note": "Order status changed to pending by Super Admin."
+  }
+},
+{
+  "model": "orders.orderstatushistory",
+  "pk": 6,
+  "fields": {
+    "created_at": "2026-07-23T07:54:48.291Z",
+    "updated_at": "2026-07-23T07:54:48.291Z",
+    "store": 6,
+    "order": 2,
+    "status": "pending",
+    "changed_by": null,
+    "note": "Order successfully placed online."
+  }
+},
+{
+  "model": "orders.orderstatushistory",
+  "pk": 7,
+  "fields": {
+    "created_at": "2026-07-24T05:17:42.489Z",
+    "updated_at": "2026-07-24T05:17:42.489Z",
+    "store": 6,
+    "order": 3,
+    "status": "pending",
+    "changed_by": null,
+    "note": "Order successfully placed online."
+  }
+},
+{
+  "model": "orders.orderstatushistory",
+  "pk": 8,
+  "fields": {
+    "created_at": "2026-07-24T07:30:38.023Z",
+    "updated_at": "2026-07-24T07:30:38.023Z",
+    "store": 6,
+    "order": 4,
+    "status": "pending",
+    "changed_by": null,
+    "note": "Order successfully placed online."
+  }
+},
+{
+  "model": "website_management.sitesettings",
+  "pk": 1,
+  "fields": {
+    "store": 6,
+    "favicon": "",
+    "logo_text": "",
+    "announcement_bar_text": "Free delivery orders ",
+    "announcement_bar_enabled": true,
+    "announcement_bar_color": "#aaa741",
+    "seo_title": "",
+    "seo_description": "",
+    "facebook_url": "",
+    "instagram_url": "https://www.instagram.com/malik_challenger/",
+    "twitter_url": "",
+    "youtube_url": "",
+    "tiktok_url": "",
+    "linkedin_url": "",
+    "whatsapp_number": "8847844888",
+    "free_shipping_threshold": "0.02",
+    "default_shipping_charge": "0.05",
+    "maintenance_mode": true,
+    "maintenance_message": "We are currently under maintenance. Please check back later.",
+    "footer_description": "",
+    "copyright_text": "",
+    "feature_1_title": "Free Shipping",
+    "feature_1_text": "On orders over $50",
+    "feature_2_title": "24/7 Support",
+    "feature_2_text": "Always here to help",
+    "feature_3_title": "Secure Payments",
+    "feature_3_text": "100% protected",
+    "feature_4_title": "Easy Returns",
+    "feature_4_text": "30-day policy",
+    "sticky_header": true,
+    "search_enabled": true,
+    "wishlist_enabled": true,
+    "cart_enabled": true,
+    "cod_enabled": true,
+    "bank_transfer_enabled": true,
+    "smtp_host": "",
+    "smtp_port": 587,
+    "smtp_username": "sen",
+    "smtp_password": "admin@123"
+  }
+},
+{
+  "model": "website_management.heroslide",
+  "pk": 8,
+  "fields": {
+    "created_at": "2026-07-24T09:23:14.481Z",
+    "updated_at": "2026-07-24T09:23:14.481Z",
+    "store": 6,
+    "title": "Trending Items",
+    "subtitle": "Up to 30% OFF on Electronics",
+    "badge": "",
+    "image": "hero_slides/images_6.jfif",
+    "mobile_image": "",
+    "button_text": "Shop Now",
+    "button_link": "/shop/",
+    "display_order": 1,
+    "is_active": true,
+    "start_date": null,
+    "end_date": null,
+    "overlay_enabled": true,
+    "text_alignment": "left",
+    "text_color": "#000000",
+    "animation_type": "fade",
+    "countdown_end": null,
+    "alt_text": ""
+  }
+},
+{
+  "model": "website_management.heroslide",
+  "pk": 11,
+  "fields": {
+    "created_at": "2026-07-24T16:26:55.628Z",
+    "updated_at": "2026-07-24T16:26:55.628Z",
+    "store": 6,
+    "title": "Buy All Items ",
+    "subtitle": "Up to 30% OFF on Electronics",
+    "badge": "",
+    "image": "hero_slides/images_11.jfif",
+    "mobile_image": "",
+    "button_text": "Shop Now",
+    "button_link": "/shop/",
+    "display_order": 5,
+    "is_active": true,
+    "start_date": null,
+    "end_date": null,
+    "overlay_enabled": true,
+    "text_alignment": "left",
+    "text_color": "#000000",
+    "animation_type": "fade",
+    "countdown_end": null,
+    "alt_text": ""
+  }
+},
+{
+  "model": "website_management.promotionalbanner",
+  "pk": 9,
+  "fields": {
+    "created_at": "2026-07-23T11:40:16.687Z",
+    "updated_at": "2026-07-23T11:40:16.687Z",
+    "store": 6,
+    "title": "car Acesssories",
+    "subtitle": "Up to 20% OFF on Electronics",
+    "image": "banners/car_9rmCU9R.webp",
+    "mobile_image": "",
+    "button_text": "Shop Now",
+    "button_link": "/shop/",
+    "position": "home_middle",
+    "display_order": 0,
+    "is_active": true,
+    "background_color": "#ffffff",
+    "text_color": "#000000",
+    "alt_text": "",
+    "start_date": null,
+    "end_date": null
+  }
+},
+{
+  "model": "website_management.promotionalbanner",
+  "pk": 10,
+  "fields": {
+    "created_at": "2026-07-24T09:25:25.910Z",
+    "updated_at": "2026-07-24T09:25:25.910Z",
+    "store": 6,
+    "title": "Kitchen Items",
+    "subtitle": "All Items will be available ",
+    "image": "banners/images_4.jfif",
+    "mobile_image": "",
+    "button_text": "Shop Now",
+    "button_link": "/shop/",
+    "position": "home_middle",
+    "display_order": 0,
+    "is_active": true,
+    "background_color": "#ffffff",
+    "text_color": "#000000",
+    "alt_text": "",
+    "start_date": null,
+    "end_date": null
+  }
+},
+{
+  "model": "website_management.promotionalbanner",
+  "pk": 11,
+  "fields": {
+    "created_at": "2026-07-24T10:09:06.342Z",
+    "updated_at": "2026-07-24T10:09:06.342Z",
+    "store": 6,
+    "title": "Headphones ",
+    "subtitle": "Up to 20% OFF on Electronics",
+    "image": "banners/images_8.jfif",
+    "mobile_image": "",
+    "button_text": "Shop Now",
+    "button_link": "/shop/",
+    "position": "home_top",
+    "display_order": 0,
+    "is_active": true,
+    "background_color": "#ffffff",
+    "text_color": "#000000",
+    "alt_text": "",
+    "start_date": null,
+    "end_date": null
+  }
+},
+{
+  "model": "website_management.page",
+  "pk": 1,
+  "fields": {
+    "store": 6,
+    "title": "About Us",
+    "slug": "about-us",
+    "content": "<h2>Our Story</h2>\n<p>Founded with a passion for quality and value, we are dedicated to delivering the best products to your doorstep. Our journey began with a simple idea: make premium products accessible to everyone.</p>\n\n<h3>Our Mission</h3>\n<p>We believe shopping should be simple, affordable, and enjoyable. That's why we carefully curate every product in our catalog to ensure exceptional quality and value.</p>\n\n<h3>Why Choose Us?</h3>\n<ul>\n  <li>✅ Thousands of verified products</li>\n  <li>✅ Fast nationwide delivery</li>\n  <li>✅ Secure payment methods</li>\n  <li>✅ 7-day easy returns</li>\n  <li>✅ 24/7 customer support</li>\n</ul>\n\n<h3>Our Team</h3>\n<p>We are a passionate team of professionals dedicated to bringing you the best shopping experience. From our buying team that selects quality products, to our customer care agents ready to help — we work as one to serve you better.</p>",
+    "seo_title": "About Us — Our Story & Mission",
+    "seo_description": "Learn about our store, our team, and our commitment to bringing you the best products.",
+    "is_active": true,
+    "show_in_footer": true,
+    "display_order": 1,
+    "hero_image": "",
+    "featured_image": "",
+    "status": "published",
+    "publish_date": "2026-07-14T11:32:23.490Z",
+    "created_at": "2026-07-14T11:32:23.490Z",
+    "updated_at": "2026-07-14T11:32:23.490Z"
+  }
+},
+{
+  "model": "website_management.page",
+  "pk": 2,
+  "fields": {
+    "store": 6,
+    "title": "Privacy Policy",
+    "slug": "privacy-policy",
+    "content": "<h2>Privacy Policy</h2>\n<p>Last updated: January 2025</p>\n\n<h3>1. Information We Collect</h3>\n<p>We collect information you provide directly, such as your name, email address, phone number, and shipping address when you place an order or create an account.</p>\n\n<h3>2. How We Use Your Information</h3>\n<ul>\n  <li>To process and fulfill your orders</li>\n  <li>To communicate about your order status</li>\n  <li>To improve our services and website</li>\n  <li>To send promotional offers (with your consent)</li>\n</ul>\n\n<h3>3. Data Security</h3>\n<p>We implement industry-standard security measures to protect your personal information. Your payment information is encrypted and never stored on our servers.</p>\n\n<h3>4. Contact Us</h3>\n<p>For privacy-related queries, contact our Data Protection Officer at privacy@yourstore.com</p>",
+    "seo_title": "Privacy Policy — How We Use Your Data",
+    "seo_description": "Our privacy policy explains how we collect, use, and protect your personal information.",
+    "is_active": true,
+    "show_in_footer": true,
+    "display_order": 2,
+    "hero_image": "",
+    "featured_image": "",
+    "status": "published",
+    "publish_date": "2026-07-14T11:32:23.496Z",
+    "created_at": "2026-07-14T11:32:23.496Z",
+    "updated_at": "2026-07-14T11:32:23.496Z"
+  }
+},
+{
+  "model": "website_management.page",
+  "pk": 3,
+  "fields": {
+    "store": 6,
+    "title": "Terms of Service",
+    "slug": "terms-of-service",
+    "content": "<h2>Terms of Service</h2>\n<p>By using our website, you agree to these terms. Please read carefully.</p>\n\n<h3>1. Acceptance of Terms</h3>\n<p>By accessing and using this website, you accept and agree to be bound by these Terms of Service.</p>\n\n<h3>2. Products & Pricing</h3>\n<p>We reserve the right to modify prices at any time. All prices are in PKR and inclusive of applicable taxes unless stated otherwise.</p>\n\n<h3>3. Orders & Payment</h3>\n<p>Orders are confirmed only after successful payment or Cash on Delivery confirmation. We reserve the right to cancel orders due to stock availability or pricing errors.</p>\n\n<h3>4. Limitation of Liability</h3>\n<p>Our liability is limited to the purchase price of the product. We are not responsible for indirect damages arising from product use.</p>",
+    "seo_title": "Terms of Service — Usage Agreement",
+    "seo_description": "Read our terms of service before using our platform.",
+    "is_active": true,
+    "show_in_footer": true,
+    "display_order": 3,
+    "hero_image": "",
+    "featured_image": "",
+    "status": "published",
+    "publish_date": "2026-07-14T11:32:23.503Z",
+    "created_at": "2026-07-14T11:32:23.503Z",
+    "updated_at": "2026-07-14T11:32:23.503Z"
+  }
+},
+{
+  "model": "website_management.page",
+  "pk": 4,
+  "fields": {
+    "store": 6,
+    "title": "Refund Policy",
+    "slug": "refund-policy",
+    "content": "<h2>Refund & Return Policy</h2>\n\n<h3>7-Day Return Policy</h3>\n<p>We offer a 7-day return window from the date of delivery. Items must be unused, in original packaging, and accompanied by the original receipt.</p>\n\n<h3>How to Initiate a Return</h3>\n<ol>\n  <li>Contact our support team within 7 days of delivery</li>\n  <li>Provide your order number and reason for return</li>\n  <li>Our team will arrange a pickup or guide you on drop-off</li>\n  <li>Refund is processed within 5-7 business days of receiving the item</li>\n</ol>\n\n<h3>Non-Returnable Items</h3>\n<ul>\n  <li>Opened software or digital products</li>\n  <li>Perishable goods</li>\n  <li>Items marked as \"Final Sale\"</li>\n  <li>Undergarments for hygiene reasons</li>\n</ul>\n\n<h3>Refund Methods</h3>\n<p>Refunds are processed to the original payment method. Cash on Delivery orders are refunded via bank transfer.</p>",
+    "seo_title": "Refund & Return Policy — 7 Day Easy Returns",
+    "seo_description": "Understand our hassle-free 7-day return and refund policy.",
+    "is_active": true,
+    "show_in_footer": true,
+    "display_order": 4,
+    "hero_image": "",
+    "featured_image": "",
+    "status": "published",
+    "publish_date": "2026-07-14T11:32:23.508Z",
+    "created_at": "2026-07-14T11:32:23.508Z",
+    "updated_at": "2026-07-14T11:32:23.508Z"
+  }
+},
+{
+  "model": "website_management.page",
+  "pk": 5,
+  "fields": {
+    "store": 6,
+    "title": "FAQ",
+    "slug": "faq",
+    "content": "<h2>Frequently Asked Questions</h2>\n\n<h3>📦 Orders & Delivery</h3>\n\n<p><strong>How long does delivery take?</strong><br>\nStandard delivery takes 3-5 business days. Express delivery is available in 1-2 days for major cities.</p>\n\n<p><strong>Do you deliver nationwide?</strong><br>\nYes, we deliver to all major cities and towns across Pakistan.</p>\n\n<p><strong>How do I track my order?</strong><br>\nOnce your order is dispatched, you will receive an SMS/email with a tracking link.</p>\n\n<h3>💳 Payments</h3>\n\n<p><strong>What payment methods do you accept?</strong><br>\nWe accept Cash on Delivery (COD) and bank transfers. Online card payments coming soon!</p>\n\n<p><strong>Is Cash on Delivery available everywhere?</strong><br>\nCOD is available in most cities. You'll see COD availability at checkout for your area.</p>\n\n<h3>🔄 Returns & Refunds</h3>\n\n<p><strong>How do I return a product?</strong><br>\nContact us within 7 days of receiving your order. See our full Return Policy for details.</p>\n\n<p><strong>When will I receive my refund?</strong><br>\nRefunds are processed within 5-7 business days after we receive the returned item.</p>",
+    "seo_title": "Frequently Asked Questions",
+    "seo_description": "Get answers to common questions about orders, delivery, payments, and returns.",
+    "is_active": true,
+    "show_in_footer": true,
+    "display_order": 5,
+    "hero_image": "",
+    "featured_image": "",
+    "status": "published",
+    "publish_date": "2026-07-14T11:32:23.513Z",
+    "created_at": "2026-07-14T11:32:23.513Z",
+    "updated_at": "2026-07-14T11:32:23.515Z"
+  }
+},
+{
+  "model": "website_management.page",
+  "pk": 6,
+  "fields": {
+    "store": 6,
+    "title": "Shipping Information",
+    "slug": "shipping",
+    "content": "<h2>Shipping Information</h2>\n\n<h3>Delivery Timeframes</h3>\n<table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse:collapse; width:100%;\">\n  <thead style=\"background:#f0f0f0;\">\n    <tr><th>Location</th><th>Standard</th><th>Express</th></tr>\n  </thead>\n  <tbody>\n    <tr><td>Karachi, Lahore, Islamabad</td><td>2-3 Days</td><td>Next Day</td></tr>\n    <tr><td>Faisalabad, Multan, Peshawar</td><td>3-4 Days</td><td>1-2 Days</td></tr>\n    <tr><td>Other Cities</td><td>4-6 Days</td><td>2-3 Days</td></tr>\n    <tr><td>Remote Areas</td><td>6-10 Days</td><td>Not Available</td></tr>\n  </tbody>\n</table>\n\n<h3>Shipping Charges</h3>\n<ul>\n  <li>Standard Delivery: Rs. 200</li>\n  <li>Express Delivery: Rs. 400</li>\n  <li>Free Delivery on orders over Rs. 5,000</li>\n</ul>\n\n<h3>Order Tracking</h3>\n<p>After dispatch, you'll receive an SMS with your tracking number. Track your order anytime on our tracking page or by calling customer support.</p>",
+    "seo_title": "Shipping Information — Delivery Details",
+    "seo_description": "Everything you need to know about our delivery options, timeframes, and charges.",
+    "is_active": true,
+    "show_in_footer": true,
+    "display_order": 6,
+    "hero_image": "",
+    "featured_image": "",
+    "status": "published",
+    "publish_date": "2026-07-14T11:32:23.520Z",
+    "created_at": "2026-07-14T11:32:23.520Z",
+    "updated_at": "2026-07-14T11:32:23.522Z"
+  }
+},
+{
+  "model": "website_management.menuitem",
+  "pk": 1,
+  "fields": {
+    "created_at": "2026-07-14T11:32:23.382Z",
+    "updated_at": "2026-07-14T11:32:23.382Z",
+    "store": 6,
+    "label": "Home",
+    "url": "/",
+    "category": null,
+    "location": "header",
+    "display_order": 1,
+    "is_active": true,
+    "open_in_new_tab": false,
+    "parent": null,
+    "icon": "fa-home"
+  }
+},
+{
+  "model": "website_management.menuitem",
+  "pk": 2,
+  "fields": {
+    "created_at": "2026-07-14T11:32:23.390Z",
+    "updated_at": "2026-07-14T11:32:23.390Z",
+    "store": 6,
+    "label": "Shop",
+    "url": "/shop/",
+    "category": null,
+    "location": "header",
+    "display_order": 2,
+    "is_active": true,
+    "open_in_new_tab": false,
+    "parent": null,
+    "icon": "fa-store"
+  }
+},
+{
+  "model": "website_management.menuitem",
+  "pk": 3,
+  "fields": {
+    "created_at": "2026-07-14T11:32:23.394Z",
+    "updated_at": "2026-07-14T11:32:23.394Z",
+    "store": 6,
+    "label": "New Arrivals",
+    "url": "/shop/?tag=new",
+    "category": null,
+    "location": "header",
+    "display_order": 3,
+    "is_active": true,
+    "open_in_new_tab": false,
+    "parent": null,
+    "icon": "fa-star"
+  }
+},
+{
+  "model": "website_management.menuitem",
+  "pk": 4,
+  "fields": {
+    "created_at": "2026-07-14T11:32:23.402Z",
+    "updated_at": "2026-07-14T11:32:23.402Z",
+    "store": 6,
+    "label": "Sale",
+    "url": "/shop/?tag=sale",
+    "category": null,
+    "location": "header",
+    "display_order": 4,
+    "is_active": true,
+    "open_in_new_tab": false,
+    "parent": null,
+    "icon": "fa-percent"
+  }
+},
+{
+  "model": "website_management.menuitem",
+  "pk": 5,
+  "fields": {
+    "created_at": "2026-07-14T11:32:23.408Z",
+    "updated_at": "2026-07-14T11:32:23.408Z",
+    "store": 6,
+    "label": "Contact",
+    "url": "/contact/",
+    "category": null,
+    "location": "header",
+    "display_order": 5,
+    "is_active": true,
+    "open_in_new_tab": false,
+    "parent": null,
+    "icon": "fa-envelope"
+  }
+},
+{
+  "model": "website_management.menuitem",
+  "pk": 6,
+  "fields": {
+    "created_at": "2026-07-14T11:32:23.414Z",
+    "updated_at": "2026-07-14T11:32:23.414Z",
+    "store": 6,
+    "label": "About Us",
+    "url": "/pages/about-us/",
+    "category": null,
+    "location": "footer",
+    "display_order": 1,
+    "is_active": true,
+    "open_in_new_tab": false,
+    "parent": null,
+    "icon": ""
+  }
+},
+{
+  "model": "website_management.menuitem",
+  "pk": 7,
+  "fields": {
+    "created_at": "2026-07-14T11:32:23.420Z",
+    "updated_at": "2026-07-14T11:32:23.420Z",
+    "store": 6,
+    "label": "Privacy Policy",
+    "url": "/pages/privacy-policy/",
+    "category": null,
+    "location": "footer",
+    "display_order": 2,
+    "is_active": true,
+    "open_in_new_tab": false,
+    "parent": null,
+    "icon": ""
+  }
+},
+{
+  "model": "website_management.menuitem",
+  "pk": 8,
+  "fields": {
+    "created_at": "2026-07-14T11:32:23.428Z",
+    "updated_at": "2026-07-14T11:32:23.428Z",
+    "store": 6,
+    "label": "Terms of Service",
+    "url": "/pages/terms-of-service/",
+    "category": null,
+    "location": "footer",
+    "display_order": 3,
+    "is_active": true,
+    "open_in_new_tab": false,
+    "parent": null,
+    "icon": ""
+  }
+},
+{
+  "model": "website_management.menuitem",
+  "pk": 9,
+  "fields": {
+    "created_at": "2026-07-14T11:32:23.436Z",
+    "updated_at": "2026-07-14T11:32:23.436Z",
+    "store": 6,
+    "label": "Refund Policy",
+    "url": "/pages/refund-policy/",
+    "category": null,
+    "location": "footer",
+    "display_order": 4,
+    "is_active": true,
+    "open_in_new_tab": false,
+    "parent": null,
+    "icon": ""
+  }
+},
+{
+  "model": "website_management.menuitem",
+  "pk": 10,
+  "fields": {
+    "created_at": "2026-07-14T11:32:23.443Z",
+    "updated_at": "2026-07-14T11:32:23.443Z",
+    "store": 6,
+    "label": "FAQ",
+    "url": "/pages/faq/",
+    "category": null,
+    "location": "footer",
+    "display_order": 5,
+    "is_active": true,
+    "open_in_new_tab": false,
+    "parent": null,
+    "icon": ""
+  }
+},
+{
+  "model": "website_management.menuitem",
+  "pk": 11,
+  "fields": {
+    "created_at": "2026-07-14T11:32:23.450Z",
+    "updated_at": "2026-07-14T11:32:23.450Z",
+    "store": 6,
+    "label": "Shipping Info",
+    "url": "/pages/shipping/",
+    "category": null,
+    "location": "footer",
+    "display_order": 6,
+    "is_active": true,
+    "open_in_new_tab": false,
+    "parent": null,
+    "icon": ""
+  }
+},
+{
+  "model": "website_management.menuitem",
+  "pk": 12,
+  "fields": {
+    "created_at": "2026-07-14T11:32:23.455Z",
+    "updated_at": "2026-07-14T11:32:23.455Z",
+    "store": 6,
+    "label": "Electronics",
+    "url": "/shop/?category=electronics",
+    "category": null,
+    "location": "mega_menu",
+    "display_order": 1,
+    "is_active": true,
+    "open_in_new_tab": false,
+    "parent": null,
+    "icon": "fa-laptop"
+  }
+},
+{
+  "model": "website_management.menuitem",
+  "pk": 13,
+  "fields": {
+    "created_at": "2026-07-14T11:32:23.462Z",
+    "updated_at": "2026-07-14T11:32:23.462Z",
+    "store": 6,
+    "label": "Fashion",
+    "url": "/shop/?category=fashion",
+    "category": null,
+    "location": "mega_menu",
+    "display_order": 2,
+    "is_active": true,
+    "open_in_new_tab": false,
+    "parent": null,
+    "icon": "fa-tshirt"
+  }
+},
+{
+  "model": "website_management.menuitem",
+  "pk": 14,
+  "fields": {
+    "created_at": "2026-07-14T11:32:23.469Z",
+    "updated_at": "2026-07-14T11:32:23.469Z",
+    "store": 6,
+    "label": "Sports",
+    "url": "/shop/?category=sports",
+    "category": null,
+    "location": "mega_menu",
+    "display_order": 3,
+    "is_active": true,
+    "open_in_new_tab": false,
+    "parent": null,
+    "icon": "fa-football"
+  }
+},
+{
+  "model": "website_management.menuitem",
+  "pk": 15,
+  "fields": {
+    "created_at": "2026-07-14T11:32:23.476Z",
+    "updated_at": "2026-07-14T11:32:23.476Z",
+    "store": 6,
+    "label": "Home & Living",
+    "url": "/shop/?category=home",
+    "category": null,
+    "location": "mega_menu",
+    "display_order": 4,
+    "is_active": true,
+    "open_in_new_tab": false,
+    "parent": null,
+    "icon": "fa-couch"
+  }
+},
+{
+  "model": "website_management.menuitem",
+  "pk": 16,
+  "fields": {
+    "created_at": "2026-07-14T11:32:23.482Z",
+    "updated_at": "2026-07-14T11:32:23.482Z",
+    "store": 6,
+    "label": "Beauty",
+    "url": "/shop/?category=beauty",
+    "category": null,
+    "location": "mega_menu",
+    "display_order": 5,
+    "is_active": true,
+    "open_in_new_tab": false,
+    "parent": null,
+    "icon": "fa-gem"
+  }
+},
+{
+  "model": "website_management.homepagesection",
+  "pk": 1,
+  "fields": {
+    "created_at": "2026-07-14T11:00:22.310Z",
+    "updated_at": "2026-07-14T11:00:22.310Z",
+    "store": 6,
+    "section_key": "slider",
+    "title": "Hero Banner Slider",
+    "subtitle": "",
+    "is_active": true,
+    "display_order": 10,
+    "products": []
+  }
+},
+{
+  "model": "website_management.homepagesection",
+  "pk": 2,
+  "fields": {
+    "created_at": "2026-07-14T11:00:22.319Z",
+    "updated_at": "2026-07-14T11:00:22.319Z",
+    "store": 6,
+    "section_key": "categories",
+    "title": "Featured Categories",
+    "subtitle": "Explore our top category lines",
+    "is_active": false,
+    "display_order": 20,
+    "products": []
+  }
+},
+{
+  "model": "website_management.homepagesection",
+  "pk": 3,
+  "fields": {
+    "created_at": "2026-07-14T11:00:22.326Z",
+    "updated_at": "2026-07-14T11:00:22.326Z",
+    "store": 6,
+    "section_key": "featured_products",
+    "title": "Featured Products Grid",
+    "subtitle": "Premium items selected for you",
+    "is_active": true,
+    "display_order": 30,
+    "products": []
+  }
+},
+{
+  "model": "website_management.homepagesection",
+  "pk": 4,
+  "fields": {
+    "created_at": "2026-07-14T11:00:22.333Z",
+    "updated_at": "2026-07-14T11:00:22.333Z",
+    "store": 6,
+    "section_key": "new_arrivals",
+    "title": "New Arrivals Grid",
+    "subtitle": "The latest tech products in stock",
+    "is_active": false,
+    "display_order": 40,
+    "products": []
+  }
+},
+{
+  "model": "website_management.homepagesection",
+  "pk": 5,
+  "fields": {
+    "created_at": "2026-07-14T11:00:22.338Z",
+    "updated_at": "2026-07-14T11:00:22.338Z",
+    "store": 6,
+    "section_key": "top_selling",
+    "title": "Top Selling Grid",
+    "subtitle": "Popular demand products",
+    "is_active": true,
+    "display_order": 50,
+    "products": [
+      9
+    ]
+  }
+},
+{
+  "model": "website_management.homepagesection",
+  "pk": 6,
+  "fields": {
+    "created_at": "2026-07-14T11:00:22.343Z",
+    "updated_at": "2026-07-14T11:00:22.343Z",
+    "store": 6,
+    "section_key": "sale_products",
+    "title": "Discounted Items Grid",
+    "subtitle": "Get them before they sell out",
+    "is_active": false,
+    "display_order": 60,
+    "products": [
+      14,
+      15
+    ]
+  }
+},
+{
+  "model": "website_management.homepagesection",
+  "pk": 7,
+  "fields": {
+    "created_at": "2026-07-14T11:00:22.348Z",
+    "updated_at": "2026-07-14T11:00:22.348Z",
+    "store": 6,
+    "section_key": "middle_banners",
+    "title": "Promotional Banners Row",
+    "subtitle": "",
+    "is_active": true,
+    "display_order": 70,
+    "products": []
+  }
+},
+{
+  "model": "website_management.homepagesection",
+  "pk": 8,
+  "fields": {
+    "created_at": "2026-07-14T11:00:22.351Z",
+    "updated_at": "2026-07-14T11:00:22.351Z",
+    "store": 6,
+    "section_key": "reviews",
+    "title": "Customer Testimonials",
+    "subtitle": "Hear what our shoppers say",
+    "is_active": true,
+    "display_order": 80,
+    "products": []
+  }
+},
+{
+  "model": "website_management.homepagesection",
+  "pk": 9,
+  "fields": {
+    "created_at": "2026-07-24T06:35:40.324Z",
+    "updated_at": "2026-07-24T06:35:40.324Z",
+    "store": 6,
+    "section_key": "special_offers",
+    "title": "SUMMER OFFER",
+    "subtitle": "Up to 20% OFF on Electronics",
+    "is_active": true,
+    "display_order": 12,
+    "products": [
+      12,
+      14,
+      15,
+      16
+    ]
+  }
+},
+{
+  "model": "website_management.mediafile",
+  "pk": 1,
+  "fields": {
+    "updated_at": "2026-07-24T06:26:03.204Z",
+    "store": 6,
+    "file": "media_library/car.webp",
+    "title": "car.webp",
+    "alt_text": "",
+    "created_at": "2026-07-24T06:26:03.208Z"
+  }
+}
+]

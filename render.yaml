@@ -14,7 +14,7 @@ services:
       - key: DEBUG
         value: "False"
       - key: ALLOWED_HOSTS
-        value: "market-world.onrender.com"
+        value: "market-world.onrender.com,.onrender.com"
       - key: DATABASE_URL
         fromDatabase:
           name: market-world-db

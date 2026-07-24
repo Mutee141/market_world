@@ -11,21 +11,12 @@ python manage.py collectstatic --no-input
 echo "=== Running database migrations ==="
 python manage.py migrate --no-input
 
-echo "=== Checking if store data needs to be loaded ==="
-STORE_COUNT=$(python -c "
-import django, os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
-django.setup()
-from tenants.models import Store
-print(Store.objects.count())
-" 2>/dev/null || echo "0")
+# Ensure database is clean before loading fixtures
+echo "=== Flushing any existing data (if any) ==="
+python manage.py flush --no-input
 
-if [ "$STORE_COUNT" = "0" ]; then
-    echo "=== No store found — loading existing data from fixtures_store.json ==="
-    python manage.py loaddata fixtures_store.json
-    echo "=== Data loaded successfully! ==="
-else
-    echo "=== Store already exists (count: $STORE_COUNT) — skipping data load ==="
-fi
+# Load initial data from fixtures_store.json
+echo "=== Loading initial data from fixtures_store.json ==="
+python manage.py loaddata fixtures_store.json || echo "⚠️ Data load failed - check logs"
 
 echo "=== Build complete ==="

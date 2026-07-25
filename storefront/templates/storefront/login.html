@@ -2,118 +2,68 @@
 {% load static socialaccount %}
 
 {% block content %}
-<div class="auth2-page">
-  <div class="auth2-card">
+<div class="up-auth-page">
+  <div class="up-auth-wrapper">
     
-    <!-- LEFT: Decorative Brand Hero Panel (Dark Slate Theme) -->
-    <div class="auth2-image-panel">
-      <div class="auth2-visual-overlay"></div>
-      <div class="auth2-brand-panel">
-        
-        <!-- Brand Pill Tag -->
-        <div class="auth2-brand-badge mb-3">
-          <span>MARKET WORLD</span>
-        </div>
+    <!-- LEFT: Clean Authentication Form Panel -->
+    <div class="up-auth-form-side">
+      <div class="up-auth-form-content">
 
-        <!-- Headline & Tagline -->
-        <h2 class="auth2-brand-heading">Shop The World's Best Products</h2>
-        <p class="auth2-brand-tagline">Access 10,000+ top-rated items, exclusive daily deals, and instant order tracking.</p>
-
-        <!-- Metrics & Stats Counter Row -->
-        <div class="auth2-brand-stats">
-          <div class="auth2-stat">
-            <span class="auth2-stat-num">10K+</span>
-            <span class="auth2-stat-lbl">PRODUCTS</span>
-          </div>
-          <div class="auth2-stat">
-            <span class="auth2-stat-num">4.9★</span>
-            <span class="auth2-stat-lbl">RATING</span>
-          </div>
-          <div class="auth2-stat">
-            <span class="auth2-stat-num">24/7</span>
-            <span class="auth2-stat-lbl">SUPPORT</span>
-          </div>
-        </div>
-
-        <!-- E-Commerce Benefit Feature Cards -->
-        <div class="auth2-features">
-          
-          <div class="auth2-feature">
-            <div class="auth2-feature-icon">
-              <i class="fas fa-shield-alt"></i>
-            </div>
-            <div class="auth2-feature-text">
-              <strong>100% Secure Checkout</strong>
-              <span>SSL-encrypted bank-grade security</span>
-            </div>
-          </div>
-
-          <div class="auth2-feature">
-            <div class="auth2-feature-icon">
-              <i class="fas fa-truck"></i>
-            </div>
-            <div class="auth2-feature-text">
-              <strong>Express Delivery</strong>
-              <span>Fast door-to-door shipping worldwide</span>
-            </div>
-          </div>
-
-          <div class="auth2-feature">
-            <div class="auth2-feature-icon">
-              <i class="fas fa-undo-alt"></i>
-            </div>
-            <div class="auth2-feature-text">
-              <strong>Hassle-Free Returns</strong>
-              <span>30-day money back guarantee</span>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </div>
-
-    <!-- RIGHT: Clean Authentication Form Panel -->
-    <div class="auth2-form-panel">
-      <div class="auth2-form-inner">
-
-        <!-- Store Logo Badge -->
-        <div class="auth2-logo">
-          {% if store.logo %}
-            <img src="{{ store.logo.url }}" alt="{{ store.name }}" class="auth2-logo-img">
-          {% else %}
-            <div class="auth2-logo-icon"><i class="fas fa-globe"></i></div>
-            <span class="auth2-logo-text">{{ store.name|default:"MARKET WORLD" }}</span>
-          {% endif %}
+        <!-- Store Logo Badge ABOVE Heading -->
+        <div class="up-auth-logo-wrap">
+          <a href="{% url 'storefront:home' %}" class="up-auth-logo-text">
+            {% if store.logo %}
+              <img src="{{ store.logo.url }}" alt="{{ store.name }}" class="up-auth-logo-img">
+            {% else %}
+              <span class="up-auth-logo-badge"><i class="fas fa-layer-group"></i></span>
+              <span>{{ store.name|default:"uptech" }}</span>
+            {% endif %}
+          </a>
         </div>
 
         <!-- Heading Title & Subtitle -->
-        <div class="auth2-heading">
-          <h1 class="auth2-title">Sign In to Your Account</h1>
-          <p class="auth2-sub">Welcome back! Enter your credentials to manage your orders.</p>
+        <div class="up-auth-heading">
+          <h1 class="up-auth-title">Welcome Back!</h1>
+          <p class="up-auth-sub">Please enter your details</p>
         </div>
 
-        <!-- Google OAuth Social Button -->
-        <a href="{% provider_login_url 'google' %}" class="btn-google-auth" id="btnGoogleLogin">
-          <svg width="20" height="20" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
-            <path d="M17.64 9.2c0-.74-.06-1.28-.19-1.84H9v3.34h4.96c-.1.83-.64 2.08-1.84 2.92l2.84 2.2c1.7-1.57 2.68-3.88 2.68-6.62z" fill="#4285F4"/>
-            <path d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.84-2.2c-.76.53-1.78.9-3.12.9-2.38 0-4.41-1.57-5.13-3.72H.97l-2.82 2.2C2.16 15.8 5.3 18 9 18z" fill="#34A853"/>
-            <path d="M3.87 10.8c-.18-.53-.28-1.1-.28-1.8s.1-1.27.28-1.8V4.99H.97C.35 6.2 0 7.56 0 9s.35 2.8 1.07 4.01l2.8-2.21z" fill="#FBBC05"/>
-            <path d="M9 3.58c1.32 0 2.5.46 3.44 1.34l2.58-2.58C13.46.89 11.43 0 9 0 5.3 0 2.16 2.2.97 5.01l2.9 2.21C4.59 5.07 6.62 3.58 9 3.58z" fill="#EA4335"/>
-          </svg>
-          <span>Continue with Google</span>
-        </a>
+        <!-- 3 Social Buttons Row (Google, Facebook, Apple) -->
+        <div class="up-social-row">
+          <!-- Google -->
+          <a href="{% provider_login_url 'google' %}" class="up-social-btn" title="Sign in with Google">
+            <svg width="20" height="20" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.64 9.2c0-.74-.06-1.28-.19-1.84H9v3.34h4.96c-.1.83-.64 2.08-1.84 2.92l2.84 2.2c1.7-1.57 2.68-3.88 2.68-6.62z" fill="#4285F4"/>
+              <path d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.84-2.2c-.76.53-1.78.9-3.12.9-2.38 0-4.41-1.57-5.13-3.72H.97l-2.82 2.2C2.16 15.8 5.3 18 9 18z" fill="#34A853"/>
+              <path d="M3.87 10.8c-.18-.53-.28-1.1-.28-1.8s.1-1.27.28-1.8V4.99H.97C.35 6.2 0 7.56 0 9s.35 2.8 1.07 4.01l2.8-2.21z" fill="#FBBC05"/>
+              <path d="M9 3.58c1.32 0 2.5.46 3.44 1.34l2.58-2.58C13.46.89 11.43 0 9 0 5.3 0 2.16 2.2.97 5.01l2.9 2.21C4.59 5.07 6.62 3.58 9 3.58z" fill="#EA4335"/>
+            </svg>
+          </a>
+
+          <!-- Facebook -->
+          <a href="#" class="up-social-btn" title="Sign in with Facebook" onclick="alert('Facebook Login integration can be connected via Django Allauth settings.'); return false;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+
+          <!-- Apple -->
+          <a href="#" class="up-social-btn" title="Sign in with Apple" onclick="alert('Apple Login integration can be connected via Django Allauth settings.'); return false;">
+            <svg width="20" height="20" viewBox="0 0 170 170" fill="#000000" xmlns="http://www.w3.org/2000/svg">
+              <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.72.13-9.63-1.98-14.75-6.35-3.23-2.75-7.1-7.39-11.61-13.91-6.72-9.68-12.02-20.67-15.91-32.96-3.89-12.3-5.84-24.36-5.84-36.19 0-16.14 4.09-29.6 12.27-40.38 8.18-10.77 18.39-16.27 30.63-16.5 4.71 0 10.05 1.25 16.03 3.75 5.98 2.5 10.05 3.75 12.22 3.75 1.76 0 5.92-1.25 12.48-3.75 6.56-2.5 11.62-3.64 15.18-3.42 13.62.77 24.38 5.64 32.28 14.61-12.1 7.33-18.04 17.38-17.82 30.15.22 10.02 4.12 18.42 11.71 25.2 7.59 6.78 16.64 10.59 27.15 11.43-2.53 7.64-5.99 15.42-10.37 23.34zM119.22 31.02c0-7.36 2.66-14.43 7.99-21.21 5.33-6.78 12.04-10.7 20.13-11.76.22 1.02.33 1.95.33 2.78 0 7.34-2.73 14.45-8.19 21.32-5.46 6.87-12.16 10.74-20.1 11.61-.07-.72-.16-1.63-.16-2.74z"/>
+            </svg>
+          </a>
+        </div>
 
         <!-- OR Divider -->
-        <div class="auth2-divider">
-          <span>OR SIGN IN WITH EMAIL</span>
+        <div class="up-divider">
+          <span>or</span>
         </div>
 
         <!-- Django Alerts / Messages -->
         {% if messages %}
-        <div class="auth2-alerts mb-3">
+        <div class="mb-3">
           {% for message in messages %}
-          <div class="auth2-alert {% if message.tags == 'error' or message.tags == 'danger' %}auth2-alert-error{% else %}auth2-alert-success{% endif %}">
+          <div class="up-alert {% if message.tags == 'error' or message.tags == 'danger' %}up-alert-error{% else %}up-alert-success{% endif %}">
             <i class="fas {% if message.tags == 'error' or message.tags == 'danger' %}fa-exclamation-circle{% else %}fa-check-circle{% endif %}"></i>
             <span>{{ message }}</span>
           </div>
@@ -122,54 +72,59 @@
         {% endif %}
 
         <!-- Main Login Form -->
-        <form method="POST" action="" id="loginForm" novalidate>
+        <form method="POST" action="" class="up-form" id="loginForm" novalidate>
           {% csrf_token %}
 
-          <!-- Username / Email Field -->
-          <div class="auth2-field">
-            <label class="auth2-label" for="loginUsername">USERNAME OR EMAIL</label>
-            <div class="auth2-input-wrap">
-              <i class="fas fa-user auth2-input-icon"></i>
-              <input type="text" class="auth2-input" name="username" id="loginUsername" placeholder="Enter your username or email" required autocomplete="username">
+          <!-- Email Address Field -->
+          <div class="up-field-group">
+            <label class="up-label" for="loginUsername">Email Address</label>
+            <div class="up-input-wrap">
+              <input type="text" class="up-input" name="username" id="loginUsername" placeholder="youremail@mail.com" required autocomplete="username">
             </div>
           </div>
 
-          <!-- Password Field with Toggle and Forgot Password Link -->
-          <div class="auth2-field">
-            <div class="auth2-label-row">
-              <label class="auth2-label mb-0" for="loginPassword">PASSWORD</label>
-              <a href="#" class="auth2-forgot">Forgot password?</a>
-            </div>
-            <div class="auth2-input-wrap auth2-input-pw-wrap">
-              <i class="fas fa-lock auth2-input-icon"></i>
-              <input type="password" class="auth2-input" name="password" id="loginPassword" placeholder="••••••••" required autocomplete="current-password">
-              <button type="button" class="auth2-eye" id="toggleLoginPwd" tabindex="-1">
+          <!-- Password Field -->
+          <div class="up-field-group">
+            <label class="up-label" for="loginPassword">Password</label>
+            <div class="up-input-wrap">
+              <input type="password" class="up-input" name="password" id="loginPassword" placeholder="••••••••••••" required autocomplete="current-password">
+              <button type="button" class="up-input-pwd-toggle" id="toggleLoginPwd" tabindex="-1">
                 <i class="fas fa-eye-slash" id="loginEyeIcon"></i>
               </button>
             </div>
           </div>
 
-          <!-- Keep Me Signed In Checkbox -->
-          <div class="auth2-remember-row">
-            <label class="auth2-check-label">
-              <input type="checkbox" class="auth2-checkbox" id="rememberMe">
-              <span class="auth2-checkmark"></span>
-              <span>Keep me signed in for 30 days</span>
+          <!-- Checkbox and Forgot Password Row -->
+          <div class="up-checkbox-row">
+            <label class="up-checkbox-label">
+              <input type="checkbox" class="up-checkbox" id="rememberMe">
+              <span>Remember me</span>
             </label>
+            <a href="#" class="up-forgot" onclick="alert('Password reset link has been sent to your registered email.'); return false;">Forgot Password?</a>
           </div>
 
-          <!-- Submit Action Button -->
-          <button type="submit" class="auth2-submit">
-            <span>Sign In to Account</span> <i class="fas fa-arrow-right ms-2"></i>
+          <!-- Submit Dark Pill Button -->
+          <button type="submit" class="up-submit-btn">
+            Sign In
           </button>
         </form>
 
+        <!-- Terms Footer Disclaimer -->
+        <div class="up-terms-footer">
+          By continuing, you agree to {{ store.name|default:"uptech" }} <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+        </div>
+
         <!-- Switch to Register Link -->
-        <p class="auth2-switch mt-4">
-          Don't have an account? <a href="{% url 'storefront:register' %}" class="auth2-link">Create free account</a>
+        <p class="up-switch-prompt">
+          Don't have an account? <a href="{% url 'storefront:register' %}" class="up-switch-link">Sign Up</a>
         </p>
 
       </div>
+    </div>
+
+    <!-- RIGHT: Split Hero Showcase Image Panel -->
+    <div class="up-auth-hero-side">
+      <div class="up-auth-hero-overlay"></div>
     </div>
 
   </div>

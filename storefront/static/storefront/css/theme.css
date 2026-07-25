@@ -4054,23 +4054,38 @@ html, body {
    UPTECH AUTHENTICATION SYSTEM — Modern Split-Screen Design
    =================================================================== */
 
+body:has(.up-auth-page) .site-top-announcement-ticker,
+body:has(.up-auth-page) .tbar-utility,
 body:has(.up-auth-page) header,
 body:has(.up-auth-page) footer,
-body:has(.up-auth-page) .tbar-utility,
-body:has(.up-auth-page) .bg-navbar-dark,
+body:has(.up-auth-page) nav,
 body:has(.up-auth-page) .navbar,
+body:has(.up-auth-page) .sh-navbar-wrap,
+body:has(.up-auth-page) .sh-header-tier2,
+body:has(.up-auth-page) .mobile-bottom-nav,
+body:has(.up-auth-page) .back-to-top,
+body:has(.up-auth-page) .whatsapp-float-btn,
 body:has(.up-auth-page) .footer,
 body:has(.up-auth-page) .copyright,
 body:has(.up-auth-page) .top-bar,
+body:has(.up-auth-page) .topbar,
 body:has(.up-auth-page) .container-fluid.bg-dark,
 body:has(.up-auth-page) .container-fluid.footer {
   display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 body:has(.up-auth-page) {
   padding: 0 !important;
   margin: 0 !important;
   background: #ffffff !important;
+  overflow-x: hidden !important;
 }
 
 .up-auth-page {

@@ -5,7 +5,12 @@
 <div class="up-auth-page">
   <div class="up-auth-wrapper">
     
-    <!-- LEFT: Clean Authentication Form Panel -->
+    <!-- LEFT: Split Hero Showcase Image Panel -->
+    <div class="up-auth-hero-side">
+      <div class="up-auth-hero-overlay"></div>
+    </div>
+
+    <!-- RIGHT: Clean Authentication Form Panel -->
     <div class="up-auth-form-side">
       <div class="up-auth-form-content">
 
@@ -16,7 +21,7 @@
               <img src="{{ store.logo.url }}" alt="{{ store.name }}" class="up-auth-logo-img">
             {% else %}
               <span class="up-auth-logo-badge"><i class="fas fa-layer-group"></i></span>
-              <span>{{ store.name|default:"uptech" }}</span>
+              <span>{{ store.name|default:"MARKET WORLD" }}</span>
             {% endif %}
           </a>
         </div>
@@ -111,7 +116,7 @@
 
         <!-- Terms Footer Disclaimer -->
         <div class="up-terms-footer">
-          By continuing, you agree to {{ store.name|default:"uptech" }} <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+          By continuing, you agree to {{ store.name|default:"MARKET WORLD" }} <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
         </div>
 
         <!-- Switch to Register Link -->
@@ -120,11 +125,6 @@
         </p>
 
       </div>
-    </div>
-
-    <!-- RIGHT: Split Hero Showcase Image Panel -->
-    <div class="up-auth-hero-side">
-      <div class="up-auth-hero-overlay"></div>
     </div>
 
   </div>

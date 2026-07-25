@@ -4,27 +4,98 @@
 {% block content %}
 <div class="auth2-page">
   <div class="auth2-card auth2-card-register">
+    
+    <!-- LEFT: Decorative Brand Hero Panel (Dark Slate Theme) -->
+    <div class="auth2-image-panel">
+      <div class="auth2-visual-overlay"></div>
+      <div class="auth2-brand-panel">
+        
+        <!-- Brand Pill Tag -->
+        <div class="auth2-brand-badge mb-3">
+          <span>MARKET WORLD</span>
+        </div>
 
-    <!-- TOP ACCENT BAR -->
-    <div class="auth2-accent-bar"></div>
+        <!-- Headline & Tagline -->
+        <h2 class="auth2-brand-heading">Join The World's Best Marketplace</h2>
+        <p class="auth2-brand-tagline">Create your free account today and unlock exclusive member deals, order tracking, and fast checkout.</p>
 
-    <!-- LEFT: Form Panel -->
+        <!-- Metrics & Stats Counter Row -->
+        <div class="auth2-brand-stats">
+          <div class="auth2-stat">
+            <span class="auth2-stat-num">10K+</span>
+            <span class="auth2-stat-lbl">PRODUCTS</span>
+          </div>
+          <div class="auth2-stat">
+            <span class="auth2-stat-num">4.9★</span>
+            <span class="auth2-stat-lbl">RATING</span>
+          </div>
+          <div class="auth2-stat">
+            <span class="auth2-stat-num">24/7</span>
+            <span class="auth2-stat-lbl">SUPPORT</span>
+          </div>
+        </div>
+
+        <!-- E-Commerce Benefit Feature Cards -->
+        <div class="auth2-features">
+          
+          <div class="auth2-feature">
+            <div class="auth2-feature-icon">
+              <i class="fas fa-tags"></i>
+            </div>
+            <div class="auth2-feature-text">
+              <strong>Exclusive Discounts</strong>
+              <span>Members-only promotions &amp; daily deals</span>
+            </div>
+          </div>
+
+          <div class="auth2-feature">
+            <div class="auth2-feature-icon">
+              <i class="fas fa-box-open"></i>
+            </div>
+            <div class="auth2-feature-text">
+              <strong>Order Tracking</strong>
+              <span>Real-time delivery status &amp; updates</span>
+            </div>
+          </div>
+
+          <div class="auth2-feature">
+            <div class="auth2-feature-icon">
+              <i class="fas fa-lock"></i>
+            </div>
+            <div class="auth2-feature-text">
+              <strong>100% Safe &amp; Secure</strong>
+              <span>Protected data &amp; encrypted checkout</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: Clean Registration Form Panel -->
     <div class="auth2-form-panel">
       <div class="auth2-form-inner">
 
-        <!-- Logo -->
+        <!-- Store Logo Badge -->
         <div class="auth2-logo">
           {% if store.logo %}
-            <img src="{{ store.logo.url }}" alt="{{ store.name }}" style="height:36px;object-fit:contain;border-radius:8px;">
+            <img src="{{ store.logo.url }}" alt="{{ store.name }}" class="auth2-logo-img">
           {% else %}
-            <div class="auth2-logo-icon"><i class="fas fa-bolt"></i></div>
+            <div class="auth2-logo-icon"><i class="fas fa-globe"></i></div>
+            <span class="auth2-logo-text">{{ store.name|default:"MARKET WORLD" }}</span>
           {% endif %}
-          <span class="auth2-logo-text">{{ store.name|default:"Market World" }}</span>
         </div>
 
-        <!-- Google Sign-up FIRST -->
+        <!-- Heading Title & Subtitle -->
+        <div class="auth2-heading">
+          <h1 class="auth2-title">Create Your Account</h1>
+          <p class="auth2-sub">Join Market World today &amp; start shopping</p>
+        </div>
+
+        <!-- Google OAuth Social Button -->
         <a href="{% provider_login_url 'google' %}" class="btn-google-auth" id="btnGoogleRegister">
-          <svg width="20" height="20" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+          <svg width="20" height="20" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
             <path d="M17.64 9.2c0-.74-.06-1.28-.19-1.84H9v3.34h4.96c-.1.83-.64 2.08-1.84 2.92l2.84 2.2c1.7-1.57 2.68-3.88 2.68-6.62z" fill="#4285F4"/>
             <path d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.84-2.2c-.76.53-1.78.9-3.12.9-2.38 0-4.41-1.57-5.13-3.72H.97l-2.82 2.2C2.16 15.8 5.3 18 9 18z" fill="#34A853"/>
             <path d="M3.87 10.8c-.18-.53-.28-1.1-.28-1.8s.1-1.27.28-1.8V4.99H.97C.35 6.2 0 7.56 0 9s.35 2.8 1.07 4.01l2.8-2.21z" fill="#FBBC05"/>
@@ -33,137 +104,116 @@
           <span>Sign up with Google</span>
         </a>
 
-        <div class="auth2-divider"><span>or create account with email</span></div>
-
-        <!-- Heading -->
-        <div class="auth2-heading">
-          <h1 class="auth2-title">Create account</h1>
-          <p class="auth2-sub">Join thousands of happy shoppers today</p>
+        <!-- OR Divider -->
+        <div class="auth2-divider">
+          <span>OR CREATE ACCOUNT WITH EMAIL</span>
         </div>
 
-        <!-- Messages -->
+        <!-- Django Messages -->
         {% if messages %}
-        <div class="auth2-alerts">
+        <div class="auth2-alerts mb-3">
           {% for message in messages %}
           <div class="auth2-alert {% if message.tags == 'error' or message.tags == 'danger' %}auth2-alert-error{% else %}auth2-alert-success{% endif %}">
             <i class="fas {% if message.tags == 'error' or message.tags == 'danger' %}fa-exclamation-circle{% else %}fa-check-circle{% endif %}"></i>
-            {{ message }}
+            <span>{{ message }}</span>
           </div>
           {% endfor %}
         </div>
         {% endif %}
 
-        <!-- Form -->
+        <!-- Register Form -->
         <form method="POST" action="" id="registerForm" novalidate>
           {% csrf_token %}
 
-          <div class="auth2-row-2">
-            <div class="auth2-field">
-              <label class="auth2-label" for="regFullName">Full Name</label>
-              <input type="text" class="auth2-input" name="full_name" id="regFullName"
-                placeholder="John Doe" required autocomplete="name">
-            </div>
-            <div class="auth2-field">
-              <label class="auth2-label" for="regPhone">Phone</label>
-              <input type="tel" class="auth2-input" name="phone" id="regPhone"
-                placeholder="+92 300 0000000" autocomplete="tel">
-            </div>
-          </div>
-
-          <div class="auth2-field">
-            <label class="auth2-label" for="regEmail">Email Address</label>
-            <input type="email" class="auth2-input" name="email" id="regEmail"
-              placeholder="you@example.com" required autocomplete="email">
-          </div>
-
-          <div class="auth2-field">
-            <label class="auth2-label" for="regUsername">Username</label>
-            <input type="text" class="auth2-input" name="username" id="regUsername"
-              placeholder="Choose a unique username" required autocomplete="username">
-          </div>
-
-          <div class="auth2-row-2">
-            <div class="auth2-field">
-              <label class="auth2-label" for="regPassword">Password</label>
-              <div class="auth2-input-pw-wrap">
-                <input type="password" class="auth2-input" name="password" id="regPassword"
-                  placeholder="Min. 8 chars" required>
-                <button type="button" class="auth2-eye" id="toggleRegPwd" tabindex="-1">
-                  <i class="fas fa-eye-slash" id="regEyeIcon"></i>
-                </button>
+          <!-- Full Name & Phone Number -->
+          <div class="row g-2 mb-2">
+            <div class="col-12 col-sm-6">
+              <div class="auth2-field">
+                <label class="auth2-label" for="regFullName">FULL NAME</label>
+                <div class="auth2-input-wrap">
+                  <i class="fas fa-user auth2-input-icon"></i>
+                  <input type="text" class="auth2-input" name="full_name" id="regFullName" placeholder="John Doe" required autocomplete="name">
+                </div>
               </div>
             </div>
-            <div class="auth2-field">
-              <label class="auth2-label" for="regConfirmPassword">Confirm Password</label>
-              <input type="password" class="auth2-input" name="confirm_password" id="regConfirmPassword"
-                placeholder="Re-enter password" required>
+            <div class="col-12 col-sm-6">
+              <div class="auth2-field">
+                <label class="auth2-label" for="regPhone">PHONE NUMBER</label>
+                <div class="auth2-input-wrap">
+                  <i class="fas fa-phone auth2-input-icon"></i>
+                  <input type="tel" class="auth2-input" name="phone" id="regPhone" placeholder="+92 300 0000000" autocomplete="tel">
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- Password strength -->
-          <div class="auth2-strength-wrap" id="strengthWrap" style="display:none;">
-            <div class="auth2-strength-track">
-              <div class="auth2-strength-bar" id="strengthBar"></div>
+          <!-- Email Address Field -->
+          <div class="auth2-field">
+            <label class="auth2-label" for="regEmail">EMAIL ADDRESS</label>
+            <div class="auth2-input-wrap">
+              <i class="fas fa-envelope auth2-input-icon"></i>
+              <input type="email" class="auth2-input" name="email" id="regEmail" placeholder="you@example.com" required autocomplete="email">
             </div>
-            <span class="auth2-strength-label" id="strengthLabel"></span>
           </div>
 
-          <button type="submit" class="auth2-submit">Create Account &nbsp;→</button>
+          <!-- Username Field -->
+          <div class="auth2-field">
+            <label class="auth2-label" for="regUsername">USERNAME</label>
+            <div class="auth2-input-wrap">
+              <i class="fas fa-at auth2-input-icon"></i>
+              <input type="text" class="auth2-input" name="username" id="regUsername" placeholder="Choose a unique username" required autocomplete="username">
+            </div>
+          </div>
+
+          <!-- Password & Confirm Password Row -->
+          <div class="row g-2 mb-2">
+            <div class="col-12 col-sm-6">
+              <div class="auth2-field">
+                <label class="auth2-label" for="regPassword">PASSWORD</label>
+                <div class="auth2-input-wrap auth2-input-pw-wrap">
+                  <i class="fas fa-lock auth2-input-icon"></i>
+                  <input type="password" class="auth2-input" name="password" id="regPassword" placeholder="Min 8 chars" required>
+                  <button type="button" class="auth2-eye" id="toggleRegPwd" tabindex="-1">
+                    <i class="fas fa-eye-slash" id="regEyeIcon"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6">
+              <div class="auth2-field">
+                <label class="auth2-label" for="regConfirmPassword">CONFIRM PASSWORD</label>
+                <div class="auth2-input-wrap">
+                  <i class="fas fa-lock auth2-input-icon"></i>
+                  <input type="password" class="auth2-input" name="confirm_password" id="regConfirmPassword" placeholder="Re-enter password" required>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Password Strength Meter -->
+          <div class="mw-pw-meter mb-3" id="pwMeterWrap" style="display:none;">
+            <div class="d-flex align-items-center gap-2">
+              <div class="mw-pw-track flex-grow-1" style="height:4px; background:#e2e8f0; border-radius:4px; overflow:hidden;">
+                <div class="mw-pw-bar" id="pwBar" style="height:100%; width:0%; transition:all 0.3s ease;"></div>
+              </div>
+              <span class="mw-pw-text small fw-semibold" id="pwText" style="font-size:12px;"></span>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="auth2-submit mt-2">
+            <span>Create Free Account</span> <i class="fas fa-arrow-right ms-2"></i>
+          </button>
         </form>
 
-        <p class="auth2-switch" style="margin-top:18px;">Already have an account? <a href="{% url 'storefront:login' %}" class="auth2-link">Sign In</a></p>
-        <p class="auth2-terms">By signing up, you agree to our <a href="#" class="auth2-link">Terms</a> &amp; <a href="#" class="auth2-link">Privacy Policy</a>.</p>
+        <!-- Switch to Login Link -->
+        <p class="auth2-switch mt-4 mb-1">
+          Already have an account? <a href="{% url 'storefront:login' %}" class="auth2-link">Sign In</a>
+        </p>
+        <p class="text-center text-muted small mt-2 mb-0" style="font-size:12px;">
+          By registering, you agree to our Terms of Service &amp; Privacy Policy.
+        </p>
 
-      </div>
-    </div>
-
-    <!-- RIGHT: Brand Panel -->
-    <div class="auth2-image-panel">
-      <div class="auth2-brand-panel">
-        <div class="auth2-brand-icon">
-          <i class="fas fa-shopping-bag"></i>
-        </div>
-        <div class="auth2-brand-name">Start Shopping</div>
-        <p class="auth2-brand-tagline">Create your free account and access exclusive deals, wishlists, and fast checkout.</p>
-
-        <div class="auth2-brand-stats">
-          <div class="auth2-stat">
-            <span class="auth2-stat-num">Free</span>
-            <span class="auth2-stat-lbl">Forever</span>
-          </div>
-          <div class="auth2-stat">
-            <span class="auth2-stat-num">30s</span>
-            <span class="auth2-stat-lbl">Setup</span>
-          </div>
-          <div class="auth2-stat">
-            <span class="auth2-stat-num">100%</span>
-            <span class="auth2-stat-lbl">Secure</span>
-          </div>
-        </div>
-
-        <div class="auth2-features">
-          <div class="auth2-feature">
-            <div class="auth2-feature-icon"><i class="fas fa-heart"></i></div>
-            <div class="auth2-feature-text">
-              <strong>Save Wishlists</strong>
-              <span>Bookmark your favourite items</span>
-            </div>
-          </div>
-          <div class="auth2-feature">
-            <div class="auth2-feature-icon"><i class="fas fa-tag"></i></div>
-            <div class="auth2-feature-text">
-              <strong>Exclusive Deals</strong>
-              <span>Members-only discounts & offers</span>
-            </div>
-          </div>
-          <div class="auth2-feature">
-            <div class="auth2-feature-icon"><i class="fas fa-bolt"></i></div>
-            <div class="auth2-feature-text">
-              <strong>Fast Checkout</strong>
-              <span>Saved addresses & payment info</span>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -173,34 +223,39 @@
 
 {% block scripts %}
 <script>
-// Toggle password
+// Toggle password visibility
 document.getElementById('toggleRegPwd').addEventListener('click', function(){
   var inp = document.getElementById('regPassword');
   var icon = document.getElementById('regEyeIcon');
-  if(inp.type === 'password'){ inp.type='text'; icon.className='fas fa-eye'; }
-  else { inp.type='password'; icon.className='fas fa-eye-slash'; }
+  if(inp.type === 'password'){ 
+    inp.type = 'text'; 
+    icon.className = 'fas fa-eye'; 
+  } else { 
+    inp.type = 'password'; 
+    icon.className = 'fas fa-eye-slash'; 
+  }
 });
 
-// Password strength
+// Password strength meter
 document.getElementById('regPassword').addEventListener('input', function(){
   var val = this.value;
-  var wrap = document.getElementById('strengthWrap');
-  var bar  = document.getElementById('strengthBar');
-  var lbl  = document.getElementById('strengthLabel');
+  var wrap = document.getElementById('pwMeterWrap');
+  var bar  = document.getElementById('pwBar');
+  var txt  = document.getElementById('pwText');
   if(!val){ wrap.style.display='none'; return; }
-  wrap.style.display='flex';
+  wrap.style.display='block';
   var score = 0;
   if(val.length >= 8) score++;
   if(/[A-Z]/.test(val)) score++;
   if(/[0-9]/.test(val)) score++;
   if(/[^A-Za-z0-9]/.test(val)) score++;
-  var colors = ['#ef4444','#f59e0b','#22c55e','#d6ff3e'];
+  var colors = ['#ef4444','#f59e0b','#22c55e','#16a34a'];
   var labels = ['Weak','Fair','Good','Strong'];
   var widths = ['25%','50%','75%','100%'];
-  bar.style.width  = widths[score-1]  || '10%';
-  bar.style.background = colors[score-1] || '#ef4444';
-  lbl.textContent  = labels[score-1]  || '';
-  lbl.style.color  = colors[score-1]  || '#ef4444';
+  bar.style.width      = widths[score-1]  || '10%';
+  bar.style.background = colors[score-1]  || '#ef4444';
+  txt.textContent      = labels[score-1]  || '';
+  txt.style.color      = colors[score-1]  || '#ef4444';
 });
 
 // Passwords match check

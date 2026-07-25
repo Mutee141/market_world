@@ -127,6 +127,47 @@
             max-width: 400px;
         }
 
+        /* ===== TOP MOVING ANNOUNCEMENT TICKER (Yellow Olive-Gold Bar) ===== */
+        .site-top-announcement-ticker {
+            background: #9ca32b;
+            color: #ffffff;
+            padding: 8px 0;
+            font-size: 13.5px;
+            font-weight: 700;
+            overflow: hidden;
+            position: relative;
+            z-index: 1002;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+        }
+
+        .announcement-marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marqueeScroll 22s linear infinite;
+        }
+
+        .announcement-marquee-track:hover {
+            animation-play-state: paused;
+        }
+
+        .announcement-marquee-content {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            padding-right: 28px;
+            white-space: nowrap;
+        }
+
+        .ticker-dot {
+            opacity: 0.6;
+            font-size: 10px;
+        }
+
+        @keyframes marqueeScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
         /* ===== MODERN NAV BAR & FOOTER STYLES (Dark Black Scheme) ===== */
         .bg-navbar-dark {
             background-color: #0d0f14 !important;
@@ -907,12 +948,32 @@
         {% endif %}
     </div>
 
-    <!-- Dynamic Announcement Bar (Dashboard Controlled) -->
-    {% if site_settings.announcement_bar_enabled and site_settings.announcement_bar_text %}
-    <div class="site-announcement-bar" style="background: {{ site_settings.announcement_bar_color|default:'#ff4d00' }}; color: #ffffff; text-align: center; padding: 8px 16px; font-size: 13px; font-weight: 700; position: relative; z-index: 1001;">
-        <span><i class="fas fa-bullhorn me-2"></i>{{ site_settings.announcement_bar_text }}</span>
+    <!-- ===== TOP MOVING ANNOUNCEMENT TICKER (Olive Gold Bar) ===== -->
+    <div class="site-top-announcement-ticker" style="background: {{ site_settings.announcement_bar_color|default:'#9ca32b' }};">
+        <div class="announcement-marquee-track">
+            <div class="announcement-marquee-content">
+                <span><i class="fas fa-bullhorn me-2"></i> {{ site_settings.announcement_bar_text|default:"Free delivery orders" }}</span>
+                <span class="ticker-dot">•</span>
+                <span><i class="fas fa-bolt me-2"></i> Special Deals: Up to 50% OFF</span>
+                <span class="ticker-dot">•</span>
+                <span><i class="fas fa-truck me-2"></i> Express Worldwide Shipping &amp; Easy Returns</span>
+                <span class="ticker-dot">•</span>
+                <span><i class="fas fa-shield-alt me-2"></i> 100% Secure Checkout Guaranteed</span>
+                <span class="ticker-dot">•</span>
+            </div>
+            <!-- Seamless infinite scroll loop duplicate -->
+            <div class="announcement-marquee-content" aria-hidden="true">
+                <span><i class="fas fa-bullhorn me-2"></i> {{ site_settings.announcement_bar_text|default:"Free delivery orders" }}</span>
+                <span class="ticker-dot">•</span>
+                <span><i class="fas fa-bolt me-2"></i> Special Deals: Up to 50% OFF</span>
+                <span class="ticker-dot">•</span>
+                <span><i class="fas fa-truck me-2"></i> Express Worldwide Shipping &amp; Easy Returns</span>
+                <span class="ticker-dot">•</span>
+                <span><i class="fas fa-shield-alt me-2"></i> 100% Secure Checkout Guaranteed</span>
+                <span class="ticker-dot">•</span>
+            </div>
+        </div>
     </div>
-    {% endif %}
 
     <!-- ===== BAR 1: TOP UTILITY BAR ===== -->
     <div class="tbar-utility">

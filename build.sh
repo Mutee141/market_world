@@ -15,5 +15,9 @@ python manage.py migrate --no-input
 echo "=== Loading data from fixtures_store.json ==="
 python manage.py loaddata fixtures_store.json || echo "⚠️ Data load note: existing data preserved or duplicate keys skipped"
 
+echo "=== Ensuring live Admin account exists ==="
+python manage.py ensure_admin
+
 echo "=== Build complete ==="
+
 

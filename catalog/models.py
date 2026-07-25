@@ -1,7 +1,54 @@
+import os
 from django.db import models
 from django.utils.text import slugify
 from core.models import TenantModel
 from django.utils import timezone
+
+
+def product_image_upload_to(instance, filename):
+    """
+    Saves uploaded product images into the 'products/' folder inside the project's media directory
+    and automatically renames the image file directly to match the Product Title Name!
+    Example: Product 'Wireless Gaming Headset' -> 'products/wireless-gaming-headset.jpg'
+    If multiple images exist -> 'products/wireless-gaming-headset-2.jpg'
+    """
+    ext = filename.rsplit('.', 1)[-1].lower() if '.' in filename else 'jpg'
+    
+    product_name = ""
+    if hasattr(instance, 'product') and instance.product and instance.product.name:
+        product_name = instance.product.name
+    elif hasattr(instance, 'name') and instance.name:
+        product_name = instance.name
+    else:
+        product_name = "product"
+
+    base_slug = slugify(product_name) or "product"
+    
+    order = getattr(instance, 'order', 1)
+    if order and order > 1:
+        new_filename = f"{base_slug}-{order}.{ext}"
+    else:
+        new_filename = f"{base_slug}.{ext}"
+
+    return os.path.join('products', new_filename)
+
+
+def category_image_upload_to(instance, filename):
+    """
+    Saves category images inside 'categories/' folder renamed directly to category title.
+    """
+    ext = filename.rsplit('.', 1)[-1].lower() if '.' in filename else 'jpg'
+    name_slug = slugify(instance.name) if getattr(instance, 'name', None) else 'category'
+    return os.path.join('categories', f"{name_slug}.{ext}")
+
+
+def brand_logo_upload_to(instance, filename):
+    """
+    Saves brand logos inside 'brands/' folder renamed directly to brand title.
+    """
+    ext = filename.rsplit('.', 1)[-1].lower() if '.' in filename else 'jpg'
+    name_slug = slugify(instance.name) if getattr(instance, 'name', None) else 'brand'
+    return os.path.join('brands', f"{name_slug}-logo.{ext}")
 
 
 class Category(TenantModel):
@@ -15,7 +62,7 @@ class Category(TenantModel):
         'self', on_delete=models.CASCADE, null=True, blank=True,
         related_name='children'
     )
-    image = models.ImageField(upload_to='categories/', blank=True, null=True)
+    image = models.ImageField(upload_to=category_image_upload_to, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     order = models.PositiveIntegerField(default=0, help_text="Display order in menus")
     created_at = models.DateTimeField(default=timezone.now, editable=False)
@@ -38,7 +85,7 @@ class Category(TenantModel):
 class Brand(TenantModel):
     name = models.CharField(max_length=120)
     slug = models.SlugField(max_length=140, blank=True)
-    logo = models.ImageField(upload_to='brands/', blank=True, null=True)
+    logo = models.ImageField(upload_to=brand_logo_upload_to, blank=True, null=True)
     is_active = models.BooleanField(default=True)
 
     class Meta:
@@ -96,7 +143,7 @@ class Product(TenantModel):
 
 class ProductImage(TenantModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='products/')
+    image = models.ImageField(upload_to=product_image_upload_to)
     is_primary = models.BooleanField(default=False)
     order = models.PositiveIntegerField(default=0)
 

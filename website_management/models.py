@@ -1,6 +1,38 @@
+import os
 from django.db import models
 from django.utils import timezone
+from django.utils.text import slugify
 from core.models import TenantModel, TimeStampedModel
+
+
+def hero_slide_upload_to(instance, filename):
+    ext = filename.rsplit('.', 1)[-1].lower() if '.' in filename else 'jpg'
+    title_slug = slugify(getattr(instance, 'title', 'hero-slide')) or 'hero-slide'
+    return os.path.join('hero_slides', f"{title_slug}.{ext}")
+
+
+def hero_slide_mobile_upload_to(instance, filename):
+    ext = filename.rsplit('.', 1)[-1].lower() if '.' in filename else 'jpg'
+    title_slug = slugify(getattr(instance, 'title', 'hero-slide')) or 'hero-slide'
+    return os.path.join('hero_slides', 'mobile', f"{title_slug}-mobile.{ext}")
+
+
+def banner_upload_to(instance, filename):
+    ext = filename.rsplit('.', 1)[-1].lower() if '.' in filename else 'jpg'
+    title_slug = slugify(getattr(instance, 'title', 'banner')) or 'banner'
+    return os.path.join('banners', f"{title_slug}.{ext}")
+
+
+def banner_mobile_upload_to(instance, filename):
+    ext = filename.rsplit('.', 1)[-1].lower() if '.' in filename else 'jpg'
+    title_slug = slugify(getattr(instance, 'title', 'banner')) or 'banner'
+    return os.path.join('banners', 'mobile', f"{title_slug}-mobile.{ext}")
+
+
+def media_library_upload_to(instance, filename):
+    ext = filename.rsplit('.', 1)[-1].lower() if '.' in filename else 'jpg'
+    title_slug = slugify(getattr(instance, 'title', filename.split('.')[0])) or 'media'
+    return os.path.join('media_library', f"{title_slug}.{ext}")
 
 
 class SiteSettings(models.Model):
@@ -85,8 +117,8 @@ class HeroSlide(TenantModel):
     title = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=255, blank=True)
     badge = models.CharField(max_length=100, blank=True, help_text="e.g. 'HOT DEAL' or 'NEW ARRIVAL'")
-    image = models.ImageField(upload_to='hero_slides/')
-    mobile_image = models.ImageField(upload_to='hero_slides/mobile/', blank=True, null=True)
+    image = models.ImageField(upload_to=hero_slide_upload_to)
+    mobile_image = models.ImageField(upload_to=hero_slide_mobile_upload_to, blank=True, null=True)
     button_text = models.CharField(max_length=60, blank=True)
     button_link = models.CharField(max_length=255, blank=True)
     display_order = models.PositiveIntegerField(default=0)
@@ -141,8 +173,8 @@ class PromotionalBanner(TenantModel):
 
     title = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=255, blank=True)
-    image = models.ImageField(upload_to='banners/')
-    mobile_image = models.ImageField(upload_to='banners/mobile/', blank=True, null=True)
+    image = models.ImageField(upload_to=banner_upload_to)
+    mobile_image = models.ImageField(upload_to=banner_mobile_upload_to, blank=True, null=True)
     button_text = models.CharField(max_length=60, blank=True)
     button_link = models.CharField(max_length=255, blank=True)
     position = models.CharField(max_length=30, choices=POSITION_CHOICES, default='home_top')
@@ -303,7 +335,7 @@ class HomepageSection(TenantModel):
 
 class MediaFile(TenantModel):
     """Centralized media library for uploading images and files once and reusing them."""
-    file = models.ImageField(upload_to='media_library/')
+    file = models.ImageField(upload_to=media_library_upload_to)
     title = models.CharField(max_length=200, blank=True)
     alt_text = models.CharField(max_length=200, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

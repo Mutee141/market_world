@@ -1,5 +1,19 @@
+import os
 from django.db import models
+from django.utils.text import slugify
 from core.models import TimeStampedModel
+
+
+def store_logo_upload_to(instance, filename):
+    ext = filename.rsplit('.', 1)[-1].lower() if '.' in filename else 'png'
+    store_name = getattr(instance, 'name', None) or getattr(instance, 'slug', None) or 'store'
+    return os.path.join('store_logos', f"{slugify(store_name)}-logo.{ext}")
+
+
+def store_banner_upload_to(instance, filename):
+    ext = filename.rsplit('.', 1)[-1].lower() if '.' in filename else 'jpg'
+    store_name = getattr(instance, 'name', None) or getattr(instance, 'slug', None) or 'store'
+    return os.path.join('store_banners', f"{slugify(store_name)}-banner.{ext}")
 
 
 class Store(TimeStampedModel):
@@ -25,8 +39,8 @@ class Store(TimeStampedModel):
     is_active = models.BooleanField(default=True)
 
     # branding — each store keeps its own identity
-    logo = models.ImageField(upload_to='store_logos/', blank=True, null=True)
-    banner = models.ImageField(upload_to='store_banners/', blank=True, null=True)
+    logo = models.ImageField(upload_to=store_logo_upload_to, blank=True, null=True)
+    banner = models.ImageField(upload_to=store_banner_upload_to, blank=True, null=True)
     primary_color = models.CharField(max_length=7, default='#0F172A')
 
     # contact / business info

@@ -13,7 +13,7 @@
             <div class="hero-slide"
               style="{% if slide.image %}background-image: url('{{ slide.image.url }}'); background-size: cover; background-position: center;{% else %}background: linear-gradient(135deg, #eef2f6 0%, #e2e8f0 100%);{% endif %}">
               <div class="hero-slide-inner">
-                <div class="hero-text-col hero-text-glass">
+                <div class="hero-text-col hero-text-seamless">
                   <span class="hero-badge"><i class="fas fa-bolt text-warning"></i> {{ slide.badge|default:"Mega Flash Deals" }}</span>
                   <h1 class="hero-title">{{ slide.title }}</h1>
                   {% if slide.subtitle %}<p class="hero-subtitle">{{ slide.subtitle }}</p>{% endif %}

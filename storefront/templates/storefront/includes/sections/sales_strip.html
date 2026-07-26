@@ -6,7 +6,7 @@
 <section class="sales-strip-wrapper py-4 my-2">
   <div class="container">
     {% if home_banners_sales_strip %}
-      {% for banner in home_banners_sales_strip %}
+      {% for banner in home_banners_sales_strip|slice:":1" %}
       <div class="sales-banner-item mb-4">
         {% if banner.image %}
           <a href="{{ banner.button_link|default:'/shop/' }}" class="sales-banner-image-link" aria-label="{{ banner.title }}">
@@ -82,9 +82,18 @@
 .sales-banner-img {
   width: 100%;
   height: auto;
+  max-height: 220px;
   display: block;
   border-radius: 20px;
-  object-fit: contain; /* Prevents text cropping */
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .sales-banner-img {
+    max-height: 140px !important;
+    object-fit: cover !important;
+    border-radius: 14px !important;
+  }
 }
 
 /* Custom Text Banner Card */

@@ -132,9 +132,7 @@ def home_view(request):
     home_banners_middle = banners.filter(position='home_middle').order_by('display_order')
     home_banners_bottom = banners.filter(position='home_bottom').order_by('display_order')
 
-    # Smart fallback: Only fallback for sales_strip if empty
-    if not home_banners_sales_strip.exists() and banners.exists():
-        home_banners_sales_strip = banners.order_by('-id')[:1]
+
 
     # Ensure sales_strip HomepageSection exists for current store
     HomepageSection.objects.get_or_create(

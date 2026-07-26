@@ -128,11 +128,12 @@ def home_view(request):
     banners = PromotionalBanner.objects.filter(store=request.store, is_active=True)
     
     home_banners_top = banners.filter(position='home_top').order_by('display_order')
+    home_banners_sales_strip = banners.filter(position='sales_strip').order_by('display_order')
     home_banners_middle = banners.filter(position='home_middle').order_by('display_order')
     home_banners_bottom = banners.filter(position='home_bottom').order_by('display_order')
 
     # Smart fallback: If specific position query is empty but banners exist, make sure banners are visible on homepage
-    if not home_banners_middle.exists() and not home_banners_top.exists() and not home_banners_bottom.exists() and banners.exists():
+    if not home_banners_middle.exists() and not home_banners_top.exists() and not home_banners_bottom.exists() and not home_banners_sales_strip.exists() and banners.exists():
         home_banners_middle = banners.order_by('display_order')
     
     # Homepage Sections Autoseeding & Querying
@@ -142,6 +143,7 @@ def home_view(request):
     if all_sec_qs.count() == 0:
         defaults = [
             ('slider', 'Hero Banner Slider', '', 10),
+            ('sales_strip', 'Mega Sales Banner Strip', 'End of Month Mega Sale', 15),
             ('categories', 'Featured Categories', 'Explore our top category lines', 20),
             ('featured_products', 'Featured Products Grid', 'Premium items selected for you', 30),
             ('new_arrivals', 'New Arrivals Grid', 'The latest tech products in stock', 40),
@@ -178,9 +180,10 @@ def home_view(request):
         'active_brands': active_brands,
         'categories': Category.objects.filter(store=request.store, parent__isnull=True, is_active=True).order_by('order', 'name'),
         'hero_slides': slides,
-        'home_banners_top': banners.filter(position='home_top').order_by('display_order'),
-        'home_banners_middle': banners.filter(position='home_middle').order_by('display_order'),
-        'home_banners_bottom': banners.filter(position='home_bottom').order_by('display_order'),
+        'home_banners_top': home_banners_top,
+        'home_banners_sales_strip': home_banners_sales_strip,
+        'home_banners_middle': home_banners_middle,
+        'home_banners_bottom': home_banners_bottom,
         'homepage_sections': homepage_sections,
         'sections_dict': sections_dict,
         'recent_reviews': recent_reviews,
@@ -745,7 +748,7 @@ def dashboard_view(request):
             alt_text = request.POST.get('alt_text', '')
             image = request.FILES.get('image')
             mobile_image = request.FILES.get('mobile_image')
-            if title and image:
+            if title:
                 PromotionalBanner.objects.create(
                     store=request.store, title=title, subtitle=subtitle,
                     image=image, mobile_image=mobile_image, button_text=button_text, button_link=button_link,
@@ -754,7 +757,7 @@ def dashboard_view(request):
                 )
                 messages.success(request, f"Banner '{title}' added!")
             else:
-                messages.error(request, "Title and image are required.")
+                messages.error(request, "Banner title is required.")
             return redirect('/dashboard/?section=banners')
 
         elif action == 'delete_banner':

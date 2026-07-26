@@ -162,9 +162,11 @@ class PromotionalBanner(TenantModel):
     home_top, home_middle, home_bottom, category_page, product_page, sidebar, footer
     """
     POSITION_CHOICES = (
-        ('home_top', 'Home — Top'),
-        ('home_middle', 'Home — Middle'),
-        ('home_bottom', 'Home — Bottom'),
+        ('home_top', 'Home — Top (Hero Right Side)'),
+        ('sales_strip', 'Home — Mega Sales Banner Strip (Daraz Style)'),
+        ('home_middle', 'Home — Middle (Special Offers)'),
+        ('home_bottom', 'Home — Bottom (Bottom Grid)'),
+        ('app_promo', 'Home — App Download / Voucher Banner Widget'),
         ('category_page', 'Category Page'),
         ('product_page', 'Product Page'),
         ('sidebar', 'Sidebar'),
@@ -301,6 +303,7 @@ class HomepageSection(TenantModel):
     """Configure homepage dynamic components display state and order."""
     SECTION_CHOICES = (
         ('slider', 'Hero Banner Slider'),
+        ('sales_strip', 'Mega Sales Banner Strip (Daraz Style)'),
         ('categories', 'Featured Categories'),
         ('featured_products', 'Featured Products Grid'),
         ('new_arrivals', 'New Arrivals Grid'),

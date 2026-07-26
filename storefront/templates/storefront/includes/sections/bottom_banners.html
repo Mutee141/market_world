@@ -1,19 +1,2 @@
-<!-- ========== 7. BOTTOM BANNERS (Dashboard Promotional Banners) ========== -->
-{% if home_banners_bottom %}
-<section class="bottom-banners-section">
-  <div class="container">
-    <div class="bottom-banners-grid">
-      {% for banner in home_banners_bottom %}
-      <a href="{{ banner.button_link|default:'#' }}" class="bottom-banner-card" style="background-image:url('{% if banner.image %}{{ banner.image.url }}{% endif %}');">
-        <div class="bottom-banner-overlay"></div>
-        <div class="bottom-banner-content">
-          {% if banner.subtitle %}<span class="bottom-banner-eyebrow">{{ banner.subtitle }}</span>{% endif %}
-          <h3 class="bottom-banner-title">{{ banner.title }}</h3>
-          {% if banner.button_text %}<span class="btn-banner">{{ banner.button_text }} <i class="fas fa-arrow-right ms-1"></i></span>{% endif %}
-        </div>
-      </a>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-{% endif %}
+{% load static %}
+<!-- Bottom banners section disabled per user request -->

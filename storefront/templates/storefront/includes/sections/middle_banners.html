@@ -1,12 +1,14 @@
-<!-- ========== 3. SPECIAL OFFER BANNERS (Dashboard Promotional Banners) ========== -->
+{% load static %}
+<!-- ========== SPECIAL OFFER BANNERS SECTION ========== -->
 {% if not sections_dict.middle_banners or sections_dict.middle_banners.is_active %}
-<section class="special-offer-section">
+<section class="special-offer-section py-5 bg-white">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header d-flex align-items-end justify-content-between mb-4">
       <div>
-        <span class="section-eyebrow">{{ sections_dict.middle_banners.subtitle|default:"Limited Time" }}</span>
-        <h2 class="section-title">{{ sections_dict.middle_banners.title|default:"Special Offers" }}</h2>
+        <span class="section-eyebrow text-uppercase fw-bold text-primary" style="font-size: 11px; letter-spacing: 1.5px;">{{ sections_dict.middle_banners.subtitle|default:"LIMITED TIME DEALS" }}</span>
+        <h2 class="section-title fw-black m-0" style="font-size: 1.75rem; color: #0f172a; letter-spacing: -0.5px;">{{ sections_dict.middle_banners.title|default:"Special Offers" }}</h2>
       </div>
+      <a href="{% url 'storefront:shop' %}" class="section-view-all">View All <i class="fas fa-arrow-right ms-1"></i></a>
     </div>
 
     <div class="special-offer-grid">
@@ -17,7 +19,7 @@
             {% if banner.subtitle %}<span class="offer-eyebrow">{{ banner.subtitle }}</span>{% endif %}
             <h3 class="offer-title">{{ banner.title }}</h3>
             <a href="{{ banner.button_link|default:'/shop/' }}" class="btn-offer">
-              {{ banner.button_text|default:"Explore Now" }} <i class="fas fa-arrow-right"></i>
+              {{ banner.button_text|default:"Explore Now" }} <i class="fas fa-arrow-right ms-1"></i>
             </a>
           </div>
           <div class="offer-media">
@@ -31,12 +33,13 @@
         </div>
         {% endfor %}
       {% else %}
+        <!-- Modern Default Special Offer Cards -->
         <div class="offer-card-v2 offer-card-1">
           <div class="offer-panel">
-            <span class="offer-eyebrow">Flash Super Deal</span>
-            <h3 class="offer-title">Mega Electronics<br>Bargain Sale</h3>
-            <div class="offer-discount">Up to 70% OFF</div>
-            <a href="{% url 'storefront:shop' %}" class="btn-offer">Claim Offer <i class="fas fa-arrow-right"></i></a>
+            <span class="offer-eyebrow"><i class="fas fa-bolt text-warning me-1"></i> FLASH SUPER DEAL</span>
+            <h3 class="offer-title">Mega Electronics &amp; Accessories</h3>
+            <div class="offer-discount">UP TO 70% OFF</div>
+            <a href="{% url 'storefront:shop' %}" class="btn-offer">Claim Offer <i class="fas fa-arrow-right ms-1"></i></a>
           </div>
           <div class="offer-media">
             <i class="fas fa-bolt offer-media-icon"></i>
@@ -44,10 +47,10 @@
         </div>
         <div class="offer-card-v2 offer-card-2">
           <div class="offer-panel">
-            <span class="offer-eyebrow">Trending Right Now</span>
-            <h3 class="offer-title">Latest Smartphones<br>&amp; Smart Tech</h3>
-            <div class="offer-discount">From PKR 999</div>
-            <a href="{% url 'storefront:shop' %}" class="btn-offer">Explore Deals <i class="fas fa-arrow-right"></i></a>
+            <span class="offer-eyebrow"><i class="fas fa-fire text-danger me-1"></i> TRENDING NOW</span>
+            <h3 class="offer-title">Smartphones &amp; Audio Gear</h3>
+            <div class="offer-discount">SPECIAL PRICE DEALS</div>
+            <a href="{% url 'storefront:shop' %}" class="btn-offer">Explore Deals <i class="fas fa-arrow-right ms-1"></i></a>
           </div>
           <div class="offer-media">
             <i class="fas fa-mobile-alt offer-media-icon"></i>

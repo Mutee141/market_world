@@ -133,8 +133,17 @@ def home_view(request):
     home_banners_bottom = banners.filter(position='home_bottom').order_by('display_order')
 
     # Smart fallback: If specific position query is empty but banners exist, make sure banners are visible on homepage
-    if not home_banners_middle.exists() and not home_banners_top.exists() and not home_banners_bottom.exists() and not home_banners_sales_strip.exists() and banners.exists():
+    if not home_banners_sales_strip.exists() and banners.exists():
+        home_banners_sales_strip = banners.order_by('display_order')
+    if not home_banners_middle.exists() and banners.exists():
         home_banners_middle = banners.order_by('display_order')
+
+    # Ensure sales_strip HomepageSection exists for current store
+    HomepageSection.objects.get_or_create(
+        store=request.store,
+        section_key='sales_strip',
+        defaults={'title': 'Mega Sales Banner Strip', 'subtitle': 'End of Month Mega Sale', 'display_order': 15, 'is_active': True}
+    )
     
     # Homepage Sections Autoseeding & Querying
     all_sec_qs = HomepageSection.objects.filter(store=request.store).prefetch_related(

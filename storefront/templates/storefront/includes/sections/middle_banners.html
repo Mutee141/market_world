@@ -1,2 +1,204 @@
 {% load static %}
-<!-- Special offers middle banners section disabled per user request -->
+<!-- =========================================================
+     MARKET WORLD — PREMIUM MIDDLE PROMOTIONAL BANNERS ROW
+     ========================================================= -->
+{% if not sections_dict.middle_banners or sections_dict.middle_banners.is_active %}
+{% if home_banners_middle %}
+<section class="middle-banners-section py-4 my-2">
+  <div class="container">
+    <div class="middle-banners-grid">
+      {% for banner in home_banners_middle %}
+      <div class="middle-banner-card-item">
+        {% if banner.image %}
+          <a href="{{ banner.button_link|default:'/shop/' }}" class="middle-banner-link" aria-label="{{ banner.title }}">
+            <div class="middle-banner-img-wrap">
+              <img src="{{ banner.image.url }}" alt="{{ banner.title }}" class="middle-banner-img" loading="lazy">
+              {% if banner.title or banner.subtitle %}
+              <div class="middle-banner-text-overlay">
+                <div class="overlay-glass-card">
+                  {% if banner.subtitle %}<span class="mb-badge">{{ banner.subtitle }}</span>{% endif %}
+                  <h3 class="mb-title">{{ banner.title }}</h3>
+                  <span class="mb-btn">{{ banner.button_text|default:"Shop Now" }} <i class="fas fa-arrow-right ms-1"></i></span>
+                </div>
+              </div>
+              {% endif %}
+            </div>
+          </a>
+        {% else %}
+          <!-- Premium Text-Based Banner Card -->
+          <div class="middle-banner-text-card" style="background: {{ banner.background_color|default:'linear-gradient(135deg, #1e1b4b 0%, #311042 100%)' }}; color: {{ banner.text_color|default:'#ffffff' }};">
+            <div class="text-card-content">
+              {% if banner.subtitle %}<span class="mb-text-badge">{{ banner.subtitle }}</span>{% endif %}
+              <h3 class="mb-text-title">{{ banner.title }}</h3>
+              <a href="{{ banner.button_link|default:'/shop/' }}" class="mb-text-btn">
+                {{ banner.button_text|default:"Shop Now" }} <i class="fas fa-bolt ms-1"></i>
+              </a>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+/* Premium Middle Promo Banners styling */
+.middle-banners-section {
+  position: relative;
+  z-index: 5;
+}
+
+.middle-banners-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.middle-banner-card-item {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+.middle-banner-card-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+  border-color: #cbd5e1;
+}
+
+.middle-banner-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.middle-banner-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.middle-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.middle-banner-card-item:hover .middle-banner-img {
+  transform: scale(1.04);
+}
+
+.middle-banner-text-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.25);
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+}
+
+.overlay-glass-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 12px 16px;
+  max-width: 85%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.mb-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #2563eb;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.mb-title {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 6px;
+  line-height: 1.25;
+}
+
+.mb-btn {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: #0f172a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+}
+
+/* Premium Text Banner Card */
+.middle-banner-text-card {
+  padding: 24px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.text-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mb-text-badge {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #ffeb3b;
+}
+
+.mb-text-title {
+  font-size: 1.35rem;
+  font-weight: 900;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.mb-text-btn {
+  align-self: flex-start;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 11.5px;
+  font-weight: 800;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+  margin-top: 4px;
+}
+
+.mb-text-btn:hover {
+  background: #0f172a;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .middle-banner-img-wrap, .middle-banner-text-card {
+    height: 160px;
+  }
+  .mb-text-title {
+    font-size: 1.15rem;
+  }
+}
+</style>
+{% endif %}
+{% endif %}

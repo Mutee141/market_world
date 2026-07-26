@@ -1221,6 +1221,8 @@
   {% elif section.section_key == 'new_arrivals' or section.section_key == 'top_selling' or section.section_key == 'sale_products' %}
     {# These were part of the featured products tabs in the old design, we'll render a dynamic product block instead #}
     {% include 'storefront/includes/sections/dynamic_products.html' %}
+  {% elif section.section_key == 'middle_banners' %}
+    {% include 'storefront/includes/sections/middle_banners.html' %}
   {% elif section.section_key == 'reviews' %}
     {% include 'storefront/includes/sections/reviews.html' %}
   {% elif section.section_key == 'special_offers' or section.section_key == 'recently_added' or section.section_key == 'flash_sale' or section.section_key == 'trending_products' or section.section_key == 'deal_of_the_day' %}

@@ -1620,6 +1620,8 @@
                         <div class="col-md-3"><label class="form-label">Cost Price</label><input type="number" name="cost_price" class="form-control" step="0.01" value="0"></div>
                         <div class="col-md-3"><label class="form-label">Selling Price *</label><input type="number" name="selling_price" class="form-control" step="0.01" value="0" required></div>
                         <div class="col-md-3"><label class="form-label">Discount Price</label><input type="number" name="discount_price" class="form-control" step="0.01"></div>
+                        <div class="col-md-3"><label class="form-label">Model (Optional)</label><input type="text" name="attr_model" class="form-control" placeholder="e.g. XPS 15"></div>
+                        <div class="col-md-6"><label class="form-label">Variant/Specs (Optional)</label><input type="text" name="attr_variant" class="form-control" placeholder="e.g. i9, 32GB RAM"></div>
                         <div class="col-md-6">
                             <label class="form-label">Featured In</label>
                             <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;">
@@ -1684,9 +1686,11 @@
                                             <div class="col-md-2"><label class="form-label">Brand</label><select name="brand_id" class="form-select"><option value="">— None —</option>{% for b in brands_list %}<option value="{{ b.id }}" {% if product.brand_id == b.id %}selected{% endif %}>{{ b.name }}</option>{% endfor %}</select></div>
                                             <div class="col-md-12"><label class="form-label">Description</label><textarea name="description" class="form-control" rows="3">{{ product.description }}</textarea></div>
                                             <div class="col-md-3"><label class="form-label">SKU *</label><input type="text" name="sku" class="form-control" value="{{ v.sku }}" required></div>
-                                            <div class="col-md-3"><label class="form-label">Cost Price</label><input type="number" name="cost_price" class="form-control" step="0.01" value="{{ v.cost_price|default_if_none:'0' }}"></div>
-                                            <div class="col-md-3"><label class="form-label">Selling Price *</label><input type="number" name="selling_price" class="form-control" step="0.01" value="{{ v.selling_price }}" required></div>
-                                            <div class="col-md-3"><label class="form-label">Discount Price</label><input type="number" name="discount_price" class="form-control" step="0.01" value="{{ v.discount_price|default_if_none:'' }}"></div>
+                                            <div class="col-md-3"><label class="form-label">Cost Price</label><input type="number" name="cost_price" class="form-control" step="0.01" value="{{ v.cost_price|default:0 }}"></div>
+                                            <div class="col-md-3"><label class="form-label">Selling Price *</label><input type="number" name="selling_price" class="form-control" step="0.01" value="{{ v.selling_price|default:0 }}" required></div>
+                                            <div class="col-md-3"><label class="form-label">Discount Price</label><input type="number" name="discount_price" class="form-control" step="0.01" value="{{ v.discount_price|default:'' }}"></div>
+                                            <div class="col-md-3"><label class="form-label">Model (Optional)</label><input type="text" name="attr_model" class="form-control" value="{{ v.attributes.Model|default:'' }}" placeholder="e.g. XPS 15"></div>
+                                            <div class="col-md-9"><label class="form-label">Variant/Specs (Optional)</label><input type="text" name="attr_variant" class="form-control" value="{{ v.attributes.Variant|default:'' }}" placeholder="e.g. i9, 32GB RAM"></div>
                                             <div class="col-md-6">
                                                 <label class="form-label">Featured In</label>
                                                 <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;">

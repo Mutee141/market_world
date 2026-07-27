@@ -1209,6 +1209,14 @@ def dashboard_view(request):
             discount_price = float(discount_price_raw) if discount_price_raw else None
             images = request.FILES.getlist('images')
             
+            attributes = {}
+            attr_model = request.POST.get('attr_model', '').strip()
+            attr_variant = request.POST.get('attr_variant', '').strip()
+            if attr_model:
+                attributes['Model'] = attr_model
+            if attr_variant:
+                attributes['Variant'] = attr_variant
+            
             with transaction.atomic():
                 category = get_object_or_404(Category, store=request.store, id=category_id)
                 brand = Brand.objects.filter(store=request.store, id=brand_id).first() if brand_id else None
@@ -1230,6 +1238,7 @@ def dashboard_view(request):
                     cost_price=cost_price,
                     selling_price=selling_price,
                     discount_price=discount_price,
+                    attributes=attributes,
                     is_active=True
                 )
                 
@@ -1281,6 +1290,14 @@ def dashboard_view(request):
             discount_price = float(discount_price_raw) if discount_price_raw else None
             images = request.FILES.getlist('images')
             
+            attributes = {}
+            attr_model = request.POST.get('attr_model', '').strip()
+            attr_variant = request.POST.get('attr_variant', '').strip()
+            if attr_model:
+                attributes['Model'] = attr_model
+            if attr_variant:
+                attributes['Variant'] = attr_variant
+            
             with transaction.atomic():
                 product = get_object_or_404(Product, store=request.store, id=product_id)
                 category = get_object_or_404(Category, store=request.store, id=category_id)
@@ -1299,6 +1316,7 @@ def dashboard_view(request):
                     variant.cost_price = cost_price
                     variant.selling_price = selling_price
                     variant.discount_price = discount_price
+                    variant.attributes = attributes
                     variant.save()
                     
                 if images:

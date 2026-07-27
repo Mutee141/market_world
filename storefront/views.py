@@ -1207,7 +1207,7 @@ def dashboard_view(request):
             selling_price = float(request.POST.get('selling_price', 0) or 0)
             discount_price_raw = request.POST.get('discount_price')
             discount_price = float(discount_price_raw) if discount_price_raw else None
-            image = request.FILES.get('image')
+            images = request.FILES.getlist('images')
             
             with transaction.atomic():
                 category = get_object_or_404(Category, store=request.store, id=category_id)
@@ -1233,14 +1233,15 @@ def dashboard_view(request):
                     is_active=True
                 )
                 
-                if image:
-                    ProductImage.objects.create(
-                        store=request.store,
-                        product=product,
-                        image=image,
-                        is_primary=True,
-                        order=1
-                    )
+                if images:
+                    for idx, img in enumerate(images):
+                        ProductImage.objects.create(
+                            store=request.store,
+                            product=product,
+                            image=img,
+                            is_primary=(idx == 0),
+                            order=idx + 1
+                        )
                 
                 # Auto-initialize initial stock of 10 in default branch
                 branch = Branch.objects.filter(store=request.store, is_default=True).first() or Branch.objects.filter(store=request.store).first()
@@ -1278,7 +1279,7 @@ def dashboard_view(request):
             selling_price = float(request.POST.get('selling_price', 0) or 0)
             discount_price_raw = request.POST.get('discount_price')
             discount_price = float(discount_price_raw) if discount_price_raw else None
-            image = request.FILES.get('image')
+            images = request.FILES.getlist('images')
             
             with transaction.atomic():
                 product = get_object_or_404(Product, store=request.store, id=product_id)
@@ -1300,15 +1301,16 @@ def dashboard_view(request):
                     variant.discount_price = discount_price
                     variant.save()
                     
-                if image:
+                if images:
                     ProductImage.objects.filter(product=product).delete()
-                    ProductImage.objects.create(
-                        store=request.store,
-                        product=product,
-                        image=image,
-                        is_primary=True,
-                        order=1
-                    )
+                    for idx, img in enumerate(images):
+                        ProductImage.objects.create(
+                            store=request.store,
+                            product=product,
+                            image=img,
+                            is_primary=(idx == 0),
+                            order=idx + 1
+                        )
             messages.success(request, f"Product '{name}' updated successfully!")
             return redirect('/dashboard/?section=products')
             

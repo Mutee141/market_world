@@ -134,7 +134,7 @@
             padding: 8px 0;
             font-size: 13.5px;
             font-weight: 700;
-            overflow: hidden;
+            overflow: visible;
             position: relative;
             z-index: 1002;
             box-shadow: 0 2px 8px rgba(0,0,0,0.12);
@@ -181,7 +181,7 @@
             background: #08090d;
             border-bottom: 1px solid rgba(255, 255, 255, 0.06);
             position: relative;
-            overflow: hidden;
+            overflow: visible;
         }
 
         .tbar-utility::before {
@@ -366,7 +366,7 @@
         .footer-modern {
             background: linear-gradient(135deg, #08090d 0%, #12131a 50%, #08090d 100%);
             position: relative;
-            overflow: hidden;
+            overflow: visible;
             border-top: 1px solid rgba(255, 255, 255, 0.06);
         }
 
@@ -1025,12 +1025,12 @@
                 </div>
                 <div class="tbar-divider d-none d-md-block"></div>
                 <!-- Multi-Currency Dropdown -->
-                <div class="dropdown tbar-select-wrap currency-dropdown-wrap">
-                    <button class="btn dropdown-toggle currency-btn" type="button" id="currencyDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="color: #cbd5e1; font-size: 11px; padding: 0; background: transparent; border: none; font-weight: 500; display: flex; align-items: center; gap: 4px;">
+                <div class="dropdown tbar-select-wrap currency-dropdown-wrap" style="position: relative; z-index: 1050;">
+                    <button class="btn dropdown-toggle currency-btn shadow-none" type="button" id="currencyDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="color: #cbd5e1; font-size: 11px; padding: 0; background: transparent; border: none; font-weight: 500; display: flex; align-items: center; gap: 4px; box-shadow: none !important; outline: none !important;">
                         <img src="https://flagcdn.com/w20/pk.png" width="16" alt="PK" id="active-currency-flag"> 
                         <span id="active-currency-code">PKR</span>
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="currencyDropdown" style="font-size: 13px; min-width: 100px; padding: 5px;">
+                    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="currencyDropdown" style="font-size: 13px; min-width: 100px; padding: 5px; z-index: 99999; position: absolute; margin-top: 8px; border-radius: 8px; border: none;">
                         <li><a class="dropdown-item currency-item d-flex align-items-center gap-2" href="#" data-currency="PKR" data-flag="pk"><img src="https://flagcdn.com/w20/pk.png" width="18" alt="PK"> PKR</a></li>
                         <li><a class="dropdown-item currency-item d-flex align-items-center gap-2" href="#" data-currency="USD" data-flag="us"><img src="https://flagcdn.com/w20/us.png" width="18" alt="US"> USD</a></li>
                         <li><a class="dropdown-item currency-item d-flex align-items-center gap-2" href="#" data-currency="GBP" data-flag="gb"><img src="https://flagcdn.com/w20/gb.png" width="18" alt="GB"> GBP</a></li>
@@ -1078,7 +1078,7 @@
                         <input type="hidden" name="category" id="searchCategoryInput" value="{{ current_category.slug|default:'' }}">
                         
                         <button type="button" id="searchCatDropdownBtn" class="sh-search-select bg-transparent border-0" style="height: 100%; max-width: 140px; padding: 0 10px; color: #475569; font-size: 12px; font-weight: 500; white-space: nowrap; outline: none; border-left: 1.5px solid #e2e8f0; border-radius: 0;">
-                            <span id="searchCatSelectedText" style="overflow: hidden; text-overflow: ellipsis; display: inline-block; max-width: 90px; vertical-align: middle;">
+                            <span id="searchCatSelectedText" style="overflow: visible; text-overflow: ellipsis; display: inline-block; max-width: 90px; vertical-align: middle;">
                                 {% if current_category %}{{ current_category.name }}{% else %}All Categories{% endif %}
                             </span>
                             <i class="fas fa-chevron-down ms-1" style="font-size:10px;"></i>

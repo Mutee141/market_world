@@ -1724,6 +1724,8 @@
                                                 <button type="button" class="btn btn-sm btn-outline-primary mt-2" onclick="addVariantRow('{{ product.id }}')"><i class="fas fa-plus"></i> Add Another Variant</button>
                                             </div>
 
+                                            <div class="col-md-6">
+                                                <label class="form-label">Featured In</label>
                                                 <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;">
                                                     <label style="font-size:13px;"><input type="checkbox" name="sections" value="featured" {% if 'featured' in product.tags %}checked{% endif %}> Featured</label>
                                                     <label style="font-size:13px;"><input type="checkbox" name="sections" value="new_arrival" {% if 'new_arrival' in product.tags %}checked{% endif %}> New Arrival</label>

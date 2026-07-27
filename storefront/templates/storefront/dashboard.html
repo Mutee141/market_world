@@ -1616,12 +1616,25 @@
                         </div>
                         <div class="col-md-2"><label class="form-label">Brand</label><select name="brand_id" class="form-select"><option value="">— None —</option>{% for b in brands_list %}<option value="{{ b.id }}">{{ b.name }}</option>{% endfor %}</select></div>
                         <div class="col-md-12"><label class="form-label">Description</label><textarea name="description" class="form-control" rows="3"></textarea></div>
-                        <div class="col-md-3"><label class="form-label">SKU *</label><input type="text" name="sku" class="form-control" required></div>
-                        <div class="col-md-3"><label class="form-label">Cost Price</label><input type="number" name="cost_price" class="form-control" step="0.01" value="0"></div>
-                        <div class="col-md-3"><label class="form-label">Selling Price *</label><input type="number" name="selling_price" class="form-control" step="0.01" value="0" required></div>
-                        <div class="col-md-3"><label class="form-label">Discount Price</label><input type="number" name="discount_price" class="form-control" step="0.01"></div>
-                        <div class="col-md-3"><label class="form-label">Model (Optional)</label><input type="text" name="attr_model" class="form-control" placeholder="e.g. XPS 15"></div>
-                        <div class="col-md-6"><label class="form-label">Variant/Specs (Optional)</label><input type="text" name="attr_variant" class="form-control" placeholder="e.g. i9, 32GB RAM"></div>
+                        <div class="col-12 mt-3">
+                            <h6 class="fw-bold"><i class="fas fa-tags me-2"></i>Product Variants</h6>
+                            <div id="variants-container-new" class="bg-light p-3 rounded border">
+                                <div class="variant-row bg-white p-3 rounded border mb-3">
+                                    <input type="hidden" name="variant_id[]" value="">
+                                    <div class="row g-2 mb-2">
+                                        <div class="col-md-3"><label class="form-label" style="font-size:12px;">SKU *</label><input type="text" name="sku[]" class="form-control form-control-sm" required></div>
+                                        <div class="col-md-3"><label class="form-label" style="font-size:12px;">Cost Price</label><input type="number" name="cost_price[]" class="form-control form-control-sm" step="0.01" value="0"></div>
+                                        <div class="col-md-3"><label class="form-label" style="font-size:12px;">Selling Price *</label><input type="number" name="selling_price[]" class="form-control form-control-sm" step="0.01" value="0" required></div>
+                                        <div class="col-md-3"><label class="form-label" style="font-size:12px;">Discount Price</label><input type="number" name="discount_price[]" class="form-control form-control-sm" step="0.01"></div>
+                                    </div>
+                                    <div class="row g-2">
+                                        <div class="col-md-4"><label class="form-label" style="font-size:12px;">Model (Optional)</label><input type="text" name="attr_model[]" class="form-control form-control-sm" placeholder="e.g. XPS 15"></div>
+                                        <div class="col-md-8"><label class="form-label" style="font-size:12px;">Variant/Specs (Optional)</label><input type="text" name="attr_variant[]" class="form-control form-control-sm" placeholder="e.g. 32GB RAM"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-primary mt-2" onclick="addVariantRow('new')"><i class="fas fa-plus"></i> Add Another Variant</button>
+                        </div>
                         <div class="col-md-6">
                             <label class="form-label">Featured In</label>
                             <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;">
@@ -1685,12 +1698,56 @@
                                             </div>
                                             <div class="col-md-2"><label class="form-label">Brand</label><select name="brand_id" class="form-select"><option value="">— None —</option>{% for b in brands_list %}<option value="{{ b.id }}" {% if product.brand_id == b.id %}selected{% endif %}>{{ b.name }}</option>{% endfor %}</select></div>
                                             <div class="col-md-12"><label class="form-label">Description</label><textarea name="description" class="form-control" rows="3">{{ product.description }}</textarea></div>
-                                            <div class="col-md-3"><label class="form-label">SKU *</label><input type="text" name="sku" class="form-control" value="{{ v.sku }}" required></div>
-                                            <div class="col-md-3"><label class="form-label">Cost Price</label><input type="number" name="cost_price" class="form-control" step="0.01" value="{{ v.cost_price|default:0 }}"></div>
-                                            <div class="col-md-3"><label class="form-label">Selling Price *</label><input type="number" name="selling_price" class="form-control" step="0.01" value="{{ v.selling_price|default:0 }}" required></div>
-                                            <div class="col-md-3"><label class="form-label">Discount Price</label><input type="number" name="discount_price" class="form-control" step="0.01" value="{{ v.discount_price|default:'' }}"></div>
-                                            <div class="col-md-3"><label class="form-label">Model (Optional)</label><input type="text" name="attr_model" class="form-control" value="{{ v.attributes.Model|default:'' }}" placeholder="e.g. XPS 15"></div>
-                                            <div class="col-md-9"><label class="form-label">Variant/Specs (Optional)</label><input type="text" name="attr_variant" class="form-control" value="{{ v.attributes.Variant|default:'' }}" placeholder="e.g. i9, 32GB RAM"></div>
+
+                                            <div class="col-12 mt-3">
+                                                <h6 class="fw-bold"><i class="fas fa-tags me-2"></i>Product Variants</h6>
+                                                <div id="variants-container-{{ product.id }}" class="bg-light p-3 rounded border">
+                                                    {% for v in product.variants.all %}
+                                                    <div class="variant-row bg-white p-3 rounded border mb-3 position-relative">
+                                                        {% if not forloop.first %}
+                                                        <button type="button" class="btn btn-sm btn-danger position-absolute" style="top: 10px; right: 10px;" onclick="this.closest('.variant-row').remove();"><i class="fas fa-trash"></i></button>
+                                                        {% endif %}
+                                                        <input type="hidden" name="variant_id[]" value="{{ v.id }}">
+                                                        <div class="row g-2 mb-2">
+                                                            <div class="col-md-3"><label class="form-label" style="font-size:12px;">SKU *</label><input type="text" name="sku[]" class="form-control form-control-sm" value="{{ v.sku }}" required></div>
+                                                            <div class="col-md-3"><label class="form-label" style="font-size:12px;">Cost Price</label><input type="number" name="cost_price[]" class="form-control form-control-sm" step="0.01" value="{{ v.cost_price|default:0 }}"></div>
+                                                            <div class="col-md-3"><label class="form-label" style="font-size:12px;">Selling Price *</label><input type="number" name="selling_price[]" class="form-control form-control-sm" step="0.01" value="{{ v.selling_price|default:0 }}" required></div>
+                                                            <div class="col-md-3"><label class="form-label" style="font-size:12px;">Discount Price</label><input type="number" name="discount_price[]" class="form-control form-control-sm" step="0.01" value="{{ v.discount_price|default:'' }}"></div>
+                                                        </div>
+                                                        <div class="row g-2">
+                                                            <div class="col-md-4"><label class="form-label" style="font-size:12px;">Model (Optional)</label><input type="text" name="attr_model[]" class="form-control form-control-sm" value="{{ v.attributes.Model|default:'' }}"></div>
+                                                            <div class="col-md-8"><label class="form-label" style="font-size:12px;">Variant/Specs (Optional)</label><input type="text" name="attr_variant[]" class="form-control form-control-sm" value="{{ v.attributes.Variant|default:'' }}" placeholder="e.g. 32GB RAM"></div>
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
+                                                </div>
+                                                <button type="button" class="btn btn-sm btn-outline-primary mt-2" onclick="addVariantRow('{{ product.id }}')"><i class="fas fa-plus"></i> Add Another Variant</button>
+                                            </div>
+
+                                            <div class="col-12 mt-3">
+                                                <h6 class="fw-bold"><i class="fas fa-tags me-2"></i>Product Variants</h6>
+                                                <div id="variants-container-{{ product.id }}" class="bg-light p-3 rounded border">
+                                                    {% for v in product.variants.all %}
+                                                    <div class="variant-row bg-white p-3 rounded border mb-3 position-relative">
+                                                        {% if not forloop.first %}
+                                                        <button type="button" class="btn btn-sm btn-danger position-absolute" style="top: 10px; right: 10px;" onclick="this.closest('.variant-row').remove();"><i class="fas fa-trash"></i></button>
+                                                        {% endif %}
+                                                        <input type="hidden" name="variant_id[]" value="{{ v.id }}">
+                                                        <div class="row g-2 mb-2">
+                                                            <div class="col-md-3"><label class="form-label" style="font-size:12px;">SKU *</label><input type="text" name="sku[]" class="form-control form-control-sm" value="{{ v.sku }}" required></div>
+                                                            <div class="col-md-3"><label class="form-label" style="font-size:12px;">Cost Price</label><input type="number" name="cost_price[]" class="form-control form-control-sm" step="0.01" value="{{ v.cost_price|default:0 }}"></div>
+                                                            <div class="col-md-3"><label class="form-label" style="font-size:12px;">Selling Price *</label><input type="number" name="selling_price[]" class="form-control form-control-sm" step="0.01" value="{{ v.selling_price|default:0 }}" required></div>
+                                                            <div class="col-md-3"><label class="form-label" style="font-size:12px;">Discount Price</label><input type="number" name="discount_price[]" class="form-control form-control-sm" step="0.01" value="{{ v.discount_price|default:'' }}"></div>
+                                                        </div>
+                                                        <div class="row g-2">
+                                                            <div class="col-md-4"><label class="form-label" style="font-size:12px;">Model (Optional)</label><input type="text" name="attr_model[]" class="form-control form-control-sm" value="{{ v.attributes.Model|default:'' }}"></div>
+                                                            <div class="col-md-8"><label class="form-label" style="font-size:12px;">Variant/Specs (Optional)</label><input type="text" name="attr_variant[]" class="form-control form-control-sm" value="{{ v.attributes.Variant|default:'' }}" placeholder="e.g. 32GB RAM"></div>
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
+                                                </div>
+                                                <button type="button" class="btn btn-sm btn-outline-primary mt-2" onclick="addVariantRow('{{ product.id }}')"><i class="fas fa-plus"></i> Add Another Variant</button>
+                                            </div>
                                             <div class="col-md-6">
                                                 <label class="form-label">Featured In</label>
                                                 <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;">
@@ -2387,6 +2444,27 @@
             if (e.key === 'Escape') closeSidebar();
         });
     })();
+
+    // JS to add variant row dynamically
+    window.addVariantRow = function(containerId) {
+        const container = document.getElementById('variants-container-' + containerId);
+        const rowHTML = `
+        <div class="variant-row bg-white p-3 rounded border mb-3 position-relative">
+            <button type="button" class="btn btn-sm btn-danger position-absolute" style="top: 10px; right: 10px;" onclick="this.closest('.variant-row').remove();"><i class="fas fa-trash"></i></button>
+            <input type="hidden" name="variant_id[]" value="">
+            <div class="row g-2 mb-2">
+                <div class="col-md-3"><label class="form-label" style="font-size:12px;">SKU *</label><input type="text" name="sku[]" class="form-control form-control-sm" required></div>
+                <div class="col-md-3"><label class="form-label" style="font-size:12px;">Cost Price</label><input type="number" name="cost_price[]" class="form-control form-control-sm" step="0.01" value="0"></div>
+                <div class="col-md-3"><label class="form-label" style="font-size:12px;">Selling Price *</label><input type="number" name="selling_price[]" class="form-control form-control-sm" step="0.01" value="0" required></div>
+                <div class="col-md-3"><label class="form-label" style="font-size:12px;">Discount Price</label><input type="number" name="discount_price[]" class="form-control form-control-sm" step="0.01"></div>
+            </div>
+            <div class="row g-2">
+                <div class="col-md-4"><label class="form-label" style="font-size:12px;">Model (Opt)</label><input type="text" name="attr_model[]" class="form-control form-control-sm"></div>
+                <div class="col-md-8"><label class="form-label" style="font-size:12px;">Variant/Specs (Opt)</label><input type="text" name="attr_variant[]" class="form-control form-control-sm" placeholder="e.g. Colour: Black, 128GB"></div>
+            </div>
+        </div>`;
+        container.insertAdjacentHTML('beforeend', rowHTML);
+    };
 </script>
 </body>
 </html>

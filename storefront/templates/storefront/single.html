@@ -753,8 +753,8 @@
 
                         <div class="pd-price-row">
                             {% if selected_variant.discount_price %}
-                            <span class="pd-price-old">{{ store.currency }} {{ selected_variant.selling_price|floatformat:2 }}</span>
-                            <span>{{ store.currency }} {{ selected_variant.discount_price|floatformat:2 }}</span>
+                            <span class="pd-price-old">{{ store.currency }} {{ selected_variant.discount_price|floatformat:2 }}</span>
+                            <span>{{ store.currency }} {{ selected_variant.selling_price|floatformat:2 }}</span>
                             {% else %}
                             <span>{{ store.currency }} {{ selected_variant.selling_price|floatformat:2 }}</span>
                             {% endif %}

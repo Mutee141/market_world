@@ -1234,6 +1234,8 @@ def dashboard_view(request):
                 
                 for i in range(len(skus)):
                     v_sku = skus[i].strip()
+                    # prevent crash on duplicate sku in same form
+                    if i > 0 and v_sku in skus[:i]: v_sku = f'{v_sku}-{i}'
                     if not v_sku: continue
                     v_cost = float(cost_prices[i] or 0) if i < len(cost_prices) else 0.0
                     v_sell = float(selling_prices[i] or 0) if i < len(selling_prices) else 0.0
@@ -1319,6 +1321,8 @@ def dashboard_view(request):
                             
                 for i in range(len(skus)):
                     v_sku = skus[i].strip()
+                    # prevent crash on duplicate sku in same form
+                    if i > 0 and v_sku in skus[:i]: v_sku = f'{v_sku}-{i}'
                     if not v_sku: continue
                     v_cost = float(cost_prices[i] or 0) if i < len(cost_prices) else 0.0
                     v_sell = float(selling_prices[i] or 0) if i < len(selling_prices) else 0.0

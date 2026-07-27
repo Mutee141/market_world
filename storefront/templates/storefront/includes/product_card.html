@@ -16,8 +16,8 @@
     <div class="pcard-footer">
       {% with prod.variants.first as v %}
       <div class="pcard-price">
-        {% if v.discount_price %}<del class="pcard-old">{{ store.currency }} {{ v.discount_price|floatformat:2 }}</del><span class="pcard-current">{{ store.currency }} {{ v.selling_price|floatformat:2 }}</span>
-        {% else %}<span class="pcard-current">{{ store.currency }} {{ v.selling_price|floatformat:2 }}</span>{% endif %}
+        {% if v.discount_price %}<del class="pcard-old" data-base-price="{{ v.discount_price }}">{{ store.currency }} {{ v.discount_price|floatformat:2 }}</del><span class="pcard-current" data-base-price="{{ v.selling_price }}">{{ store.currency }} {{ v.selling_price|floatformat:2 }}</span>
+        {% else %}<span class="pcard-current" data-base-price="{{ v.selling_price }}">{{ store.currency }} {{ v.selling_price|floatformat:2 }}</span>{% endif %}
       </div>
       <button type="button" class="pcard-cart add-to-cart-btn" data-variant-id="{{ v.id }}"><i class="fas fa-cart-plus"></i></button>
       {% endwith %}
